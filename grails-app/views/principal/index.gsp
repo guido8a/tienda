@@ -18,8 +18,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <title>Tienda en Línea</title>
 
     <!-- Bootstrap core CSS -->
-    <asset:stylesheet src="/apli/bootstrap.css.css"/>
-    <asset:stylesheet src="/apli/pignose.layerslider.css.css"/>
+    <asset:stylesheet src="/apli/bootstrap.css"/>
+    <asset:stylesheet src="/apli/pignose.layerslider.css"/>
     <asset:stylesheet src="/apli/style.css"/>
 
     <asset:javascript src="/apli/jquery-2.1.4.min.js"/>
@@ -58,7 +58,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="header-bot">
     <div class="container">
         <div class="col-md-3 header-left">
-            <h1><a href="index.html"><img src="images/logo3.jpg"></a></h1>
+            <h1><a href="index.html">
+                <asset:image src="apli/logo3.jpg"/>
+%{--                <img src="images/logo3.jpg">--}%
+            </a></h1>
         </div>
         <div class="col-md-6 header-middle">
             <form>
@@ -235,7 +238,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="clearfix"></div>
     </div>
-    <script type="text/javascript" src="js/pignose.layerslider.js"></script>
+    <asset:javascript src="/apli/pignose.layerslider.js"/>
+%{--    <script type="text/javascript" src="js/pignose.layerslider.js"></script>--}%
     <script type="text/javascript">
         //<![CDATA[
         $(window).load(function() {
@@ -365,7 +369,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="product-easy">
     <div class="container">
 
-        <script src="js/easyResponsiveTabs.js" type="text/javascript"></script>
+        <asset:javascript src="/apli/easyResponsiveTabs.js"/>
+%{--        <script src="js/easyResponsiveTabs.js" type="text/javascript"></script>--}%
         <script type="text/javascript">
             $(document).ready(function () {
                 $('#horizontalTab').easyResponsiveTabs({
