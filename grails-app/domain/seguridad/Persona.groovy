@@ -5,7 +5,8 @@ import geografia.Canton
 
 class Persona implements Auditable{
 
-//    Institucion institucion
+    Empresa empresa
+    String tipo
     String cedula
     String nombre
     String apellido
@@ -22,6 +23,9 @@ class Persona implements Auditable{
     String direccion
     String referencia
     String observaciones
+    String contacto
+    String telefonoContacto
+    String mailContacto
 
     static auditable = true
 
@@ -37,7 +41,8 @@ class Persona implements Auditable{
 
         columns {
             id column: 'prsn__id'
-//            institucion column: 'inst__id'
+            empresa column: 'empr__id'
+            tipo column: 'prsntppr'
             cedula column: 'prsncdla'
             nombre column: 'prsnnmbr'
             apellido column: 'prsnapll'
@@ -54,10 +59,14 @@ class Persona implements Auditable{
             direccion column: 'prsndire'
             referencia column: 'prsnrefe'
             observaciones column: 'prsnobsr'
+            contacto column: 'prsncntc'
+            telefonoContacto column: 'prsntfct'
+            mailContacto column: 'prsnmlct'
         }
     }
     static constraints = {
-//        institucion(blank: true, nullable: true)
+        empresa(blank: true, nullable: true)
+        tipo(blank: true, nullable: true)
         cedula(blank: true, nullable: true)
         nombre(size: 3..31, blank: false)
         apellido(size: 0..31, blank: true, nullable: true)
@@ -74,6 +83,9 @@ class Persona implements Auditable{
         direccion(size: 0..255, blank: true, nullable: true)
         referencia(size: 0..255, blank: true, nullable: true)
         observaciones(size: 0..255, blank: true, nullable: true)
+        contacto(size: 0..63, blank: true, nullable: true)
+        telefonoContacto(size: 0..63, blank: true, nullable: true)
+        mailContacto(size: 0..63, blank: true, nullable: true)
     }
 
     String toString() {
