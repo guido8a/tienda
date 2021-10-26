@@ -22,7 +22,7 @@
 
 %{--    <asset:javascript src="/jquery-3.3.1.min.js"/>--}%
 
-    <asset:javascript src="/jquery/jquery-2.2.4.js"/>
+    <asset:javascript src="/apli/jquery-2.1.4.min.js"/>
     <asset:javascript src="/jquery/jquery-ui.js"/>
 
 %{--    <asset:javascript src="/jquery/jquery-1.9.1.js"/>--}%
