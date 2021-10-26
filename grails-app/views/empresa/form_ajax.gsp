@@ -79,7 +79,7 @@
                 Email
             </label>
             <div class="col-md-6">
-                <g:textField name="email" maxlength="63" class="email mail form-control" value="${empresa?.email}"/>
+                <g:textField name="email" maxlength="63" class="email mail form-control" value="${empresa?.mail}"/>
             </div>
         </span>
     </div>
@@ -101,7 +101,7 @@
                 Observaciones
             </label>
             <div class="col-md-8">
-                <g:textArea name="observaciones" style="resize: none" maxlength="255" class="form-control" value="${empresa?.descripcion}"/>
+                <g:textArea name="observaciones" style="resize: none" maxlength="255" class="form-control" value="${empresa?.observaciones}"/>
             </div>
         </span>
     </div>

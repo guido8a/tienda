@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>
-        <g:layoutTitle default="Bitácora"/>
+        <g:layoutTitle default="Tienda"/>
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 %{--    <asset:link rel="icon" href="favicon.ico" type="image/x-ico"/>--}%
@@ -34,7 +34,7 @@
     <asset:javascript src="/apli/fontawesome.all.min.js"/>
 
 %{--    <asset:javascript src="/apli/bootstrap.js"/>--}%
-    <asset:javascript src="/apli/bootstrap.min.js"/>
+    <asset:javascript src="/apli/bootstrap-3.1.1.min.js"/>
 %{--    <asset:javascript src="/apli/bootbox.all.min.js"/>--}%
     <asset:javascript src="/apli/funciones.js"/>
     <asset:javascript src="/apli/functions.js"/>
@@ -54,9 +54,7 @@
     <g:layoutBody/>
 </div>
 
-<div id="spinner" class="spinner" style="display:none;">
-    <g:message code="spinner.alt" default="Loading&hellip;"/>
-</div>
+
 
 
 </body>

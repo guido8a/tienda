@@ -8,7 +8,6 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-
         gtag('config', 'G-HQJWN3ZDKR');
     </script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -73,14 +72,12 @@
     <asset:javascript src="/apli/fontawesome.all.min.js"/>
 
     <asset:javascript src="/apli/bootstrap-datetimepicker.min.js"/>
-    <asset:javascript src="/apli/bootstrap-maxlength.min.js"/>
+    <asset:javascript src="/apli/bootstrap-maxlength.js"/>
 
 
     <asset:javascript src="/bootstrap-3.3.2/dist/js/bootstrap.min.js"/>
     <asset:javascript src="/apli/jquery.switcher.js"/>
 
-%{--    <asset:stylesheet src="/material-date-range-picker/dist/duDatepicker.min.css"/>--}%
-%{--    <asset:javascript src="/material-date-range-picker/dist/duDatepicker.min.js"/>--}%
 
     <script type="text/javascript">
         var spinner = $('<asset:image src="apli/spinner32.gif" style="padding: 40px;"/>');
@@ -98,7 +95,7 @@
 %{--<div id="modalTableGray"></div>--}%
 
 %{--<g:if test="${session?.usuario}">--}%
-<mn:menu title="${g.layoutTitle(default: 'Monitor')}"/>
+<mn:menu title="${g.layoutTitle(default: 'Tienda')}"/>
 %{--</g:if>--}%
 
 %{--<div class="container" style="min-width: 1000px !important; margin-top: 0px; overflow-y: hidden">--}%

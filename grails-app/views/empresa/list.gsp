@@ -42,14 +42,14 @@
             <td>${empresa?.ruc}</td>
             <td>${empresa?.nombre}</td>
             <td>${empresa?.sigla}</td>
-            <td>${empresa?.email}</td>
+            <td>${empresa?.mail}</td>
             <td>${empresa?.telefono}</td>
         </tr>
     </g:each>
     </tbody>
 </table>
 
-<elm:pagination total="${empresaInstanceCount}" params="${params}"/>
+%{--<elm:pagination total="${empresaInstanceCount}" params="${params}"/>--}%
 
 <script type="text/javascript">
 
@@ -60,7 +60,7 @@
             var r = cargarLoader("Grabando");
             $.ajax({
                 type    : "POST",
-                url     : '${createLink(action:'save_ajax')}',
+                url     : '${createLink(controller: 'empresa', action:'save_ajax')}',
                 data    : $form.serialize(),
                 success : function (msg) {
                     r.modal("hide");
@@ -159,94 +159,94 @@
     } //createEdit
 
 
-    function inicializarArbol(id){
-        $.ajax({
-            type: 'POST',
-            url: '${createLink(controller: 'empresa', action: 'verificarArbol_ajax')}',
-            data:{
-                id: id
-            },
-            success: function (msg) {
-                if(msg == 'no'){
-                    bootbox.alert("<i class='fa fa-exclamation-circle fa-2x text-warning'></i> El árbol de estructura departamental ya se encuentra inicializado")
-                }else{
-                    createEditRowDpto(null, "Crear", id)
-                }
+    %{--function inicializarArbol(id){--}%
+    %{--    $.ajax({--}%
+    %{--        type: 'POST',--}%
+    %{--        url: '${createLink(controller: 'empresa', action: 'verificarArbol_ajax')}',--}%
+    %{--        data:{--}%
+    %{--            id: id--}%
+    %{--        },--}%
+    %{--        success: function (msg) {--}%
+    %{--            if(msg == 'no'){--}%
+    %{--                bootbox.alert("<i class='fa fa-exclamation-circle fa-2x text-warning'></i> El árbol de estructura departamental ya se encuentra inicializado")--}%
+    %{--            }else{--}%
+    %{--                createEditRowDpto(null, "Crear", id)--}%
+    %{--            }--}%
 
-            }
-        })
-    }
+    %{--        }--}%
+    %{--    })--}%
+    %{--}--}%
 
-    function createEditRowDpto(id, tipo, empresa) {
-        var data = tipo == "Crear" ? {padre : id, bb: 1, empresa: empresa} : {id : id, bb: 1, empresa: empresa};
-        var c =  cargarLoader("Cargando...");
-        $.ajax({
-            type    : "POST",
-            url     : "${createLink(controller: 'departamento', action:'form_ajax')}",
-            data    : data,
-            success : function (msg) {
-                c.modal('hide');
-                var b = bootbox.dialog({
-                    id      : "dlgCreateEdit",
-                    title   : tipo + " Departamento Inicial",
-                    message : msg,
-                    buttons : {
-                        cancelar : {
-                            label     : "Cancelar",
-                            className : "btn-primary",
-                            callback  : function () {
-                            }
-                        },
-                        guardar  : {
-                            id        : "btnSave",
-                            label     : "<i class='fa fa-save'></i> Guardar",
-                            className : "btn-success",
-                            callback  : function () {
-                                return submitFormDpto();
-                            } //callback
-                        } //guardar
-                    } //buttons
-                }); //dialog
-                setTimeout(function () {
-                    var $input = b.find(".form-control").not(".datepicker").first();
-                    var val = $input.val();
-                    $input.focus();
-                    $input.val("");
-                    $input.val(val);
-                }, 500);
-            } //success
-        }); //ajax
-    } //createEdit
+    %{--function createEditRowDpto(id, tipo, empresa) {--}%
+    %{--    var data = tipo == "Crear" ? {padre : id, bb: 1, empresa: empresa} : {id : id, bb: 1, empresa: empresa};--}%
+    %{--    var c =  cargarLoader("Cargando...");--}%
+    %{--    $.ajax({--}%
+    %{--        type    : "POST",--}%
+    %{--        url     : "${createLink(controller: 'departamento', action:'form_ajax')}",--}%
+    %{--        data    : data,--}%
+    %{--        success : function (msg) {--}%
+    %{--            c.modal('hide');--}%
+    %{--            var b = bootbox.dialog({--}%
+    %{--                id      : "dlgCreateEdit",--}%
+    %{--                title   : tipo + " Departamento Inicial",--}%
+    %{--                message : msg,--}%
+    %{--                buttons : {--}%
+    %{--                    cancelar : {--}%
+    %{--                        label     : "Cancelar",--}%
+    %{--                        className : "btn-primary",--}%
+    %{--                        callback  : function () {--}%
+    %{--                        }--}%
+    %{--                    },--}%
+    %{--                    guardar  : {--}%
+    %{--                        id        : "btnSave",--}%
+    %{--                        label     : "<i class='fa fa-save'></i> Guardar",--}%
+    %{--                        className : "btn-success",--}%
+    %{--                        callback  : function () {--}%
+    %{--                            return submitFormDpto();--}%
+    %{--                        } //callback--}%
+    %{--                    } //guardar--}%
+    %{--                } //buttons--}%
+    %{--            }); //dialog--}%
+    %{--            setTimeout(function () {--}%
+    %{--                var $input = b.find(".form-control").not(".datepicker").first();--}%
+    %{--                var val = $input.val();--}%
+    %{--                $input.focus();--}%
+    %{--                $input.val("");--}%
+    %{--                $input.val(val);--}%
+    %{--            }, 500);--}%
+    %{--        } //success--}%
+    %{--    }); //ajax--}%
+    %{--} //createEdit--}%
 
-    function submitFormDpto() {
-        var $form = $("#frmDepartamento");
-        var $btn = $("#dlgCreateEdit").find("#btnSave");
-        if ($form.valid()) {
-            var cl2 = cargarLoader("Guardando...");
-            $btn.replaceWith(spinner);
-            $.ajax({
-                type    : "POST",
-                url     : $form.attr("action"),
-                data    : $form.serialize(),
-                success : function (msg) {
-                    cl2.modal("hide");
-                    var parts = msg.split("_");
-                    if (parts[0] == "OK") {
-                        log("Departamento inicial creado correctamente","success");
-                        setTimeout(function () {
-                            location.reload(true);
-                        }, 1000);
-                    } else {
-                        log("Error al crear el departamento inicial","error");
-                        spinner.replaceWith($btn);
-                        return false;
-                    }
-                }
-            });
-        } else {
-            return false;
-        } //else
-    }
+    // function submitFormDpto() {
+    //     var $form = $("#frmDepartamento");
+    //     var $btn = $("#dlgCreateEdit").find("#btnSave");
+    //     if ($form.valid()) {
+    //         var cl2 = cargarLoader("Guardando...");
+    //         $btn.replaceWith(spinner);
+    //         $.ajax({
+    //             type    : "POST",
+    //             url     : $form.attr("action"),
+    //             data    : $form.serialize(),
+    //             success : function (msg) {
+    //                 cl2.modal("hide");
+    //                 var parts = msg.split("_");
+    //                 if (parts[0] == "OK") {
+    //                     log("Departamento inicial creado correctamente","success");
+    //                     setTimeout(function () {
+    //                         location.reload(true);
+    //                     }, 1000);
+    //                 } else {
+    //                     log("Error al crear el departamento inicial","error");
+    //                     spinner.replaceWith($btn);
+    //                     return false;
+    //                 }
+    //             }
+    //         });
+    //     } else {
+    //         return false;
+    //     } //else
+    // }
 
 
     $(function () {
@@ -307,15 +307,15 @@
                         location.href="${createLink(controller: 'empresa', action: 'administradores')}/" + id;
                     }
                 },
-                dpto : {
-                    label            : "Inicializar árbol",
-                    icon             : "fa fa-tree",
-                    separator_before : true,
-                    action           : function ($element) {
-                        var id = $element.data("id");
-                        inicializarArbol(id);
-                    }
-                },
+                // dpto : {
+                //     label            : "Inicializar árbol",
+                //     icon             : "fa fa-tree",
+                //     separator_before : true,
+                //     action           : function ($element) {
+                //         var id = $element.data("id");
+                //         inicializarArbol(id);
+                //     }
+                // },
                 eliminar : {
                     label            : "Eliminar",
                     icon             : "fa fa-trash",
