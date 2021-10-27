@@ -142,7 +142,7 @@
         }); //ajax
     } //createEdit
 
-    function createEditCanton(id, parentId) {
+    function createEditSubcategoria(id, parentId) {
 
         var title = id ? "Editar" : "Crear";
         var data = id ? {id : id} : {};
@@ -151,12 +151,12 @@
         }
         $.ajax({
             type    : "POST",
-            url     : "${createLink(controller: 'canton', action:'form_ajax')}",
+            url     : "${createLink(controller: 'subcategoria', action:'form_ajax')}",
             data    : data,
             success : function (msg) {
                 var b = bootbox.dialog({
                     id    : "dlgCreateEditC",
-                    title : title + " Cantón",
+                    title : title + " Subcategoría",
                     class : "modal-lg",
                     message : msg,
                     buttons : {
@@ -171,7 +171,7 @@
                             label     : "<i class='fa fa-save'></i> Guardar",
                             className : "btn-success",
                             callback  : function () {
-                                return submitFormCanton();
+                                return submitFormSubcategoria();
                             } //callback
                         } //guardar
                     } //buttons
@@ -183,7 +183,7 @@
         }); //ajax
     } //createEdit
 
-    function createEditParroquia(id, parentId) {
+    function createEditGrupo(id, parentId) {
 
         var title = id ? "Editar" : "Crear";
         var data = id ? {id : id} : {};
@@ -192,12 +192,12 @@
         }
         $.ajax({
             type    : "POST",
-            url     : "${createLink(controller: 'parroquia', action:'form_ajax')}",
+            url     : "${createLink(controller: 'grupo', action:'form_ajax')}",
             data    : data,
             success : function (msg) {
                 var b = bootbox.dialog({
                     id    : "dlgCreateEditP",
-                    title : title + " Parroquia",
+                    title : title + " Grupo",
                     class : "modal-lg",
                     message : msg,
                     buttons : {
@@ -212,7 +212,7 @@
                             label     : "<i class='fa fa-save'></i> Guardar",
                             className : "btn-success",
                             callback  : function () {
-                                return submitFormParroquia();
+                                return submitFormGrupo();
                             } //callback
                         } //guardar
                     } //buttons
@@ -267,7 +267,7 @@
     %{--} //createEdit--}%
 
     function submitFormCategoria() {
-        var $form = $("#frmSave-provinciaInstance");
+        var $form = $("#frmCategoria");
         var $btn = $("#dlgCreateEdit").find("#btnSave");
         if ($form.valid()) {
             var data = $form.serialize();
@@ -281,12 +281,13 @@
                     dialog.modal('hide');
                     var parts = msg.split("_");
                     if(parts[0] == 'ok'){
-                        log(parts[1], "success");
+                        log("Categoría guardada correctamente", "success");
                         setTimeout(function () {
                             location.reload(true);
                         }, 1000);
                     }else{
-                        bootbox.alert('<i class="fa fa-exclamation-triangle text-danger fa-3x"></i> ' + '<strong style="font-size: 14px">' + parts[1] + '</strong>');
+                        log("Error al guardar la categoría","error");
+                        // bootbox.alert('<i class="fa fa-exclamation-triangle text-danger fa-3x"></i> ' + '<strong style="font-size: 14px">' + parts[1] + '</strong>');
                         return false;
                     }
                 }
@@ -296,11 +297,10 @@
         }
     }
 
-    function submitFormCanton() {
-        var $form = $("#frmSave-cantonInstance");
+    function submitFormSubcategoria() {
+        var $form = $("#frmSubcategoria");
         var $btn = $("#dlgCreateEditC").find("#btnSave");
         if ($form.valid()) {
-            $("#provincia").attr("disabled", false)
             var data = $form.serialize();
             $btn.replaceWith(spinner);
             var dialog = cargarLoader("Guardando...");
@@ -312,12 +312,13 @@
                     dialog.modal('hide');
                     var parts = msg.split("_");
                     if(parts[0] == 'ok'){
-                        log(parts[1], "success");
+                        log("Subcategoría guardada correctamente", "success");
                         setTimeout(function () {
                             location.reload(true);
                         }, 1000);
                     }else{
-                        bootbox.alert('<i class="fa fa-exclamation-triangle text-danger fa-3x"></i> ' + '<strong style="font-size: 14px">' + parts[1] + '</strong>');
+                        log("Error al guardar la subcategoría","error");
+                        // bootbox.alert('<i class="fa fa-exclamation-triangle text-danger fa-3x"></i> ' + '<strong style="font-size: 14px">' + parts[1] + '</strong>');
                         return false;
                     }
                 }
@@ -327,11 +328,10 @@
         }
     }
 
-    function submitFormParroquia() {
-        var $form = $("#frmSave-parroquiaInstance");
+    function submitFormGrupo() {
+        var $form = $("#frmGrupo");
         var $btn = $("#dlgCreateEditP").find("#btnSave");
         if ($form.valid()) {
-            $("#canton").attr("disabled", false)
             var data = $form.serialize();
             $btn.replaceWith(spinner);
             var dialog = cargarLoader("Guardando...");
@@ -343,12 +343,13 @@
                     dialog.modal('hide');
                     var parts = msg.split("_");
                     if(parts[0] == 'ok'){
-                        log(parts[1], "success");
+                        log("Grupo guardado correctamente", "success");
                         setTimeout(function () {
                             location.reload(true);
                         }, 1000);
                     }else{
-                        bootbox.alert('<i class="fa fa-exclamation-triangle text-danger fa-3x"></i> ' + '<strong style="font-size: 14px">' + parts[1] + '</strong>');
+                        log("Error al guardar el grupo","error");
+                        // bootbox.alert('<i class="fa fa-exclamation-triangle text-danger fa-3x"></i> ' + '<strong style="font-size: 14px">' + parts[1] + '</strong>');
                         return false;
                     }
                 }
@@ -358,36 +359,36 @@
         }
     }
 
-    function submitFormComunidad() {
-        var $form = $("#frmSave-comunidadInstance");
-        var $btn = $("#dlgCreateEditCo").find("#btnSave");
-        if ($form.valid()) {
-            $("#parroquia").attr("disabled", false);
-            var data = $form.serialize();
-            $btn.replaceWith(spinner);
-            var dialog = cargarLoader("Guardando...");
-            $.ajax({
-                type    : "POST",
-                url     : $form.attr("action"),
-                data    : data,
-                success : function (msg) {
-                    dialog.modal('hide');
-                    var parts = msg.split("_");
-                    if(parts[0] == 'ok'){
-                        log(parts[1], "success");
-                        setTimeout(function () {
-                            location.reload(true);
-                        }, 1000);
-                    }else{
-                        bootbox.alert('<i class="fa fa-exclamation-triangle text-danger fa-3x"></i> ' + '<strong style="font-size: 14px">' + parts[1] + '</strong>');
-                        return false;
-                    }
-                }
-            });
-        } else {
-            return false;
-        }
-    }
+    // function submitFormComunidad() {
+    //     var $form = $("#frmSave-comunidadInstance");
+    //     var $btn = $("#dlgCreateEditCo").find("#btnSave");
+    //     if ($form.valid()) {
+    //         $("#parroquia").attr("disabled", false);
+    //         var data = $form.serialize();
+    //         $btn.replaceWith(spinner);
+    //         var dialog = cargarLoader("Guardando...");
+    //         $.ajax({
+    //             type    : "POST",
+    //             url     : $form.attr("action"),
+    //             data    : data,
+    //             success : function (msg) {
+    //                 dialog.modal('hide');
+    //                 var parts = msg.split("_");
+    //                 if(parts[0] == 'ok'){
+    //                     log(parts[1], "success");
+    //                     setTimeout(function () {
+    //                         location.reload(true);
+    //                     }, 1000);
+    //                 }else{
+    //                     bootbox.alert('<i class="fa fa-exclamation-triangle text-danger fa-3x"></i> ' + '<strong style="font-size: 14px">' + parts[1] + '</strong>');
+    //                     return false;
+    //                 }
+    //             }
+    //         });
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
 
 
@@ -406,48 +407,48 @@
         var esRoot = nodeType.contains("root");
         var esPrincipal = nodeType.contains("principal");
         var esSubcategoria = nodeType.contains("subcategoria");
-        var esGrupo = nodeType.contains("gupo");
+        var esGrupo = nodeType.contains("grupo");
         // var esComunidad = nodeType.contains("comunidad");
 
         var items = {};
 
         var agregarCategoria = {
             label  : "Agregar Categoria",
-            icon   : "fa fa-parking text-success",
+            icon   : "fa fa-copyright text-success",
             action : function () {
                 createEditCategoria(null);
             }
         };
 
-        var agregarCanton = {
+        var agregarSubcategoria = {
             label  : "Agregar Subcategoría",
-            icon   : "fa fa-copyright text-info",
+            icon   : "fa fa-parking text-info",
             action : function () {
-                createEditCanton(null, nodeId);
+                createEditSubcategoria(null, nodeId);
             }
         };
 
-        var agregarCanton2 = {
-            label  : "Agregar Cantón",
-            icon   : "fa fa-copyright text-info",
+        var agregarSubcategoria2 = {
+            label  : "Agregar Subcategoría",
+            icon   : "fa fa-parking text-info",
             action : function () {
-                createEditCanton(null, $node.parent().parent().children()[1].id.split("_")[1]);
+                createEditSubcategoria(null, $node.parent().parent().children()[1].id.split("_")[1]);
             }
         };
 
-        var agregarParroquia = {
-            label  : "Agregar Parroquia",
+        var agregarGrupo = {
+            label  : "Agregar Grupo",
             icon   : "fa fa-registered text-danger",
             action : function () {
-                createEditParroquia(null, nodeId);
+                createEditGrupo(null, nodeId);
             }
         };
 
-        var agregarParroquia2 = {
-            label  : "Agregar Parroquia",
+        var agregarGrupo2 = {
+            label  : "Agregar Grupo",
             icon   : "fa fa-registered text-danger",
             action : function () {
-                createEditParroquia(null, $node.parent().parent().children()[1].id.split("_")[1]);
+                createEditGrupo(null, $node.parent().parent().children()[1].id.split("_")[1]);
             }
         };
 
@@ -467,27 +468,27 @@
         //     }
         // };
 
-        var editarProvincia = {
-            label  : "Editar Provincia",
+        var editarCategoria = {
+            label  : "Editar Categoría",
             icon   : "fa fa-pen text-info",
             action : function () {
-                createEditProvincia(nodeId);
+                createEditCategoria(nodeId);
             }
         };
 
-        var editarCanton = {
-            label  : "Editar Cantón",
+        var editarSubcategoria = {
+            label  : "Editar Subcategoría",
             icon   : "fa fa-pen text-info",
             action : function () {
-                createEditCanton(nodeId, null);
+                createEditSubcategoria(nodeId, null);
             }
         };
 
-        var editarParroquia = {
-            label  : "Editar Parroquia",
+        var editarGrupo = {
+            label  : "Editar Grupo",
             icon   : "fa fa-pen text-info",
             action : function () {
-                createEditParroquia(nodeId, null);
+                createEditGrupo(nodeId, null);
             }
         };
 
@@ -499,20 +500,20 @@
         //     }
         // };
 
-        var verProvincia = {
-            label            : "Ver datos de la provincia",
+        var verCategoria= {
+            label            : "Ver datos de la Categoría",
             icon             : "fa fa-laptop text-info",
             separator_before : true,
             action           : function () {
                 $.ajax({
                     type    : "POST",
-                    url     : "${createLink(controller: "provincia", action:'show_ajax')}",
+                    url     : "${createLink(controller: "categoria", action:'show_ajax')}",
                     data    : {
                         id : nodeId
                     },
                     success : function (msg) {
                         bootbox.dialog({
-                            title   : "Ver Provincia",
+                            title   : "Ver Categoría",
                             message : msg,
                             buttons : {
                                 ok : {
@@ -528,20 +529,20 @@
             }
         };
 
-        var verCanton = {
-            label            : "Ver datos del cantón",
+        var verSubcategoria = {
+            label            : "Ver datos de la subcategoría",
             icon             : "fa fa-laptop text-info",
             separator_before : true,
             action           : function () {
                 $.ajax({
                     type    : "POST",
-                    url     : "${createLink(controller: "canton", action:'show_ajax')}",
+                    url     : "${createLink(controller: "subcategoria", action:'show_ajax')}",
                     data    : {
                         id : nodeId
                     },
                     success : function (msg) {
                         bootbox.dialog({
-                            title   : "Ver Cantón",
+                            title   : "Ver Subcategoría",
                             message : msg,
                             buttons : {
                                 ok : {
@@ -557,20 +558,20 @@
             }
         };
 
-        var verParroquia = {
-            label            : "Ver datos de la parroquia",
+        var verGrupo = {
+            label            : "Ver datos del grupo",
             icon             : "fa fa-laptop text-info",
             separator_before : true,
             action           : function () {
                 $.ajax({
                     type    : "POST",
-                    url     : "${createLink(controller: "parroquia", action:'show_ajax')}",
+                    url     : "${createLink(controller: "grupo", action:'show_ajax')}",
                     data    : {
                         id : nodeId
                     },
                     success : function (msg) {
                         bootbox.dialog({
-                            title   : "Ver Parroquia",
+                            title   : "Ver Grupo",
                             message : msg,
                             buttons : {
                                 ok : {
@@ -617,14 +618,14 @@
         %{--};--}%
 
 
-        var borrarProvincia = {
-            label            : "Borrar Provincia",
+        var borrarCategoria = {
+            label            : "Borrar Categoría",
             icon             : "fa fa-trash text-danger",
             separator_before : true,
             action           : function () {
                 bootbox.confirm({
-                    title: "Borrar Provincia",
-                    message: "Está seguro de borrar esta provincia? Esta acción no puede deshacerse.",
+                    title: "Borrar Categoría",
+                    message: "Está seguro de borrar esta categoría? Esta acción no puede deshacerse.",
                     buttons: {
                         cancel: {
                             label: '<i class="fa fa-times"></i> Cancelar',
@@ -640,19 +641,19 @@
                             var dialog = cargarLoader("Borrando...");
                             $.ajax({
                                 type: 'POST',
-                                url: '${createLink(controller: 'provincia', action: 'borrarProvincia_ajax')}',
+                                url: '${createLink(controller: 'categoria', action: 'borrarCategoria_ajax')}',
                                 data:{
                                     id: nodeId
                                 },
                                 success: function (msg) {
                                     dialog.modal('hide');
                                     if(msg == 'ok'){
-                                        log("Provincia borrado correctamente","success");
+                                        log("Categoría borrada correctamente","success");
                                         setTimeout(function () {
                                             location.reload(true);
                                         }, 1000);
                                     }else{
-                                        log("Error al borrar la provincia", "error")
+                                        log("Error al borrar la categoría", "error")
                                     }
                                 }
                             });
@@ -663,14 +664,14 @@
         };
 
 
-        var borrarCanton = {
-            label            : "Borrar Cantón",
+        var borrarSubcategoria = {
+            label            : "Borrar Subcategoría",
             icon             : "fa fa-trash text-danger",
             separator_before : true,
             action           : function () {
                 bootbox.confirm({
-                    title: "Borrar Cantón",
-                    message: "Está seguro de borrar este cantón? Esta acción no puede deshacerse.",
+                    title: "Borrar Subcategoría",
+                    message: "Está seguro de borrar esta subcategoría? Esta acción no puede deshacerse.",
                     buttons: {
                         cancel: {
                             label: '<i class="fa fa-times"></i> Cancelar',
@@ -686,19 +687,19 @@
                             var dialog = cargarLoader("Borrando...");
                             $.ajax({
                                 type: 'POST',
-                                url: '${createLink(controller: 'canton', action: 'borrarCanton_ajax')}',
+                                url: '${createLink(controller: 'subcategoria', action: 'borrarSubcategoria_ajax')}',
                                 data:{
                                     id: nodeId
                                 },
                                 success: function (msg) {
                                     dialog.modal('hide');
                                     if(msg == 'ok'){
-                                        log("Cantón borrado correctamente","success");
+                                        log("Subcategoría borrada correctamente","success");
                                         setTimeout(function () {
                                             location.reload(true);
                                         }, 1000);
                                     }else{
-                                        log("Error al borrar el canton", "error")
+                                        log("Error al borrar la subcategoría", "error")
                                     }
                                 }
                             });
@@ -709,14 +710,14 @@
         };
 
 
-        var borrarParroquia = {
-            label            : "Borrar Parroquia",
+        var borrarGrupo = {
+            label            : "Borrar Grupo",
             icon             : "fa fa-trash text-danger",
             separator_before : true,
             action           : function () {
                 bootbox.confirm({
-                    title: "Borrar Parroquia",
-                    message: "Está seguro de borrar esta parroquia? Esta acción no puede deshacerse.",
+                    title: "Borrar Grupo",
+                    message: "Está seguro de borrar este grupo? Esta acción no puede deshacerse.",
                     buttons: {
                         cancel: {
                             label: '<i class="fa fa-times"></i> Cancelar',
@@ -732,19 +733,19 @@
                             var dialog = cargarLoader("Borrando...");
                             $.ajax({
                                 type: 'POST',
-                                url: '${createLink(controller: 'parroquia', action: 'borrarParroquia_ajax')}',
+                                url: '${createLink(controller: 'grupo', action: 'borrarGrupo_ajax')}',
                                 data:{
                                     id: nodeId
                                 },
                                 success: function (msg) {
                                     dialog.modal('hide');
                                     if(msg == 'ok'){
-                                        log("Parroquia borrada correctamente","success");
+                                        log("Grupo borrado correctamente","success");
                                         setTimeout(function () {
                                             location.reload(true);
                                         }, 1000);
                                     }else{
-                                        log("Error al borrar la parroquia", "error")
+                                        log("Error al borrar el grupo", "error")
                                     }
                                 }
                             });
@@ -803,22 +804,21 @@
             items.agregarCategoria = agregarCategoria;
         } else if (esPrincipal) {
             items.agregarCategoria = agregarCategoria;
-            items.agregarCanton = agregarCanton;
-            items.verProvincia = verProvincia;
-            items.editarProvincia = editarProvincia;
-            items.borrarProvincia = borrarProvincia;
+            items.agregarSubcategoria = agregarSubcategoria;
+            items.verCategoria = verCategoria;
+            items.editarCategoria = editarCategoria;
+            items.borrarCategoria = borrarCategoria;
         } else if (esSubcategoria) {
-            items.agregarCanton = agregarCanton2;
-            items.agregarParroquia = agregarParroquia;
-            items.verCanton = verCanton;
-            items.editarCanton = editarCanton;
-            items.borrarCanton = borrarCanton;
+            items.agregarSubcategoria = agregarSubcategoria2;
+            items.agregarGrupo = agregarGrupo;
+            items.verSubcategoria = verSubcategoria;
+            items.editarSubcategoria = editarSubcategoria;
+            items.borrarSubcategoria = borrarSubcategoria;
         } else if (esGrupo) {
-            items.agregarParroquia = agregarParroquia2;
-            // items.agregarComunidad = agregarComunidad;
-            items.verParroquia = verParroquia;
-            items.editarParroquia = editarParroquia;
-            items.borrarParroquia = borrarParroquia;
+            items.agregarGrupo = agregarGrupo2;
+            items.verGrupo = verGrupo;
+            items.editarGrupo = editarGrupo;
+            items.borrarGrupo = borrarGrupo;
         }
 
         // else if (esComunidad) {

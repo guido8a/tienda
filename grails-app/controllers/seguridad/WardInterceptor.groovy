@@ -9,6 +9,8 @@ class WardInterceptor {
                 .excludes(controller:'participante')
                 .excludes(controller:'empresa')
                 .excludes(controller:'categoria')
+                .excludes(controller:'subcategoria')
+                .excludes(controller:'grupo')
     }
 
     boolean before() {

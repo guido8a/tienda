@@ -113,4 +113,49 @@ class CategoriaController {
         return[categoria: categoria]
     }
 
+    def validarOrden_ajax(){
+        println("params orden " + params)
+
+        def categorias = false
+        def categoria
+
+        if(params.orden){
+            if(params.id){
+                categoria = Categoria.get(params.id)
+                categorias = Categoria.findAllByOrdenAndIdNotEqual(params.orden.toInteger(), categoria.id)
+            }else{
+                categorias = Categoria.findAllByOrden(params.orden.toInteger())
+            }
+
+            if(categorias){
+                render "false"
+            }else{
+                render "true"
+            }
+        }else{
+            render "true"
+        }
+    }
+
+    def saveCategoria_ajax(){
+        println("params svc " + params)
+
+        def categoria
+
+        if(params.id){
+            categoria = Categoria.get(params.id)
+        }else{
+            categoria = new Categoria()
+        }
+
+        categoria.properties = params
+
+        if(!categoria.save(flush:true)){
+            println("error al guardar la categoria " + categoria.errors)
+            render "no"
+        }else{
+            render "ok"
+        }
+    }
+
 }
