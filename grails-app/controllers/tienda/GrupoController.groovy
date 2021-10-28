@@ -66,4 +66,21 @@ class GrupoController {
         }
     }
 
+    def show_ajax(){
+        def grupo = Grupo.get(params.id)
+        return[grupo:grupo]
+    }
+
+    def borrarGrupo_ajax(){
+        def grupo = Grupo.get(params.id)
+
+        try{
+            grupo.delete(flush:true)
+            render "ok"
+        }catch(e){
+            println("Error al borrar la grupo " + grupo.errors)
+            render "no"
+        }
+    }
+
 }

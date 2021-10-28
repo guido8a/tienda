@@ -66,6 +66,22 @@ class SubcategoriaController {
         }
     }
 
+    def show_ajax(){
+        def subcategoria = Subcategoria.get(params.id)
+        return[subcategoria: subcategoria]
+    }
 
+
+    def borrarSubcategoria_ajax(){
+        def subcategoria = Subcategoria.get(params.id)
+
+        try{
+            subcategoria.delete(flush:true)
+            render "ok"
+        }catch(e){
+            println("Error al borrar la subcategoria " + subcategoria.errors)
+            render "no"
+        }
+    }
 
 }

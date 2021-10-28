@@ -91,7 +91,6 @@
         <i class="fa fa-copyright text-success"></i> Categoría
         <i class="fa fa-parking text-primary"></i> Subcategoría
         <i class="fa fa-registered text-danger"></i> Grupo
-%{--        <i class="fa fa-info-circle text-warning"></i> Comunidad--}%
     </div>
 </div>
 
@@ -225,47 +224,6 @@
     } //createEdit
 
 
-    %{--function createEditComunidad(id, parentId) {--}%
-
-    %{--    var title = id ? "Editar" : "Crear";--}%
-    %{--    var data = id ? {id : id} : {};--}%
-    %{--    if (parentId) {--}%
-    %{--        data.padre = parentId;--}%
-    %{--    }--}%
-    %{--    $.ajax({--}%
-    %{--        type    : "POST",--}%
-    %{--        url     : "${createLink(controller: 'comunidad', action:'form_ajax')}",--}%
-    %{--        data    : data,--}%
-    %{--        success : function (msg) {--}%
-    %{--            var b = bootbox.dialog({--}%
-    %{--                id    : "dlgCreateEditCo",--}%
-    %{--                title : title + " Comunidad",--}%
-    %{--                class : "modal-lg",--}%
-    %{--                message : msg,--}%
-    %{--                buttons : {--}%
-    %{--                    cancelar : {--}%
-    %{--                        label     : "Cancelar",--}%
-    %{--                        className : "btn-primary",--}%
-    %{--                        callback  : function () {--}%
-    %{--                        }--}%
-    %{--                    },--}%
-    %{--                    guardar  : {--}%
-    %{--                        id        : "btnSave",--}%
-    %{--                        label     : "<i class='fa fa-save'></i> Guardar",--}%
-    %{--                        className : "btn-success",--}%
-    %{--                        callback  : function () {--}%
-    %{--                            return submitFormComunidad();--}%
-    %{--                        } //callback--}%
-    %{--                    } //guardar--}%
-    %{--                } //buttons--}%
-    %{--            }); //dialog--}%
-    %{--            setTimeout(function () {--}%
-    %{--                b.find(".form-control").first().focus()--}%
-    %{--            }, 500);--}%
-    %{--        } //success--}%
-    %{--    }); //ajax--}%
-    %{--} //createEdit--}%
-
     function submitFormCategoria() {
         var $form = $("#frmCategoria");
         var $btn = $("#dlgCreateEdit").find("#btnSave");
@@ -359,39 +317,6 @@
         }
     }
 
-    // function submitFormComunidad() {
-    //     var $form = $("#frmSave-comunidadInstance");
-    //     var $btn = $("#dlgCreateEditCo").find("#btnSave");
-    //     if ($form.valid()) {
-    //         $("#parroquia").attr("disabled", false);
-    //         var data = $form.serialize();
-    //         $btn.replaceWith(spinner);
-    //         var dialog = cargarLoader("Guardando...");
-    //         $.ajax({
-    //             type    : "POST",
-    //             url     : $form.attr("action"),
-    //             data    : data,
-    //             success : function (msg) {
-    //                 dialog.modal('hide');
-    //                 var parts = msg.split("_");
-    //                 if(parts[0] == 'ok'){
-    //                     log(parts[1], "success");
-    //                     setTimeout(function () {
-    //                         location.reload(true);
-    //                     }, 1000);
-    //                 }else{
-    //                     bootbox.alert('<i class="fa fa-exclamation-triangle text-danger fa-3x"></i> ' + '<strong style="font-size: 14px">' + parts[1] + '</strong>');
-    //                     return false;
-    //                 }
-    //             }
-    //         });
-    //     } else {
-    //         return false;
-    //     }
-    // }
-
-
-
     function createContextMenu(node) {
         $(".lzm-dropdown-menu").hide();
 
@@ -452,22 +377,6 @@
             }
         };
 
-        // var agregarComunidad = {
-        //     label  : "Agregar Comunidad",
-        //     icon   : "fa fa-info-circle text-warning",
-        //     action : function () {
-        //         createEditComunidad(null, nodeId);
-        //     }
-        // };
-        //
-        // var agregarComunidad2 = {
-        //     label  : "Agregar Comunidad",
-        //     icon   : "fa fa-info-circle text-warning",
-        //     action : function () {
-        //         createEditComunidad(null, $node.parent().parent().children()[1].id.split("_")[1]);
-        //     }
-        // };
-
         var editarCategoria = {
             label  : "Editar Categoría",
             icon   : "fa fa-pen text-info",
@@ -491,14 +400,6 @@
                 createEditGrupo(nodeId, null);
             }
         };
-
-        // var editarComunidad = {
-        //     label  : "Editar Comunidad",
-        //     icon   : "fa fa-pen text-info",
-        //     action : function () {
-        //         createEditComunidad(nodeId, null);
-        //     }
-        // };
 
         var verCategoria= {
             label            : "Ver datos de la Categoría",
@@ -586,37 +487,6 @@
                 });
             }
         };
-
-
-        %{--var verComunidad = {--}%
-        %{--    label            : "Ver datos de la comunidad",--}%
-        %{--    icon             : "fa fa-laptop text-info",--}%
-        %{--    separator_before : true,--}%
-        %{--    action           : function () {--}%
-        %{--        $.ajax({--}%
-        %{--            type    : "POST",--}%
-        %{--            url     : "${createLink(controller: "comunidad", action:'show_ajax')}",--}%
-        %{--            data    : {--}%
-        %{--                id : nodeId--}%
-        %{--            },--}%
-        %{--            success : function (msg) {--}%
-        %{--                bootbox.dialog({--}%
-        %{--                    title   : "Ver Comunidad",--}%
-        %{--                    message : msg,--}%
-        %{--                    buttons : {--}%
-        %{--                        ok : {--}%
-        %{--                            label     : "Aceptar",--}%
-        %{--                            className : "btn-primary",--}%
-        %{--                            callback  : function () {--}%
-        %{--                            }--}%
-        %{--                        }--}%
-        %{--                    }--}%
-        %{--                });--}%
-        %{--            }--}%
-        %{--        });--}%
-        %{--    }--}%
-        %{--};--}%
-
 
         var borrarCategoria = {
             label            : "Borrar Categoría",
@@ -755,52 +625,7 @@
             }
         };
 
-        %{--var borrarComunidad = {--}%
-        %{--    label            : "Borrar comunidad",--}%
-        %{--    icon             : "fa fa-trash text-danger",--}%
-        %{--    separator_before : true,--}%
-        %{--    action           : function () {--}%
-        %{--        bootbox.confirm({--}%
-        %{--            title: "Borrar Comunidad",--}%
-        %{--            message: "Está seguro de borrar esta comunidad? Esta acción no puede deshacerse.",--}%
-        %{--            buttons: {--}%
-        %{--                cancel: {--}%
-        %{--                    label: '<i class="fa fa-times"></i> Cancelar',--}%
-        %{--                    className: 'btn-primary'--}%
-        %{--                },--}%
-        %{--                confirm: {--}%
-        %{--                    label: '<i class="fa fa-trash"></i> Borrar',--}%
-        %{--                    className: 'btn-danger'--}%
-        %{--                }--}%
-        %{--            },--}%
-        %{--            callback: function (result) {--}%
-        %{--                if(result){--}%
-        %{--                    var dialog = cargarLoader("Borrando...");--}%
-        %{--                    $.ajax({--}%
-        %{--                        type: 'POST',--}%
-        %{--                        url: '${createLink(controller: 'comunidad', action: 'borrarComunidad_ajax')}',--}%
-        %{--                        data:{--}%
-        %{--                            id: nodeId--}%
-        %{--                        },--}%
-        %{--                        success: function (msg) {--}%
-        %{--                            dialog.modal('hide');--}%
-        %{--                            if(msg == 'ok'){--}%
-        %{--                                log("Comunidad borrada correctamente","success");--}%
-        %{--                                setTimeout(function () {--}%
-        %{--                                    location.reload(true);--}%
-        %{--                                }, 1000);--}%
-        %{--                            }else{--}%
-        %{--                                log("Error al borrar la comunidad", "error")--}%
-        %{--                            }--}%
-        %{--                        }--}%
-        %{--                    });--}%
-        %{--                }--}%
-        %{--            }--}%
-        %{--        });--}%
-        %{--    }--}%
-        %{--};--}%
-
-        if (esRoot) {
+         if (esRoot) {
             items.agregarCategoria = agregarCategoria;
         } else if (esPrincipal) {
             items.agregarCategoria = agregarCategoria;

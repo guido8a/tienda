@@ -114,7 +114,7 @@ class CategoriaController {
     }
 
     def validarOrden_ajax(){
-        println("params orden " + params)
+//        println("params orden " + params)
 
         def categorias = false
         def categoria
@@ -138,7 +138,7 @@ class CategoriaController {
     }
 
     def saveCategoria_ajax(){
-        println("params svc " + params)
+//        println("params svc " + params)
 
         def categoria
 
@@ -155,6 +155,62 @@ class CategoriaController {
             render "no"
         }else{
             render "ok"
+        }
+    }
+
+    def show_ajax(){
+        def categoria = Categoria.get(params.id)
+        return[categoria:categoria]
+    }
+
+    def borrarCategoria_ajax(){
+        def categoria = Categoria.get(params.id)
+
+        try{
+            categoria.delete(flush:true)
+            render "ok"
+        }catch(e){
+            println("Error al borrar la categoria " + categoria.errors)
+            render "no"
+        }
+    }
+
+    def arbolSearch_ajax() {
+        println "arbolSearch_ajax $params"
+        def search = params.str.trim()
+        if (search != "") {
+            def c = Subcategoria.createCriteria()
+            def find = c.list(params) {
+                or {
+                    ilike("descripcion", "%" + search + "%")
+                    categoria {
+                        or {
+                            ilike("descripcion", "%" + search + "%")
+                        }
+                    }
+                }
+            }
+
+            def categorias = []
+            find.each { pers ->
+                if (pers.categoria && !categorias.contains(pers.categoria)) {
+                    categorias.add(pers.categoria)
+                    def dep = pers.categoria
+                }
+            }
+            categorias = categorias.reverse()
+            def ids = "["
+            if (find.size() > 0) {
+                ids += "\"#root\","
+                categorias.each { dp ->
+                    ids += "\"#lidep_" + dp.id + "\","
+                }
+                ids = ids[0..-2]
+            }
+            ids += "]"
+            render ids
+        } else {
+            render ""
         }
     }
 
