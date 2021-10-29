@@ -44,9 +44,9 @@ class Producto {
         texto(blank: true, nullable: true, attributes: [title: 'texto'])
         estado(blank: true, nullable: true, attributes: [title: 'estado'])
         fecha(blank: false, nullable: false, attributes: [title: 'fecha creacion'])
-        sitio(size: 0..127, blank: false, nullable: false, attributes: [title: 'sitio'])
-        latitud(blank: false, nullable: false, attributes: [title: 'latitud'])
-        longitud(blank: false, nullable: false, attributes: [title: 'longitud'])
-        fechaModificacion(blank: false, nullable: false, attributes: [title: 'fecha modificacion'])
+        sitio(size: 0..127, blank: true, nullable: true, attributes: [title: 'sitio'])
+        latitud(blank: true, nullable: true, attributes: [title: 'latitud'])
+        longitud(blank: true, nullable: true, attributes: [title: 'longitud'])
+        fechaModificacion(blank: true, nullable: true, attributes: [title: 'fecha modificacion'])
     }
 }

@@ -7,7 +7,7 @@
 <g:if test="${tipo != '1'}">
     <b>Subcategorías: </b>
 </g:if>
-<g:select name="subcategoria" from="${subcategorias}" optionKey="id" optionValue="descripcion" class="form-control"/>
+<g:select name="subcategoria" from="${subcategorias}" optionKey="id" optionValue="descripcion" class="form-control" value="${sub?.id ?: ''}"/>
 
 <script type="text/javascript">
     cargarGrupos($("#subcategoria option:selected").val());

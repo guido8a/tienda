@@ -1,5 +1,7 @@
 package tienda
 
+import seguridad.Persona
+
 
 class ProductoController {
     def dbConnectionService
@@ -16,13 +18,25 @@ class ProductoController {
     def subcategorias_ajax(){
         def categoria = Categoria.get(params.id)
         def subcategorias = Subcategoria.findAllByCategoria(categoria)
-        return[subcategorias: subcategorias, tipo: params.tipo]
+        def subcategoria = null
+
+        if(params.tipo == '1'){
+            subcategoria = Subcategoria.get(params.sub)
+        }
+
+        return[subcategorias: subcategorias, tipo: params.tipo, sub: subcategoria]
     }
 
     def grupos_ajax(){
         def subcategoria = Subcategoria.get(params.id)
         def grupos = Grupo.findAllBySubcategoria(subcategoria)
-        return[grupos:grupos, tipo: params.tipo]
+        def grupo = null
+
+        if(params.tipo == '1'){
+            grupo = Grupo.get(params.gru)
+        }
+
+        return[grupos:grupos, tipo: params.tipo, gru: grupo]
     }
 
     def form(){
@@ -93,6 +107,33 @@ class ProductoController {
 //        }
 //        println "-->sql: $sqlSelect $sqlWhere $sqlOrder"
         "$sqlSelect $sqlWhere $sqlOrder".toString()
+    }
+
+    def guardarProducto_ajax(){
+        println("params sv pr" + params)
+
+        def usuario = Persona.get(session.usuario.id)
+
+        def producto
+
+        if(params.id){
+            producto = Producto.get(params.id)
+            producto.fechaModificacion = new Date()
+        }else{
+            producto = new Producto()
+            producto.fecha = new Date()
+            producto.estado = 'A'
+            producto.persona = usuario
+        }
+
+        producto.properties = params
+
+        if(!producto.save(flush:true)){
+            println("error al guardar el producto " + producto.errors)
+            render "no"
+        }else{
+            render "ok_" + producto?.id
+        }
     }
 
 }

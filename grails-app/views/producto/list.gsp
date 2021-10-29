@@ -38,9 +38,6 @@
     <h3>Administración de Productos</h3>
 </div>
 
-%{--<elm:flashMessage tipo="${flash.tipo}" icon="${flash.icon}"--}%
-%{--                  clase="${flash.clase}">${flash.message}</elm:flashMessage>--}%
-
 <div style="margin-top: -15px;" class="vertical-container">
     <p class="css-icono" style="margin-bottom: -15px"><i class="fa fa-search-plus"></i></p>
 
@@ -156,12 +153,12 @@
     }
 
 
-    <g:if test="${data}">
+%{--    <g:if test="${data}">--}%
     cargarBusqueda();
-    </g:if>
-    <g:else>
+%{--    </g:if>--}%
+%{--    <g:else>--}%
     // $("#mensaje").removeClass('hidden').append("No existen registros");
-    </g:else>
+%{--    </g:else>--}%
 
 
     $("#categoriaId").change(function () {
@@ -171,7 +168,7 @@
 
     function cargarBusqueda() {
         var area = $("#areas option:selected").val();
-        var nvel = $("#niveles option:selected").val()
+        var nvel = $("#niveles option:selected").val();
         $("#detalle").html("").append($("<div style='width:100%; text-align: center;'/>").append(spinnerSquare64));
         $.ajax({
             type: "POST",
@@ -214,15 +211,14 @@
 
         var id = $tr.data("id");
 
-        console.log('id', id, 'tr', $tr)
+        // console.log('id', id, 'tr', $tr)
         var editar = {
             label: "Editar",
             icon: "fa fa-edit",
             separator_before : true,
             action : function ($element) {
-                var id = $element.data("id");
-                console.log('--id', id)
-                cargarFechas(id);
+                var id = $element.attr("id");
+                location.href="${createLink(controller: 'producto', action: 'form')}?id=" + id
             }
         };
 

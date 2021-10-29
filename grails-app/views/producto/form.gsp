@@ -58,52 +58,23 @@
 <body>
 
 <div style="text-align: center; margin-top: -20px;margin-bottom:20px">
-    <h3>${producto?.titulo ? ("Producto:"  + producto?.titulo) : 'Nuevo Producto'}</h3>
+    <h3>${producto?.titulo ? ("Producto: "  + producto?.titulo) : 'Nuevo Producto'}</h3>
 </div>
-
-
-%{--<div style="margin-top: -15px;" class="vertical-container">--}%
-%{--    <p class="css-icono" style="margin-bottom: -15px"><i class="fa fa-search-plus"></i></p>--}%
-
-%{--    <div class="linea45"></div>--}%
-%{--    <div class="row" style="margin-bottom: 10px;">--}%
-
-%{--        <div class="row-fluid">--}%
-%{--            <div style="margin-left: 20px;">--}%
-%{--                <div class="col-xs-2 col-md-2">--}%
-%{--                    <b>Categoría: </b>--}%
-%{--                    <g:select name="categoria" from="${tienda.Categoria.list().sort{it.descripcion}}" optionKey="id" optionValue="descripcion" class="form-control"/>--}%
-%{--                </div>--}%
-%{--                <div class="col-xs-3 col-md-3" id="divSubcategoria">--}%
-
-%{--                </div>--}%
-
-%{--                <div class="col-xs-2 col-md-2" id="divGrupo">--}%
-
-%{--                </div>--}%
-%{--            </div>--}%
-%{--        </div>--}%
-%{--    </div>--}%
-%{--</div>--}%
-
-
-
-
-
 
 <div class="panel panel-primary col-md-12">
 
     <div class="panel-heading" style="padding: 3px; margin-top: 2px; text-align: left">
         <div class="btn-group">
-            %{--            <a href="${createLink(controller: 'inicio', action: 'index')}" id="btnSalir"--}%
-            %{--               class="btn btn-sm btn-warning" title="Salir">--}%
-            %{--                <i class="fa fa-door-open"></i> Salir--}%
-            %{--            </a>--}%
-
-            <a href="#" id="btnGuardar" class="btn btn-sm btn-success" title="Guardar">
-                <i class="fa fa-save"></i> Guardar
+            <a href="${createLink(controller: 'producto', action: 'list')}" id="btnSalir"
+               class="btn btn-sm btn-warning" title="Regresar a la lista de prodcutos">
+                <i class="fa fa-arrow-left"></i> Regresar
             </a>
         </div>
+
+        <a href="#" id="btnGuardar" class="btn btn-sm btn-success" title="Guardar">
+            <i class="fa fa-save"></i> Guardar
+        </a>
+
         <a href="#" id="btnNuevo" class="btn btn-sm btn-info" title="Nuevo producto">
             <i class="fa fa-file"></i> Nuevo producto
         </a>
@@ -111,15 +82,14 @@
 
     <div class="tab-content">
         <div id="home" class="tab-pane fade in active">
-            <g:form class="form-horizontal" name="frmCurso" role="form" method="POST" controller="curso" action="saveCurso_ajax">
-                <g:hiddenField name="id" value="${curso?.id}"/>
+            <g:form class="form-horizontal" name="frmProducto" role="form" method="POST" controller="curso" action="saveCurso_ajax">
+                <g:hiddenField name="id" value="${producto?.id}"/>
 
                 <div class="row izquierda">
                     <div class="col-md-12 input-group">
                         <span class="col-md-1 label label-primary text-info mediano">Categoría</span>
                         <div class="col-md-3">
-%{--                            <b>Categoría: </b>--}%
-                            <g:select name="categoria" from="${tienda.Categoria.list().sort{it.descripcion}}" optionKey="id" optionValue="descripcion" class="form-control"/>
+                            <g:select name="categoria" from="${tienda.Categoria.list().sort{it.descripcion}}" optionKey="id" optionValue="descripcion" class="form-control" value="${producto?.grupo?.subcategoria?.categoria?.id}"/>
                         </div>
 
                         <span class="col-md-1 label label-primary text-info mediano">Subcategoria</span>
@@ -131,9 +101,6 @@
                         <div class="col-xs-3 col-md-3" id="divGrupo">
 
                         </div>
-
-
-
                     </div>
                 </div>
 
@@ -152,35 +119,13 @@
                         <span class="col-md-1 label label-primary text-info mediano">Subtítulo</span>
                         <div class="col-md-8">
                             <span class="grupo">
-                            <g:textField name="subtitulo" maxlength="255" class="form-control" value="${producto?.subtitulo}"/>
+                                <g:textField name="subtitulo" maxlength="255" class="form-control" value="${producto?.subtitulo}"/>
                             </span>
                         </div>
                         <span class="col-md-1 label label-primary text-info mediano">Estado</span>
                         <div class="col-md-2">
                             <span class="grupo">
-                            <g:textField name="estado"  class="allCaps form-control" value="${producto?.estado}" readonly="true"/>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row izquierda">
-                    <div class="col-md-12 input-group">
-                        <span class="col-md-1 label label-primary text-info mediano">Texto</span>
-                        <div class="col-md-8">
-                            <span class="grupo">
-                                 <g:textArea name="texto" class="form-control" value="${producto?.texto}" style="resize: none; height: 200px"/>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row izquierda">
-                    <div class="col-md-12 input-group">
-                        <span class="col-md-1 label label-primary text-info mediano">Lugar</span>
-                        <div class="col-md-6">
-                            <span class="grupo">
-                                <g:textField name="sitio" maxlength="127" class="form-control" value="${producto?.sitio}"/>
+                                <g:textField name="estado_name" class="allCaps form-control" value="${producto?.estado == 'A' ? 'Activo' : 'Inactivo'}" readonly="true"/>
                             </span>
                         </div>
                     </div>
@@ -188,25 +133,12 @@
 
                 <div class="row izquierda" style="margin-bottom: 20px">
                     <div class="col-md-12 input-group">
-                        <div class="col-md-1"></div>
-                        <span class="col-md-1 label label-primary text-info mediano">Latitud</span>
-                        <div class="col-md-1">
+                        <span class="col-md-1 label label-primary text-info mediano">Texto</span>
+                        <div class="col-md-8">
                             <span class="grupo">
-                                %{--                                <g:textField name="numeroHorasDocente" maxlength="2" class="form-control" value="${curso?.numeroHorasDocente}"/>--}%
+                                <g:textArea name="texto" class="form-control" value="${producto?.texto}" style="resize: none; height: 200px"/>
                             </span>
                         </div>
-                        <span class="col-md-1 label label-primary text-info mediano">Longitud</span>
-                        <div class="col-md-1">
-                            <span class="grupo">
-                                %{--                                <g:textField name="numeroHorasPractica" maxlength="2" class="form-control" value="${curso?.numeroHorasPractica}"/>--}%
-                            </span>
-                        </div>
-%{--                        <span class="col-md-2 label label-primary text-info mediano">Número de horas aprendizaje autónomo</span>--}%
-%{--                        <div class="col-md-1">--}%
-%{--                            <span class="grupo">--}%
-%{--                                --}%%{--                                <g:textField name="numeroHorasAprendizajeAutonomo"  maxlength="2" class="form-control" value="${curso?.numeroHorasAprendizajeAutonomo}"/>--}%
-%{--                            </span>--}%
-%{--                        </div>--}%
                     </div>
                 </div>
             </g:form>
@@ -214,10 +146,39 @@
     </div>
 </div>
 
-
-
-
 <script type="text/javascript">
+
+    $("#btnNuevo").click(function (){
+        location.href="${createLink(controller: 'producto', action: 'form')}"
+    });
+
+    $("#btnGuardar").click(function () {
+        var $form = $("#frmProducto");
+        if ($form.valid()) {
+            if($("#grupo option:selected").val() == '' || $("#grupo option:selected").val() == null){
+                bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i> Seleccione un grupo")
+            }else{
+                var r = cargarLoader("Grabando");
+                $.ajax({
+                    type: 'POST',
+                    url: '${createLink(controller: 'producto', action: 'guardarProducto_ajax')}',
+                    data:$form.serialize(),
+                    success: function (msg) {
+                        r.modal("hide");
+                        var parts = msg.split("_");
+                        if(parts[0] == 'ok'){
+                            log("Producto guardado correctamente");
+                            setTimeout(function () {
+                                location.href="${createLink(controller: 'producto', action: 'form')}?id=" + parts[1]
+                            }, 1000);
+                        }else{
+                            log("Error al guardar el producto")
+                        }
+                    }
+                });
+            }
+        }
+    });
 
     cargarsubcategorias($("#categoria option:selected").val());
 
@@ -232,7 +193,8 @@
             url: '${createLink(controller: 'producto', action: 'subcategorias_ajax')}',
             data:{
                 id: categoria,
-                tipo: 1
+                tipo: 1,
+                sub: '${producto?.grupo?.subcategoria?.id}'
             },
             success: function (msg) {
                 $("#divSubcategoria").html(msg)
@@ -246,7 +208,8 @@
             url: '${createLink(controller: 'producto', action: 'grupos_ajax')}',
             data:{
                 id: subcategoria,
-                tipo: 1
+                tipo: 1,
+                gru: '${producto?.grupo?.id}'
             },
             success: function (msg) {
                 $("#divGrupo").html(msg)
