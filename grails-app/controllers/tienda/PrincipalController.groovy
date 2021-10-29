@@ -59,7 +59,8 @@ class PrincipalController {
     def getImgnProd(){
 //        println "getImgnProd: $params"
         def producto = Producto.get(params.id)
-        def path = (params.tp == 'p'? "/var/ventas/productos/pro_${producto.id}/" : "/var/ventas/imagen/destacados/") + params.ruta
+//        def path = (params.tp == 'p'? "/var/ventas/productos/pro_${producto.id}/" : "/var/ventas/imagen/destacados/") + params.ruta
+        def path = (params.tp == 'p'? "/var/ventas/productos/pro_${producto.id}/" : "/var/tienda/imagenes/images/") + params.ruta
         def fileext = path.substring(path.indexOf(".")+1, path.length())
 
 //        println "ruta: $path"

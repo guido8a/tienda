@@ -50,6 +50,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <li><span class="glyphicon glyphicon-time" aria-hidden="true"></span>Free and Fast Delivery</li>
             <li><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Free shipping On all orders</li>
             <li><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><a href="mailto:info@example.com">info@example.com</a></li>
+            <li><a href="${createLink(controller: 'login', action: 'login')}"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>Admin</a></li>
         </ul>
     </div>
 </div>
@@ -60,7 +61,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="col-md-3 header-left">
             <h1><a href="index.html">
                 <asset:image src="apli/logo3.jpg"/>
-%{--                <img src="images/logo3.jpg">--}%
             </a></h1>
         </div>
         <div class="col-md-6 header-middle">
@@ -215,17 +215,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="slide-visual">
             <!-- Slide Image Area (1000 x 424) -->
             <ul class="slide-group">
-                <li><img class="img-responsive" src="images/ba1.jpg" alt="Dummy Image" /></li>
-                <li><img class="img-responsive" src="images/ba2.jpg" alt="Dummy Image" /></li>
-                <li><img class="img-responsive" src="images/ba3.jpg" alt="Dummy Image" /></li>
+%{--                 <li><img class="img-responsive" src="images/ba1.jpg" alt="Dummy Image" /></li>--}%
+                <li><img class="img-responsive" alt="Imagen de promoción 1"
+                         src="${request.contextPath}/principal/getImgnProd?ruta=ba1.jpg&tp=P&id=0"/></li>
+                <li><img class="img-responsive" alt="Imagen de promoción 1"
+                         src="${request.contextPath}/principal/getImgnProd?ruta=ba2.jpg&tp=P&id=0"/></li>
+                <li><img class="img-responsive" alt="Imagen de promoción 1"
+                         src="${request.contextPath}/principal/getImgnProd?ruta=ba3.jpg&tp=P&id=0"/></li>
             </ul>
 
             <!-- Slide Description Image Area (316 x 328) -->
             <div class="script-wrap">
                 <ul class="script-group">
-                    <li><div class="inner-script"><img class="img-responsive" src="images/baa1.jpg" alt="Dummy Image" /></div></li>
-                    <li><div class="inner-script"><img class="img-responsive" src="images/baa2.jpg" alt="Dummy Image" /></div></li>
-                    <li><div class="inner-script"><img class="img-responsive" src="images/baa3.jpg" alt="Dummy Image" /></div></li>
+                    <li><div class="inner-script">
+%{--                        <img class="img-responsive" src="images/baa1.jpg" alt="Dummy Image" />--}%
+                        <img class="img-responsive" alt="Imagen de promoción 1"
+                             src="${request.contextPath}/principal/getImgnProd?ruta=baa1.jpg&tp=P&id=0"/>
+                    </div></li>
+                    <li><div class="inner-script">
+                        <img class="img-responsive" alt="Imagen de promoción 1"
+                             src="${request.contextPath}/principal/getImgnProd?ruta=baa2.jpg&tp=P&id=0"/>
+                    <li><div class="inner-script">
+                    <img class="img-responsive" alt="Imagen de promoción 1"
+                         src="${request.contextPath}/principal/getImgnProd?ruta=baa3.jpg&tp=P&id=0"/>
                 </ul>
                 <div class="slide-controller">
                     <a href="#" class="btn-prev"><img src="images/btn_prev.png" alt="Prev Slide" /></a>
@@ -962,25 +974,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <div class="coupons-grids text-center">
             <div class="col-md-3 coupons-gd">
-                <h3>Buy your product in a simple way</h3>
+                <h3>Comprar es simple</h3>
             </div>
             <div class="col-md-3 coupons-gd">
+                <a href="${createLink(controller: 'login', action: 'login')}">
                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                <h4>LOGIN TO YOUR ACCOUNT</h4>
-                <p>Neque porro quisquam est, qui dolorem ipsum quia dolor
-                sit amet, consectetur.</p>
+                <h4>Ingresar</h4>
+                </a>
+                <p>Ingresa al sistema con tus datos</p>
             </div>
             <div class="col-md-3 coupons-gd">
                 <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                <h4>SELECT YOUR ITEM</h4>
-                <p>Neque porro quisquam est, qui dolorem ipsum quia dolor
-                sit amet, consectetur.</p>
+                <h4>Seleccionar un Item</h4>
+                <p>Busca lo que desea comprar y compare alternativas</p>
             </div>
             <div class="col-md-3 coupons-gd">
                 <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span>
-                <h4>MAKE PAYMENT</h4>
-                <p>Neque porro quisquam est, qui dolorem ipsum quia dolor
-                sit amet, consectetur.</p>
+                <h4>Pagar</h4>
+                <p>Tenemos varias formas de apgo para tu comodidad y seguridad</p>
             </div>
             <div class="clearfix"> </div>
         </div>

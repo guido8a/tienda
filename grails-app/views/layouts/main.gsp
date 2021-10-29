@@ -15,25 +15,12 @@
     <title>
         <g:layoutTitle default="monitor"/>
     </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    %{--    <asset:link rel="icon" href="favicon.ico" type="image/x-ico"/>--}%
+%{--    <meta name="viewport" content="width=device-width, initial-scale=1"/>--}%
+        <asset:link rel="icon" href="favicon.ico" type="image/x-ico"/>
     <asset:link rel="icon" href="favicon.png" type="image/x-ico"/>
 
-    %{--
-        <asset:stylesheet src="/merc/bootstrap.min.css"/>
-        <asset:stylesheet src="/apli/shop-homepage.css"/>
-        <asset:javascript src="/merc/jquery.min.js"/>
-        <asset:javascript src="/merc/bootstrap.bundle.js"/>
-        <asset:javascript src="/apli/bootbox.js"/>
-        <asset:javascript src="/jquery-validation-1.11.1/js/jquery.validate.min.js"/>
-        <asset:javascript src="/jquery-validation-1.11.1/js/jquery.validate.js"/>
-        <asset:javascript src="/jquery-validation-1.11.1/localization/messages_es.js"/>
-        <asset:javascript src="/apli/functions.js"/>
-        <asset:javascript src="/apli/loader.js"/>
-        <asset:javascript src="/apli/fontawesome.all.min.js"/>
-    --}%
-
     <asset:stylesheet src="/bootstrap-3.3.2/dist/css/bootstrap.css"/>
+%{--    <asset:stylesheet src="/apli/bootstrap.css"/>--}%
     <asset:stylesheet src="/bootstrap-3.3.2/dist/css/bootstrap-theme.css"/>
 
     <asset:stylesheet src="/jquery/jquery-ui-1.10.3.custom.min.css"/>

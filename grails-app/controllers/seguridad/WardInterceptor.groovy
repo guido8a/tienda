@@ -7,11 +7,11 @@ class WardInterceptor {
                 .excludes(controller:'shield')
                 .excludes(controller:'principal')
                 .excludes(controller:'participante')
-                .excludes(controller:'empresa')
-                .excludes(controller:'categoria')
-                .excludes(controller:'subcategoria')
-                .excludes(controller:'grupo')
-                .excludes(controller:'producto')
+//                .excludes(controller:'empresa')
+//                .excludes(controller:'categoria')
+//                .excludes(controller:'subcategoria')
+//                .excludes(controller:'grupo')
+//                .excludes(controller:'producto')
     }
 
     boolean before() {
@@ -24,7 +24,7 @@ class WardInterceptor {
         if(session) {
             usro = session.usuario
         }
-
+        println "usuario: ${session?.usuario} && perfil: ${session?.perfil}"
         if(session.an == 'saveTramite' && session.cn == 'tramite'){
             println("entro")
             return true

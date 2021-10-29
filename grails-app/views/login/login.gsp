@@ -11,7 +11,7 @@
 
 <div style="text-align: center; margin-top: 22px; height: ${(flash.message) ? '640' : '570'}px;" class="well">
 
-    <h1 class="titl" style="font-size: 24px; color: #06a">INSTITUTO DE FORMACIÓN DE LIDERES</h1>
+    <h1 class="titl" style="font-size: 32px; color: #06a">Tienda en Línea</h1>
 
     <elm:flashMessage tipo="${flash.tipo}" icon="${flash.icon}" clase="${flash.clase}">${flash.message}</elm:flashMessage>
 

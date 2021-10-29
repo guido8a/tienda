@@ -154,7 +154,7 @@ class LoginController {
                 def perf = Sesn.findAllByUsuario(user)
                 def perfiles = []
                 perf.each { p ->
-//                    println "añade a perfiles $p activo:${p.estaActivo}"
+                    println "añade a perfiles $p activo:${p.estaActivo}"
                     if (p.estaActivo) {
                         perfiles.add(p)
                     }

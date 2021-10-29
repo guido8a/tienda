@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>Sistema de Ventas</title>
+    <title>Tienda en Línea</title>
     <meta name="layout" content="main"/>
     <style type="text/css">
     @page {
@@ -166,13 +166,13 @@
 
     <div style="text-align: center;margin-bottom: 20px"><h2 class="titl">
         %{--            <p class="text-warning">${inst.institucion}</p>--}%
-        <p class="text-warning">INSTITUTO DE FORMACIÓN DE LIDERES</p>
+        <p class="text-warning">Tienda en Línea</p>
     </h2>
     </div>
 
     <div class="row mbr-justify-content-center">
 
-        <a href="${createLink(controller: 'institucion', action: 'inst')}" style="text-decoration: none">
+        <a href="${createLink(controller: 'empresa', action: 'list')}" style="text-decoration: none">
             <div class="col-lg-6 mbr-col-md-10">
                 <div class="wrap">
                     <div style="width: 200px; height: 120px">
@@ -182,7 +182,7 @@
 
                     <div style="width: 450px; height: 120px">
                         <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">
-                            <span>El Instituto de Formación de Líderes</span></h2>
+                            <span>Empresa</span></h2>
 
                         <p class="mbr-fonts-style text1 mbr-text display-6">La institución: Visión, Misión,
                         Quienes somos, Objetivos, Ejes formativos, etc..</p>
@@ -192,7 +192,7 @@
         </a>
 
 
-        <a href="${createLink(controller: 'curso', action: 'curso')}" style="text-decoration: none">
+        <a href="${createLink(controller: 'producto', action: 'list')}" style="text-decoration: none">
             <div class="col-lg-6 mbr-col-md-10">
                 <div class="wrap">
                     <div style="width: 200px; height: 120px">
@@ -201,10 +201,10 @@
                     </div>
 
                     <div style="width: 450px; height: 120px">
-                        <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>Cursos y Contenidos</span>
+                        <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>Productos</span>
                         </h2>
 
-                        <p class="mbr-fonts-style text1 mbr-text display-6">Administración de lso curos impartidos y sus contenidos</p>
+                        <p class="mbr-fonts-style text1 mbr-text display-6">Administración de los productos</p>
                     </div>
                 </div>
             </div>
