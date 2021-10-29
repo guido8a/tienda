@@ -24,7 +24,7 @@ class WardInterceptor {
         if(session) {
             usro = session.usuario
         }
-        println "usuario: ${session?.usuario} && perfil: ${session?.perfil}"
+//        println "usuario: ${session?.usuario} && perfil: ${session?.perfil}"
         if(session.an == 'saveTramite' && session.cn == 'tramite'){
             println("entro")
             return true

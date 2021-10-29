@@ -99,15 +99,10 @@
     <table class="table table-bordered table-hover table-condensed" style="width: 1070px">
         <thead>
         <tr>
-            <th class="alinear" style="width: 15%">Nombre</th>
-            <th class="alinear" style="width: 12%">Educación</th>
-            <th class="alinear" style="width: 8%">Edad</th>
-            <th class="alinear" style="width: 8%">Trabajo</th>
-            <th class="alinear" style="width: 5%">Curr.</th>
-            <th class="alinear" style="width: 5%">Comp.</th>
-            <th class="alinear" style="width: 6%">Partido</th>
-            <th class="alinear" style="width: 20%">Organización Social</th>
-            <th class="alinear" style="width: 20%">Movimiento político</th>
+            <th class="alinear" style="width: 25%">Nombre</th>
+            <th class="alinear" style="width: 50%">Título</th>
+            <th class="alinear" style="width: 20%">Grupo</th>
+            <th class="alinear" style="width: 5%">Estado</th>
         </tr>
         </thead>
     </table>
@@ -161,21 +156,11 @@
     }
 
 
-
-
-
-
-    $(function () {
-        $("#limpiaBuscar").click(function () {
-            $("#buscar").val('');
-        });
-    });
-
-    <g:if test="${areas}">
+    <g:if test="${data}">
     cargarBusqueda();
     </g:if>
     <g:else>
-    $("#mensaje").removeClass('hidden').append("No existen registros");
+    // $("#mensaje").removeClass('hidden').append("No existen registros");
     </g:else>
 
 
@@ -190,7 +175,7 @@
         $("#detalle").html("").append($("<div style='width:100%; text-align: center;'/>").append(spinnerSquare64));
         $.ajax({
             type: "POST",
-            url: "${g.createLink(controller: 'admnParticipante', action: 'tablaBuscar')}",
+            url: "${g.createLink(controller: 'producto', action: 'tablaBuscar')}",
             data: {
                 buscador: $("#buscador_con").val(),
                 ordenar: $("#ordenar_por").val(),
@@ -230,9 +215,9 @@
         var id = $tr.data("id");
 
         console.log('id', id, 'tr', $tr)
-        var detalle = {
-            label: "Detalle Pagos",
-            icon: "fa fa-print",
+        var editar = {
+            label: "Editar",
+            icon: "fa fa-edit",
             separator_before : true,
             action : function ($element) {
                 var id = $element.data("id");
@@ -241,9 +226,9 @@
             }
         };
 
-        var pago = {
-            label: "Pagos",
-            icon: "fa fa-dollar-sign",
+        var aprobar = {
+            label: "Aprobar",
+            icon: "fa fa-check",
             separator_before : true,
             action : function ($element) {
                 var id = $element.data("id");
@@ -264,8 +249,8 @@
         */
 
         // items.administrar = administrar;
-        items.detalle = detalle;
-        if("{data.pago__id}") items.pago = pago;
+        items.editar = editar;
+        if("{data.prod__id}") items.aprobara = aprobar;
 
         return items
     }

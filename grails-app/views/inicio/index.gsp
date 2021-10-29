@@ -153,7 +153,7 @@
 
     .display-6 {
         font-family: 'Source Sans Pro', sans-serif;
-        font-size: 1 re
+        font-size: 1rem;
     }
 
 
