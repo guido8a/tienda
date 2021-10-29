@@ -11,9 +11,9 @@ class Producto {
     String texto
     String estado
     Date fecha
-    String sitio
-    double latitud
-    double longitud
+//    String sitio
+//    double latitud
+//    double longitud
     Date fechaModificacion
 
     static mapping = {
@@ -30,9 +30,9 @@ class Producto {
             texto column: 'prodtxto'
             estado column: 'prodetdo'
             fecha column: 'prodfcha'
-            sitio column: 'prodsito'
-            longitud column: 'prodlong'
-            latitud column: 'prodlatt'
+//            sitio column: 'prodsito'
+//            longitud column: 'prodlong'
+//            latitud column: 'prodlatt'
             fechaModificacion column: 'prodfcmd'
         }
     }
@@ -44,9 +44,9 @@ class Producto {
         texto(blank: true, nullable: true, attributes: [title: 'texto'])
         estado(blank: true, nullable: true, attributes: [title: 'estado'])
         fecha(blank: false, nullable: false, attributes: [title: 'fecha creacion'])
-        sitio(size: 0..127, blank: true, nullable: true, attributes: [title: 'sitio'])
-        latitud(blank: true, nullable: true, attributes: [title: 'latitud'])
-        longitud(blank: true, nullable: true, attributes: [title: 'longitud'])
+//        sitio(size: 0..127, blank: true, nullable: true, attributes: [title: 'sitio'])
+//        latitud(blank: true, nullable: true, attributes: [title: 'latitud'])
+//        longitud(blank: true, nullable: true, attributes: [title: 'longitud'])
         fechaModificacion(blank: true, nullable: true, attributes: [title: 'fecha modificacion'])
     }
 }
