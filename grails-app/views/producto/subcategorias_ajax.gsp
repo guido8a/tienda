@@ -4,8 +4,9 @@
   Date: 28/10/21
   Time: 11:25
 --%>
-
-<b>Subcategorías: </b>
+<g:if test="${tipo != '1'}">
+    <b>Subcategorías: </b>
+</g:if>
 <g:select name="subcategoria" from="${subcategorias}" optionKey="id" optionValue="descripcion" class="form-control"/>
 
 <script type="text/javascript">

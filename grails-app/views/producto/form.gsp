@@ -1,0 +1,390 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: fabricio
+  Date: 28/10/21
+  Time: 14:37
+--%>
+
+<%@ page contentType="text/html;charset=UTF-8" %>
+
+
+<html>
+<head>
+    <meta name="layout" content="main">
+    <title>Producto</title>
+
+    <style type="text/css">
+
+    .alinear {
+        text-align: center !important;
+    }
+    .aviso{
+        font-size: 16px;
+        font-weight: normal;
+    }
+    .caja50{
+        width: 100px !important;
+        height: 70px;
+        display: block;
+    }
+
+    .mediano {
+        margin-top: 5px;
+        padding-top: 9px;
+        height: 30px;
+        font-size: inherit;
+        text-align: right;
+    }
+
+    .sobrepuesto {
+        position: absolute;
+        top: 3px;
+        font-size: 14px;
+    }
+
+    .negrita {
+        font-weight: bold;
+    }
+
+    .izquierda{
+        margin-left: 4px;
+    }
+    </style>
+
+
+
+</head>
+
+<body>
+
+<div style="text-align: center; margin-top: -20px;margin-bottom:20px">
+    <h3>${producto?.titulo ? ("Producto:"  + producto?.titulo) : 'Nuevo Producto'}</h3>
+</div>
+
+
+%{--<div style="margin-top: -15px;" class="vertical-container">--}%
+%{--    <p class="css-icono" style="margin-bottom: -15px"><i class="fa fa-search-plus"></i></p>--}%
+
+%{--    <div class="linea45"></div>--}%
+%{--    <div class="row" style="margin-bottom: 10px;">--}%
+
+%{--        <div class="row-fluid">--}%
+%{--            <div style="margin-left: 20px;">--}%
+%{--                <div class="col-xs-2 col-md-2">--}%
+%{--                    <b>Categoría: </b>--}%
+%{--                    <g:select name="categoria" from="${tienda.Categoria.list().sort{it.descripcion}}" optionKey="id" optionValue="descripcion" class="form-control"/>--}%
+%{--                </div>--}%
+%{--                <div class="col-xs-3 col-md-3" id="divSubcategoria">--}%
+
+%{--                </div>--}%
+
+%{--                <div class="col-xs-2 col-md-2" id="divGrupo">--}%
+
+%{--                </div>--}%
+%{--            </div>--}%
+%{--        </div>--}%
+%{--    </div>--}%
+%{--</div>--}%
+
+
+
+
+
+
+<div class="panel panel-primary col-md-12">
+
+    <div class="panel-heading" style="padding: 3px; margin-top: 2px; text-align: left">
+        <div class="btn-group">
+            %{--            <a href="${createLink(controller: 'inicio', action: 'index')}" id="btnSalir"--}%
+            %{--               class="btn btn-sm btn-warning" title="Salir">--}%
+            %{--                <i class="fa fa-door-open"></i> Salir--}%
+            %{--            </a>--}%
+
+            <a href="#" id="btnGuardar" class="btn btn-sm btn-success" title="Guardar">
+                <i class="fa fa-save"></i> Guardar
+            </a>
+        </div>
+        <a href="#" id="btnNuevo" class="btn btn-sm btn-info" title="Nuevo producto">
+            <i class="fa fa-file"></i> Nuevo producto
+        </a>
+    </div>
+
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+            <g:form class="form-horizontal" name="frmCurso" role="form" method="POST" controller="curso" action="saveCurso_ajax">
+                <g:hiddenField name="id" value="${curso?.id}"/>
+
+                <div class="row izquierda">
+                    <div class="col-md-12 input-group">
+                        <span class="col-md-1 label label-primary text-info mediano">Categoría</span>
+                        <div class="col-md-3">
+%{--                            <b>Categoría: </b>--}%
+                            <g:select name="categoria" from="${tienda.Categoria.list().sort{it.descripcion}}" optionKey="id" optionValue="descripcion" class="form-control"/>
+                        </div>
+
+                        <span class="col-md-1 label label-primary text-info mediano">Subcategoria</span>
+                        <div class="col-xs-3 col-md-3" id="divSubcategoria">
+
+                        </div>
+
+                        <span class="col-md-1 label label-primary text-info mediano">Grupo</span>
+                        <div class="col-xs-3 col-md-3" id="divGrupo">
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+
+                <div class="row izquierda">
+                    <div class="col-md-12 input-group">
+                        <span class="col-md-1 label label-primary text-info mediano">Título</span>
+                        <div class="col-md-8">
+                            <g:textField name="titulo" maxlength="255" class="form-control required" value="${producto?.titulo}"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row izquierda">
+                    <div class="col-md-12 input-group">
+                        <span class="col-md-1 label label-primary text-info mediano">Subtítulo</span>
+                        <div class="col-md-8">
+                            <span class="grupo">
+                            <g:textField name="subtitulo" maxlength="255" class="form-control" value="${producto?.subtitulo}"/>
+                            </span>
+                        </div>
+                        <span class="col-md-1 label label-primary text-info mediano">Estado</span>
+                        <div class="col-md-2">
+                            <span class="grupo">
+                            <g:textField name="estado"  class="allCaps form-control" value="${producto?.estado}" readonly="true"/>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row izquierda">
+                    <div class="col-md-12 input-group">
+                        <span class="col-md-1 label label-primary text-info mediano">Texto</span>
+                        <div class="col-md-8">
+                            <span class="grupo">
+                                 <g:textArea name="texto" class="form-control" value="${producto?.texto}" style="resize: none; height: 200px"/>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row izquierda">
+                    <div class="col-md-12 input-group">
+                        <span class="col-md-1 label label-primary text-info mediano">Lugar</span>
+                        <div class="col-md-6">
+                            <span class="grupo">
+                                <g:textField name="sitio" maxlength="127" class="form-control" value="${producto?.sitio}"/>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row izquierda" style="margin-bottom: 20px">
+                    <div class="col-md-12 input-group">
+                        <div class="col-md-1"></div>
+                        <span class="col-md-1 label label-primary text-info mediano">Latitud</span>
+                        <div class="col-md-1">
+                            <span class="grupo">
+                                %{--                                <g:textField name="numeroHorasDocente" maxlength="2" class="form-control" value="${curso?.numeroHorasDocente}"/>--}%
+                            </span>
+                        </div>
+                        <span class="col-md-1 label label-primary text-info mediano">Longitud</span>
+                        <div class="col-md-1">
+                            <span class="grupo">
+                                %{--                                <g:textField name="numeroHorasPractica" maxlength="2" class="form-control" value="${curso?.numeroHorasPractica}"/>--}%
+                            </span>
+                        </div>
+%{--                        <span class="col-md-2 label label-primary text-info mediano">Número de horas aprendizaje autónomo</span>--}%
+%{--                        <div class="col-md-1">--}%
+%{--                            <span class="grupo">--}%
+%{--                                --}%%{--                                <g:textField name="numeroHorasAprendizajeAutonomo"  maxlength="2" class="form-control" value="${curso?.numeroHorasAprendizajeAutonomo}"/>--}%
+%{--                            </span>--}%
+%{--                        </div>--}%
+                    </div>
+                </div>
+            </g:form>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+
+    cargarsubcategorias($("#categoria option:selected").val());
+
+    $("#categoria").change(function () {
+        var cat = $(this).val();
+        cargarsubcategorias(cat)
+    });
+
+    function cargarsubcategorias(categoria){
+        $.ajax({
+            type: 'POST',
+            url: '${createLink(controller: 'producto', action: 'subcategorias_ajax')}',
+            data:{
+                id: categoria,
+                tipo: 1
+            },
+            success: function (msg) {
+                $("#divSubcategoria").html(msg)
+            }
+        })
+    }
+
+    function cargarGrupos(subcategoria){
+        $.ajax({
+            type: 'POST',
+            url: '${createLink(controller: 'producto', action: 'grupos_ajax')}',
+            data:{
+                id: subcategoria,
+                tipo: 1
+            },
+            success: function (msg) {
+                $("#divGrupo").html(msg)
+            }
+        })
+    }
+
+
+
+
+
+
+    $(function () {
+        $("#limpiaBuscar").click(function () {
+            $("#buscar").val('');
+        });
+    });
+
+    <g:if test="${areas}">
+    cargarBusqueda();
+    </g:if>
+    <g:else>
+    $("#mensaje").removeClass('hidden').append("No existen registros");
+    </g:else>
+
+
+    $("#categoriaId").change(function () {
+        cargarBusqueda();
+    });
+
+
+    function cargarBusqueda() {
+        var area = $("#areas option:selected").val();
+        var nvel = $("#niveles option:selected").val()
+        $("#detalle").html("").append($("<div style='width:100%; text-align: center;'/>").append(spinnerSquare64));
+        $.ajax({
+            type: "POST",
+            url: "${g.createLink(controller: 'admnParticipante', action: 'tablaBuscar')}",
+            data: {
+                buscador: $("#buscador_con").val(),
+                ordenar: $("#ordenar_por").val(),
+                criterio: $("#criterio_con").val(),
+                operador: $("#oprd").val(),
+                area: area,
+                nvel: nvel
+            },
+            success: function (msg) {
+                $("#detalle").html(msg);
+            },
+            error: function (msg) {
+                $("#detalle").html("Ha ocurrido un error");
+            }
+        });
+    }
+
+    $("#btnBusqueda").click(function () {
+        cargarBusqueda();
+    });
+
+    $("input").keyup(function (ev) {
+        if (ev.keyCode == 13) {
+            $("#btnBusqueda").click();
+        }
+    });
+
+    function createContextMenu(node) {
+        var $tr = $(node);
+        var items = {
+            header: {
+                label: "Acciones",
+                header: true
+            }
+        };
+
+        var id = $tr.data("id");
+
+        console.log('id', id, 'tr', $tr)
+        var detalle = {
+            label: "Detalle Pagos",
+            icon: "fa fa-print",
+            separator_before : true,
+            action : function ($element) {
+                var id = $element.data("id");
+                console.log('--id', id)
+                cargarFechas(id);
+            }
+        };
+
+        var pago = {
+            label: "Pagos",
+            icon: "fa fa-dollar-sign",
+            separator_before : true,
+            action : function ($element) {
+                var id = $element.data("id");
+                console.log('pago--id', id)
+                verPago(id);
+            }
+        };
+
+        /*
+                var administrar = {
+                    label: "Administrar",
+                    icon: "fa fa-pencil",
+                    separator_before : true,
+                    submenu: {
+                        editar
+                    }
+                };
+        */
+
+        // items.administrar = administrar;
+        items.detalle = detalle;
+        if("{data.pago__id}") items.pago = pago;
+
+        return items
+    }
+
+    $("#btnLimpiarBusqueda").click(function () {
+        $(".fechaD, .fechaH, #criterio_con").val('');
+    });
+
+    $("#nuevo").click(function () {
+        createEditRow(null);
+    });
+
+    $("#buscador_con").change(function(){
+        var anterior = "${params.operador}";
+        var opciones = $(this).find("option:selected").attr("class").split(",");
+
+        poneOperadores(opciones);
+    });
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
