@@ -66,7 +66,7 @@
     <div class="panel-heading" style="padding: 3px; margin-top: 2px; text-align: left">
         <div class="btn-group">
             <a href="${createLink(controller: 'producto', action: 'list')}" id="btnSalir"
-               class="btn btn-sm btn-warning" title="Regresar a la lista de prodcutos">
+               class="btn btn-sm btn-warning" title="Regresar a la lista de productos">
                 <i class="fa fa-arrow-left"></i> Regresar
             </a>
         </div>
@@ -78,6 +78,20 @@
         <a href="#" id="btnNuevo" class="btn btn-sm btn-info" title="Nuevo producto">
             <i class="fa fa-file"></i> Nuevo producto
         </a>
+
+        <g:if test="${producto?.id}">
+            <div class="btn-group" style="margin-left: 50px">
+                <a href="${createLink(controller: 'atributo', action: 'list', id: producto?.id)}" id="btnAtributos"
+                   class="btn btn-sm btn-warning" title="Lista de atributos ">
+                    <i class="fa fa-list"></i> Atributos
+                </a>
+                <a href="${createLink(controller: 'imagen', action: 'list', id: producto?.id)}" id="btnImagenes"
+                   class="btn btn-sm btn-success" title="Lista de imágenes ">
+                    <i class="fa fa-image"></i> Imágenes
+                </a>
+            </div>
+        </g:if>
+
     </div>
 
     <div class="tab-content">

@@ -64,21 +64,25 @@
                         <g:textField name="criterio" class="form-control" />
                     </div>
 
-%{--                </div>--}%
-
-%{--                <div class="col-xs-6 col-md-6">--}%
                     <div class="btn-group col-xs-2 col-md-2" style="margin-left: -10px; margin-top: 18px;">
 
                         <a href="#" name="busqueda" class="btn btn-info" id="btnBusqueda" title="Buscar"
                            style="height: 34px; width: 46px">
-                            <i class="fa fa-search"></i></a>
+                            <i class="fa fa-search"></i>
+                        </a>
 
                         <a href="#" name="limpiarBus" class="btn btn-warning" id="btnLimpiarBusqueda"
                            title="Borrar criterios" style="height: 34px; width: 34px">
-                            <i class="fa fa-eraser"></i></a>
-                    </div>
+                            <i class="fa fa-eraser"></i>
+                        </a>
 
-%{--                </div>--}%
+
+                        <a href="${createLink(controller: 'producto', action: 'form')}" class="btn btn-success" id="btnNuevo"
+                           title="Nuevo producto" style="height: 34px; width: 46px">
+                            <i class="fa fa-plus-square"></i>
+                        </a>
+
+                    </div>
             </div>
 
         </div>
