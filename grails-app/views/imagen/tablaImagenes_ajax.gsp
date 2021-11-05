@@ -62,7 +62,7 @@
                        data-id="${file?.id}" style="margin-bottom: 5px">
                         <i class="fa fa-edit"></i>
                     </a>
-                    <img src="${createLink(controller: 'producto', action: 'getImage', params: [id: file.file, pro: producto?.id] )}"
+                    <img src="${createLink(controller: 'imagen', action: 'getImage', params: [id: file.file, pro: producto?.id] )}"
                          class="imag_pq"/>
                     <div class="caption" style="text-align: center">
                         <p>${file.file}</p>

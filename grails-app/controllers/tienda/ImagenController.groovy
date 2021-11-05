@@ -111,7 +111,7 @@ class ImagenController {
         println "deleteImagen_ajax params $params"
         def imagen = Imagen.get(params.idim)
         def imagenes = Imagen.findAllByProductoAndIdNotEqual(imagen.producto, imagen.id)
-        def path = "/var/ventas/imagenes/productos/pro_" + imagen.producto.id + "/${imagen.ruta}"
+        def path = "/var/tienda/imagenes/productos/pro_" + imagen.producto.id + "/${imagen.ruta}"
 
         if(imagenes.size() == 0){
             render "er_No se puede borrar la imagen, el producto tiene una sola imagen asociada."

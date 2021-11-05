@@ -92,7 +92,7 @@
                         <div class="carrusel">
                             <g:each in="${imagenes}" var="im" status="i">
                                 <div class="product" id="product_${i+1}">
-                                    <img src="${createLink(controller: 'producto', action: 'getImage', params: [id: "${im.file}", pro: producto?.id] )}"  width="120" height="80" title="${im.file}"/>
+                                    <img src="${createLink(controller: 'imagen', action: 'getImage', params: [id: "${im.file}", pro: producto?.id] )}"  width="120" height="80" title="${im.file}"/>
                                 </div>
                             </g:each>
                         </div>
