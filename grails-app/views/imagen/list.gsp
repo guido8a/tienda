@@ -114,6 +114,37 @@
 
 <script type="text/javascript">
 
+    $("#btnImasProducto").click(function () {
+        cargarImagenes('${producto?.id}')
+    });
+
+    function cargarImagenes(id) {
+        $.ajax({
+            type    : "POST",
+            url     : "${createLink(controller: 'imagen', action:'imagenes_ajax')}",
+            data    : {
+                id:id
+            },
+            success : function (msg) {
+                var b = bootbox.dialog({
+                    id      : "dlgImas",
+                    title   : "Imágenes",
+                    class : "modal-lg",
+                    message : msg,
+                    buttons : {
+                        cancelar : {
+                            label     : "<i class='fa fa-times'></i> Cerrar",
+                            className : "btn-gris",
+                            callback  : function () {
+                                location.href="${createLink(controller: 'imagen', action: 'list')}?id=" + '${producto?.id}'
+                            }
+                        }
+                    } //buttons
+                }); //dialog
+            } //success
+        }); //ajax
+    } //createEdit
+
 
     $("#btnNuevoAtributo").click(function() {
         createEditRow();
