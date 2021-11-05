@@ -142,7 +142,7 @@ class ImagenController {
 
     byte[] im(nombre,ext,producto) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream()
-        ImageIO.write(ImageIO.read(new File("/var/ventas/imagenes/productos/pro_" + producto + "/" + nombre + "." + ext)), ext.toString(), baos)
+        ImageIO.write(ImageIO.read(new File("/var/tienda/imagenes/productos/pro_" + producto + "/" + nombre + "." + ext)), ext.toString(), baos)
         baos.toByteArray()
     }
 
@@ -150,7 +150,7 @@ class ImagenController {
         println ("params imas " +  params)
         def producto = Producto.get(params.id)
         def imagenes = Imagen.findAllByProducto(producto)
-        def path = "/var/ventas/imagenes/productos/pro_" + producto.id + "/"
+        def path = "/var/tienda/imagenes/productos/pro_" + producto.id + "/"
         new File(path).mkdirs()
 
 //        def f = request.getFile('upload')
@@ -205,13 +205,16 @@ class ImagenController {
 
                     def i = 1
                     while (src.exists()) {
+                        println "---> srs.exists"
                         nombre = fn + "_" + i + "." + ext
                         pathFile = path + nombre
                         src = new File(pathFile)
                         i++
                     }
                     try {
+                        println "---> try:  ${f.getContentType()}"
                         f.transferTo(new File(pathFile)) // guarda el archivo subido al nuevo path
+                        println "transferTo --> $pathFile"
                         def imagenNueva = new Imagen()
                         imagenNueva.producto = producto
                         imagenNueva.ruta = nombre
