@@ -52,7 +52,7 @@ class ImagenController {
         def producto = Producto.get(params.id)
         def imagenes = Imagen.findAllByProducto(producto)
 
-        def path = "/var/ventas/imagenes/productos/pro_" + producto.id + "/"
+        def path = "/var/tienda/imagenes/productos/pro_" + producto.id + "/"
         new File(path).mkdirs()
 
         def files = []
