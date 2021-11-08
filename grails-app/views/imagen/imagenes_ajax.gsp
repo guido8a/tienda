@@ -117,7 +117,7 @@
 
 <div class="alert alert-warning" style="margin-top: 5px;">
     <i class="fa fa-info-circle fa-2x"></i>
-    Se puede cargar hasta <strong>5</strong> imágenes, de tipo <strong>.jpeg, .jpg, .png</strong>
+    Se puede cargar hasta <strong>20</strong> imágenes, de tipo <strong>.jpeg, .jpg, .png</strong>
     Peso máximo del archivo <strong>5MB</strong>.
     <br>
 </div>

@@ -30,17 +30,22 @@ class ImagenController {
 
             def imag = new File(path)
             imag?.eachFileRecurse(FileType.FILES) { file ->
+                println("file " + file)
                 if(file.name.toString() in imas.ruta) {
                     def img = ImageIO.read(file)
-                    if (img) {
-                        imagenes.add([file: file.name])
+                    imas.each {mm->
+                        if (img) {
+                            if (mm.ruta == file.name) {
+                                    imagenes.add([file: file.name, pncp: mm.principal])
+                            }
+                        }
                     }
                 }
             }
             println "path: $path --> imagenes: $imagenes"
         }
 
-        return[producto: producto, persona: persona, imagenes: imagenes, tam: imas.size(), tipo: params.tipo]
+        return[producto: producto, persona: persona, imagenes: imagenes, tam: imas.size(), tipo: params.tipo, imas: imas]
     }
 
     def imagenes_ajax() {
@@ -97,10 +102,10 @@ class ImagenController {
     }
 
     def revisarImas_ajax(){
-        println "revisarImas_ajax $params"
+//        println "revisarImas_ajax $params"
         def producto = Producto.get(params.id)
         def imagenes = Imagen.findAllByProducto(producto)
-        if(imagenes.size() < 5){
+        if(imagenes.size() < 20){
             render "ok"
         }else{
             render "no"
@@ -174,7 +179,7 @@ class ImagenController {
         }
 
 //        if(canti.size() < 5){
-        if(imagenes.size() < 5){
+        if(imagenes.size() < 20){
 
             if (f && !f.empty) {
                 def fileName = f.getOriginalFilename() //nombre original del archivo
@@ -269,6 +274,28 @@ class ImagenController {
             }
         }else{
             return false
+        }
+    }
+
+    def ponerPrincipal_ajax(){
+        def imagen = Imagen.get(params.id)
+        def producto = imagen.producto
+        def imagenes = Imagen.findAllByProducto(producto)
+
+        println("imagenes " + imagenes)
+
+        imagenes.each{
+            it.principal = 0
+            it.save(flush:true)
+        }
+
+        imagen.principal = 1
+
+        if(!imagen.save(flush:true)){
+            println("error al colocar el estado principal en imagen " + imagen.errors)
+            render "no"
+        }else{
+            render "ok"
         }
     }
 
