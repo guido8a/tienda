@@ -6,7 +6,7 @@ class Imagen {
     String texto
     String ruta
     String estado
-    String principal
+    String principal = 0
 
     static mapping = {
         table 'imag'

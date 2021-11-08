@@ -52,7 +52,7 @@
     <h3>Administración de Imágenes del producto: ${producto?.titulo}</h3>
 </div>
 
-<div style="margin-top: 30px; min-height: 350px" class="vertical-container">
+<div style="margin-top: 30px; min-height: ${tam < 5 ? 250 : (tam < 9 ? 350 : (tam < 13 ? 500 : (tam < 17 ? 600 : 700)))}px" class="vertical-container">
     <p class="css-vertical-text">Imágenes</p>
 
     <div class="linea"></div>
@@ -66,7 +66,7 @@
         <g:if test="${producto?.id}">
             <g:if test="${tam > 0}">
                 <div class="col-md-12">
-                    <div class="row" style="height: 350px">
+                    <div class="row" style="height: ${tam < 5 ? 250 : (tam < 9 ? 350 : (tam < 13 ? 450 : (tam < 17 ? 550 : 650)))}px">
                         <g:each in="${imagenes}" var="im" status="i">
                             <div class="col-xs-3 col-md-3" style="height: 150px">
                                 <div class="product" id="product_${i+1}">
