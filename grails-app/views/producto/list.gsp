@@ -157,12 +157,7 @@
     }
 
 
-%{--    <g:if test="${data}">--}%
-    cargarBusqueda();
-%{--    </g:if>--}%
-%{--    <g:else>--}%
-    // $("#mensaje").removeClass('hidden').append("No existen registros");
-%{--    </g:else>--}%
+    // cargarBusqueda();
 
 
     $("#categoriaId").change(function () {
@@ -171,19 +166,19 @@
 
 
     function cargarBusqueda() {
-        var area = $("#areas option:selected").val();
-        var nvel = $("#niveles option:selected").val();
+        var cat = $("#categoria option:selected").val();
+        var sub = $("#subcategoria option:selected").val();
+        var grp = $("#grupo option:selected").val();
         $("#detalle").html("").append($("<div style='width:100%; text-align: center;'/>").append(spinnerSquare64));
         $.ajax({
             type: "POST",
             url: "${g.createLink(controller: 'producto', action: 'tablaBuscar')}",
+            async: true,
             data: {
-                buscador: $("#buscador_con").val(),
-                ordenar: $("#ordenar_por").val(),
-                criterio: $("#criterio_con").val(),
-                operador: $("#oprd").val(),
-                area: area,
-                nvel: nvel
+                criterio: $("#criterio").val(),
+                categoria: cat,
+                subcategoria: sub,
+                grupo: grp
             },
             success: function (msg) {
                 $("#detalle").html(msg);

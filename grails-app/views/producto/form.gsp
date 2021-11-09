@@ -13,6 +13,8 @@
     <meta name="layout" content="main">
     <title>Producto</title>
 
+    <ckeditor:resources/>
+
     <style type="text/css">
 
     .alinear {
@@ -50,8 +52,6 @@
         margin-left: 4px;
     }
     </style>
-
-
 
 </head>
 
@@ -150,7 +150,8 @@
                         <span class="col-md-1 label label-primary text-info mediano">Texto</span>
                         <div class="col-md-8">
                             <span class="grupo">
-                                <g:textArea name="texto" class="form-control" value="${producto?.texto}" style="resize: none; height: 200px"/>
+%{--                                <g:textArea name="texto" class="form-control" value="${producto?.texto}" style="resize: none; height: 200px"/>--}%
+                                <textarea name='texto' id="texto" class="editor">${producto?.texto}</textarea>
                             </span>
                         </div>
                     </div>
@@ -162,11 +163,26 @@
 
 <script type="text/javascript">
 
+    CKEDITOR.replace( 'texto', {
+         height                  : 150,
+         width                   : 1000,
+         resize_enabled          : false,
+         language: 'es',
+         uiColor: '#9AB8F3',
+         extraPlugins: 'entities',
+         toolbar                 : [
+             ['FontSize', 'Scayt', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'],
+             ['Bold', 'Italic', 'Underline','Subscript', 'Superscript'],
+             ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-']
+         ]
+     });
+
     $("#btnNuevo").click(function (){
         location.href="${createLink(controller: 'producto', action: 'form')}"
     });
 
     $("#btnGuardar").click(function () {
+        var texto = CKEDITOR.instances.texto.getData();
         var $form = $("#frmProducto");
         if ($form.valid()) {
             if($("#grupo option:selected").val() == '' || $("#grupo option:selected").val() == null){
@@ -176,7 +192,7 @@
                 $.ajax({
                     type: 'POST',
                     url: '${createLink(controller: 'producto', action: 'guardarProducto_ajax')}',
-                    data:$form.serialize(),
+                    data: $form.serialize() + "&texto2=" + texto,
                     success: function (msg) {
                         r.modal("hide");
                         var parts = msg.split("_");

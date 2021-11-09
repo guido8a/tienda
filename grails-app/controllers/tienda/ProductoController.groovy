@@ -53,14 +53,14 @@ class ProductoController {
     }
 
     def tablaBuscar() {
-        println "buscar .... $params"
+//        println "buscar .... $params"
         def cn = dbConnectionService.getConnection()
-        params.old = params.criterio
-        params.criterio = buscadorService.limpiaCriterio(params.criterio)
-        params.ordenar  = buscadorService.limpiaCriterio(params.ordenar)
+//        params.old = params.criterio
+//        params.criterio = buscadorService.limpiaCriterio(params.criterio)
+//        params.ordenar  = buscadorService.limpiaCriterio(params.ordenar)
 
         def sql = armaSql(params)
-        params.criterio = params.old
+//        params.criterio = params.old
         println "sql: $sql"
         def data = cn.rows(sql.toString())
 
@@ -78,6 +78,30 @@ class ProductoController {
 
     def armaSql(params){
 //        println "armaSql: $params"
+        def categoria = Categoria.get(params.categoria)
+        def subcategoria
+        def grupo
+        def condicionAdicional = ''
+
+
+        if(params.categoria){
+            condicionAdicional = ' and sbct.ctgr__id = '  + categoria?.id
+        }
+
+        if(params.subcategoria){
+            subcategoria = Subcategoria.get(params.subcategoria)
+            condicionAdicional += ' and sbct.sbct__id = ' + subcategoria?.id
+        }
+
+        if(params.grupo){
+            grupo = Grupo.get(params.grupo)
+            condicionAdicional += ' and prod.grpo__id =' + grupo?.id
+        }
+
+        if(params.criterio){
+            condicionAdicional += ' and prodtitl ilike ' + " '%" + params.criterio + "%'"
+        }
+
         def campos = buscadorService.parmInstructor()
         def operador = buscadorService.operadores()
         def sqlSelect = "select prod__id, prodtitl, prodsbtl, grpodscr, prodetdo " +
@@ -85,32 +109,24 @@ class ProductoController {
 
         //condicion fija
         def wh = " grpo.grpo__id = prod.grpo__id and sbct.sbct__id = grpo.sbct__id and ctgr.ctgr__id = sbct.ctgr__id "
-        def sqlWhere = "where ${wh}"
+        def sqlWhere = "where ${wh} ${condicionAdicional}"
 
-//        def sqlOrder = "order by ${params.ordenar} limit 51"
         def sqlOrder = "order by prodtitl limit 51"
 
-//        println "sql: $sqlSelect $sqlWhere $sqlOrder"
-//        if(params.criterio) {
-        if(params.operador && params.criterio) {
-            if(campos.find {it.campo == params.buscador}?.size() > 0) {
-                def op = operador.find {it.valor == params.operador}
-                sqlWhere += " and ${params.buscador} ${op.operador} ${op.strInicio}${params.criterio}${op.strFin}";
-            }
-        }
+//        if(params.operador && params.criterio) {
+//            if(campos.find {it.campo == params.buscador}?.size() > 0) {
+//                def op = operador.find {it.valor == params.operador}
+//                sqlWhere += " and ${params.buscador} ${op.operador} ${op.strInicio}${params.criterio}${op.strFin}";
+//            }
+//        }
 
-//        if(params.area != '0') {
-//            sqlWhere += " and artb__id = ${params.area} "
-//        }
-//        if(params.nvel != '0') {
-//            sqlWhere += " and nved__id = ${params.nvel} "
-//        }
-//        println "-->sql: $sqlSelect $sqlWhere $sqlOrder"
-        "$sqlSelect $sqlWhere $sqlOrder".toString()
+//        println("---> " + "$sqlSelect $sqlWhere $sqlOrder".toString())
+
+       return "$sqlSelect $sqlWhere $sqlOrder".toString()
     }
 
     def guardarProducto_ajax(){
-        println("params sv pr" + params)
+//        println("params sv pr" + params)
 
         def usuario = Persona.get(session.usuario.id)
 
@@ -125,6 +141,8 @@ class ProductoController {
             producto.estado = 'A'
             producto.persona = usuario
         }
+
+        params.texto = params.texto2
 
         producto.properties = params
 
