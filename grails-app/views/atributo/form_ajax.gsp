@@ -26,7 +26,7 @@
                 Descripción
             </label>
             <div class="col-md-6">
-                <g:textField name="descripcion" maxlength="63" required="" class="form-control required" value="${atributo?.descripcion}"/>
+                <g:textArea name="descripcion" maxlength="63" required="" style="height: 80px; width: 400px; resize: none" class="form-control required" value="${atributo?.descripcion}"/>
             </div>
         </span>
     </div>
