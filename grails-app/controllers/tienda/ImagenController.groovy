@@ -4,6 +4,10 @@ import groovy.io.FileType
 import seguridad.Persona
 
 import javax.imageio.ImageIO
+import java.awt.image.BufferedImage
+
+import static java.awt.RenderingHints.KEY_INTERPOLATION
+import static java.awt.RenderingHints.VALUE_INTERPOLATION_BICUBIC
 
 
 class ImagenController {
@@ -206,11 +210,11 @@ class ImagenController {
                     def fn = fileName
                     def src = new File(pathFile)
 
-                    println("path -->" + pathFile)
+//                    println("path -->" + pathFile)
 
                     def i = 1
                     while (src.exists()) {
-                        println "---> srs.exists"
+//                        println "---> srs.exists"
                         nombre = fn + "_" + i + "." + ext
                         pathFile = path + nombre
                         src = new File(pathFile)
@@ -233,7 +237,65 @@ class ImagenController {
                         println ("error al subir la imagen " + e)
                     }
 
-                    /* fin resize */
+                    def img = ImageIO.read(new File(pathFile))
+                    def scale = 0.5
+                    def minW = 300 * 0.7
+                    def minH = 400 * 0.7
+                    def maxW = minW * 3
+                    def maxH = minH * 3
+                    def w = img.width
+                    def h = img.height
+
+                    if (w > maxW || h > maxH || w < minW || h < minH) {
+                        def newW = w * scale
+                        def newH = h * scale
+                        def r = 1
+                        if (w > h) {
+                            if (w > maxW) {
+                                r = w / maxW
+                                newW = maxW
+                                println "w>maxW:    r=" + r + "   newW=" + newW
+                            }
+                            if (w < minW) {
+                                r = minW / w
+                                newW = minW
+                                println "w<minW:    r=" + r + "   newW=" + newW
+                            }
+                            newH = h / r
+                            println "newH=" + newH
+                        } else {
+                            if (h > maxH) {
+                                r = h / maxH
+                                newH = maxH
+                                println "h>maxH:    r=" + r + "   newH=" + newH
+                            }
+                            if (h < minH) {
+                                r = minH / h
+                                newH = minH
+                                println "h<minxH:    r=" + r + "   newH=" + newH
+                            }
+                            newW = w / r
+                            println "newW=" + newW
+                        }
+                        println newW + "   " + newH
+
+                        newW = Math.round(newW.toDouble()).toInteger()
+                        newH = Math.round(newH.toDouble()).toInteger()
+
+                        println newW + "   " + newH
+
+                        new BufferedImage(newW, newH, img.type).with { j ->
+                            createGraphics().with {
+                                setRenderingHint(KEY_INTERPOLATION, VALUE_INTERPOLATION_BICUBIC)
+                                drawImage(img, 0, 0, newW, newH, null)
+                                dispose()
+                            }
+                            ImageIO.write(j, ext, new File(pathFile))
+                        }
+                    }
+
+
+
 //                def pathReturn = "/var/ventas/productos/pro_" + producto.id + "/" + nombre
                     def output = '<html>' +
                             '<body>' +
