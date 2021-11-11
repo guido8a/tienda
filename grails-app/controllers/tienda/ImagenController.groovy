@@ -239,10 +239,10 @@ class ImagenController {
 
                     def img = ImageIO.read(new File(pathFile))
                     def scale = 0.5
-                    def minW = 1000
-                    def minH = 500
-                    def maxW = 1000
-                    def maxH = 500
+                    def minW = 730
+                    def minH = 350
+                    def maxW = 730
+                    def maxH = 350
                     def w = img.width
                     def h = img.height
 

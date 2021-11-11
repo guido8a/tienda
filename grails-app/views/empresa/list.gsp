@@ -158,6 +158,33 @@
         }); //ajax
     } //createEdit
 
+    function cargarImagenesEmpresa(id) {
+        $.ajax({
+            type    : "POST",
+            url     : "${createLink(controller: 'empresa', action:'imagenesEmpresa_ajax')}",
+            data    : {
+                id:id
+            },
+            success : function (msg) {
+                var b = bootbox.dialog({
+                    id      : "dlgImas",
+                    title   : "Imágenes de la empresa",
+                    class : "modal-lg",
+                    message : msg,
+                    buttons : {
+                        cancelar : {
+                            label     : "<i class='fa fa-times'></i> Cerrar",
+                            className : "btn-gris",
+                            callback  : function () {
+
+                            }
+                        }
+                    } //buttons
+                }); //dialog
+            } //success
+        }); //ajax
+    } //createEdit
+
 
 
     $(function () {
@@ -218,15 +245,15 @@
                         location.href="${createLink(controller: 'empresa', action: 'administradores')}/" + id;
                     }
                 },
-                // dpto : {
-                //     label            : "Inicializar árbol",
-                //     icon             : "fa fa-tree",
-                //     separator_before : true,
-                //     action           : function ($element) {
-                //         var id = $element.data("id");
-                //         inicializarArbol(id);
-                //     }
-                // },
+                imas : {
+                    label            : "Imágenes",
+                    icon             : "fa fa-images",
+                    separator_before : true,
+                    action           : function ($element) {
+                        var id = $element.data("id");
+                        cargarImagenesEmpresa(id);
+                    }
+                },
                 eliminar : {
                     label            : "Eliminar",
                     icon             : "fa fa-trash",
