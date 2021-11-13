@@ -70,7 +70,8 @@ label{
     color: #fda30e;
 }
 .header ul li:nth-child(3) {
-    text-align: right;
+    border-right: 1px solid #eee;
+    text-align: center;
 }
 .header ul li:nth-child(1) {
     text-align: left;
@@ -804,7 +805,7 @@ position:relative;
 .wed-brand {
     position: absolute;
     top: 28%;
-    left: 12%;
+    left: 18%;
 }
 /* Outline Out */
 .hvr-outline-out {
@@ -853,7 +854,7 @@ position:relative;
     text-transform: uppercase;
     margin: 25px auto 0;
     font-size: 16px;
-    width: 50%;
+    width: 70%;
 	text-decoration:none;
 }
 .wed-brandtwo h4{
@@ -4045,9 +4046,9 @@ td.invert-image a img {
 	.header ul li:nth-child(1),.header ul li:nth-child(3) {
 		text-align: center;
 	}
-	.header ul li:nth-child(3) {
-		width:100%;
-	}
+	/*.header ul li:nth-child(3) {*/
+	/*	width:100%;*/
+	/*}*/
 	.header ul li:nth-child(2) {
 		border-right: none;
 	}

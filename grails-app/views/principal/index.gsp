@@ -69,13 +69,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <input type="search" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Buscar';}" required="">
                 </div>
                 <div class="section_room">
-                    <select id="country" onchange="change_country(this.value)" class="frm-field required">
-                        <option value="null">All categories</option>
-                        <option value="null">Electronics</option>
-                        <option value="AX">kids Wear</option>
-                        <option value="AX">Men's Wear</option>
-                        <option value="AX">Women's Wear</option>
-                        <option value="AX">Watches</option>
+                    <select id="categoría" class="frm-field required" style="color: #4F1B00; border-bottom-style: solid; border-color: #AF5B00; font-size: 12pt">
+                        <g:each in="${ctgr}" var="tp">
+                            <option value="${tp.id}" data-dscr="${tp.descripcion}" ${tp.id == grpo? 'selected' : ''}>
+                                ${tp.descripcion}</option>
+                        </g:each>
                     </select>
                 </div>
                 <div class="sear-sub">
@@ -87,7 +85,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="col-md-3 header-right footer-bottom">
             <ul>
                 <li><a href="#" class="use1" data-toggle="modal" data-target="#myModal4"><span>Login</span></a>
-
                 </li>
                 <li><a class="fb" href="#"></a></li>
                 <li><a class="twi" href="#"></a></li>
@@ -123,7 +120,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <ul class="dropdown-menu multi-column columns-3">
                                     <div class="row">
                                         <div class="col-sm-6 multi-gd-img1 multi-gd-text ">
-                                            <a href="mens.html"><img src="images/woo1.jpg" alt=" "/></a>
+                                            <a href="mens.html">
+                                                <img alt="" src="${request.contextPath}/principal/getImgnProd?ruta=woo1.jpg&tp=P&id=0"/></a>
                                         </div>
                                         <div class="col-sm-3 multi-gd-img">
                                             <ul class="multi-column-dropdown">
@@ -178,7 +176,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                             </ul>
                                         </div>
                                         <div class="col-sm-6 multi-gd-img multi-gd-text ">
-                                            <a href="womens.html"><img src="images/woo.jpg" alt=" "/></a>
+                                            <a href="womens.html">
+                                                <img alt="" src="${request.contextPath}/principal/getImgnProd?ruta=woo.jpg&tp=P&id=0"/></a>
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
@@ -240,10 +239,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                          src="${request.contextPath}/principal/getImgnProd?ruta=baa3.jpg&tp=P&id=0"/>
                 </ul>
                 <div class="slide-controller">
-                    <a href="#" class="btn-prev"><img src="images/btn_prev.png" alt="Prev Slide" /></a>
-                    <a href="#" class="btn-play"><img src="images/btn_play.png" alt="Start Slide" /></a>
-                    <a href="#" class="btn-pause"><img src="images/btn_pause.png" alt="Pause Slide" /></a>
-                    <a href="#" class="btn-next"><img src="images/btn_next.png" alt="Next Slide" /></a>
+                    <a href="#" class="btn-prev">
+                        <img class="img-responsive" alt="Imagen de promoción 1"
+                             src="${request.contextPath}/principal/getImgnProd?ruta=btn_prev.png&tp=P&id=0"/></a>
+                    <a href="#" class="btn-play">
+                        <img class="img-responsive" alt="Imagen de promoción 1"
+                             src="${request.contextPath}/principal/getImgnProd?ruta=btn_play.png&tp=P&id=0"/></a>
+                    <a href="#" class="btn-pause">
+                        <img class="img-responsive" alt="Imagen de promoción 1"
+                             src="${request.contextPath}/principal/getImgnProd?ruta=btn_pause.png&tp=P&id=0"/></a>
+                    <a href="#" class="btn-next">
+                        <img class="img-responsive" alt="Imagen de promoción 1"
+                             src="${request.contextPath}/principal/getImgnProd?ruta=btn_next.png&tp=P&id=0"/></a>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -271,42 +278,46 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <div class="new_arrivals">
     <div class="container">
-        <h3><span>new </span>arrivals</h3>
-        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium</p>
+        <h3><span>Nuevos </span>productos</h3>
+        <p>Nuevos productos exclusivos de nuestra tienda en línea </p>
         <div class="new_grids">
             <div class="col-md-4 new-gd-left">
-                <img src="images/wed1.jpg" alt=" " />
+                <img class="img-responsive" alt="Imagen de promoción 1"
+                     src="${request.contextPath}/principal/getImgnProd?ruta=wed1.jpg&tp=P&id=0"/>
                 <div class="wed-brand simpleCart_shelfItem">
-                    <h4>Wedding Collections</h4>
-                    <h5>Flat 50% Discount</h5>
-                    <p><i>$250</i> <span class="item_price">$500</span><a class="item_add hvr-outline-out button2" href="#">add to cart </a></p>
+                    <h4>Colección Novias</h4>
+                    <h5>50% de descuento</h5>
+                    <p><i>$500</i> <span class="item_price">$250</span><a class="item_add hvr-outline-out button2" href="#">Añadir al carrito</a></p>
                 </div>
             </div>
             <div class="col-md-4 new-gd-middle">
                 <div class="new-levis">
                     <div class="mid-img">
-                        <img src="images/levis1.png" alt=" " />
+                        <img class="img-responsive" alt="Imagen de promoción 1"
+                             src="${request.contextPath}/principal/getImgnProd?ruta=levis1.png&tp=P&id=0"/>
                     </div>
                     <div class="mid-text">
                         <h4>up to 40% <span>off</span></h4>
-                        <a class="hvr-outline-out button2" href="product.html">Shop now </a>
+                        <a class="hvr-outline-out button2" href="product.html">Comprar </a>
                     </div>
                     <div class="clearfix"></div>
                 </div>
                 <div class="new-levis">
                     <div class="mid-text">
                         <h4>up to 50% <span>off</span></h4>
-                        <a class="hvr-outline-out button2" href="product.html">Shop now </a>
+                        <a class="hvr-outline-out button2" href="product.html">Comprar </a>
                     </div>
                     <div class="mid-img">
-                        <img src="images/dig.jpg" alt=" " />
+                        <img class="img-responsive" alt="Imagen de promoción 1"
+                             src="${request.contextPath}/principal/getImgnProd?ruta=dig.jpg&tp=P&id=0"/>
                     </div>
                     <div class="clearfix"></div>
                 </div>
                 <div class="clearfix"></div>
             </div>
             <div class="col-md-4 new-gd-left">
-                <img src="images/wed2.jpg" alt=" " />
+                <img class="img-responsive" alt="Imagen de promoción 1"
+                     src="${request.contextPath}/principal/getImgnProd?ruta=wed2.jpg&tp=P&id=0"/>
                 <div class="wed-brandtwo simpleCart_shelfItem">
                     <h4>Spring / Summer</h4>
                     <p>Shop Men</p>
@@ -324,14 +335,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="col-md-7 content-lgrid">
         <div class="col-sm-6 content-img-left text-center">
             <div class="content-grid-effect slow-zoom vertical">
-                <div class="img-box"><img src="images/p1.jpg" alt="image" class="img-responsive zoom-img"></div>
+                <div class="img-box">
+                    <img class="img-responsive zoom-img" alt="Imagen de promoción 1"
+                         src="${request.contextPath}/principal/getImgnProd?ruta=p1.jpg&tp=P&id=0"/>
+%{--                    <img src="images/p1.jpg" alt="image" class="img-responsive zoom-img">--}%
+                </div>
                 <div class="info-box">
                     <div class="info-content simpleCart_shelfItem">
                         <h4>Mobiles</h4>
                         <span class="separator"></span>
                         <p><span class="item_price">$500</span></p>
                         <span class="separator"></span>
-                        <a class="item_add hvr-outline-out button2" href="#">add to cart </a>
+                        <a class="item_add hvr-outline-out button2" href="#">Añadir al carrito </a>
                     </div>
                 </div>
             </div>
@@ -345,14 +360,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="col-sm-6 content-img-left text-center">
             <div class="content-grid-effect slow-zoom vertical">
-                <div class="img-box"><img src="images/p2.jpg" alt="image" class="img-responsive zoom-img"></div>
+                <div class="img-box">
+                    <img class="img-responsive zoom-img" alt="Imagen de promoción 1"
+                         src="${request.contextPath}/principal/getImgnProd?ruta=p2.jpg&tp=P&id=0"/>
+                </div>
                 <div class="info-box">
                     <div class="info-content simpleCart_shelfItem">
                         <h4>Watches</h4>
                         <span class="separator"></span>
                         <p><span class="item_price">$250</span></p>
                         <span class="separator"></span>
-                        <a class="item_add hvr-outline-out button2" href="#">add to cart </a>
+                        <a class="item_add hvr-outline-out button2" href="#">Añadir al carrito </a>
                     </div>
                 </div>
             </div>
@@ -361,14 +379,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
     <div class="col-md-5 content-rgrid text-center">
         <div class="content-grid-effect slow-zoom vertical">
-            <div class="img-box"><img src="images/p4.jpg" alt="image" class="img-responsive zoom-img"></div>
+            <div class="img-box">
+                <img class="img-responsive zoom-img" alt="Imagen de promoción 1"
+                     src="${request.contextPath}/principal/getImgnProd?ruta=p4.jpg&tp=P&id=0"/>
+            </div>
             <div class="info-box">
                 <div class="info-content simpleCart_shelfItem">
                     <h4>Shoes</h4>
                     <span class="separator"></span>
                     <p><span class="item_price">$150</span></p>
                     <span class="separator"></span>
-                    <a class="item_add hvr-outline-out button2" href="#">add to cart </a>
+                    <a class="item_add hvr-outline-out button2" href="#">Añadir al carrito </a>
                 </div>
             </div>
         </div>
@@ -396,20 +417,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="sap_tabs">
             <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
                 <ul class="resp-tabs-list">
-                    <li class="resp-tab-item" aria-controls="tab_item-0" role="tab"><span>Latest Designs</span></li>
-                    <li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span>Special Offers</span></li>
-                    <li class="resp-tab-item" aria-controls="tab_item-2" role="tab"><span>Collections</span></li>
+                    <li class="resp-tab-item" aria-controls="tab_item-0" role="tab"><span>Últimos diseños</span></li>
+                    <li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span>Ofertas especiales</span></li>
+                    <li class="resp-tab-item" aria-controls="tab_item-2" role="tab"><span>Coleciones</span></li>
                 </ul>
                 <div class="resp-tabs-container">
                     <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
                         <div class="col-md-3 product-men">
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <div class="men-thumb-item">
-                                    <img src="images/a1.png" alt="" class="pro-image-front">
-                                    <img src="images/a1.png" alt="" class="pro-image-back">
+                                    <img alt="" class="pro-image-front"
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=a1.png&tp=P&id=0"/>
+                                    <img alt="" class="pro-image-back"
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=a1.png&tp=P&id=0"/>
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
-                                            <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                            <a href="${createLink(controller: 'ver', action: 'producto',  params: [prod: 1])}" class="link-product-add-cart">Ver</a>
                                         </div>
                                     </div>
                                     <span class="product-new-top">New</span>
@@ -421,15 +444,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <span class="item_price">$45.99</span>
                                         <del>$69.71</del>
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">Añadir al carrito</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3 product-men">
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <div class="men-thumb-item">
-                                    <img src="images/a8.png" alt="" class="pro-image-front">
-                                    <img src="images/a8.png" alt="" class="pro-image-back">
+                                    <img alt="" class="pro-image-front"
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=a8.png&tp=P&id=0"/>
+                                    <img alt="" class="pro-image-back"
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=a8.png&tp=P&id=0"/>
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
                                             <a href="single.html" class="link-product-add-cart">Quick View</a>
@@ -444,15 +469,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <span class="item_price">$99.99</span>
                                         <del>$109.71</del>
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">Añadir al carrito</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3 product-men">
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <div class="men-thumb-item">
-                                    <img src="images/a3.png" alt="" class="pro-image-front">
-                                    <img src="images/a3.png" alt="" class="pro-image-back">
+                                    <img alt="" class="pro-image-front"
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=a3.png&tp=P&id=0"/>
+                                    <img alt="" class="pro-image-back"
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=a3.png&tp=P&id=0"/>
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
                                             <a href="single.html" class="link-product-add-cart">Quick View</a>
@@ -467,15 +494,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <span class="item_price">$119.99</span>
                                         <del>$120.71</del>
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">Añadir al carrito</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3 product-men">
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <div class="men-thumb-item">
-                                    <img src="images/a4.png" alt="" class="pro-image-front">
-                                    <img src="images/a4.png" alt="" class="pro-image-back">
+                                    <img alt="" class="pro-image-front"
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=a4.png&tp=P&id=0"/>
+                                    <img alt="" class="pro-image-back"
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=a4.png&tp=P&id=0"/>
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
                                             <a href="single.html" class="link-product-add-cart">Quick View</a>
@@ -490,7 +519,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <span class="item_price">$79.99</span>
                                         <del>$120.71</del>
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">Añadir al carrito</a>
                                 </div>
                             </div>
                         </div>
@@ -513,7 +542,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <span class="item_price">$129.99</span>
                                         <del>$150.71</del>
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">Añadir al carrito</a>
                                 </div>
                             </div>
                         </div>
@@ -536,7 +565,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <span class="item_price">$129.99</span>
                                         <del>$150.71</del>
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">Añadir al carrito</a>
                                 </div>
                             </div>
                         </div>
@@ -559,7 +588,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <span class="item_price">$129.99</span>
                                         <del>$150.71</del>
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">Añadir al carrito</a>
                                 </div>
                             </div>
                         </div>
@@ -582,7 +611,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <span class="item_price">$129.99</span>
                                         <del>$150.71</del>
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">Añadir al carrito</a>
                                 </div>
                             </div>
                         </div>
@@ -605,7 +634,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <span class="item_price">$45.99</span>
                                         <del>$69.71</del>
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">Añadir al carrito</a>
                                 </div>
                             </div>
                         </div>
@@ -628,7 +657,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <span class="item_price">$45.99</span>
                                         <del>$69.71</del>
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">Añadir al carrito</a>
                                 </div>
                             </div>
                         </div>
@@ -651,7 +680,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <span class="item_price">$45.99</span>
                                         <del>$69.71</del>
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">Añadir al carrito</a>
                                 </div>
                             </div>
                         </div>
@@ -674,7 +703,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <span class="item_price">$45.99</span>
                                         <del>$69.71</del>
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">Añadir al carrito</a>
                                 </div>
                             </div>
                         </div>
@@ -684,8 +713,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <div class="col-md-3 product-men">
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <div class="men-thumb-item">
-                                    <img src="images/w1.png" alt="" class="pro-image-front">
-                                    <img src="images/w1.png" alt="" class="pro-image-back">
+                                    <img alt="" class="pro-image-front"
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=w1.png&tp=P&id=0"/>
+                                    <img alt="" class="pro-image-back"
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=w1.png&tp=P&id=0"/>
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
                                             <a href="single.html" class="link-product-add-cart">Quick View</a>
@@ -700,15 +731,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <span class="item_price">$45.99</span>
                                         <del>$69.71</del>
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">Añadir al carrito</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3 product-men">
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <div class="men-thumb-item">
-                                    <img src="images/w2.png" alt="" class="pro-image-front">
-                                    <img src="images/w2.png" alt="" class="pro-image-back">
+                                    <img alt="" class="pro-image-front"
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=w2.png&tp=P&id=0"/>
+                                    <img alt="" class="pro-image-back"
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=w2.png&tp=P&id=0"/>
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
                                             <a href="single.html" class="link-product-add-cart">Quick View</a>
@@ -723,7 +756,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <span class="item_price">$45.99</span>
                                         <del>$69.71</del>
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">Añadir al carrito</a>
                                 </div>
                             </div>
                         </div>
@@ -746,7 +779,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <span class="item_price">$45.99</span>
                                         <del>$69.71</del>
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">Añadir al carrito</a>
                                 </div>
                             </div>
                         </div>
@@ -769,7 +802,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <span class="item_price">$45.99</span>
                                         <del>$69.71</del>
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">Añadir al carrito</a>
                                 </div>
                             </div>
                         </div>
@@ -792,7 +825,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <span class="item_price">$45.99</span>
                                         <del>$69.71</del>
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">Añadir al carrito</a>
                                 </div>
                             </div>
                         </div>
@@ -815,7 +848,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <span class="item_price">$45.99</span>
                                         <del>$69.71</del>
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">Añadir al carrito</a>
                                 </div>
                             </div>
                         </div>
@@ -826,8 +859,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <div class="col-md-3 product-men">
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <div class="men-thumb-item">
-                                    <img src="images/g1.png" alt="" class="pro-image-front">
-                                    <img src="images/g1.png" alt="" class="pro-image-back">
+                                    <img alt="" class="pro-image-front"
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=g1.png&tp=P&id=0"/>
+                                    <img alt="" class="pro-image-back"
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=g1.png&tp=P&id=0"/>
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
                                             <a href="single.html" class="link-product-add-cart">Quick View</a>
@@ -842,15 +877,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <span class="item_price">$45.99</span>
                                         <del>$69.71</del>
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">Añadir al carrito</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3 product-men">
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <div class="men-thumb-item">
-                                    <img src="images/g2.png" alt="" class="pro-image-front">
-                                    <img src="images/g2.png" alt="" class="pro-image-back">
+                                    <img alt="" class="pro-image-front"
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=g2.png&tp=P&id=0"/>
+                                    <img alt="" class="pro-image-back"
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=g2.png&tp=P&id=0"/>
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
                                             <a href="single.html" class="link-product-add-cart">Quick View</a>
@@ -865,7 +902,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <span class="item_price">$45.99</span>
                                         <del>$69.71</del>
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">Añadir al carrito</a>
                                 </div>
                             </div>
                         </div>
@@ -888,7 +925,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <span class="item_price">$45.99</span>
                                         <del>$69.71</del>
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">Añadir al carrito</a>
                                 </div>
                             </div>
                         </div>
@@ -911,7 +948,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <span class="item_price">$45.99</span>
                                         <del>$69.71</del>
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">Añadir al carrito</a>
                                 </div>
                             </div>
                         </div>
@@ -934,7 +971,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <span class="item_price">$45.99</span>
                                         <del>$69.71</del>
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">Añadir al carrito</a>
                                 </div>
                             </div>
                         </div>
@@ -957,7 +994,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         <span class="item_price">$45.99</span>
                                         <del>$69.71</del>
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Add to cart</a>
+                                    <a href="#" class="item_add single-item hvr-outline-out button2">Añadir al carrito</a>
                                 </div>
                             </div>
                         </div>

@@ -10,8 +10,16 @@ class PrincipalController {
 
     def index() {
 //        def inst = Institucion.get(1)
-//        def ejes = Ejes.list([sort: 'orden'])
-//        [inst: inst, ejes: ejes]
+        def ctgr = Categoria.list([sort: 'descripcion'])
+        def producto
+        def grupo, subcategoria, categoria
+        if(params.grpo) {
+            grupo = Grupo.get(params.grpo)
+            producto = Producto.findAllByGrupo(grupo)
+        } else {
+            producto = Producto.list([sort: 'fecha', order:'desc'])
+        }
+        [ctgr: ctgr, producto: producto, grpo: params.grpo]
     }
 
 
