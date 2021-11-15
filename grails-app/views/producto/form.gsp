@@ -125,6 +125,15 @@
                         <div class="col-md-8">
                             <g:textField name="titulo" maxlength="255" class="form-control required" value="${producto?.titulo}"/>
                         </div>
+
+                        <span class="col-md-1 label label-primary text-info mediano">Destacado</span>
+                        <div class="col-md-2">
+                            <span class="grupo">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input des" type="checkbox" name="destacado" ${producto?.destacado == 'S' ? 'checked' : ''}>
+                                </div>
+                            </span>
+                        </div>
                     </div>
                 </div>
 
@@ -163,6 +172,8 @@
 
 <script type="text/javascript">
 
+    $.switcher('input[type=checkbox]');
+
     CKEDITOR.replace( 'texto', {
          height                  : 150,
          width                   : 1000,
@@ -184,6 +195,7 @@
     $("#btnGuardar").click(function () {
         var texto = CKEDITOR.instances.texto.getData();
         var $form = $("#frmProducto");
+        var destacado = $(".des").is(":checked");
         if ($form.valid()) {
             if($("#grupo option:selected").val() == '' || $("#grupo option:selected").val() == null){
                 bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i> Seleccione un grupo")
@@ -192,17 +204,17 @@
                 $.ajax({
                     type: 'POST',
                     url: '${createLink(controller: 'producto', action: 'guardarProducto_ajax')}',
-                    data: $form.serialize() + "&texto2=" + texto,
+                    data: $form.serialize() + "&texto2=" + texto + "&destacado2=" + destacado,
                     success: function (msg) {
                         r.modal("hide");
                         var parts = msg.split("_");
                         if(parts[0] == 'ok'){
-                            log("Producto guardado correctamente");
+                            log("Producto guardado correctamente", "success");
                             setTimeout(function () {
                                 location.href="${createLink(controller: 'producto', action: 'form')}?id=" + parts[1]
-                            }, 1000);
+                            }, 1100);
                         }else{
-                            log("Error al guardar el producto")
+                            log("Error al guardar el producto","error")
                         }
                     }
                 });

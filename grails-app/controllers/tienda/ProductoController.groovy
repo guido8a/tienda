@@ -126,7 +126,7 @@ class ProductoController {
     }
 
     def guardarProducto_ajax(){
-//        println("params sv pr" + params)
+        println("params sv pr" + params)
 
         def usuario = Persona.get(session.usuario.id)
 
@@ -143,6 +143,23 @@ class ProductoController {
         }
 
         params.texto = params.texto2
+
+        def totalDestacados = Producto.withCriteria {
+
+            eq("destacado","S")
+            persona{
+                eq("empresa", usuario.empresa)
+            }
+        }
+
+
+//        println("td " + totalDestacados.size())
+
+        if(totalDestacados.size() < 3){
+            params.destacado = (params.destacado2 == 'true' ? 'S' : 'N')
+        }else{
+            params.destacado = 'N'
+        }
 
         producto.properties = params
 
