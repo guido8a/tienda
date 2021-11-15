@@ -126,7 +126,7 @@
                             <g:textField name="titulo" maxlength="255" class="form-control required" value="${producto?.titulo}"/>
                         </div>
 
-                        <span class="col-md-1 label label-primary text-info mediano">Destacado</span>
+                        <span class="col-md-1 label label-primary text-info mediano">Promoción</span>
                         <div class="col-md-2">
                             <span class="grupo">
                                 <div class="form-check form-check-inline">
@@ -285,7 +285,7 @@
 
     function cargarBusqueda() {
         var area = $("#areas option:selected").val();
-        var nvel = $("#niveles option:selected").val()
+        var nvel = $("#niveles option:selected").val();
         $("#detalle").html("").append($("<div style='width:100%; text-align: center;'/>").append(spinnerSquare64));
         $.ajax({
             type: "POST",
