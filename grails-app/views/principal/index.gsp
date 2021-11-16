@@ -121,7 +121,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <div class="row">
                                         <div class="col-sm-6 multi-gd-img1 multi-gd-text ">
                                             <a href="mens.html">
-                                                <img alt="" src="${request.contextPath}/principal/getImgnProd?ruta=woo1.jpg&tp=P&id=0"/></a>
+                                                <img alt="" src="${request.contextPath}/principal/getImgnProd?ruta=woo1.jpg&tp=v&id=0"/></a>
                                         </div>
                                         <div class="col-sm-3 multi-gd-img">
                                             <ul class="multi-column-dropdown">
@@ -177,7 +177,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         </div>
                                         <div class="col-sm-6 multi-gd-img multi-gd-text ">
                                             <a href="womens.html">
-                                                <img alt="" src="${request.contextPath}/principal/getImgnProd?ruta=woo.jpg&tp=P&id=0"/></a>
+                                                <img alt="" src="${request.contextPath}/principal/getImgnProd?ruta=woo.jpg&tp=v&id=0"/></a>
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
@@ -216,11 +216,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <ul class="slide-group">
 %{--                 <li><img class="img-responsive" src="images/ba1.jpg" alt="Dummy Image" /></li>--}%
                 <li><img class="img-responsive" alt="Imagen de promoción 1"
-                         src="${request.contextPath}/principal/getImgnProd?ruta=ba1.jpg&tp=P&id=0"/></li>
+                         src="${request.contextPath}/principal/getImgnProd?ruta=ba1.jpg&tp=v&id=0"/></li>
                 <li><img class="img-responsive" alt="Imagen de promoción 1"
-                         src="${request.contextPath}/principal/getImgnProd?ruta=ba2.jpg&tp=P&id=0"/></li>
+                         src="${request.contextPath}/principal/getImgnProd?ruta=ba2.jpg&tp=v&id=0"/></li>
                 <li><img class="img-responsive" alt="Imagen de promoción 1"
-                         src="${request.contextPath}/principal/getImgnProd?ruta=ba3.jpg&tp=P&id=0"/></li>
+                         src="${request.contextPath}/principal/getImgnProd?ruta=ba3.jpg&tp=v&id=0"/></li>
             </ul>
 
             <!-- Slide Description Image Area (316 x 328) -->
@@ -229,28 +229,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <li><div class="inner-script">
 %{--                        <img class="img-responsive" src="images/baa1.jpg" alt="Dummy Image" />--}%
                         <img class="img-responsive" alt="Imagen de promoción 1"
-                             src="${request.contextPath}/principal/getImgnProd?ruta=baa1.jpg&tp=P&id=0"/>
+                             src="${request.contextPath}/principal/getImgnProd?ruta=baa1.jpg&tp=v&id=0"/>
                     </div></li>
                     <li><div class="inner-script">
                         <img class="img-responsive" alt="Imagen de promoción 1"
-                             src="${request.contextPath}/principal/getImgnProd?ruta=baa2.jpg&tp=P&id=0"/>
+                             src="${request.contextPath}/principal/getImgnProd?ruta=baa2.jpg&tp=v&id=0"/>
                     <li><div class="inner-script">
                     <img class="img-responsive" alt="Imagen de promoción 1"
-                         src="${request.contextPath}/principal/getImgnProd?ruta=baa3.jpg&tp=P&id=0"/>
+                         src="${request.contextPath}/principal/getImgnProd?ruta=baa3.jpg&tp=v&id=0"/>
                 </ul>
                 <div class="slide-controller">
                     <a href="#" class="btn-prev">
                         <img class="img-responsive" alt="Imagen de promoción 1"
-                             src="${request.contextPath}/principal/getImgnProd?ruta=btn_prev.png&tp=P&id=0"/></a>
+                             src="${request.contextPath}/principal/getImgnProd?ruta=btn_prev.png&tp=v&id=0"/></a>
                     <a href="#" class="btn-play">
                         <img class="img-responsive" alt="Imagen de promoción 1"
-                             src="${request.contextPath}/principal/getImgnProd?ruta=btn_play.png&tp=P&id=0"/></a>
+                             src="${request.contextPath}/principal/getImgnProd?ruta=btn_play.png&tp=v&id=0"/></a>
                     <a href="#" class="btn-pause">
                         <img class="img-responsive" alt="Imagen de promoción 1"
-                             src="${request.contextPath}/principal/getImgnProd?ruta=btn_pause.png&tp=P&id=0"/></a>
+                             src="${request.contextPath}/principal/getImgnProd?ruta=btn_pause.png&tp=v&id=0"/></a>
                     <a href="#" class="btn-next">
                         <img class="img-responsive" alt="Imagen de promoción 1"
-                             src="${request.contextPath}/principal/getImgnProd?ruta=btn_next.png&tp=P&id=0"/></a>
+                             src="${request.contextPath}/principal/getImgnProd?ruta=btn_next.png&tp=v&id=0"/></a>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -283,7 +283,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="new_grids">
             <div class="col-md-4 new-gd-left">
                 <img class="img-responsive" alt="Imagen de promoción 1"
-                     src="${request.contextPath}/principal/getImgnProd?ruta=wed1.jpg&tp=P&id=0"/>
+                     src="${request.contextPath}/principal/getImgnProd?ruta=wed1.jpg&tp=v&id=0"/>
                 <div class="wed-brand simpleCart_shelfItem">
                     <h4>Colección Novias</h4>
                     <h5>50% de descuento</h5>
@@ -294,7 +294,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="new-levis">
                     <div class="mid-img">
                         <img class="img-responsive" alt="Imagen de promoción 1"
-                             src="${request.contextPath}/principal/getImgnProd?ruta=levis1.png&tp=P&id=0"/>
+                             src="${request.contextPath}/principal/getImgnProd?ruta=levis1.png&tp=v&id=0"/>
                     </div>
                     <div class="mid-text">
                         <h4>up to 40% <span>off</span></h4>
@@ -309,7 +309,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </div>
                     <div class="mid-img">
                         <img class="img-responsive" alt="Imagen de promoción 1"
-                             src="${request.contextPath}/principal/getImgnProd?ruta=dig.jpg&tp=P&id=0"/>
+                             src="${request.contextPath}/principal/getImgnProd?ruta=dig.jpg&tp=v&id=0"/>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -317,7 +317,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <div class="col-md-4 new-gd-left">
                 <img class="img-responsive" alt="Imagen de promoción 1"
-                     src="${request.contextPath}/principal/getImgnProd?ruta=wed2.jpg&tp=P&id=0"/>
+                     src="${request.contextPath}/principal/getImgnProd?ruta=wed2.jpg&tp=v&id=0"/>
                 <div class="wed-brandtwo simpleCart_shelfItem">
                     <h4>Spring / Summer</h4>
                     <p>Shop Men</p>
@@ -337,7 +337,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="content-grid-effect slow-zoom vertical">
                 <div class="img-box">
                     <img class="img-responsive zoom-img" alt="Imagen de promoción 1"
-                         src="${request.contextPath}/principal/getImgnProd?ruta=p1.jpg&tp=P&id=0"/>
+                         src="${request.contextPath}/principal/getImgnProd?ruta=p1.jpg&tp=v&id=0"/>
 %{--                    <img src="images/p1.jpg" alt="image" class="img-responsive zoom-img">--}%
                 </div>
                 <div class="info-box">
@@ -362,7 +362,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="content-grid-effect slow-zoom vertical">
                 <div class="img-box">
                     <img class="img-responsive zoom-img" alt="Imagen de promoción 1"
-                         src="${request.contextPath}/principal/getImgnProd?ruta=p2.jpg&tp=P&id=0"/>
+                         src="${request.contextPath}/principal/getImgnProd?ruta=p2.jpg&tp=v&id=0"/>
                 </div>
                 <div class="info-box">
                     <div class="info-content simpleCart_shelfItem">
@@ -381,7 +381,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="content-grid-effect slow-zoom vertical">
             <div class="img-box">
                 <img class="img-responsive zoom-img" alt="Imagen de promoción 1"
-                     src="${request.contextPath}/principal/getImgnProd?ruta=p4.jpg&tp=P&id=0"/>
+                     src="${request.contextPath}/principal/getImgnProd?ruta=p4.jpg&tp=v&id=0"/>
             </div>
             <div class="info-box">
                 <div class="info-content simpleCart_shelfItem">
@@ -427,9 +427,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <div class="men-thumb-item">
                                     <img alt="" class="pro-image-front"
-                                         src="${request.contextPath}/principal/getImgnProd?ruta=a1.png&tp=P&id=0"/>
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=a1.png&tp=v&id=0"/>
                                     <img alt="" class="pro-image-back"
-                                         src="${request.contextPath}/principal/getImgnProd?ruta=a1.png&tp=P&id=0"/>
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=a1.png&tp=v&id=0"/>
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
                                             <a href="${createLink(controller: 'ver', action: 'producto',  params: [prod: 1])}" class="link-product-add-cart">Ver</a>
@@ -452,9 +452,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <div class="men-thumb-item">
                                     <img alt="" class="pro-image-front"
-                                         src="${request.contextPath}/principal/getImgnProd?ruta=a8.png&tp=P&id=0"/>
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=a8.png&tp=v&id=0"/>
                                     <img alt="" class="pro-image-back"
-                                         src="${request.contextPath}/principal/getImgnProd?ruta=a8.png&tp=P&id=0"/>
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=a8.png&tp=v&id=0"/>
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
                                             <a href="single.html" class="link-product-add-cart">Quick View</a>
@@ -477,9 +477,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <div class="men-thumb-item">
                                     <img alt="" class="pro-image-front"
-                                         src="${request.contextPath}/principal/getImgnProd?ruta=a3.png&tp=P&id=0"/>
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=a3.png&tp=v&id=0"/>
                                     <img alt="" class="pro-image-back"
-                                         src="${request.contextPath}/principal/getImgnProd?ruta=a3.png&tp=P&id=0"/>
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=a3.png&tp=v&id=0"/>
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
                                             <a href="single.html" class="link-product-add-cart">Quick View</a>
@@ -502,9 +502,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <div class="men-thumb-item">
                                     <img alt="" class="pro-image-front"
-                                         src="${request.contextPath}/principal/getImgnProd?ruta=a4.png&tp=P&id=0"/>
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=a4.png&tp=v&id=0"/>
                                     <img alt="" class="pro-image-back"
-                                         src="${request.contextPath}/principal/getImgnProd?ruta=a4.png&tp=P&id=0"/>
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=a4.png&tp=v&id=0"/>
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
                                             <a href="single.html" class="link-product-add-cart">Quick View</a>
@@ -714,9 +714,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <div class="men-thumb-item">
                                     <img alt="" class="pro-image-front"
-                                         src="${request.contextPath}/principal/getImgnProd?ruta=w1.png&tp=P&id=0"/>
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=w1.png&tp=v&id=0"/>
                                     <img alt="" class="pro-image-back"
-                                         src="${request.contextPath}/principal/getImgnProd?ruta=w1.png&tp=P&id=0"/>
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=w1.png&tp=v&id=0"/>
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
                                             <a href="single.html" class="link-product-add-cart">Quick View</a>
@@ -739,9 +739,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <div class="men-thumb-item">
                                     <img alt="" class="pro-image-front"
-                                         src="${request.contextPath}/principal/getImgnProd?ruta=w2.png&tp=P&id=0"/>
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=w2.png&tp=v&id=0"/>
                                     <img alt="" class="pro-image-back"
-                                         src="${request.contextPath}/principal/getImgnProd?ruta=w2.png&tp=P&id=0"/>
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=w2.png&tp=v&id=0"/>
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
                                             <a href="single.html" class="link-product-add-cart">Quick View</a>
@@ -860,9 +860,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <div class="men-thumb-item">
                                     <img alt="" class="pro-image-front"
-                                         src="${request.contextPath}/principal/getImgnProd?ruta=g1.png&tp=P&id=0"/>
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=g1.png&tp=v&id=0"/>
                                     <img alt="" class="pro-image-back"
-                                         src="${request.contextPath}/principal/getImgnProd?ruta=g1.png&tp=P&id=0"/>
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=g1.png&tp=v&id=0"/>
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
                                             <a href="single.html" class="link-product-add-cart">Quick View</a>
@@ -885,9 +885,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <div class="men-thumb-item">
                                     <img alt="" class="pro-image-front"
-                                         src="${request.contextPath}/principal/getImgnProd?ruta=g2.png&tp=P&id=0"/>
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=g2.png&tp=v&id=0"/>
                                     <img alt="" class="pro-image-back"
-                                         src="${request.contextPath}/principal/getImgnProd?ruta=g2.png&tp=P&id=0"/>
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=g2.png&tp=v&id=0"/>
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
                                             <a href="single.html" class="link-product-add-cart">Quick View</a>

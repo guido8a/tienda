@@ -100,8 +100,9 @@
     <table class="table table-bordered table-hover table-condensed" style="width: 1070px">
         <thead>
         <tr>
+            <th class="alinear" style="width: 10%">Imagen</th>
             <th class="alinear" style="width: 25%">Nombre</th>
-            <th class="alinear" style="width: 50%">Título</th>
+            <th class="alinear" style="width: 40%">Título</th>
             <th class="alinear" style="width: 20%">Grupo</th>
             <th class="alinear" style="width: 5%">Estado</th>
         </tr>

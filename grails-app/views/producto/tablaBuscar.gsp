@@ -36,11 +36,16 @@ th, td {
             </g:if>
 
             <tr id="${dato.prod__id}" class="${clase}" title="Haga clic derecho y seleccione una opción">
+                <td style="width: 10%">
+                    <img class="img-fluid imag-item" alt="First slide" style="max-width: 100px"
+                         src="${request.contextPath}/principal/getImgnProd?id=${dato.prod__id}&tp=P"/>
+                </td>
+
                 <td width="25%">
                     ${dato?.prodtitl}
                 </td>
 
-                <td width="50%">
+                <td width="40%">
                     ${dato?.prodsbtl}
                 </td>
 

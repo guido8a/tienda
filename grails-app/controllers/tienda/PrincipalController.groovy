@@ -65,13 +65,18 @@ class PrincipalController {
     }
 
     def getImgnProd(){
-//        println "getImgnProd: $params"
+        println "getImgnProd: $params"
         def producto = Producto.get(params.id)
 //        def path = (params.tp == 'p'? "/var/ventas/productos/pro_${producto.id}/" : "/var/ventas/imagen/destacados/") + params.ruta
-        def path = (params.tp == 'p'? "/var/ventas/productos/pro_${producto.id}/" : "/var/tienda/imagenes/images/") + params.ruta
+        def path
+        if(params.tp == 'P') {
+            def ruta = Imagen.findByProductoAndPrincipal(Producto.get(params.id), 1).ruta
+            path = "/var/tienda/imagenes/productos/pro_${params.id}/${ruta}"
+        }
+        if(params.tp == 'v') path = "/var/tienda/imagenes/images/" + params.ruta
         def fileext = path.substring(path.indexOf(".")+1, path.length())
 
-//        println "ruta: $path"
+        println "ruta: $path"
 
         BufferedImage imagen = ImageIO.read(new File(path));
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
