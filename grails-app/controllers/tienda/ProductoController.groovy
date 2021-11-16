@@ -145,14 +145,11 @@ class ProductoController {
         params.texto = params.texto2
 
         def totalDestacados = Producto.withCriteria {
-
             eq("destacado","S")
             persona{
                 eq("empresa", usuario.empresa)
             }
         }
-
-
 //        println("td " + totalDestacados.size())
 
         if(totalDestacados.size() < 3){
@@ -160,6 +157,8 @@ class ProductoController {
         }else{
             params.destacado = 'N'
         }
+
+        params.nuevo = (params.nuevo2 == 'true' ? 'S' : 'N')
 
         producto.properties = params
 

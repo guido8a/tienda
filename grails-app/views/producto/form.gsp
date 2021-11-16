@@ -75,7 +75,7 @@
             <i class="fa fa-save"></i> Guardar
         </a>
 
-        <a href="#" id="btnNuevo" class="btn btn-sm btn-info" title="Nuevo producto">
+        <a href="#" id="btnNuevo" class="btn btn-sm btn-warning" title="Nuevo producto">
             <i class="fa fa-file"></i> Nuevo producto
         </a>
 
@@ -126,31 +126,44 @@
                             <g:textField name="titulo" maxlength="255" class="form-control required" value="${producto?.titulo}"/>
                         </div>
 
-                        <span class="col-md-1 label label-primary text-info mediano">Promoción</span>
-                        <div class="col-md-2">
-                            <span class="grupo">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input des" type="checkbox" name="destacado" ${producto?.destacado == 'S' ? 'checked' : ''}>
-                                </div>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row izquierda">
-                    <div class="col-md-12 input-group">
-                        <span class="col-md-1 label label-primary text-info mediano">Subtítulo</span>
-                        <div class="col-md-8">
-                            <span class="grupo">
-                                <g:textField name="subtitulo" maxlength="255" class="form-control" value="${producto?.subtitulo}"/>
-                            </span>
-                        </div>
                         <span class="col-md-1 label label-primary text-info mediano">Estado</span>
                         <div class="col-md-2">
                             <span class="grupo">
                                 <g:textField name="estado_name" class="allCaps form-control" value="${producto?.estado == 'A' ? 'Activo' : 'Inactivo'}" readonly="true"/>
                             </span>
                         </div>
+
+
+                    </div>
+                </div>
+
+                <div class="row izquierda">
+                    <div class="col-md-12 input-group">
+                        <span class="col-md-1 label label-primary text-info mediano">Subtítulo</span>
+                        <div class="col-md-6">
+                            <span class="grupo">
+                                <g:textField name="subtitulo" maxlength="255" class="form-control" value="${producto?.subtitulo}"/>
+                            </span>
+                        </div>
+
+                        <span class="col-md-1 label label-primary text-info mediano">Promoción</span>
+                        <div class="col-md-1">
+                            <span class="grupo">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input des" type="checkbox" name="destacado" ${producto?.destacado == 'S' ? 'checked' : ''}>
+                                </div>
+                            </span>
+                        </div>
+
+                        <span class="col-md-1 label label-primary text-info mediano">Nuevo</span>
+                        <div class="col-md-1">
+                            <span class="grupo">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input nvo" type="checkbox" name="nuevo" ${producto?.nuevo == 'S' ? 'checked' : ''}>
+                                </div>
+                            </span>
+                        </div>
+
                     </div>
                 </div>
 
@@ -196,6 +209,7 @@
         var texto = CKEDITOR.instances.texto.getData();
         var $form = $("#frmProducto");
         var destacado = $(".des").is(":checked");
+        var nuevo = $(".nvo").is(":checked");
         if ($form.valid()) {
             if($("#grupo option:selected").val() == '' || $("#grupo option:selected").val() == null){
                 bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i> Seleccione un grupo")
@@ -204,7 +218,7 @@
                 $.ajax({
                     type: 'POST',
                     url: '${createLink(controller: 'producto', action: 'guardarProducto_ajax')}',
-                    data: $form.serialize() + "&texto2=" + texto + "&destacado2=" + destacado,
+                    data: $form.serialize() + "&texto2=" + texto + "&destacado2=" + destacado + "&nuevo2=" + nuevo,
                     success: function (msg) {
                         r.modal("hide");
                         var parts = msg.split("_");

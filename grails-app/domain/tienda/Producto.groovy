@@ -16,6 +16,7 @@ class Producto {
 //    double longitud
     Date fechaModificacion
     String destacado
+    String nuevo
 
     static mapping = {
         table 'prod'
@@ -36,6 +37,7 @@ class Producto {
 //            latitud column: 'prodlatt'
             fechaModificacion column: 'prodfcmd'
             destacado column: 'proddstc'
+            nuevo column: 'prodnuvo'
         }
     }
     static constraints = {
@@ -51,5 +53,6 @@ class Producto {
 //        longitud(blank: true, nullable: true, attributes: [title: 'longitud'])
         fechaModificacion(blank: true, nullable: true, attributes: [title: 'fecha modificacion'])
         destacado(blank: true, nullable: true, attributes: [title: 'destacado'])
+        nuevo(size: 0..1, blank: true, nullable: true, attributes: [title: 'destacado'])
     }
 }
