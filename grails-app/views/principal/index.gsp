@@ -29,27 +29,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
     function hideURLbar(){ window.scrollTo(0,1); } </script>
-%{--    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />--}%
-%{--    <link href="css/pignose.layerslider.css" rel="stylesheet" type="text/css" media="all" />--}%
-%{--    <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />--}%
+    %{--    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />--}%
+    %{--    <link href="css/pignose.layerslider.css" rel="stylesheet" type="text/css" media="all" />--}%
+    %{--    <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />--}%
 
     <!-- js -->
-%{--    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>--}%
-%{--    <script src="js/simpleCart.min.js"></script>--}%
-%{--    <script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>--}%
+    %{--    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>--}%
+    %{--    <script src="js/simpleCart.min.js"></script>--}%
+    %{--    <script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>--}%
     <!-- //for bootstrap working -->
     <link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic' rel='stylesheet' type='text/css'>
-%{--    <script src="js/jquery.easing.min.js"></script>--}%
+    %{--    <script src="js/jquery.easing.min.js"></script>--}%
 </head>
 <body>
 <!-- header -->
 <div class="header">
     <div class="container">
         <ul>
-            <li><span class="glyphicon glyphicon-time" aria-hidden="true"></span>Entrega inmediata gratis</li>
-            <li><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Entrega gratuita de su orden</li>
+            %{--            <li><span class="glyphicon glyphicon-time" aria-hidden="true"></span>Entrega inmediata gratis</li>--}%
+            %{--            <li><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Entrega gratuita de su orden</li>--}%
             <li><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><a href="mailto:info@example.com">Contáctenos</a></li>
+            <li><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span><a href="#" class="use1" data-toggle="modal" data-target="#myModal4"><span>Login</span></a></li>
             <li><a href="${createLink(controller: 'login', action: 'login')}"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>Admin</a></li>
         </ul>
     </div>
@@ -84,8 +85,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="col-md-3 header-right footer-bottom">
             <ul>
-                <li><a href="#" class="use1" data-toggle="modal" data-target="#myModal4"><span>Login</span></a>
-                </li>
+                %{--                <li><a href="#" class="use1" data-toggle="modal" data-target="#myModal4"><span>Login</span></a>--}%
+                %{--                </li>--}%
                 <li><a class="fb" href="#"></a></li>
                 <li><a class="twi" href="#"></a></li>
                 <li><a class="insta" href="#"></a></li>
@@ -214,7 +215,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="slide-visual">
             <!-- Slide Image Area (1000 x 424) -->
             <ul class="slide-group">
-%{--                 <li><img class="img-responsive" src="images/ba1.jpg" alt="Dummy Image" /></li>--}%
+                %{--                 <li><img class="img-responsive" src="images/ba1.jpg" alt="Dummy Image" /></li>--}%
                 <li><img class="img-responsive" alt="Imagen de promoción 1"
                          src="${request.contextPath}/principal/getImgnProd?ruta=ba1.jpg&tp=v&id=0"/></li>
                 <li><img class="img-responsive" alt="Imagen de promoción 1"
@@ -227,7 +228,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="script-wrap">
                 <ul class="script-group">
                     <li><div class="inner-script">
-%{--                        <img class="img-responsive" src="images/baa1.jpg" alt="Dummy Image" />--}%
+                        %{--                        <img class="img-responsive" src="images/baa1.jpg" alt="Dummy Image" />--}%
                         <img class="img-responsive" alt="Imagen de promoción 1"
                              src="${request.contextPath}/principal/getImgnProd?ruta=baa1.jpg&tp=v&id=0"/>
                     </div></li>
@@ -235,8 +236,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <img class="img-responsive" alt="Imagen de promoción 1"
                              src="${request.contextPath}/principal/getImgnProd?ruta=baa2.jpg&tp=v&id=0"/>
                     <li><div class="inner-script">
-                    <img class="img-responsive" alt="Imagen de promoción 1"
-                         src="${request.contextPath}/principal/getImgnProd?ruta=baa3.jpg&tp=v&id=0"/>
+                        <img class="img-responsive" alt="Imagen de promoción 1"
+                             src="${request.contextPath}/principal/getImgnProd?ruta=baa3.jpg&tp=v&id=0"/>
+                    </div></li>
                 </ul>
                 <div class="slide-controller">
                     <a href="#" class="btn-prev">
@@ -258,7 +260,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="clearfix"></div>
     </div>
     <asset:javascript src="/apli/pignose.layerslider.js"/>
-%{--    <script type="text/javascript" src="js/pignose.layerslider.js"></script>--}%
+    %{--    <script type="text/javascript" src="js/pignose.layerslider.js"></script>--}%
     <script type="text/javascript">
         //<![CDATA[
         $(window).load(function() {
@@ -338,7 +340,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="img-box">
                     <img class="img-responsive zoom-img" alt="Imagen de promoción 1"
                          src="${request.contextPath}/principal/getImgnProd?ruta=p1.jpg&tp=v&id=0"/>
-%{--                    <img src="images/p1.jpg" alt="image" class="img-responsive zoom-img">--}%
+                    %{--                    <img src="images/p1.jpg" alt="image" class="img-responsive zoom-img">--}%
                 </div>
                 <div class="info-box">
                     <div class="info-content simpleCart_shelfItem">
@@ -403,7 +405,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
 
         <asset:javascript src="/apli/easyResponsiveTabs.js"/>
-%{--        <script src="js/easyResponsiveTabs.js" type="text/javascript"></script>--}%
+        %{--        <script src="js/easyResponsiveTabs.js" type="text/javascript"></script>--}%
         <script type="text/javascript">
             $(document).ready(function () {
                 $('#horizontalTab').easyResponsiveTabs({
@@ -1015,8 +1017,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <div class="col-md-3 coupons-gd">
                 <a href="${createLink(controller: 'login', action: 'login')}">
-                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                <h4>Ingresar</h4>
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    <h4>Ingresar</h4>
                 </a>
                 <p>Ingresa al sistema con tus datos</p>
             </div>
@@ -1099,6 +1101,70 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 <!-- //footer -->
 <!-- login -->
+%{--<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">--}%
+%{--    <div class="modal-dialog" role="document">--}%
+%{--        <div class="modal-content modal-info">--}%
+%{--            <div class="modal-header">--}%
+%{--                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--}%
+%{--            </div>--}%
+%{--            <div class="modal-body modal-spa">--}%
+%{--                <div class="login-grids">--}%
+%{--                    <div class="login">--}%
+%{--                        <div class="login-bottom">--}%
+%{--                            <h3>Sign up for free</h3>--}%
+%{--                            <form>--}%
+%{--                                <div class="sign-up">--}%
+%{--                                    <h4>Email :</h4>--}%
+%{--                                    <input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">--}%
+%{--                                </div>--}%
+%{--                                <div class="sign-up">--}%
+%{--                                    <h4>Password :</h4>--}%
+%{--                                    <input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">--}%
+
+%{--                                </div>--}%
+%{--                                <div class="sign-up">--}%
+%{--                                    <h4>Re-type Password :</h4>--}%
+%{--                                    <input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">--}%
+
+%{--                                </div>--}%
+%{--                                <div class="sign-up">--}%
+%{--                                    <input type="submit" value="REGISTER NOW" >--}%
+%{--                                </div>--}%
+
+%{--                            </form>--}%
+%{--                        </div>--}%
+%{--                        <div class="login-right">--}%
+%{--                            <h3>Sign in with your account</h3>--}%
+%{--                            <form>--}%
+%{--                                <div class="sign-in">--}%
+%{--                                    <h4>Email :</h4>--}%
+%{--                                    <input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">--}%
+%{--                                </div>--}%
+%{--                                <div class="sign-in">--}%
+%{--                                    <h4>Password :</h4>--}%
+%{--                                    <input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">--}%
+%{--                                    <a href="#">Forgot password?</a>--}%
+%{--                                </div>--}%
+%{--                                <div class="single-bottom">--}%
+%{--                                    <input type="checkbox"  id="brand" value="">--}%
+%{--                                    <label for="brand"><span></span>Remember Me.</label>--}%
+%{--                                </div>--}%
+%{--                                <div class="sign-in">--}%
+%{--                                    <input type="submit" value="SIGNIN" >--}%
+%{--                                </div>--}%
+%{--                            </form>--}%
+%{--                        </div>--}%
+%{--                        <div class="clearfix"></div>--}%
+%{--                    </div>--}%
+%{--                    <p>By logging in you agree to our <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a></p>--}%
+%{--                </div>--}%
+%{--            </div>--}%
+%{--        </div>--}%
+%{--    </div>--}%
+%{--</div>--}%
+%{--<!-- //login -->--}%
+
+
 <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-info">
@@ -1109,57 +1175,103 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="login-grids">
                     <div class="login">
                         <div class="login-bottom">
-                            <h3>Sign up for free</h3>
+                            <h3>Registrarse</h3>
                             <form>
                                 <div class="sign-up">
+                                    <h4>Nombre :</h4>
+                                    <input type="text" value="Ingrese su nombre" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su nombre';}" required="">
+                                </div>
+                                <div class="sign-up">
+                                    <h4>Apellido :</h4>
+                                    <input type="text" value="Ingrese su apellido" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su apellido';}" required="">
+                                </div>
+                                <div class="sign-up">
                                     <h4>Email :</h4>
-                                    <input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
+                                    <input type="text" value="Ingrese su dirección de correo" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su dirección de correo';}" required="">
                                 </div>
-                                <div class="sign-up">
-                                    <h4>Password :</h4>
-                                    <input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">
 
-                                </div>
                                 <div class="sign-up">
-                                    <h4>Re-type Password :</h4>
-                                    <input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">
-
-                                </div>
-                                <div class="sign-up">
-                                    <input type="submit" value="REGISTER NOW" >
+                                    <input type="submit" id="btnRegistrarse" value="Registrarse" >
                                 </div>
 
                             </form>
                         </div>
                         <div class="login-right">
-                            <h3>Sign in with your account</h3>
+                            <h3>Ingrese con su cuenta</h3>
                             <form>
                                 <div class="sign-in">
-                                    <h4>Email :</h4>
-                                    <input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
+                                    <h4>Usuario :</h4>
+                                    <input type="text" value="Ingrese su usuario" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su usuario';}" required="">
                                 </div>
                                 <div class="sign-in">
                                     <h4>Password :</h4>
-                                    <input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">
-                                    <a href="#">Forgot password?</a>
+                                    <input type="password" value="Ingrese su clave" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su clave';}" required="">
+                                    ¿Olvidó su contraseña? <a href="#" class="" id="btnOlvidoPass"> <i class="fa fa-user-secret"></i> Recuperar contraseña </a>
                                 </div>
-                                <div class="single-bottom">
-                                    <input type="checkbox"  id="brand" value="">
-                                    <label for="brand"><span></span>Remember Me.</label>
+                                <div class="single-bottom" style="margin-bottom: 57px">
+                                    %{--                                    <input type="checkbox"  id="brand" value="">--}%
+                                    %{--                                    <label for="brand"><span></span>Remember Me.</label>--}%
                                 </div>
                                 <div class="sign-in">
-                                    <input type="submit" value="SIGNIN" >
+                                    <input type="submit" value="Ingresar" >
                                 </div>
                             </form>
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                    <p>By logging in you agree to our <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a></p>
+                    <p>Al registrarse en el sistema la clave de acceso será enviada a su <strong>correo electrónico</strong>
+                    <p>Al ingresar al sistema usted acepta nuestros <a href="#">Términos y Condiciones</a></p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!-- //login -->
+
+
+<script type="text/javascript">
+
+
+    $("#btnRegistrarse").click(function () {
+        submitFormRegistro();
+    });
+
+    function submitFormRegistro() {
+
+        var d = cargarLoader("Guardando...");
+        $.ajax({
+            type: "POST",
+            url: '${createLink(controller: 'cliente', action:'saveRegistro_ajax')}',
+            data: $form.serialize(),
+            success: function (msg) {
+                var parts = msg.split("_");
+                if (parts[0] == 'ok') {
+                    bootbox.alert("<i class='fa fa-envelope fa-2x text-warning'></i> Un mail de verificación ha sido enviado a su correo " +
+                        "<br> <i class='fa fa-exclamation-circle fa-2x text-warning'></i> Si no ha recibido el correo, revise su bandeja de spam", function(){
+                        d.modal('hide');
+                    })
+                }else {
+                    if(parts[0] == 'er'){
+                        bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i>" + parts[1], function(){
+                            d.modal('hide');
+                        })
+                    }else{
+                        bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i>" + "Error al crear el usuario", function(){
+                            d.modal('hide');
+                        })
+                    }
+                }
+            }
+        });
+
+    }
+
+
+
+</script>
+
+
+
+
 </body>
 </html>

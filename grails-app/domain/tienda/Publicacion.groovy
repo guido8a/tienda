@@ -14,8 +14,8 @@ class Publicacion {
     String titulo
     String subtitulo
     String texto
-    double latitud
-    double longitud
+//    double latitud
+//    double longitud
     String estado
     String observaciones
 
@@ -37,8 +37,8 @@ class Publicacion {
             subtitulo column: 'publsbtl'
             texto column: 'publtxto'
             estado column: 'publetdo'
-            longitud column: 'publlong'
-            latitud column: 'publlatt'
+//            longitud column: 'publlong'
+//            latitud column: 'publlatt'
             observaciones column: 'publobsr'
         }
     }
@@ -53,8 +53,8 @@ class Publicacion {
         fecha(blank: false, nullable: false, attributes: [title: 'fecha creacion'])
         fechaInicio(blank: true, nullable: true, attributes: [title: 'fecha inicio'])
         fechaFin(blank: true, nullable: true, attributes: [title: 'fecha fin'])
-        latitud(blank: false, nullable: false, attributes: [title: 'latitud'])
-        longitud(blank: false, nullable: false, attributes: [title: 'longitud'])
+//        latitud(blank: false, nullable: false, attributes: [title: 'latitud'])
+//        longitud(blank: false, nullable: false, attributes: [title: 'longitud'])
         observaciones(size: 0..255, blank: false, nullable: false, attributes: [title: 'longitud'])
 
     }

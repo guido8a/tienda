@@ -2,7 +2,6 @@ package tienda
 
 class Cliente {
 
-    Producto producto
     String nombre
     String apellido
     String mail
@@ -18,7 +17,6 @@ class Cliente {
         id generator: 'identity'
         version false
         columns {
-            producto column: 'prod__id'
             nombre column: 'clntnmbr'
             apellido column: 'clntapll'
             mail column: 'clntmail'
@@ -29,7 +27,6 @@ class Cliente {
         }
     }
     static constraints = {
-        producto(blank: false, nullable: false)
         nombre(size:0..31, blank: false, nullable: false, attributes: [title: 'nombre'])
         apellido(size:0..31, blank: true, nullable: true, attributes: [title: 'apellido'])
         mail(size:0..63, blank: true, nullable: true, attributes: [title: 'mail'])
