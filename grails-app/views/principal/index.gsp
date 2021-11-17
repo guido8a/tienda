@@ -47,7 +47,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="header">
     <div class="container">
         <ul>
-            %{--            <li><span class="glyphicon glyphicon-time" aria-hidden="true"></span>Entrega inmediata gratis</li>--}%
+                        <li><span class="glyphicon glyphicon-time" aria-hidden="true"></span>Entrega inmediata gratis</li>
             %{--            <li><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Entrega gratuita de su orden</li>--}%
             <li><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><a href="mailto:info@example.com">Contáctenos</a></li>
             <li><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span><a href="#" class="use1" data-toggle="modal" data-target="#myModal4"><span>Login</span></a></li>
@@ -1179,11 +1179,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <form>
                                 <div class="sign-up">
                                     <h4>Nombre :</h4>
-                                    <input type="text" value="Ingrese su nombre" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su nombre';}" required="">
+                                    <input type="text" id="nombreCliente" value="Ingrese su nombre" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su nombre';}" required="">
                                 </div>
                                 <div class="sign-up">
                                     <h4>Apellido :</h4>
-                                    <input type="text" value="Ingrese su apellido" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su apellido';}" required="">
+                                    <input type="text" id="Cliente" value="Ingrese su apellido" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su apellido';}" required="">
                                 </div>
                                 <div class="sign-up">
                                     <h4>Email :</h4>
