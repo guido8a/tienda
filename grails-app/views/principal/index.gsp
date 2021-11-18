@@ -26,6 +26,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <asset:javascript src="/apli/simpleCart.min.js"/>
     <asset:javascript src="/apli/bootstrap-3.1.1.min.js"/>
     <asset:javascript src="/apli/jquery.easing.min.js"/>
+    <asset:javascript src="/jquery-validation-1.11.1/js/jquery.validate.min.js"/>
+    <asset:javascript src="/jquery-validation-1.11.1/js/jquery.validate.js"/>
+    <asset:javascript src="/jquery-validation-1.11.1/localization/messages_es.js"/>
+    <asset:javascript src="/apli/functions.js"/>
+    <asset:javascript src="/apli/bootbox.js"/>
 
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
     function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -47,7 +52,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="header">
     <div class="container">
         <ul>
-                        <li><span class="glyphicon glyphicon-time" aria-hidden="true"></span>Entrega inmediata gratis</li>
+            <li><span class="glyphicon glyphicon-time" aria-hidden="true"></span>Entrega inmediata gratis</li>
             %{--            <li><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Entrega gratuita de su orden</li>--}%
             <li><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><a href="mailto:info@example.com">Contáctenos</a></li>
             <li><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span><a href="#" class="use1" data-toggle="modal" data-target="#myModal4"><span>Login</span></a></li>
@@ -1176,22 +1181,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="login">
                         <div class="login-bottom">
                             <h3>Registrarse</h3>
-                            <form>
-                                <div class="sign-up">
+                            <form id="frmRegistro">
+                                <div>
                                     <h4>Nombre :</h4>
-                                    <input type="text" id="nombreCliente" value="Ingrese su nombre" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su nombre';}" required="">
+                                    <g:textField name="nombre" minlength="3" maxlength="31" required="" class="form-control required"/>
+%{--                                    <input type="text" id="nombreCliente" value="Ingrese su nombre" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su nombre';}" required="">--}%
                                 </div>
                                 <div class="sign-up">
                                     <h4>Apellido :</h4>
-                                    <input type="text" id="Cliente" value="Ingrese su apellido" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su apellido';}" required="">
+                                    <g:textField name="apellido" minlength="3" maxlength="31" class="form-control required"/>
+%{--                                    <input type="text" id="apellidoCliente" value="Ingrese su apellido" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su apellido';}" required="">--}%
                                 </div>
                                 <div class="sign-up">
                                     <h4>Email :</h4>
-                                    <input type="text" value="Ingrese su dirección de correo" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su dirección de correo';}" required="">
+                                    <g:textField name="mail" maxlength="63" required="" class="email form-control unique noEspacios required"/>
+%{--                                    <input type="text" id="mailCliente" class="mail email" value="Ingrese su dirección de correo" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su dirección de correo';}" required="">--}%
                                 </div>
 
-                                <div class="sign-up">
-                                    <input type="submit" id="btnRegistrarse" value="Registrarse" >
+                                <div class="sign-up" style="text-align: center">
+%{--                                <div>--}%
+%{--                                    <input type="submit" id="btnRegistrarse" value="Registrarse" >--}%
+
+                                    <a href="#" id="btnRegistrarse" class="btn btn-warning btn-lg" title="Registrar nuevo cliente">
+                                        <i class="fa fa-file"></i> Registrarse
+                                    </a>
+
                                 </div>
 
                             </form>
@@ -1201,19 +1215,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <form>
                                 <div class="sign-in">
                                     <h4>Usuario :</h4>
-                                    <input type="text" value="Ingrese su usuario" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su usuario';}" required="">
+                                    <g:textField name="login" required="" class="email form-control input-sm required"/>
+%{--                                    <input type="text" value="Ingrese su usuario" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su usuario';}" required="">--}%
                                 </div>
                                 <div class="sign-in">
                                     <h4>Password :</h4>
-                                    <input type="password" value="Ingrese su clave" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su clave';}" required="">
+%{--                                    <g:textField name="password" required="" type="password" class="noEspacios form-control input-sm required"/>--}%
+                                    <input type="password" class="required" value="Ingrese su clave" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su clave';}" required="">
                                     ¿Olvidó su contraseña? <a href="#" class="" id="btnOlvidoPass"> <i class="fa fa-user-secret"></i> Recuperar contraseña </a>
                                 </div>
-                                <div class="single-bottom" style="margin-bottom: 57px">
+                                <div class="single-bottom" style="margin-bottom: 34px">
                                     %{--                                    <input type="checkbox"  id="brand" value="">--}%
                                     %{--                                    <label for="brand"><span></span>Remember Me.</label>--}%
                                 </div>
-                                <div class="sign-in">
-                                    <input type="submit" value="Ingresar" >
+                                <div  style="text-align: center">
+%{--                                    <input type="submit" value="Ingresar" >--}%
+                                    <a href="#" id="btnIngresar" class="btn btn-warning btn-lg" title="Ingreso de clientes">
+                                        <i class="fa fa-file"></i> Ingresar
+                                    </a>
                                 </div>
                             </form>
                         </div>
@@ -1232,37 +1251,49 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="text/javascript">
 
 
+    $("#btnIngresar").click(function () {
+
+    });
+
+
     $("#btnRegistrarse").click(function () {
         submitFormRegistro();
     });
 
     function submitFormRegistro() {
 
-        var d = cargarLoader("Guardando...");
-        $.ajax({
-            type: "POST",
-            url: '${createLink(controller: 'cliente', action:'saveRegistro_ajax')}',
-            data: $form.serialize(),
-            success: function (msg) {
-                var parts = msg.split("_");
-                if (parts[0] == 'ok') {
-                    bootbox.alert("<i class='fa fa-envelope fa-2x text-warning'></i> Un mail de verificación ha sido enviado a su correo " +
-                        "<br> <i class='fa fa-exclamation-circle fa-2x text-warning'></i> Si no ha recibido el correo, revise su bandeja de spam", function(){
-                        d.modal('hide');
-                    })
-                }else {
-                    if(parts[0] == 'er'){
-                        bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i>" + parts[1], function(){
+        var $form = $("#frmRegistro");
+        if ($form.valid()) {
+            var d = cargarLoader("Guardando...");
+            $.ajax({
+                type: "POST",
+                url: '${createLink(controller: 'cliente', action:'saveRegistro_ajax')}',
+                data: $form.serialize(),
+                success: function (msg) {
+                    var parts = msg.split("_");
+                    $("#myModal4").modal('hide')
+                    if (parts[0] == 'ok') {
+                        bootbox.alert("<i class='fa fa-envelope fa-2x text-warning'></i> Un mail de verificación ha sido enviado a su correo " +
+                            "<br> <i class='fa fa-exclamation-circle fa-2x text-warning'></i> Si no ha recibido el correo, revise su bandeja de spam", function(){
                             d.modal('hide');
+                            // bootbox.hideAll()
                         })
-                    }else{
-                        bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i>" + "Error al crear el usuario", function(){
-                            d.modal('hide');
-                        })
+                    }else {
+                        if(parts[0] == 'er'){
+                            bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i>" + parts[1], function(){
+                                d.modal('hide');
+                            })
+                        }else{
+                            bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i>" + "Error al crear el usuario", function(){
+                                d.modal('hide');
+                            })
+                        }
                     }
                 }
-            }
-        });
+            });
+        } else {
+            return false;
+        } //else
 
     }
 

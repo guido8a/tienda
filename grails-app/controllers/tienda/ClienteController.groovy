@@ -7,10 +7,11 @@ import seguridad.Sesn
 
 class ClienteController {
 
+    def mailService
 
     def saveRegistro_ajax(){
 
-        println("params" + params)
+        println("params ---> " + params)
 
         def existeCorreo = Cliente.findAllByMail(params.mail)
 
@@ -19,7 +20,6 @@ class ClienteController {
         }else{
 
             params.fecha = new Date()
-//            params.activo = 1
             params.login = params.mail
 
             def cliente = new Cliente()
@@ -32,25 +32,12 @@ class ClienteController {
                 println("error al crear el cliente " + cliente.errors)
                 render "no"
             }else{
-
-//                def sesion = new Sesn()
-//                sesion.usuario = persona
-//                sesion.fechaInicio = new Date()
-//                sesion.perfil = Prfl.findByCodigo('USUV')
-//
-//                if(!sesion.save(flush:true)){
-//                    println("error al asignar el perfil del usuario " + sesion.errors)
-//                    render "no"
-//                }else{
-                    println("persona p " + persona)
-
                     def ec = enviarCorreoRegistro(cliente.mail, pass)
                     if(ec){
                         render "ok"
                     }else{
                         render "no"
                     }
-//                }
             }
         }
     }

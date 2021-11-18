@@ -7,6 +7,7 @@ class WardInterceptor {
                 .excludes(controller:'shield')
                 .excludes(controller:'principal')
                 .excludes(controller:'ver')
+                .excludes(controller:'cliente')
 //                .excludes(controller:'empresa')
 //                .excludes(controller:'categoria')
 //                .excludes(controller:'subcategoria')
@@ -15,7 +16,7 @@ class WardInterceptor {
     }
 
     boolean before() {
-        println "before acción: " + actionName + " controlador: " + controllerName + " params: $params"
+//        println "before acción: " + actionName + " controlador: " + controllerName + " params: $params"
 //        println "usuario: ${session.usuario} , perfil: ${session?.perfil}"
         session.an = actionName
         session.cn = controllerName

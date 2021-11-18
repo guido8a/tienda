@@ -65,7 +65,7 @@ class PrincipalController {
     }
 
     def getImgnProd(){
-        println "getImgnProd: $params"
+//        println "getImgnProd: $params"
         def producto = Producto.get(params.id)
 //        def path = (params.tp == 'p'? "/var/ventas/productos/pro_${producto.id}/" : "/var/ventas/imagen/destacados/") + params.ruta
         def path
@@ -76,7 +76,7 @@ class PrincipalController {
         if(params.tp == 'v') path = "/var/tienda/imagenes/images/" + params.ruta
         def fileext = path.substring(path.indexOf(".")+1, path.length())
 
-        println "ruta: $path"
+//        println "ruta: $path"
 
         BufferedImage imagen = ImageIO.read(new File(path));
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -202,5 +202,9 @@ class PrincipalController {
 
     def error(){
 
+    }
+
+    def saveRegistro_ajax(){
+        println("params -->" + params)
     }
 }
