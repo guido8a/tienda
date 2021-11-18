@@ -100,7 +100,8 @@ class ClienteController {
 //                redirect(controller: 'principal', action: "index")
             }else{
                 session.cliente = user
-                session.time = new Date()
+                println "ok..."
+//                session.time = new Date()
                 redirect(controller: 'principal', action: "index")
             }
         }
