@@ -1271,9 +1271,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         var parts = msg.split("_");
                         $("#myModal4").modal('hide');
                         if (parts[0] == 'ok') {
-                            bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i>" + "Ingreso correcto", function(){
-                                d.modal('hide');
-                            })
+                            location.reload(true);
+                            // bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i>" + "Ingreso correcto", function(){
+                            //     d.modal('hide');
+                            // })
                         }else {
                             if(parts[0] == 'er'){
                                 bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i>" + parts[1], function(){
