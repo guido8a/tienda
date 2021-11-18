@@ -79,4 +79,32 @@ class ClienteController {
         }
     }
 
+    def ingreso_ajax(){
+        println "valida ingreso " + params
+        def user = Cliente.withCriteria {
+            eq("login", params.login, [ignoreCase: true])
+        }
+
+        if (user.size() == 0) {
+            render "er_No se ha encontrado el usuario"
+            return false
+        } else if (user.size() > 1) {
+            render "er_Error al ingresar"
+            return false
+        } else {
+            user = user[0]
+
+            if (params.password.encodeAsMD5() != user.password) {
+                render "er_Contraseña incorrecta"
+                return false
+//                redirect(controller: 'principal', action: "index")
+            }else{
+                session.cliente = user
+                session.time = new Date()
+                redirect(controller: 'principal', action: "index")
+            }
+        }
+
+    }
+
 }

@@ -1212,16 +1212,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </div>
                         <div class="login-right">
                             <h3>Ingrese con su cuenta</h3>
-                            <form>
+                            <form id="frmIngreso">
                                 <div class="sign-in">
                                     <h4>Usuario :</h4>
-                                    <g:textField name="login" required="" class="email form-control input-sm required"/>
+                                    <g:textField name="login" required="" class="email form-control required"/>
 %{--                                    <input type="text" value="Ingrese su usuario" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su usuario';}" required="">--}%
                                 </div>
                                 <div class="sign-in">
                                     <h4>Password :</h4>
 %{--                                    <g:textField name="password" required="" type="password" class="noEspacios form-control input-sm required"/>--}%
-                                    <input type="password" class="required" value="Ingrese su clave" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su clave';}" required="">
+                                    <input type="password" name="password" class="required" value="Ingrese su clave" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su clave';}" required="">
                                     ¿Olvidó su contraseña? <a href="#" class="" id="btnOlvidoPass"> <i class="fa fa-user-secret"></i> Recuperar contraseña </a>
                                 </div>
                                 <div class="single-bottom" style="margin-bottom: 34px">
@@ -1252,8 +1252,49 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
     $("#btnIngresar").click(function () {
-
+        ingresoCliente();
     });
+
+    function ingresoCliente(){
+        var p = $("#password").val();
+        var $form = $("#frmIngreso");
+        if ($form.valid()) {
+            // if(p == '' || p == null){
+            //     bootbox.alert("Ingrese la contraseña!")
+            // }else{
+                var d = cargarLoader("Ingresando...");
+                $.ajax({
+                    type: "POST",
+                    url: '${createLink(controller: 'cliente', action:'ingreso_ajax')}',
+                    data: $form.serialize(),
+                    success: function (msg) {
+                        var parts = msg.split("_");
+                        $("#myModal4").modal('hide');
+                        if (parts[0] == 'ok') {
+                            bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i>" + "Ingreso correcto", function(){
+                                d.modal('hide');
+                            })
+                        }else {
+                            if(parts[0] == 'er'){
+                                bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i>" + parts[1], function(){
+                                    d.modal('hide');
+                                })
+                            }else{
+                                bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i>" + "Error al ingresar", function(){
+                                    d.modal('hide');
+                                })
+                            }
+                        }
+                    }
+                });
+            // }
+
+        } else {
+            return false;
+        } //else
+
+
+    }
 
 
     $("#btnRegistrarse").click(function () {
