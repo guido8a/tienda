@@ -247,7 +247,7 @@
 
         // items.administrar = administrar;
         items.editar = editar;
-        if(etdo == 'N') items.publicar = publicar;
+        if(etdo == 'A') items.publicar = publicar;
 
         return items
     }

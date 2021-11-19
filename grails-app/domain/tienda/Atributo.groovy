@@ -17,6 +17,7 @@ class Atributo {
             producto column: 'prod__id'
             descripcion column: 'atrbdscr'
             orden column: 'atrbordn'
+            valor column: 'atrbvlor'
         }
     }
     static constraints = {
