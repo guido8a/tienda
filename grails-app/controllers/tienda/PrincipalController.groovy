@@ -19,7 +19,10 @@ class PrincipalController {
         } else {
             producto = Producto.list([sort: 'fecha', order:'desc'])
         }
-        [ctgr: ctgr, producto: producto, grpo: params.grpo]
+
+        println("session " + session.cliente)
+
+        [ctgr: ctgr, producto: producto, grpo: params.grpo, cliente: session.cliente]
     }
 
 

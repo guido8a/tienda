@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Smart Shop a Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | Home :: w3layouts</title>
+    <title>Tienda en Línea</title>
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -52,10 +52,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="header">
     <div class="container">
         <ul>
-            <li><span class="glyphicon glyphicon-time" aria-hidden="true"></span>Entrega inmediata gratis</li>
+            <li><span class="glyphicon glyphicon-time" aria-hidden="true"></span>Envios a nivel nacional</li>
             %{--            <li><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Entrega gratuita de su orden</li>--}%
             <li><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><a href="mailto:info@example.com">Contáctenos</a></li>
-            <li><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span><a href="#" class="use1" data-toggle="modal" data-target="#myModal4"><span>Login</span></a></li>
+            <g:if test="${cliente}">
+                <li><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span><a href="#" class="use1" ><span>Cerrar sesión ${cliente?.nombre}</span></a></li>
+            </g:if>
+            <g:else>
+                <li><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span><a href="#" class="use1" data-toggle="modal" data-target="#myModal4"><span>Cliente</span></a></li>
+            </g:else>
+
             <li><a href="${createLink(controller: 'login', action: 'login')}"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>Admin</a></li>
         </ul>
     </div>
@@ -72,7 +78,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="col-md-6 header-middle">
             <form>
                 <div class="search">
-                    <input type="search" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Buscar';}" required="">
+                    <input type="search" value="Buscar" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Buscar';}" required="">
                 </div>
                 <div class="section_room">
                     <select id="categoría" class="frm-field required" style="color: #4F1B00; border-bottom-style: solid; border-color: #AF5B00; font-size: 12pt">
@@ -197,19 +203,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </div>
             </nav>
         </div>
-        <div class="top_nav_right">
-            <div class="cart box_1">
-                <a href="checkout.html">
-                    <h3> <div class="total">
-                        <i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
-                        <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)</div>
+        <g:if test="${cliente}">
+            <div class="top_nav_right">
+                <div class="cart box_1">
+                    <a href="${createLink(controller: 'carrito', action: 'carrito')}">
+                        <h3> <div class="total">
+                            <i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
+                            <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)</div>
 
-                    </h3>
-                </a>
-                <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
-
+                        </h3>
+                    </a>
+                    <p><a href="${createLink(controller: 'carrito', action: 'carrito')}" id="btnCarrito" class="simpleCart_empty">Empty Cart</a></p>
+                </div>
             </div>
-        </div>
+        </g:if>
         <div class="clearfix"></div>
     </div>
 </div>
@@ -1021,7 +1028,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <h3>Comprar es simple</h3>
             </div>
             <div class="col-md-3 coupons-gd">
-                <a href="${createLink(controller: 'login', action: 'login')}">
+                <a href="#">
                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                     <h4>Ingresar</h4>
                 </a>
@@ -1044,64 +1051,64 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- footer -->
 <div class="footer">
     <div class="container">
-        <div class="col-md-3 footer-left">
-            <h2><a href="index.html"><img src="images/logo3.jpg" alt=" " /></a></h2>
-            <p>Neque porro quisquam est, qui dolorem ipsum quia dolor
-            sit amet, consectetur, adipisci velit, sed quia non
-            numquam eius modi tempora incidunt ut labore
-            et dolore magnam aliquam quaerat voluptatem.</p>
-        </div>
+%{--        <div class="col-md-3 footer-left">--}%
+%{--            <h2><a href="index.html"><img src="images/logo3.jpg" alt=" " /></a></h2>--}%
+%{--            <p>Neque porro quisquam est, qui dolorem ipsum quia dolor--}%
+%{--            sit amet, consectetur, adipisci velit, sed quia non--}%
+%{--            numquam eius modi tempora incidunt ut labore--}%
+%{--            et dolore magnam aliquam quaerat voluptatem.</p>--}%
+%{--        </div>--}%
         <div class="col-md-9 footer-right">
             <div class="col-sm-6 newsleft">
-                <h3>SIGN UP FOR NEWSLETTER !</h3>
+                <h3>INGRESE SU EMAIL PARA RECIBIR NUESTRAS NOTIFICACIONES !</h3>
             </div>
             <div class="col-sm-6 newsright">
                 <form>
                     <input type="text" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
-                    <input type="submit" value="Submit">
+                    <input type="submit" value="Enviar">
                 </form>
             </div>
             <div class="clearfix"></div>
             <div class="sign-grds">
-                <div class="col-md-4 sign-gd">
-                    <h4>Information</h4>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="mens.html">Men's Wear</a></li>
-                        <li><a href="womens.html">Women's Wear</a></li>
-                        <li><a href="electronics.html">Electronics</a></li>
-                        <li><a href="codes.html">Short Codes</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
+%{--                <div class="col-md-4 sign-gd">--}%
+%{--                    <h4>Information</h4>--}%
+%{--                    <ul>--}%
+%{--                        <li><a href="index.html">Home</a></li>--}%
+%{--                        <li><a href="mens.html">Men's Wear</a></li>--}%
+%{--                        <li><a href="womens.html">Women's Wear</a></li>--}%
+%{--                        <li><a href="electronics.html">Electronics</a></li>--}%
+%{--                        <li><a href="codes.html">Short Codes</a></li>--}%
+%{--                        <li><a href="contact.html">Contact</a></li>--}%
+%{--                    </ul>--}%
+%{--                </div>--}%
 
-                <div class="col-md-4 sign-gd-two">
-                    <h4>Store Information</h4>
+                <div class="col-md-6 sign-gd-two">
+                    <h4>Información de la tienda</h4>
                     <ul>
-                        <li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>Address : 1234k Avenue, 4th block, <span>Newyork City.</span></li>
+                        <li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>Dirección : Amazonas..., <span>Quito - Ecuador.</span></li>
                         <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i>Email : <a href="mailto:info@example.com">info@example.com</a></li>
-                        <li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>Phone : +1234 567 567</li>
+                        <li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>Teléfono : +1234 567 567</li>
                     </ul>
                 </div>
-                <div class="col-md-4 sign-gd flickr-post">
-                    <h4>Flickr Posts</h4>
-                    <ul>
-                        <li><a href="single.html"><img src="images/b15.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="single.html"><img src="images/b16.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="single.html"><img src="images/b17.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="single.html"><img src="images/b18.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="single.html"><img src="images/b15.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="single.html"><img src="images/b16.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="single.html"><img src="images/b17.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="single.html"><img src="images/b18.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="single.html"><img src="images/b15.jpg" alt=" " class="img-responsive" /></a></li>
-                    </ul>
-                </div>
+%{--                <div class="col-md-4 sign-gd flickr-post">--}%
+%{--                    <h4>Flickr Posts</h4>--}%
+%{--                    <ul>--}%
+%{--                        <li><a href="single.html"><img src="images/b15.jpg" alt=" " class="img-responsive" /></a></li>--}%
+%{--                        <li><a href="single.html"><img src="images/b16.jpg" alt=" " class="img-responsive" /></a></li>--}%
+%{--                        <li><a href="single.html"><img src="images/b17.jpg" alt=" " class="img-responsive" /></a></li>--}%
+%{--                        <li><a href="single.html"><img src="images/b18.jpg" alt=" " class="img-responsive" /></a></li>--}%
+%{--                        <li><a href="single.html"><img src="images/b15.jpg" alt=" " class="img-responsive" /></a></li>--}%
+%{--                        <li><a href="single.html"><img src="images/b16.jpg" alt=" " class="img-responsive" /></a></li>--}%
+%{--                        <li><a href="single.html"><img src="images/b17.jpg" alt=" " class="img-responsive" /></a></li>--}%
+%{--                        <li><a href="single.html"><img src="images/b18.jpg" alt=" " class="img-responsive" /></a></li>--}%
+%{--                        <li><a href="single.html"><img src="images/b15.jpg" alt=" " class="img-responsive" /></a></li>--}%
+%{--                    </ul>--}%
+%{--                </div>--}%
                 <div class="clearfix"></div>
             </div>
         </div>
         <div class="clearfix"></div>
-        <p class="copy-right">&copy 2016 Smart Shop. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+        <p class="copy-right">&copy 2021. Tienda en Línea | <a href="http://www.tedein.com.ec/">TEDEIN S.A:</a></p>
     </div>
 </div>
 <!-- //footer -->
@@ -1185,22 +1192,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <div>
                                     <h4>Nombre :</h4>
                                     <g:textField name="nombre" minlength="3" maxlength="31" required="" class="form-control required"/>
-%{--                                    <input type="text" id="nombreCliente" value="Ingrese su nombre" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su nombre';}" required="">--}%
+                                    %{--                                    <input type="text" id="nombreCliente" value="Ingrese su nombre" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su nombre';}" required="">--}%
                                 </div>
                                 <div class="sign-up">
                                     <h4>Apellido :</h4>
                                     <g:textField name="apellido" minlength="3" maxlength="31" class="form-control required"/>
-%{--                                    <input type="text" id="apellidoCliente" value="Ingrese su apellido" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su apellido';}" required="">--}%
+                                    %{--                                    <input type="text" id="apellidoCliente" value="Ingrese su apellido" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su apellido';}" required="">--}%
                                 </div>
                                 <div class="sign-up">
                                     <h4>Email :</h4>
                                     <g:textField name="mail" maxlength="63" required="" class="email form-control unique noEspacios required"/>
-%{--                                    <input type="text" id="mailCliente" class="mail email" value="Ingrese su dirección de correo" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su dirección de correo';}" required="">--}%
+                                    %{--                                    <input type="text" id="mailCliente" class="mail email" value="Ingrese su dirección de correo" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su dirección de correo';}" required="">--}%
                                 </div>
 
                                 <div class="sign-up" style="text-align: center">
-%{--                                <div>--}%
-%{--                                    <input type="submit" id="btnRegistrarse" value="Registrarse" >--}%
+                                    %{--                                <div>--}%
+                                    %{--                                    <input type="submit" id="btnRegistrarse" value="Registrarse" >--}%
 
                                     <a href="#" id="btnRegistrarse" class="btn btn-warning btn-lg" title="Registrar nuevo cliente">
                                         <i class="fa fa-file"></i> Registrarse
@@ -1216,11 +1223,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <div class="sign-in">
                                     <h4>Usuario :</h4>
                                     <g:textField name="login" required="" class="email form-control required"/>
-%{--                                    <input type="text" value="Ingrese su usuario" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su usuario';}" required="">--}%
+                                    %{--                                    <input type="text" value="Ingrese su usuario" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su usuario';}" required="">--}%
                                 </div>
                                 <div class="sign-in">
                                     <h4>Password :</h4>
-%{--                                    <g:textField name="password" required="" type="password" class="noEspacios form-control input-sm required"/>--}%
+                                    %{--                                    <g:textField name="password" required="" type="password" class="noEspacios form-control input-sm required"/>--}%
                                     <input type="password" name="password" class="required" value="Ingrese su clave" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su clave';}" required="">
                                     ¿Olvidó su contraseña? <a href="#" class="" id="btnOlvidoPass"> <i class="fa fa-user-secret"></i> Recuperar contraseña </a>
                                 </div>
@@ -1229,7 +1236,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     %{--                                    <label for="brand"><span></span>Remember Me.</label>--}%
                                 </div>
                                 <div  style="text-align: center">
-%{--                                    <input type="submit" value="Ingresar" >--}%
+                                    %{--                                    <input type="submit" value="Ingresar" >--}%
                                     <a href="#" id="btnIngresar" class="btn btn-warning btn-lg" title="Ingreso de clientes">
                                         <i class="fa fa-file"></i> Ingresar
                                     </a>
@@ -1262,32 +1269,32 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             // if(p == '' || p == null){
             //     bootbox.alert("Ingrese la contraseña!")
             // }else{
-                var d = cargarLoader("Ingresando...");
-                $.ajax({
-                    type: "POST",
-                    url: '${createLink(controller: 'cliente', action:'ingreso_ajax')}',
-                    data: $form.serialize(),
-                    success: function (msg) {
-                        var parts = msg.split("_");
-                        $("#myModal4").modal('hide');
-                        if (parts[0] == 'ok') {
-                            location.reload(true);
-                            // bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i>" + "Ingreso correcto", function(){
-                            //     d.modal('hide');
-                            // })
-                        }else {
-                            if(parts[0] == 'er'){
-                                bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i>" + parts[1], function(){
-                                    d.modal('hide');
-                                })
-                            }else{
-                                bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i>" + "Error al ingresar", function(){
-                                    d.modal('hide');
-                                })
-                            }
+            var d = cargarLoader("Ingresando...");
+            $.ajax({
+                type: "POST",
+                url: '${createLink(controller: 'cliente', action:'ingreso_ajax')}',
+                data: $form.serialize(),
+                success: function (msg) {
+                    var parts = msg.split("_");
+                    $("#myModal4").modal('hide');
+                    if (parts[0] == 'ok') {
+                        location.reload(true);
+                        // bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i>" + "Ingreso correcto", function(){
+                        //     d.modal('hide');
+                        // })
+                    }else {
+                        if(parts[0] == 'er'){
+                            bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i>" + parts[1], function(){
+                                d.modal('hide');
+                            })
+                        }else{
+                            bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i>" + "Error al ingresar", function(){
+                                d.modal('hide');
+                            })
                         }
                     }
-                });
+                }
+            });
             // }
 
         } else {

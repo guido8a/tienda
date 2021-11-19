@@ -8,6 +8,7 @@ class WardInterceptor {
                 .excludes(controller:'principal')
                 .excludes(controller:'ver')
                 .excludes(controller:'cliente')
+                .excludes(controller:'carrito')
 //                .excludes(controller:'empresa')
 //                .excludes(controller:'categoria')
 //                .excludes(controller:'subcategoria')
