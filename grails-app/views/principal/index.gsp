@@ -316,7 +316,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </div>
                     <div class="mid-img">
                         <img class="img-responsive" alt="Imagen de promoción 1"
-                             src="${request.contextPath}/principal/getImgnProd?ruta=dig.jpg&tp=v&id=0"/>
+                             src="${request.contextPath}/principal/getImgnProd?ruta=levis1.png&tp=v&id=0"/>
                     </div>
                     <div class="clearfix"></div>
                 </div>

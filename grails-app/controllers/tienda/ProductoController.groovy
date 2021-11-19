@@ -170,4 +170,67 @@ class ProductoController {
         }
     }
 
+
+    /*
+* insertar en PUBL: prod__id, prodfcha, prodtitl, prodsbtt, prodtxto, prodlong, prodlatt
+* En DTPB: Imágenes: {dtpbtipo = 'I', dtpbdscr = imagtxto, dtpbvlor = imagruta }
+*          Valores:  {dtpbtipo = 'V', dtpbdscr = atvldscr, dtpbvlor = atvlvlor }
+* Si hay una publicación activa, se la da de baja: publetdo = 'B' el nuevo queda como 'A' **/
+    def publicar_ajax(){
+        println "publicar_ajax: $params"
+        def cn = dbConnectionService.getConnection()
+        def prod = Producto.get(params.id)
+        def prsn = session.usuario.id
+        def obsr = ""
+        def fcha = new Date().format('yyyy-MM-dd HH:mm:ss')
+        def sql = "update publ set publetdo = 'B', publfcmd = '${fcha}' " +
+                "where prod__id = ${params.id} and publetdo = 'A' returning publfcha"
+        println "sql: $sql"
+
+        def publfcha = cn.rows(sql.toString())[0]?.publfcha
+
+        // si  existió una publicación OBSR: 'Producto modificado
+
+        sql = "insert into publ(prod__id, prsn__id, grpo__id, publfcha, publdstc, " +
+                "publnuvo, publtitl, publsbtl, publtxto, publetdo, publobsr) select " +
+                "${params.id}, ${prsn}, ${prod.grupo.id}, '${fcha}', prod.proddstc, " +
+                "prod.prodnuvo, prodtitl, prodsbtl, prodtxto, 'A'"
+        if(publfcha) {
+            sql += ",'Publicado anteriormente el ${publfcha.format('yyyy-MM-dd HH:mm:ss')}' " +
+                    "from prod where prod__id = ${params.id} returning publ__id"
+        } else {
+            sql += ",null from prod where prod__id = ${params.id} returning publ__id"
+        }
+        println "sql: $sql"
+        def publ__id = cn.rows(sql.toString())[0].publ__id
+
+        sql = "insert into dtpb(publ__id, dtpbtipo, dtpbdscr, dtpbvlor, dtpbpncp) " +
+                "select ${publ__id}, 'I', imagtxto, imagruta, imagpncp " +
+                "from imag where prod__id = ${params.id} returning dtpb__id"
+
+        println "sql: $sql"
+        def dtpbimag = cn.rows(sql.toString()).size()
+
+        sql = "insert into dtpb(publ__id, dtpbtipo, dtpbdscr, dtpbvlor) " +
+                "select ${publ__id}, 'V', atrbdscr, atrbvlor from atrb " +
+                "where prod__id = ${params.id} returning dtpb__id"
+
+        def dtpbvlor = cn.rows(sql.toString()).size()
+
+        prod.estado = 'P'
+        prod.save(flush: true)
+
+        render("Publicación Existosa del anuncio: <br><strong>${prod.titulo}</strong><br>" +
+                "Con ${dtpbimag} imágenes y ${dtpbvlor} atributos")
+//        render("Publicación Existosa del anuncio: <br><strong>${prod.titulo}</strong><br>" +
+//                "Con 4 imágenes y 4 atributos")
+    }
+
+    def revisarProd_ajax() {
+        def producto = Producto.get(params.id)
+        def imag = Imagen.countByProductoAndPrincipal(producto, 1)
+        println "revisarProd_ajax: $params, --> ${producto?.id} --> imag: $imag"
+        render "${imag > 0 ? 'ok' : 'no' }"
+    }
+
 }

@@ -4,6 +4,7 @@ class Atributo {
 
     Producto producto
     String descripcion
+    String valor
     Integer orden
 
     static mapping = {
@@ -20,7 +21,8 @@ class Atributo {
     }
     static constraints = {
         producto(blank:false, nullable: false)
-        descripcion(size: 0..63, blank: false, nullable: false, attributes: [title: 'descripcion'])
+        descripcion(size: 0..127, blank: false, nullable: false, attributes: [title: 'descripcion'])
+        valor(size: 0..255, blank: false, nullable: false, attributes: [title: 'valor'])
         orden(blank: true, nullable: true)
     }
 }

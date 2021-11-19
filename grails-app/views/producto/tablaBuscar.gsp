@@ -35,7 +35,7 @@ th, td {
                 <g:set var="clase" value="${'aprobado'}"/>
             </g:if>
 
-            <tr id="${dato.prod__id}" class="${clase}" title="Haga clic derecho y seleccione una opción">
+            <tr id="${dato.prod__id}" data-etdo="${dato.prodetdo}" class="${clase}" title="Haga clic derecho y seleccione una opción">
                 <td style="width: 10%">
                     <img class="img-fluid imag-item" alt="First slide" style="max-width: 100px"
                          src="${request.contextPath}/principal/getImgnProd?id=${dato.prod__id}&tp=P"/>

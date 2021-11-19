@@ -202,6 +202,7 @@
 
     function createContextMenu(node) {
         var $tr = $(node);
+        var etdo = $tr.data("etdo");
         var items = {
             header: {
                 label: "Acciones",
@@ -222,14 +223,14 @@
             }
         };
 
-        var aprobar = {
-            label: "Aprobar",
+        var publicar = {
+            label: "Publicar",
             icon: "fa fa-check",
             separator_before : true,
             action : function ($element) {
-                var id = $element.data("id");
-                console.log('pago--id', id)
-                verPago(id);
+                var id = $element.attr("id");
+                console.log('prod__id', id)
+                verProducto(id);
             }
         };
 
@@ -246,7 +247,7 @@
 
         // items.administrar = administrar;
         items.editar = editar;
-        if("{data.prod__id}") items.aprobara = aprobar;
+        if(etdo == 'N') items.publicar = publicar;
 
         return items
     }
@@ -319,37 +320,40 @@
         $("#buscador_con").change();
     });
 
-    function verPago(id){
+    /* id: prod__id*/
+    function verProducto(id){
         $.ajax({
             type    : "POST",
-            url     : "${createLink(controller: 'anuncio', action:'revisarPago_ajax')}",
+            url     : "${createLink(controller: 'producto', action:'revisarProd_ajax')}",
             data    : {
                 id: id
             },
-            success : function (msg) {
-                var b = bootbox.dialog({
-                    id      : "dlgRevisaPago",
-                    title   : "Ver constancia de Pago y Aprobaciónde anuncio",
-                    message : msg,
-                    // class : "modal-lg",
-                    buttons : {
-                        cancelar : {
-                            label     : "Cancelar",
-                            className : "btn-primary",
-                            callback  : function () {
-                            }
+            success: function (msg){
+                if(msg == 'ok'){
+                    $.ajax({
+                        type    : "POST",
+                        url     : '${createLink(action:'publicar_ajax')}',
+                        data    : {
+                            id: id
                         },
-                        Aceptar : {
-                            id        : "btnSave",
-                            label     : "<i class='fa fa-save'></i> Aceptar el Anuncio",
-                            className : "btn-success",
-                            callback  : function () {
-                                return aceptarAnuncio(id);
-                            } //callback
-                        } //guardar
-                    } //buttons
-                }); //dialog
-            } //success
+                        success : function (msg) {
+                            if (msg) {
+                                log(msg,"success");
+                                setTimeout(function () {
+                                    // location.reload();
+                                    $("#btnBusqueda").click();
+                                }, 1000);
+                            } else {
+                                log("Error al guardar el producto","error");
+                            }
+                        }
+                    });
+                }else{
+                    bootbox.alert("<i class='fa fa-times fa-3x pull-left text-warning text-shadow'>" +
+                        "</i><span style='font-size: 14px; font-weight: bold'>" +
+                        "&nbsp;Faltan imágenes del producto</span>")
+                }
+            }
         }); //ajax
     };
 
