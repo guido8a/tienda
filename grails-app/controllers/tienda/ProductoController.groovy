@@ -192,9 +192,9 @@ class ProductoController {
         // si  existió una publicación OBSR: 'Producto modificado
 
         sql = "insert into publ(prod__id, prsn__id, grpo__id, publfcha, publdstc, " +
-                "publnuvo, publtitl, publsbtl, publtxto, publetdo, publobsr) select " +
+                "publnuvo, publtitl, publsbtl, publtxto, publetdo, publobsr, publpcun, publpcmy) select " +
                 "${params.id}, ${prsn}, ${prod.grupo.id}, '${fcha}', prod.proddstc, " +
-                "prod.prodnuvo, prodtitl, prodsbtl, prodtxto, 'A'"
+                "prod.prodnuvo, prodtitl, prodsbtl, prodtxto, 'A', prodpcun, prodpcmy "
         if(publfcha) {
             sql += ",'Publicado anteriormente el ${publfcha.format('yyyy-MM-dd HH:mm:ss')}' " +
                     "from prod where prod__id = ${params.id} returning publ__id"

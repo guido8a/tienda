@@ -440,13 +440,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="resp-tabs-container">
 %{--                    Últimos diseños--}%
                     <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
+                        <g:each in="${productos}" var="prod" status="i">
+
                         <div class="col-md-3 product-men">
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <div class="men-thumb-item">
                                     <img alt="" class="pro-image-front"
-                                         src="${request.contextPath}/principal/getImgnProd?ruta=a1.png&tp=v&id=0"/>
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=${prod.rt}&tp=P&id=${prod.p}"/>
                                     <img alt="" class="pro-image-back"
-                                         src="${request.contextPath}/principal/getImgnProd?ruta=a1.png&tp=v&id=0"/>
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=${prod.rt}&tp=P&id=${prod.p}"/>
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
                                             <a href="${createLink(controller: 'ver', action: 'producto',  params: [prod: 1])}" class="link-product-add-cart">Ver</a>
@@ -456,15 +458,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                                 </div>
                                 <div class="item-info-product ">
-                                    <h4><a href="single.html">Air Tshirt Black</a></h4>
+                                    <h4><a href="single.html">${prod.tt}</a></h4>
                                     <div class="info-product-price">
-                                        <span class="item_price">$45.99</span>
-                                        <del>$69.71</del>
+                                        <span class="item_price">$${prod.pc}</span><del>$${prod.pc*1.5}</del>
                                     </div>
                                     <a href="#" class="item_add single-item hvr-outline-out button2">Añadir al carrito</a>
                                 </div>
                             </div>
                         </div>
+                        </g:each>
 %{--
                         <div class="col-md-3 product-men">
                             <div class="men-pro-item simpleCart_shelfItem">

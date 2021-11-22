@@ -14,8 +14,8 @@ class Publicacion {
     String titulo
     String subtitulo
     String texto
-//    double latitud
-//    double longitud
+    Double precioUnidad = 0
+    Double precioMayor = 0
     String estado
     String observaciones
 
@@ -37,8 +37,8 @@ class Publicacion {
             subtitulo column: 'publsbtl'
             texto column: 'publtxto'
             estado column: 'publetdo'
-//            longitud column: 'publlong'
-//            latitud column: 'publlatt'
+            precioUnidad column: 'publpcun'
+            precioMayor column: 'publpcmy'
             observaciones column: 'publobsr'
         }
     }

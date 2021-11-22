@@ -11,12 +11,11 @@ class Producto {
     String texto
     String estado
     Date fecha
-//    String sitio
-//    double latitud
-//    double longitud
     Date fechaModificacion
     String destacado
     String nuevo
+    Double precioUnidad = 0
+    Double precioMayor = 0
 
     static mapping = {
         table 'prod'
@@ -32,12 +31,11 @@ class Producto {
             texto column: 'prodtxto'
             estado column: 'prodetdo'
             fecha column: 'prodfcha'
-//            sitio column: 'prodsito'
-//            longitud column: 'prodlong'
-//            latitud column: 'prodlatt'
             fechaModificacion column: 'prodfcmd'
             destacado column: 'proddstc'
             nuevo column: 'prodnuvo'
+            precioUnidad column: 'prodpcun'
+            precioMayor column: 'prodpcmy'
         }
     }
     static constraints = {
