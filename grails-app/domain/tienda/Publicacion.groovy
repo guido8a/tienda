@@ -53,6 +53,8 @@ class Publicacion {
         fecha(blank: false, nullable: false, attributes: [title: 'fecha creacion'])
         fechaInicio(blank: true, nullable: true, attributes: [title: 'fecha inicio'])
         fechaFin(blank: true, nullable: true, attributes: [title: 'fecha fin'])
+        precioUnidad(blank: true, nullable: true, attributes: [title: 'unidad'])
+        precioMayor(blank: true, nullable: true, attributes: [title: 'mayor'])
 //        latitud(blank: false, nullable: false, attributes: [title: 'latitud'])
 //        longitud(blank: false, nullable: false, attributes: [title: 'longitud'])
         observaciones(size: 0..255, blank: false, nullable: false, attributes: [title: 'longitud'])

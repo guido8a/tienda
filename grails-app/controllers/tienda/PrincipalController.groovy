@@ -71,7 +71,15 @@ class PrincipalController {
         println "carrusel ${productos.rt}"
         println "session ${session.cliente}  grpo: ${params.grpo}"
 
-        [ctgr: ctgr, productos: productos, grpo: params.grpo]
+
+        def cliente = null
+
+        if(session.cliente){
+            cliente = Cliente.get(session.cliente.id)
+        }
+
+
+        [ctgr: ctgr, productos: productos, grpo: params.grpo, cliente: cliente]
     }
 
 
@@ -122,7 +130,9 @@ class PrincipalController {
 //        def path = (params.tp == 'p'? "/var/ventas/productos/pro_${producto.id}/" : "/var/ventas/imagen/destacados/") + params.ruta
         def path
         if(params.tp == 'P') {
-            path = "/var/tienda/imagenes/productos/pro_${params.id}/${params.ruta}"
+//            path = "/var/tienda/imagenes/productos/pro_${params.id}/${params.ruta}"
+            def imagenPrincipal = Imagen.findByProductoAndPrincipal(producto, '1')
+            path = "/var/tienda/imagenes/productos/pro_${params.id}/${imagenPrincipal?.ruta}"
         }
         if(params.tp == 'v') path = "/var/tienda/imagenes/images/" + params.ruta
         def fileext = path.substring(path.indexOf(".")+1, path.length())

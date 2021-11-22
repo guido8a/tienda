@@ -41,9 +41,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <div class="header">
 	<div class="container">
 		<ul>
-			<li><span class="glyphicon glyphicon-time" aria-hidden="true"></span>Entrega inmediata gratis</li>
+			<li><span class="glyphicon glyphicon-time" aria-hidden="true"></span>Envios a nivel nacional</li>
+			%{--            <li><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Entrega gratuita de su orden</li>--}%
 			<li><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><a href="mailto:info@example.com">Contáctenos</a></li>
-			<li><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span><a href="#" class="use1" data-toggle="modal" data-target="#myModal4"><span>Login</span></a></li>
+			<g:if test="${session.cliente}">
+				<li><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span><a href="#" class="use1" ><span>Cerrar sesión ${cliente?.nombre}</span></a></li>
+			</g:if>
+			<g:else>
+				<li><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span><a href="#" class="use1" data-toggle="modal" data-target="#myModal4"><span>Cliente</span></a></li>
+			</g:else>
+
 			<li><a href="${createLink(controller: 'login', action: 'login')}"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>Admin</a></li>
 		</ul>
 	</div>
@@ -71,117 +78,155 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<th>Precio</th>
 				</tr>
 				</thead>
-				<tr class="rem1">
-					<td class="invert-closeb">
-						<div class="rem">
-							<div class="close1"> </div>
-						</div>
-						<script>$(document).ready(function(c) {
-							$('.close1').on('click', function(c){
-								$('.rem1').fadeOut('slow', function(c){
-									$('.rem1').remove();
-								});
-							});
-						});
-						</script>
-					</td>
-					<td class="invert-image"><a href="single.html"><img src="images/w4.png" alt=" " class="img-responsive" /></a></td>
-					<td class="invert">
-						<div class="quantity">
-							<div class="quantity-select">
-								<div class="entry value-minus">&nbsp;</div>
-								<div class="entry value"><span>1</span></div>
-								<div class="entry value-plus active">&nbsp;</div>
-							</div>
-						</div>
-					</td>
-					<td class="invert">Hand Bag</td>
-					<td class="invert">$45.99</td>
-				</tr>
-				<tr class="rem2">
-					<td class="invert-closeb">
-						<div class="rem">
-							<div class="close2"> </div>
-						</div>
-						<script>$(document).ready(function(c) {
-							$('.close2').on('click', function(c){
-								$('.rem2').fadeOut('slow', function(c){
-									$('.rem2').remove();
-								});
-							});
-						});
-						</script>
-					</td>
-					<td class="invert-image"><a href="single.html"><img src="images/ep3.png" alt=" " class="img-responsive" /></a></td>
-					<td class="invert">
-						<div class="quantity">
-							<div class="quantity-select">
-								<div class="entry value-minus">&nbsp;</div>
-								<div class="entry value"><span>1</span></div>
-								<div class="entry value-plus active">&nbsp;</div>
-							</div>
-						</div>
-					</td>
-					<td class="invert">Watches</td>
-					<td class="invert">$45.99</td>
 
-				</tr>
-				<tr class="rem3">
-					<td class="invert-closeb">
-						<div class="rem">
-							<div class="close3"> </div>
-						</div>
-						<script>$(document).ready(function(c) {
-							$('.close3').on('click', function(c){
-								$('.rem3').fadeOut('slow', function(c){
-									$('.rem3').remove();
+				<g:each in="${productos}" var="detalle">
+					<tr class="rem1">
+						<td class="invert-closeb">
+							<div class="rem">
+								<div class="close1"> </div>
+							</div>
+							<script>$(document).ready(function(c) {
+								$('.close1').on('click', function(c){
+									$('.rem1').fadeOut('slow', function(c){
+										$('.rem1').remove();
+									});
 								});
 							});
-						});
-						</script>
-					</td>
-					<td class="invert-image"><a href="single.html"><img src="images/w2.png" alt=" " class="img-responsive" /></a></td>
-					<td class="invert">
-						<div class="quantity">
-							<div class="quantity-select">
-								<div class="entry value-minus">&nbsp;</div>
-								<div class="entry value"><span>1</span></div>
-								<div class="entry value-plus active">&nbsp;</div>
+							</script>
+						</td>
+						<td class="invert-image">
+							<a href="#">
+								<img alt="Sin Imagen" style="width: 100px; height: 100px" class="pro-image-front"
+									 src="${request.contextPath}/principal/getImgnProd?ruta=${tienda.Imagen.findByProductoAndPrincipal(detalle.publicacion.producto, '1').ruta}&tp=P&id=${detalle?.publicacion?.producto?.id}"/>
+							</a>
+						</td>
+						<td class="invert">
+							<div class="quantity">
+								<div class="quantity-select">
+									<div class="entry value-minus">&nbsp;</div>
+									<div class="entry value"><span>1</span></div>
+									<div class="entry value-plus active">&nbsp;</div>
+								</div>
 							</div>
-						</div>
-					</td>
-					<td class="invert">Sandals</td>
-					<td class="invert">$45.99</td>
+						</td>
+						<td class="invert">${detalle?.publicacion?.producto?.titulo}</td>
+						<td class="invert">${detalle?.subtotal}</td>
+					</tr>
+				</g:each>
 
-				</tr>
-				<tr class="rem4">
-					<td class="invert-closeb">
-						<div class="rem">
-							<div class="close4"> </div>
-						</div>
-						<script>$(document).ready(function(c) {
-							$('.close4').on('click', function(c){
-								$('.rem4').fadeOut('slow', function(c){
-									$('.rem4').remove();
-								});
-							});
-						});
-						</script>
-					</td>
-					<td class="invert-image"><a href="single.html"><img src="images/w1.png" alt=" " class="img-responsive" /></a></td>
-					<td class="invert">
-						<div class="quantity">
-							<div class="quantity-select">
-								<div class="entry value-minus">&nbsp;</div>
-								<div class="entry value"><span>1</span></div>
-								<div class="entry value-plus active">&nbsp;</div>
-							</div>
-						</div>
-					</td>
-					<td class="invert">Wedges</td>
-					<td class="invert">$45.99</td>
 
-				</tr>
+
+%{--				<tr class="rem1">--}%
+%{--					<td class="invert-closeb">--}%
+%{--						<div class="rem">--}%
+%{--							<div class="close1"> </div>--}%
+%{--						</div>--}%
+%{--						<script>$(document).ready(function(c) {--}%
+%{--							$('.close1').on('click', function(c){--}%
+%{--								$('.rem1').fadeOut('slow', function(c){--}%
+%{--									$('.rem1').remove();--}%
+%{--								});--}%
+%{--							});--}%
+%{--						});--}%
+%{--						</script>--}%
+%{--					</td>--}%
+%{--					<td class="invert-image"><a href="single.html"><img src="images/w4.png" alt=" " class="img-responsive" /></a></td>--}%
+%{--					<td class="invert">--}%
+%{--						<div class="quantity">--}%
+%{--							<div class="quantity-select">--}%
+%{--								<div class="entry value-minus">&nbsp;</div>--}%
+%{--								<div class="entry value"><span>1</span></div>--}%
+%{--								<div class="entry value-plus active">&nbsp;</div>--}%
+%{--							</div>--}%
+%{--						</div>--}%
+%{--					</td>--}%
+%{--					<td class="invert">Hand Bag</td>--}%
+%{--					<td class="invert">$45.99</td>--}%
+%{--				</tr>--}%
+%{--				<tr class="rem2">--}%
+%{--					<td class="invert-closeb">--}%
+%{--						<div class="rem">--}%
+%{--							<div class="close2"> </div>--}%
+%{--						</div>--}%
+%{--						<script>$(document).ready(function(c) {--}%
+%{--							$('.close2').on('click', function(c){--}%
+%{--								$('.rem2').fadeOut('slow', function(c){--}%
+%{--									$('.rem2').remove();--}%
+%{--								});--}%
+%{--							});--}%
+%{--						});--}%
+%{--						</script>--}%
+%{--					</td>--}%
+%{--					<td class="invert-image"><a href="single.html"><img src="images/ep3.png" alt=" " class="img-responsive" /></a></td>--}%
+%{--					<td class="invert">--}%
+%{--						<div class="quantity">--}%
+%{--							<div class="quantity-select">--}%
+%{--								<div class="entry value-minus">&nbsp;</div>--}%
+%{--								<div class="entry value"><span>1</span></div>--}%
+%{--								<div class="entry value-plus active">&nbsp;</div>--}%
+%{--							</div>--}%
+%{--						</div>--}%
+%{--					</td>--}%
+%{--					<td class="invert">Watches</td>--}%
+%{--					<td class="invert">$45.99</td>--}%
+
+%{--				</tr>--}%
+%{--				<tr class="rem3">--}%
+%{--					<td class="invert-closeb">--}%
+%{--						<div class="rem">--}%
+%{--							<div class="close3"> </div>--}%
+%{--						</div>--}%
+%{--						<script>$(document).ready(function(c) {--}%
+%{--							$('.close3').on('click', function(c){--}%
+%{--								$('.rem3').fadeOut('slow', function(c){--}%
+%{--									$('.rem3').remove();--}%
+%{--								});--}%
+%{--							});--}%
+%{--						});--}%
+%{--						</script>--}%
+%{--					</td>--}%
+%{--					<td class="invert-image"><a href="single.html"><img src="images/w2.png" alt=" " class="img-responsive" /></a></td>--}%
+%{--					<td class="invert">--}%
+%{--						<div class="quantity">--}%
+%{--							<div class="quantity-select">--}%
+%{--								<div class="entry value-minus">&nbsp;</div>--}%
+%{--								<div class="entry value"><span>1</span></div>--}%
+%{--								<div class="entry value-plus active">&nbsp;</div>--}%
+%{--							</div>--}%
+%{--						</div>--}%
+%{--					</td>--}%
+%{--					<td class="invert">Sandals</td>--}%
+%{--					<td class="invert">$45.99</td>--}%
+
+%{--				</tr>--}%
+%{--				<tr class="rem4">--}%
+%{--					<td class="invert-closeb">--}%
+%{--						<div class="rem">--}%
+%{--							<div class="close4"> </div>--}%
+%{--						</div>--}%
+%{--						<script>$(document).ready(function(c) {--}%
+%{--							$('.close4').on('click', function(c){--}%
+%{--								$('.rem4').fadeOut('slow', function(c){--}%
+%{--									$('.rem4').remove();--}%
+%{--								});--}%
+%{--							});--}%
+%{--						});--}%
+%{--						</script>--}%
+%{--					</td>--}%
+%{--					<td class="invert-image"><a href="single.html"><img src="images/w1.png" alt=" " class="img-responsive" /></a></td>--}%
+%{--					<td class="invert">--}%
+%{--						<div class="quantity">--}%
+%{--							<div class="quantity-select">--}%
+%{--								<div class="entry value-minus">&nbsp;</div>--}%
+%{--								<div class="entry value"><span>1</span></div>--}%
+%{--								<div class="entry value-plus active">&nbsp;</div>--}%
+%{--							</div>--}%
+%{--						</div>--}%
+%{--					</td>--}%
+%{--					<td class="invert">Wedges</td>--}%
+%{--					<td class="invert">$45.99</td>--}%
+
+%{--				</tr>--}%
 
 				<!--quantity-->
 				<script>

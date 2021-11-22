@@ -27,7 +27,7 @@ th, td {
 
 </style>
 
-<div class="" style="width: 99.7%;height: ${msg == '' ? 600 : 575}px; overflow-y: auto;float: right; margin-top: -20px">
+<div class="" style="width: 100%;height: ${msg == '' ? 600 : 575}px; overflow-y: auto;float: right; margin-top: -20px">
     <table class="table-bordered table-condensed table-hover" width="1060px">
         <g:each in="${data}" var="dato" status="z">
             <g:set var="clase" value="${''}"/>
@@ -37,7 +37,7 @@ th, td {
 
             <tr id="${dato.prod__id}" data-etdo="${dato.prodetdo}" class="${clase}" title="Haga clic derecho y seleccione una opción">
                 <td style="width: 10%">
-                    <img class="img-fluid imag-item" alt="First slide" style="max-width: 100px"
+                    <img class="img-fluid imag-item" alt="Sin imagen" style="max-width: 100px"
                          src="${request.contextPath}/principal/getImgnProd?id=${dato.prod__id}&tp=P"/>
                 </td>
 
@@ -49,11 +49,11 @@ th, td {
                     ${dato?.prodsbtl}
                 </td>
 
-                <td width="20%">
+                <td width="18%">
                     ${dato?.grpodscr}
                 </td>
-                <td width="5%">
-                    ${dato.prodetdo}
+                <td width="6%">
+                    ${dato.prodetdo == 'P' ? 'Publicado' : (dato.prodetdo == 'A' ? 'Activo' : 'Inactivo')}
                 </td>
 
             </tr>

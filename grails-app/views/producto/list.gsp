@@ -103,8 +103,8 @@
             <th class="alinear" style="width: 10%">Imagen</th>
             <th class="alinear" style="width: 25%">Nombre</th>
             <th class="alinear" style="width: 40%">Título</th>
-            <th class="alinear" style="width: 20%">Grupo</th>
-            <th class="alinear" style="width: 5%">Estado</th>
+            <th class="alinear" style="width: 18%">Grupo</th>
+            <th class="alinear" style="width: 7%">Estado</th>
         </tr>
         </thead>
     </table>
@@ -229,7 +229,7 @@
             separator_before : true,
             action : function ($element) {
                 var id = $element.attr("id");
-                console.log('prod__id', id)
+                // console.log('prod__id', id)
                 verProducto(id);
             }
         };

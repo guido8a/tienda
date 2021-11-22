@@ -21,6 +21,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <asset:stylesheet src="/apli/bootstrap.css"/>
     <asset:stylesheet src="/apli/pignose.layerslider.css"/>
     <asset:stylesheet src="/apli/style.css"/>
+    <asset:stylesheet src="/fonts/fontawesome-webfont.woff"/>
 
     <asset:javascript src="/apli/jquery-2.1.4.min.js"/>
     <asset:javascript src="/apli/simpleCart.min.js"/>
@@ -31,6 +32,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <asset:javascript src="/jquery-validation-1.11.1/localization/messages_es.js"/>
     <asset:javascript src="/apli/functions.js"/>
     <asset:javascript src="/apli/bootbox.js"/>
+    <asset:javascript src="/apli/fontawesome.all.min.js"/>
 
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
     function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -203,7 +205,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </div>
             </nav>
         </div>
-        <g:if test="${cliente}">
+%{--        <g:if test="${cliente}">--}%
             <div class="top_nav_right">
                 <div class="cart box_1">
                     <a href="${createLink(controller: 'carrito', action: 'carrito')}">
@@ -216,7 +218,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <p><a href="${createLink(controller: 'carrito', action: 'carrito')}" id="btnCarrito" class="simpleCart_empty">Empty Cart</a></p>
                 </div>
             </div>
-        </g:if>
+%{--        </g:if>--}%
         <div class="clearfix"></div>
     </div>
 </div>
@@ -462,7 +464,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <div class="info-product-price">
                                         <span class="item_price">$${prod.pc}</span><del>$${prod.pc*1.5}</del>
                                     </div>
-                                    <a href="#" class="item_add single-item hvr-outline-out button2">Añadir al carrito</a>
+                                    <a href="#" class="item_add single-item hvr-outline-out button2" data-id="${prod.id}">Añadir al carrito</a>
                                 </div>
                             </div>
                         </div>
@@ -1267,6 +1269,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <script type="text/javascript">
 
+    $(".item_add").click(function () {
+        var prod = $(this).data("id");
+            $.ajax({
+               type: 'POST',
+               url: '${createLink(controller: 'carrito', action: 'agregarProducto_ajax')}',
+               data:{
+                    id: prod
+               },
+               success: function(msg){
+                   var parts = msg.split("_")
+                   if(parts[0] == 'ok'){
+                       bootbox.alert("<i class='fa fa-check text-success fa-2x'></i> Producto agregado correctamente")
+                   }else{
+                       if(parts[0] == 'er'){
+                           bootbox.alert("<i class='fa fa-exclamation-triangle text-danger fa-2x'></i> " + parts[1])
+                       }else{
+                           bootbox.alert("<i class='fa fa-exclamation-triangle text-danger fa-2x'></i> Error al agregar el producto")
+                       }
+                   }
+               }
+            });
+    });
 
     $("#btnIngresar").click(function () {
         ingresoCliente();

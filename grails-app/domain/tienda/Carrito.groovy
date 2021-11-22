@@ -7,6 +7,7 @@ class Carrito {
     int cantidad
     Double subtotal
     int ticket
+    String estado
 
     static mapping = {
         table 'crro'
@@ -20,6 +21,7 @@ class Carrito {
             cantidad column: 'crrocntd'
             subtotal column: 'crrosbtt'
             ticket column: 'crrotikt'
+            estado column: 'crroetdo'
         }
     }
     static constraints = {
@@ -28,5 +30,6 @@ class Carrito {
         cantidad(blank:false, nullable: false)
         subtotal(blank:false, nullable: false)
         ticket(blank:true, nullable: true)
+        estado(size: 0..1, blank:true, nullable: true)
     }
 }

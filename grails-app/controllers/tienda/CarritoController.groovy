@@ -4,6 +4,83 @@ package tienda
 class CarritoController {
 
     def carrito(){
+        def cliente = null
+        def productos
+        def carrito
 
+        if(session.cliente){
+            cliente = Cliente.get(session.cliente.id)
+            carrito = Carrito.findByClienteAndEstado(cliente, 'A')
+            productos = DetalleCarrito.findAllByCarrito(carrito)
+            return[cliente: cliente, productos: productos]
+        }else{
+            redirect(controller: 'principal', action: 'index')
+        }
+    }
+
+    def agregarProducto_ajax(){
+        println("params " + params)
+        println("---> " + session.cliente)
+
+        def publicacion = Publicacion.get(params.id)
+        def cliente
+        def carrito
+        def existente
+        def detalle
+
+        if(session.cliente){
+            cliente = Cliente.get(session.cliente.id)
+            carrito = Carrito.findByClienteAndEstado(cliente, 'A')
+
+            if(carrito){
+                existente = DetalleCarrito.findAllByCarritoAndPublicacion(carrito, publicacion)
+
+                if(existente){
+                    render "er_El producto seleccionado ya se encuentra en su carrito de compras"
+                }else{
+                    detalle = new DetalleCarrito()
+                    detalle.carrito = carrito
+                    detalle.publicacion = publicacion
+                    detalle.cantidad = 1
+                    detalle.subtotal = publicacion.producto.precioUnidad.toDouble()
+
+                    if(!detalle.save(flush:true)){
+                        println("error al agregar el producto del carrito " + detalle.errors)
+                        render "no"
+                    }else{
+                        render "ok"
+                    }
+                }
+
+            }else{
+                carrito = new Carrito()
+                carrito.cliente = cliente
+                carrito.cantidad = 0
+                carrito.subtotal = 0
+                carrito.estado = 'A'
+
+
+                if(!carrito.save(flush:true)){
+                    println("error al crear el carrito " + carrito.errors)
+                    render "no"
+                }else{
+
+                    detalle = new DetalleCarrito()
+                    detalle.carrito = carrito
+                    detalle.publicacion = publicacion
+                    detalle.cantidad = 1
+                    detalle.subtotal = publicacion.producto.precioUnidad.toDouble()
+
+                    if(!detalle.save(flush:true)){
+                        println("error al agregar el producto del carrito " + detalle.errors)
+                        render "no"
+                    }else{
+                        render "ok"
+                    }
+                }
+            }
+        }else{
+            render "er_Primero debe ingresar en el sistema para poder agregar productos a su carrito de compras"
+        }
     }
 }
