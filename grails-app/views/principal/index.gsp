@@ -55,7 +55,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <li><span class="glyphicon glyphicon-time" aria-hidden="true"></span>Envios a nivel nacional</li>
             %{--            <li><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Entrega gratuita de su orden</li>--}%
             <li><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><a href="mailto:info@example.com">Contáctenos</a></li>
-            <g:if test="${cliente}">
+            <g:if test="${session.cliente}">
                 <li><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span><a href="#" class="use1" ><span>Cerrar sesión ${cliente?.nombre}</span></a></li>
             </g:if>
             <g:else>
@@ -83,7 +83,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="section_room">
                     <select id="categoría" class="frm-field required" style="color: #4F1B00; border-bottom-style: solid; border-color: #AF5B00; font-size: 12pt">
                         <g:each in="${ctgr}" var="tp">
-                            <option value="${tp.id}" data-dscr="${tp.descripcion}" ${tp.id == grpo? 'selected' : ''}>
+                            <option value="${tp.id}" data-dscr="${tp.descripcion}" ${tp.id == grpo? 'selected=\"selected\"' : ''}>
                                 ${tp.descripcion}</option>
                         </g:each>
                     </select>
@@ -434,8 +434,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <li class="resp-tab-item" aria-controls="tab_item-0" role="tab"><span>Últimos diseños</span></li>
                     <li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span>Ofertas especiales</span></li>
                     <li class="resp-tab-item" aria-controls="tab_item-2" role="tab"><span>Coleciones</span></li>
+                    <li class="resp-tab-item" aria-controls="tab_item-3" role="tab"><span>Coleciones2</span></li>
                 </ul>
+
                 <div class="resp-tabs-container">
+%{--                    Últimos diseños--}%
                     <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
                         <div class="col-md-3 product-men">
                             <div class="men-pro-item simpleCart_shelfItem">
@@ -462,6 +465,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 </div>
                             </div>
                         </div>
+%{--
                         <div class="col-md-3 product-men">
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <div class="men-thumb-item">
@@ -537,6 +541,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 </div>
                             </div>
                         </div>
+--}%
+
+
+%{--                        continua la sección 1--}%
                         <div class="col-md-3 product-men yes-marg">
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <div class="men-thumb-item">

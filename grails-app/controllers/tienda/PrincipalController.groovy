@@ -17,12 +17,13 @@ class PrincipalController {
             grupo = Grupo.get(params.grpo)
             producto = Producto.findAllByGrupo(grupo)
         } else {
+            params.grpo = 1
             producto = Producto.list([sort: 'fecha', order:'desc'])
         }
 
-        println("session " + session.cliente)
+        println "session ${session.cliente}  grpo: ${params.grpo}"
 
-        [ctgr: ctgr, producto: producto, grpo: params.grpo, cliente: session.cliente]
+        [ctgr: ctgr, producto: producto, grpo: params.grpo]
     }
 
 
