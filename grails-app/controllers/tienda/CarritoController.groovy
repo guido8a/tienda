@@ -58,7 +58,7 @@ class CarritoController {
                 carrito.cantidad = 0
                 carrito.subtotal = 0
                 carrito.estado = 'A'
-
+                carrito.fecha = new Date()
 
                 if(!carrito.save(flush:true)){
                     println("error al crear el carrito " + carrito.errors)
@@ -109,8 +109,8 @@ class CarritoController {
     def guardarCantidad_ajax(){
         def detalle = DetalleCarrito.get(params.id)
         detalle.cantidad = params.cantidad.toInteger()
-        def valor = g.formatNumber(number: (params.cantidad.toInteger() * detalle.publicacion.precioUnidad), format: "##,##0", maxFractionDigits: 2, minFractionDigits: 2)
-        detalle.subtotal = valor.toDouble()
+//        def valor = g.formatNumber(number: (params.cantidad.toInteger() * detalle.publicacion.precioUnidad), format: "##,##0", maxFractionDigits: 2, minFractionDigits: 2)
+        detalle.subtotal = Math.round(((params.cantidad.toInteger() * detalle.publicacion.precioUnidad)*100)/100)
 
         if(!detalle.save(flush:true)){
             println("error al modificar la cantidad " + detalle.errors)
