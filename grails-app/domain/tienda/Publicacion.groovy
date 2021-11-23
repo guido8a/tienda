@@ -57,7 +57,7 @@ class Publicacion {
         precioMayor(blank: true, nullable: true, attributes: [title: 'mayor'])
 //        latitud(blank: false, nullable: false, attributes: [title: 'latitud'])
 //        longitud(blank: false, nullable: false, attributes: [title: 'longitud'])
-        observaciones(size: 0..255, blank: false, nullable: false, attributes: [title: 'longitud'])
+        observaciones(size: 0..255, blank: true, nullable: true, attributes: [title: 'longitud'])
 
     }
 }
