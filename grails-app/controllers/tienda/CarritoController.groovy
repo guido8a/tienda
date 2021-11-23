@@ -11,7 +11,7 @@ class CarritoController {
         if(session.cliente){
             cliente = Cliente.get(session.cliente.id)
             carrito = Carrito.findByClienteAndEstado(cliente, 'A')
-            productos = DetalleCarrito.findAllByCarrito(carrito)
+            productos = DetalleCarrito.findAllByCarrito(carrito).sort{it.publicacion.producto.titulo}
             return[cliente: cliente, productos: productos]
         }else{
             redirect(controller: 'principal', action: 'index')
@@ -81,6 +81,42 @@ class CarritoController {
             }
         }else{
             render "er_Primero debe ingresar en el sistema para poder agregar productos a su carrito de compras"
+        }
+    }
+
+
+    def borrarDetalle_ajax(){
+        println("params " + params)
+
+        def detalle = DetalleCarrito.get(params.id)
+
+        try{
+            detalle.delete(flush:true)
+            render "ok"
+        }catch(e){
+            println("error al borrar el detalle " + detalle.errors)
+            render "no"
+        }
+    }
+
+    def totales_ajax(){
+        def cliente = Cliente.get(session.cliente.id)
+        def carrito = Carrito.findByClienteAndEstado(cliente, 'A')
+        def productos = DetalleCarrito.findAllByCarrito(carrito).sort{it.publicacion.producto.titulo}
+        return[cliente: cliente, productos: productos]
+    }
+
+    def guardarCantidad_ajax(){
+        def detalle = DetalleCarrito.get(params.id)
+        detalle.cantidad = params.cantidad.toInteger()
+        def valor = g.formatNumber(number: (params.cantidad.toInteger() * detalle.publicacion.precioUnidad), format: "##,##0", maxFractionDigits: 2, minFractionDigits: 2)
+        detalle.subtotal = valor.toDouble()
+
+        if(!detalle.save(flush:true)){
+            println("error al modificar la cantidad " + detalle.errors)
+            render "no"
+        }else{
+            render "ok"
         }
     }
 }

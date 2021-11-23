@@ -21,6 +21,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<asset:stylesheet src="/apli/bootstrap.css"/>
 	<asset:stylesheet src="/apli/pignose.layerslider.css"/>
 	<asset:stylesheet src="/apli/style.css"/>
+	<asset:stylesheet src="/fonts/fontawesome-webfont.woff"/>
 
 	<asset:javascript src="/apli/jquery-2.1.4.min.js"/>
 	<asset:javascript src="/apli/simpleCart.min.js"/>
@@ -31,6 +32,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<asset:javascript src="/jquery-validation-1.11.1/localization/messages_es.js"/>
 	<asset:javascript src="/apli/functions.js"/>
 	<asset:javascript src="/apli/bootbox.js"/>
+	<asset:javascript src="/apli/fontawesome.all.min.js"/>
 	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 	function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
@@ -71,28 +73,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<table class="timetable_sub">
 				<thead>
 				<tr>
-					<th>Quitar</th>
-					<th>Imagen</th>
-					<th>Cantidad</th>
-					<th>Nombre del Producto</th>
-					<th>Precio</th>
+					<th style="width: 15%">Quitar</th>
+					<th style="width: 20%">Imagen</th>
+					<th style="width: 17%">Cantidad</th>
+					<th style="width: 38%">Producto</th>
+					<th style="width: 10%">Precio</th>
 				</tr>
 				</thead>
 
 				<g:each in="${productos}" var="detalle">
-					<tr class="rem1">
+					<tr class="rem_${detalle?.id}">
 						<td class="invert-closeb">
 							<div class="rem">
-								<div class="close1"> </div>
+								<div class="close1" data-cl="rem_${detalle?.id}" data-id="${detalle?.id}"> </div>
 							</div>
-							<script>$(document).ready(function(c) {
-								$('.close1').on('click', function(c){
-									$('.rem1').fadeOut('slow', function(c){
-										$('.rem1').remove();
-									});
-								});
-							});
-							</script>
+							%{--							<script>$(document).ready(function(c) {--}%
+							%{--								$('.close1').on('click', function(c){--}%
+							%{--									$('.rem1').fadeOut('slow', function(c){--}%
+							%{--										$('.rem1').remove();--}%
+							%{--									});--}%
+							%{--								});--}%
+							%{--							});--}%
+							%{--							</script>--}%
 						</td>
 						<td class="invert-image">
 							<a href="#">
@@ -103,160 +105,52 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<td class="invert">
 							<div class="quantity">
 								<div class="quantity-select">
-									<div class="entry value-minus">&nbsp;</div>
-									<div class="entry value"><span>1</span></div>
-									<div class="entry value-plus active">&nbsp;</div>
+									<div class="entry value-minus" data-id="${detalle?.id}">&nbsp;</div>
+									<div class="entry value v_${detalle?.id}"><span>${detalle?.cantidad}</span></div>
+									<div class="entry value-plus active" data-id="${detalle?.id}">&nbsp;</div>
 								</div>
 							</div>
 						</td>
 						<td class="invert">${detalle?.publicacion?.producto?.titulo}</td>
-						<td class="invert">${detalle?.subtotal}</td>
+						<td class="invert sbt_${detalle?.id}" data-id="${detalle?.id}" data-valor="${detalle?.publicacion?.precioUnidad}">${g.formatNumber(number: detalle?.subtotal, format: "##,##0", maxFractionDigits: 2, minFractionDigits: 2)}</td>
 					</tr>
 				</g:each>
 
-
-
-%{--				<tr class="rem1">--}%
-%{--					<td class="invert-closeb">--}%
-%{--						<div class="rem">--}%
-%{--							<div class="close1"> </div>--}%
-%{--						</div>--}%
-%{--						<script>$(document).ready(function(c) {--}%
-%{--							$('.close1').on('click', function(c){--}%
-%{--								$('.rem1').fadeOut('slow', function(c){--}%
-%{--									$('.rem1').remove();--}%
-%{--								});--}%
-%{--							});--}%
-%{--						});--}%
-%{--						</script>--}%
-%{--					</td>--}%
-%{--					<td class="invert-image"><a href="single.html"><img src="images/w4.png" alt=" " class="img-responsive" /></a></td>--}%
-%{--					<td class="invert">--}%
-%{--						<div class="quantity">--}%
-%{--							<div class="quantity-select">--}%
-%{--								<div class="entry value-minus">&nbsp;</div>--}%
-%{--								<div class="entry value"><span>1</span></div>--}%
-%{--								<div class="entry value-plus active">&nbsp;</div>--}%
-%{--							</div>--}%
-%{--						</div>--}%
-%{--					</td>--}%
-%{--					<td class="invert">Hand Bag</td>--}%
-%{--					<td class="invert">$45.99</td>--}%
-%{--				</tr>--}%
-%{--				<tr class="rem2">--}%
-%{--					<td class="invert-closeb">--}%
-%{--						<div class="rem">--}%
-%{--							<div class="close2"> </div>--}%
-%{--						</div>--}%
-%{--						<script>$(document).ready(function(c) {--}%
-%{--							$('.close2').on('click', function(c){--}%
-%{--								$('.rem2').fadeOut('slow', function(c){--}%
-%{--									$('.rem2').remove();--}%
-%{--								});--}%
-%{--							});--}%
-%{--						});--}%
-%{--						</script>--}%
-%{--					</td>--}%
-%{--					<td class="invert-image"><a href="single.html"><img src="images/ep3.png" alt=" " class="img-responsive" /></a></td>--}%
-%{--					<td class="invert">--}%
-%{--						<div class="quantity">--}%
-%{--							<div class="quantity-select">--}%
-%{--								<div class="entry value-minus">&nbsp;</div>--}%
-%{--								<div class="entry value"><span>1</span></div>--}%
-%{--								<div class="entry value-plus active">&nbsp;</div>--}%
-%{--							</div>--}%
-%{--						</div>--}%
-%{--					</td>--}%
-%{--					<td class="invert">Watches</td>--}%
-%{--					<td class="invert">$45.99</td>--}%
-
-%{--				</tr>--}%
-%{--				<tr class="rem3">--}%
-%{--					<td class="invert-closeb">--}%
-%{--						<div class="rem">--}%
-%{--							<div class="close3"> </div>--}%
-%{--						</div>--}%
-%{--						<script>$(document).ready(function(c) {--}%
-%{--							$('.close3').on('click', function(c){--}%
-%{--								$('.rem3').fadeOut('slow', function(c){--}%
-%{--									$('.rem3').remove();--}%
-%{--								});--}%
-%{--							});--}%
-%{--						});--}%
-%{--						</script>--}%
-%{--					</td>--}%
-%{--					<td class="invert-image"><a href="single.html"><img src="images/w2.png" alt=" " class="img-responsive" /></a></td>--}%
-%{--					<td class="invert">--}%
-%{--						<div class="quantity">--}%
-%{--							<div class="quantity-select">--}%
-%{--								<div class="entry value-minus">&nbsp;</div>--}%
-%{--								<div class="entry value"><span>1</span></div>--}%
-%{--								<div class="entry value-plus active">&nbsp;</div>--}%
-%{--							</div>--}%
-%{--						</div>--}%
-%{--					</td>--}%
-%{--					<td class="invert">Sandals</td>--}%
-%{--					<td class="invert">$45.99</td>--}%
-
-%{--				</tr>--}%
-%{--				<tr class="rem4">--}%
-%{--					<td class="invert-closeb">--}%
-%{--						<div class="rem">--}%
-%{--							<div class="close4"> </div>--}%
-%{--						</div>--}%
-%{--						<script>$(document).ready(function(c) {--}%
-%{--							$('.close4').on('click', function(c){--}%
-%{--								$('.rem4').fadeOut('slow', function(c){--}%
-%{--									$('.rem4').remove();--}%
-%{--								});--}%
-%{--							});--}%
-%{--						});--}%
-%{--						</script>--}%
-%{--					</td>--}%
-%{--					<td class="invert-image"><a href="single.html"><img src="images/w1.png" alt=" " class="img-responsive" /></a></td>--}%
-%{--					<td class="invert">--}%
-%{--						<div class="quantity">--}%
-%{--							<div class="quantity-select">--}%
-%{--								<div class="entry value-minus">&nbsp;</div>--}%
-%{--								<div class="entry value"><span>1</span></div>--}%
-%{--								<div class="entry value-plus active">&nbsp;</div>--}%
-%{--							</div>--}%
-%{--						</div>--}%
-%{--					</td>--}%
-%{--					<td class="invert">Wedges</td>--}%
-%{--					<td class="invert">$45.99</td>--}%
-
-%{--				</tr>--}%
-
-				<!--quantity-->
+			<!--quantity-->
 				<script>
 					$('.value-plus').on('click', function(){
-						var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)+1;
+						var idDiv = $(this).data("id");
+						var divUpd = $(this).parent().find('.v_' +  idDiv), newVal = parseInt(divUpd.text(), 10)+1;
 						divUpd.text(newVal);
+						var s = $(".sbt_" + idDiv).data("valor");
+						guardarCantidad(idDiv, newVal);
+						$('.sbt_' + idDiv).text( (Math.round((s * newVal) * 100) / 100).toFixed(2))
 					});
 
 					$('.value-minus').on('click', function(){
-						var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)-1;
-						if(newVal>=1) divUpd.text(newVal);
+						var idDiv = $(this).data("id");
+						var divUpd = $(this).parent().find('.v_' +  idDiv), newVal = parseInt(divUpd.text(), 10)-1;
+						if(newVal>=1){
+							divUpd.text(newVal);
+							var s = $(".sbt_" + idDiv).data("valor");
+							guardarCantidad(idDiv, newVal);
+							$('.sbt_' + idDiv).text( (Math.round((s * newVal) * 100) / 100).toFixed(2))
+						}else{
+							bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-danger'></i> No es posible colocar una cantidad igual a cero a un producto")
+						}
+
 					});
 				</script>
 				<!--quantity-->
 			</table>
 		</div>
 		<div class="checkout-left">
-
 			<div class="checkout-right-basket animated wow slideInRight" data-wow-delay=".5s">
 				<a href="${createLink(controller: 'principal', action: 'index')}"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Seguir comprando</a>
+				<a href="#">Siguiente paso <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
 			</div>
-			<div class="checkout-left-basket animated wow slideInLeft" data-wow-delay=".5s">
-				<h4>Totales</h4>
-				<ul>
-					<li>Hand Bag <i>-</i> <span>$45.99</span></li>
-					<li>Watches <i>-</i> <span>$45.99</span></li>
-					<li>Sandals <i>-</i> <span>$45.99</span></li>
-					<li>Wedges <i>-</i> <span>$45.99</span></li>
-					<li>Total <i>-</i> <span>$183.96</span></li>
-				</ul>
+			<div class="checkout-left-basket animated wow slideInLeft" data-wow-delay=".5s" id="divTotales">
+
 			</div>
 			<div class="clearfix"> </div>
 		</div>
@@ -323,6 +217,77 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<p class="copy-right">&copy 2021. Tienda en Línea | <a href="http://www.tedein.com.ec/">TEDEIN S.A:</a></p>
 	</div>
 </div>
+
+
+<script type="text/javascript">
+
+	function guardarCantidad(id, cantidad) {
+		var d = cargarLoader("Guardando...");
+		$.ajax({
+			type: 'POST',
+			url: '${createLink(controller: 'carrito', action: 'guardarCantidad_ajax')}',
+			data:{
+				id:id,
+				cantidad: cantidad
+			},
+			success: function (msg) {
+				d.modal('hide');
+				if(msg == 'ok'){
+					cargarTotales();
+				}else{
+					log("Error al modificar la cantidad del producto", "error")
+				}
+			}
+		})
+	}
+
+	cargarTotales();
+
+	function cargarTotales(){
+		$.ajax({
+			type: 'POST',
+			url: '${createLink(controller: 'carrito', action: 'totales_ajax')}',
+			data:{
+			},
+			success: function (msg) {
+				$("#divTotales").html(msg)
+			}
+		})
+	}
+
+	$(document).ready(function(c) {
+		$('.close1').on('click', function(c){
+			var d = $(this).data("cl");
+			var id = $(this).data("id");
+
+			bootbox.confirm("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i> " +
+					"Está seguro que desea remover el producto de su carrito de compras?", function (res) {
+				if (res) {
+
+					$.ajax({
+						type: 'POST',
+						url: '${createLink(controller: 'carrito', action: 'borrarDetalle_ajax')}',
+						data:{
+							id: id
+						},
+						success: function (msg) {
+							if(msg == 'ok'){
+								$('.' + d).fadeOut('slow', function(c){
+									$('.' + d).remove();
+									cargarTotales();
+								});
+
+							}else{
+								log("Error al remover el producto", "error")
+							}
+						}
+					});
+				}
+			});
+		});
+	});
+</script>
+
 
 </body>
 </html>
