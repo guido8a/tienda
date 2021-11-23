@@ -110,7 +110,7 @@ class CarritoController {
         def detalle = DetalleCarrito.get(params.id)
         detalle.cantidad = params.cantidad.toInteger()
 //        def valor = g.formatNumber(number: (params.cantidad.toInteger() * detalle.publicacion.precioUnidad), format: "##,##0", maxFractionDigits: 2, minFractionDigits: 2)
-        detalle.subtotal = Math.round(((params.cantidad.toInteger() * detalle.publicacion.precioUnidad)*100)/100)
+        detalle.subtotal = Math.round((params.cantidad.toInteger() * detalle.publicacion.precioUnidad)*100)/100
 
         if(!detalle.save(flush:true)){
             println("error al modificar la cantidad " + detalle.errors)
