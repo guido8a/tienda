@@ -37,6 +37,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 	<link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic' rel='stylesheet' type='text/css'>
+
+	<style type="text/css">
+	.page-head {
+		background: url("${request.contextPath}/principal/getImgnProd?ruta=ba2.jpg&tp=v&id=1") no-repeat center;
+		background-size: cover;
+		-webkit-background-size: cover;
+		-o-background-size: cover;
+		-ms-background-size: cover;
+		-moz-background-size: cover;
+		min-height: 217px;
+		padding-top: 85px;
+	}
+	</style>
+
 </head>
 <body>
 <!-- header -->
@@ -97,7 +111,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							%{--							</script>--}%
 						</td>
 						<td class="invert-image">
-							<a href="${createLink(controller: 'ver', action: 'producto')}?publ=${detalle?.publicacion?.id}">
+							<a href="${createLink(controller: 'ver', action: 'producto')}?publ=${detalle?.publicacion?.id}"}>
 								<img alt="Sin Imagen" style="width: 100px; height: 100px" class="pro-image-front"
 									 src="${request.contextPath}/principal/getImgnProd?ruta=${tienda.Imagen.findByProductoAndPrincipal(detalle.publicacion.producto, '1').ruta}&tp=P&id=${detalle?.publicacion?.producto?.id}"/>
 							</a>
