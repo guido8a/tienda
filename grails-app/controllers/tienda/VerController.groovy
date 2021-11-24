@@ -10,8 +10,9 @@ class VerController {
         def cn = dbConnectionService.getConnection()
         println "carrusel params: $params"
         def publ = Publicacion.get(params.anun)
+        def ctgr = Categoria.list([sort: 'descripcion'])
 
-        def sql = "select publ.prod__id, publtitl, publsbtl, publtxto, publpcun from publ " +
+        def sql = "select publ.prod__id, publtitl, publ__id, publsbtl, publtxto, publpcun from publ " +
                 "where publ__id = ${params.publ}"
         println "sql: $sql"
         def prod = cn.rows(sql.toString())[0]
@@ -26,8 +27,14 @@ class VerController {
             carrusel.add([ruta: "${d.prod__id}/${d.dtpbvlor}"])
         }
 
-        println"carrusel: $carrusel"
-        return [carrusel: carrusel, publ: prod, anuncio: params.anun]
+//        println"carrusel: $carrusel"
+
+        def cliente = null
+
+        if(session.cliente){
+            cliente = Cliente.get(session.cliente.id)
+        }
+        return [ctgr: ctgr, carrusel: carrusel, publ: prod, anuncio: params.anun, cliente:cliente]
     }
 
     def preguntas_ajax(){

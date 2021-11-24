@@ -97,7 +97,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							%{--							</script>--}%
 						</td>
 						<td class="invert-image">
-							<a href="#">
+							<a href="${createLink(controller: 'ver', action: 'producto')}?publ=${detalle?.publicacion?.id}">
 								<img alt="Sin Imagen" style="width: 100px; height: 100px" class="pro-image-front"
 									 src="${request.contextPath}/principal/getImgnProd?ruta=${tienda.Imagen.findByProductoAndPrincipal(detalle.publicacion.producto, '1').ruta}&tp=P&id=${detalle?.publicacion?.producto?.id}"/>
 							</a>

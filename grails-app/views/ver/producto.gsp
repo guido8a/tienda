@@ -7,14 +7,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Smart Shop a Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | Single :: w3layouts</title>
+    <title>Tienda en Línea</title>
     <asset:link rel="icon" href="favicon.png" type="image/x-ico"/>
     <title>Tienda en Línea</title>
 
     <asset:stylesheet src="/apli/bootstrap.css"/>
     <asset:stylesheet src="/apli/pignose.layerslider.css"/>
     <asset:stylesheet src="/apli/style.css"/>
-
+    <asset:stylesheet src="/fonts/fontawesome-webfont.woff"/>
     <asset:stylesheet src="/flexslider/flexslider.css"/>
 
     <asset:javascript src="/apli/jquery-2.1.4.min.js"/>
@@ -22,6 +22,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <asset:javascript src="/apli/bootstrap-3.1.1.min.js"/>
     <asset:javascript src="/apli/jquery.easing.min.js"/>
     <asset:javascript src="/flexslider/jquery.flexslider.js"/>
+    <asset:javascript src="/jquery-validation-1.11.1/js/jquery.validate.min.js"/>
+    <asset:javascript src="/jquery-validation-1.11.1/js/jquery.validate.js"/>
+    <asset:javascript src="/jquery-validation-1.11.1/localization/messages_es.js"/>
+    <asset:javascript src="/apli/functions.js"/>
+    <asset:javascript src="/apli/bootbox.js"/>
+    <asset:javascript src="/apli/fontawesome.all.min.js"/>
 
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 
@@ -42,7 +48,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             min-height: 217px;
             padding-top: 85px;
         }
-    </style
+    </style>
 
 </head>
 <body>
@@ -50,9 +56,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="header">
     <div class="container">
         <ul>
-            <li><span class="glyphicon glyphicon-time" aria-hidden="true"></span>Entrega inmediata gratis</li>
-            <li><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Entrega gratuita de su orden</li>
+            <li><span class="glyphicon glyphicon-time" aria-hidden="true"></span>Envios a nivel nacional</li>
+            %{--            <li><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Entrega gratuita de su orden</li>--}%
             <li><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><a href="mailto:info@example.com">Contáctenos</a></li>
+            <g:if test="${session.cliente}">
+                <li><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span><a href="${createLink(controller: 'cliente', action: 'logout')}" class="use1" ><span>Cerrar sesión ${cliente?.nombre}</span></a></li>
+            </g:if>
+            <g:else>
+                <li><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span><a href="#" class="use1" data-toggle="modal" data-target="#myModal4"><span>Cliente</span></a></li>
+            </g:else>
+
             <li><a href="${createLink(controller: 'login', action: 'login')}"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>Admin</a></li>
         </ul>
     </div>
@@ -62,17 +75,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="header-bot">
     <div class="container">
         <div class="col-md-3 header-left">
-            <h1><a href="index.html"><asset:image src="apli/logo3.jpg"/></a></h1>
+            <h1><a href="index.html">
+                <asset:image src="apli/logo3.jpg"/>
+            </a></h1>
         </div>
         <div class="col-md-6 header-middle">
             <form>
                 <div class="search">
-                    <input type="search" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}" required="">
+                    <input type="search" value="Buscar" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Buscar';}" required="">
                 </div>
                 <div class="section_room">
                     <select id="categoría" class="frm-field required" style="color: #4F1B00; border-bottom-style: solid; border-color: #AF5B00; font-size: 12pt">
                         <g:each in="${ctgr}" var="tp">
-                            <option value="${tp.id}" data-dscr="${tp.descripcion}" ${tp.id == grpo? 'selected' : ''}>
+                            <option value="${tp.id}" data-dscr="${tp.descripcion}" ${tp.id == grpo? 'selected=\"selected\"' : ''}>
                                 ${tp.descripcion}</option>
                         </g:each>
                     </select>
@@ -85,9 +100,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         </div>
         <div class="col-md-3 header-right footer-bottom">
             <ul>
-                <li><a href="#" class="use1" data-toggle="modal" data-target="#myModal4"><span>Login</span></a>
-
-                </li>
                 <li><a class="fb" href="#"></a></li>
                 <li><a class="twi" href="#"></a></li>
                 <li><a class="insta" href="#"></a></li>
@@ -192,15 +204,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             </nav>
         </div>
         <div class="top_nav_right">
-            <div class="cart box_1">
-                <a href="checkout.html">
-                    <h3> <div class="total">
-                        <i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
-                        <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)</div>
-
-                    </h3>
-                </a>
-                <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
+            <div class="cart box_1" id="divCarrito">
 
             </div>
         </div>
@@ -212,7 +216,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="page-head">
     <div class="container">
         <h3>${publ.publtitl}</h3>
-%{--        <h3>Producto</h3>--}%
     </div>
 </div>
 <!-- //banner -->
@@ -243,6 +246,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </div>
         </div>
         <div class="col-md-6 single-right-left simpleCart_shelfItem animated wow slideInRight animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: slideInRight;">
+            <h3>${publ.publtitl}</h3>
             <h3>${publ.publsbtl}</h3>
             <p><span class="item_price">
                 Precio : &nbsp;
@@ -283,7 +287,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="clearfix"> </div>
             </div>
             <div class="occasion-cart">
-                <a href="#" class="item_add hvr-outline-out button2">Añadir al carrito</a>
+                <a href="#" class="item_add hvr-outline-out button2" data-id="${publ.publ__id}">Añadir al carrito</a>
             </div>
 
         </div>
@@ -305,8 +309,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div id="myTabContent" class="tab-content">
                     <div role="tabpanel" class="tab-pane fade in active bootstrap-tab-text" id="home" aria-labelledby="home-tab">
                         <h5>Descripción</h5>
-                        <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.
-                            <span>${raw(publ.publtxto)}</span></p>
+                        <p>
+                            Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.
+                            <span>${raw(publ.publtxto)}</span>
+                        </p>
                     </div>
                     <div role="tabpanel" class="tab-pane fade bootstrap-tab-text" id="profile" aria-labelledby="profile-tab">
                         <div class="bootstrap-tab-text-grids">
@@ -355,25 +361,24 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <div class="container">
         <div class="coupons-grids text-center">
             <div class="col-md-3 coupons-gd">
-                <h3>Buy your product in a simple way</h3>
+                <h3>Comprar es simple</h3>
             </div>
             <div class="col-md-3 coupons-gd">
-                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                <h4>LOGIN TO YOUR ACCOUNT</h4>
-                <p>Neque porro quisquam est, qui dolorem ipsum quia dolor
-                sit amet, consectetur.</p>
+                <a href="#">
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    <h4>Ingresar</h4>
+                </a>
+                <p>Ingresa al sistema con tus datos</p>
             </div>
             <div class="col-md-3 coupons-gd">
                 <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                <h4>SELECT YOUR ITEM</h4>
-                <p>Neque porro quisquam est, qui dolorem ipsum quia dolor
-                sit amet, consectetur.</p>
+                <h4>Seleccionar un Item</h4>
+                <p>Busca lo que desea comprar y compare alternativas</p>
             </div>
             <div class="col-md-3 coupons-gd">
                 <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span>
-                <h4>MAKE PAYMENT</h4>
-                <p>Neque porro quisquam est, qui dolorem ipsum quia dolor
-                sit amet, consectetur.</p>
+                <h4>Pagar</h4>
+                <p>Tenemos varias formas de apgo para tu comodidad y seguridad</p>
             </div>
             <div class="clearfix"> </div>
         </div>
@@ -382,64 +387,31 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- footer -->
 <div class="footer">
     <div class="container">
-        <div class="col-md-3 footer-left">
-            <h2><a href="index.html"><img src="images/logo3.jpg" alt=" " /></a></h2>
-            <p>Neque porro quisquam est, qui dolorem ipsum quia dolor
-            sit amet, consectetur, adipisci velit, sed quia non
-            numquam eius modi tempora incidunt ut labore
-            et dolore magnam aliquam quaerat voluptatem.</p>
-        </div>
         <div class="col-md-9 footer-right">
             <div class="col-sm-6 newsleft">
-                <h3>SIGN UP FOR NEWSLETTER !</h3>
+                <h3>INGRESE SU EMAIL PARA RECIBIR NUESTRAS NOTIFICACIONES !</h3>
             </div>
             <div class="col-sm-6 newsright">
                 <form>
                     <input type="text" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
-                    <input type="submit" value="Submit">
+                    <input type="submit" value="Enviar">
                 </form>
             </div>
             <div class="clearfix"></div>
             <div class="sign-grds">
-                <div class="col-md-4 sign-gd">
-                    <h4>Information</h4>
+                <div class="col-md-6 sign-gd-two">
+                    <h4>Información de la tienda</h4>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="mens.html">Men's Wear</a></li>
-                        <li><a href="womens.html">Women's Wear</a></li>
-                        <li><a href="electronics.html">Electronics</a></li>
-                        <li><a href="codes.html">Short Codes</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-md-4 sign-gd-two">
-                    <h4>Store Information</h4>
-                    <ul>
-                        <li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>Address : 1234k Avenue, 4th block, <span>Newyork City.</span></li>
+                        <li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>Dirección : Amazonas..., <span>Quito - Ecuador.</span></li>
                         <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i>Email : <a href="mailto:info@example.com">info@example.com</a></li>
-                        <li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>Phone : +1234 567 567</li>
-                    </ul>
-                </div>
-                <div class="col-md-4 sign-gd flickr-post">
-                    <h4>Flickr Posts</h4>
-                    <ul>
-                        <li><a href="single.html"><img src="images/b15.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="single.html"><img src="images/b16.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="single.html"><img src="images/b17.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="single.html"><img src="images/b18.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="single.html"><img src="images/b15.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="single.html"><img src="images/b16.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="single.html"><img src="images/b17.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="single.html"><img src="images/b18.jpg" alt=" " class="img-responsive" /></a></li>
-                        <li><a href="single.html"><img src="images/b15.jpg" alt=" " class="img-responsive" /></a></li>
+                        <li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>Teléfono : +1234 567 567</li>
                     </ul>
                 </div>
                 <div class="clearfix"></div>
             </div>
         </div>
         <div class="clearfix"></div>
-        <p class="copy-right">&copy 2016 Smart Shop. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+        <p class="copy-right">&copy 2021. Tienda en Línea | <a href="http://www.tedein.com.ec/">TEDEIN S.A:</a></p>
     </div>
 </div>
 <!-- //footer -->
@@ -454,57 +426,252 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="login-grids">
                     <div class="login">
                         <div class="login-bottom">
-                            <h3>Sign up for free</h3>
-                            <form>
+                            <h3>Registrarse</h3>
+                            <form id="frmRegistro">
+                                <div>
+                                    <h4>Nombre :</h4>
+                                    <g:textField name="nombre" minlength="3" maxlength="31" required="" class="form-control required"/>
+                                </div>
+                                <div class="sign-up">
+                                    <h4>Apellido :</h4>
+                                    <g:textField name="apellido" minlength="3" maxlength="31" class="form-control required"/>
+                                </div>
                                 <div class="sign-up">
                                     <h4>Email :</h4>
-                                    <input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
-                                </div>
-                                <div class="sign-up">
-                                    <h4>Password :</h4>
-                                    <input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">
-
-                                </div>
-                                <div class="sign-up">
-                                    <h4>Re-type Password :</h4>
-                                    <input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">
-
-                                </div>
-                                <div class="sign-up">
-                                    <input type="submit" value="REGISTER NOW" >
+                                    <g:textField name="mail" maxlength="63" required="" class="email form-control unique noEspacios required"/>
                                 </div>
 
+                                <div class="sign-up" style="text-align: center">
+                                    <a href="#" id="btnRegistrarse" class="btn btn-warning btn-lg" title="Registrar nuevo cliente">
+                                        <i class="fa fa-file"></i> Registrarse
+                                    </a>
+                                </div>
                             </form>
                         </div>
                         <div class="login-right">
-                            <h3>Sign in with your account</h3>
-                            <form>
+                            <h3>Ingrese con su cuenta</h3>
+                            <form id="frmIngreso">
                                 <div class="sign-in">
-                                    <h4>Email :</h4>
-                                    <input type="text" value="Type here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type here';}" required="">
+                                    <h4>Usuario :</h4>
+                                    <g:textField name="login" required="" class="email form-control required"/>
                                 </div>
                                 <div class="sign-in">
                                     <h4>Password :</h4>
-                                    <input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">
-                                    <a href="#">Forgot password?</a>
+                                    <input type="password" name="password" class="required" value="Ingrese su clave" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su clave';}" required="">
+                                    ¿Olvidó su contraseña? <a href="#" class="" id="btnOlvidoPass"> <i class="fa fa-user-secret"></i> Recuperar contraseña </a>
                                 </div>
-                                <div class="single-bottom">
-                                    <input type="checkbox"  id="brand" value="">
-                                    <label for="brand"><span></span>Remember Me.</label>
+                                <div class="single-bottom" style="margin-bottom: 34px">
                                 </div>
-                                <div class="sign-in">
-                                    <input type="submit" value="SIGNIN" >
+                                <div  style="text-align: center">
+                                    <a href="#" id="btnIngresar" class="btn btn-warning btn-lg" title="Ingreso de clientes">
+                                        <i class="fa fa-file"></i> Ingresar
+                                    </a>
                                 </div>
                             </form>
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                    <p>By logging in you agree to our <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a></p>
+                    <p>Al registrarse en el sistema la clave de acceso será enviada a su <strong>correo electrónico</strong>
+                    <p>Al ingresar al sistema usted acepta nuestros <a href="#">Términos y Condiciones</a></p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!-- //login -->
+
+
+<script type="text/javascript">
+
+    $(".item_add").click(function () {
+        var prod = $(this).data("id");
+        $.ajax({
+            type: 'POST',
+            url: '${createLink(controller: 'carrito', action: 'agregarProducto_ajax')}',
+            data:{
+                id: prod
+            },
+            success: function(msg){
+                var parts = msg.split("_");
+                if(parts[0] == 'ok'){
+                    bootbox.alert("<i class='fa fa-check text-success fa-2x'></i> Producto agregado correctamente");
+                    cargarBannerCarrito();
+                }else{
+                    if(parts[0] == 'er'){
+                        bootbox.alert("<i class='fa fa-exclamation-triangle text-danger fa-2x'></i> " + parts[1])
+                    }else{
+                        bootbox.alert("<i class='fa fa-exclamation-triangle text-danger fa-2x'></i> Error al agregar el producto")
+                    }
+                }
+            }
+        });
+    });
+
+    $("#btnOlvidoPass").click(function () {
+        cargarPassword();
+    });
+
+    function cargarPassword() {
+        bootbox.hideAll();
+        $.ajax({
+            type: "POST",
+            url: "${createLink(controller: 'cliente', action: 'password_ajax')}",
+            data: {},
+            success: function (msg) {
+                var b = bootbox.dialog({
+                    id: "dlgPassword",
+                    message: msg,
+                    buttons: {
+                        cancelar: {
+                            label: "<i class='fa fa-times'></i> Salir",
+                            className: "btn-gris",
+                            callback: function () {
+                            }
+                        },
+                        guardar: {
+                            id: "btnSave",
+                            label: "<i class='fa fa-check'></i> Aceptar",
+                            className: "btn-rojo",
+                            callback: function () {
+                                return submitFormPassword();
+                            } //callback
+                        } //guardar
+                    } //buttons
+                }); //dialog
+            } //success
+        }); //ajax
+    } //createEdit
+
+    function submitFormPassword() {
+        var $form = $("#frmPassword");
+        if ($form.valid()) {
+            var d = cargarLoader("Procesando...");
+            $.ajax({
+                type: "POST",
+                url: '${createLink(controller: 'cliente', action:'recuperarPassword_ajax')}',
+                data: $form.serialize(),
+                success: function (msg) {
+                    $("#myModal4").modal('hide');
+                    var parts = msg.split("_");
+                    if (parts[0] == 'ok') {
+                        bootbox.alert("<i class='fa fa-envelope fa-2x text-warning'></i> Un mail con su contraseña ha sido enviado a su correo " +
+                            "<br> <i class='fa fa-exclamation-circle fa-2x text-warning'></i> Si no ha recibido el correo, revise su bandeja de spam", function(){
+                            d.modal('hide');
+                            // bootbox.hideAll()
+                        })
+                    }else {
+                        if(parts[0] == 'er'){
+                            bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i>" + parts[1], function(){
+                                d.modal('hide');
+                            })
+                        }else{
+                            bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i>" + "Error al recuperar el password", function(){
+                                d.modal('hide');
+                            })
+                        }
+                    }
+                }
+            });
+        } else {
+            return false;
+        } //else
+    }
+
+
+    cargarBannerCarrito();
+
+    function cargarBannerCarrito(){
+        $.ajax({
+            type: 'POST',
+            url: '${createLink(controller: 'principal', action: 'carrito_ajax')}',
+            data:{
+            },
+            success: function (msg){
+                $("#divCarrito").html(msg)
+            }
+        });
+    }
+
+
+    $("#btnIngresar").click(function () {
+        ingresoCliente();
+    });
+
+    function ingresoCliente(){
+        var p = $("#password").val();
+        var $form = $("#frmIngreso");
+        if ($form.valid()) {
+            var d = cargarLoader("Ingresando...");
+            $.ajax({
+                type: "POST",
+                url: '${createLink(controller: 'cliente', action:'ingreso_ajax')}',
+                data: $form.serialize(),
+                success: function (msg) {
+                    var parts = msg.split("_");
+                    $("#myModal4").modal('hide');
+                    if (parts[0] == 'ok') {
+                        location.reload(true);
+                    }else {
+                        if(parts[0] == 'er'){
+                            bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i>" + parts[1], function(){
+                                d.modal('hide');
+                            })
+                        }else{
+                            bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i>" + "Error al ingresar", function(){
+                                d.modal('hide');
+                            })
+                        }
+                    }
+                }
+            });
+        } else {
+            return false;
+        } //else
+    }
+
+
+    $("#btnRegistrarse").click(function () {
+        submitFormRegistro();
+    });
+
+    function submitFormRegistro() {
+
+        var $form = $("#frmRegistro");
+        if ($form.valid()) {
+            var d = cargarLoader("Guardando...");
+            $.ajax({
+                type: "POST",
+                url: '${createLink(controller: 'cliente', action:'saveRegistro_ajax')}',
+                data: $form.serialize(),
+                success: function (msg) {
+                    var parts = msg.split("_");
+                    $("#myModal4").modal('hide')
+                    if (parts[0] == 'ok') {
+                        bootbox.alert("<i class='fa fa-envelope fa-2x text-warning'></i> Un mail de verificación ha sido enviado a su correo " +
+                            "<br> <i class='fa fa-exclamation-circle fa-2x text-warning'></i> Si no ha recibido el correo, revise su bandeja de spam", function(){
+                            d.modal('hide');
+                            // bootbox.hideAll()
+                        })
+                    }else {
+                        if(parts[0] == 'er'){
+                            bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i>" + parts[1], function(){
+                                d.modal('hide');
+                            })
+                        }else{
+                            bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i>" + "Error al crear el usuario", function(){
+                                d.modal('hide');
+                            })
+                        }
+                    }
+                }
+            });
+        } else {
+            return false;
+        } //else
+    }
+
+</script>
+
+
 </body>
 </html>

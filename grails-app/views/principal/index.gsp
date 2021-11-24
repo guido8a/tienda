@@ -99,8 +99,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="col-md-3 header-right footer-bottom">
             <ul>
-                %{--                <li><a href="#" class="use1" data-toggle="modal" data-target="#myModal4"><span>Login</span></a>--}%
-                %{--                </li>--}%
                 <li><a class="fb" href="#"></a></li>
                 <li><a class="twi" href="#"></a></li>
                 <li><a class="insta" href="#"></a></li>
@@ -209,14 +207,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 %{--        <g:if test="${cliente}">--}%
             <div class="top_nav_right">
                 <div class="cart box_1" id="divCarrito">
-%{--                    <a href="${createLink(controller: 'carrito', action: 'carrito')}">--}%
-%{--                        <h3> <div class="total">--}%
-%{--                            <i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>--}%
-%{--                            <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)</div>--}%
 
-%{--                        </h3>--}%
-%{--                    </a>--}%
-%{--                    <p><a href="${createLink(controller: 'carrito', action: 'carrito')}" id="btnCarrito" class="simpleCart_empty">Carrito de Compras</a></p>--}%
                 </div>
             </div>
 %{--        </g:if>--}%
@@ -1388,9 +1379,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         var p = $("#password").val();
         var $form = $("#frmIngreso");
         if ($form.valid()) {
-            // if(p == '' || p == null){
-            //     bootbox.alert("Ingrese la contraseña!")
-            // }else{
             var d = cargarLoader("Ingresando...");
             $.ajax({
                 type: "POST",
@@ -1401,9 +1389,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     $("#myModal4").modal('hide');
                     if (parts[0] == 'ok') {
                         location.reload(true);
-                        // bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i>" + "Ingreso correcto", function(){
-                        //     d.modal('hide');
-                        // })
                     }else {
                         if(parts[0] == 'er'){
                             bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i>" + parts[1], function(){
@@ -1417,13 +1402,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     }
                 }
             });
-            // }
-
         } else {
             return false;
         } //else
-
-
     }
 
 
@@ -1465,15 +1446,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         } else {
             return false;
         } //else
-
     }
 
-
-
 </script>
-
-
-
-
 </body>
 </html>
