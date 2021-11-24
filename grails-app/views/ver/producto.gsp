@@ -245,15 +245,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div class="col-md-6 single-right-left simpleCart_shelfItem animated wow slideInRight animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: slideInRight;">
             <h3>${publ.publsbtl}</h3>
             <p><span class="item_price">
+                Precio : &nbsp;
                 ${g.formatNumber(number: publ.publpcun, format: "##,##0", maxFractionDigits: 2, minFractionDigits: 2)}</span>
                 <del>${g.formatNumber(number: publ.publpcun*1.1, format: "##,##0", maxFractionDigits: 2, minFractionDigits: 2)}</del></p>
             <div class="rating1">
+                <strong>Opinión : &nbsp;</strong>
                 <span class="starRating">
                     <input id="rating5" type="radio" name="rating" value="5">
                     <label for="rating5">5</label>
-                    <input id="rating4" type="radio" name="rating" value="4">
+                    <input id="rating4" type="radio" name="rating" value="4" checked="">
                     <label for="rating4">4</label>
-                    <input id="rating3" type="radio" name="rating" value="3" checked="">
+                    <input id="rating3" type="radio" name="rating" value="3">
                     <label for="rating3">3</label>
                     <input id="rating2" type="radio" name="rating" value="2">
                     <label for="rating2">2</label>
@@ -261,19 +263,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <label for="rating1">1</label>
                 </span>
             </div>
+%{--
             <div class="color-quality">
                 <div class="color-quality-right">
-                    <h5>Cantidad :</h5>
-                    <select id="country1" onchange="change_country(this.value)" class="frm-field required sect">
-                        <option value="null">1 Unidad</option>
-                        <option value="null">2 Unidades</option>
-                        <option value="null">3 Unidades</option>
-                        <option value="null">4 Unidades</option>
-                    </select>
                 </div>
             </div>
+--}%
             <div class="occasional">
-                <h5>Tipos :</h5>
+                <h5>Tipo de empacado :</h5>
                 <div class="colr ert">
                     <label class="radio"><input type="radio" name="radio" checked=""><i></i>Empaque de lujo</label>
                 </div>
