@@ -1680,16 +1680,16 @@ padding-top:40px;
 }
 /*-- //coupons --*/
 /*-- contact --*/
-.page-head {
-    background: url(../images/ba2.jpg) no-repeat center;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -o-background-size: cover;
-    -ms-background-size: cover;
-    -moz-background-size: cover;
-    min-height: 217px;
-    padding-top: 85px;
-}
+/*.page-head {*/
+/*    background: url(../images/ba2.jpg) no-repeat center;*/
+/*    background-size: cover;*/
+/*    -webkit-background-size: cover;*/
+/*    -o-background-size: cover;*/
+/*    -ms-background-size: cover;*/
+/*    -moz-background-size: cover;*/
+/*    min-height: 217px;*/
+/*    padding-top: 85px;*/
+/*}*/
 .page-head h3 {
     color: #FDA30E;
     text-align: center;

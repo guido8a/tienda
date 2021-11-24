@@ -15,10 +15,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <asset:stylesheet src="/apli/pignose.layerslider.css"/>
     <asset:stylesheet src="/apli/style.css"/>
 
+    <asset:stylesheet src="/flexslider/flexslider.css"/>
+
     <asset:javascript src="/apli/jquery-2.1.4.min.js"/>
     <asset:javascript src="/apli/simpleCart.min.js"/>
     <asset:javascript src="/apli/bootstrap-3.1.1.min.js"/>
     <asset:javascript src="/apli/jquery.easing.min.js"/>
+    <asset:javascript src="/flexslider/jquery.flexslider.js"/>
 
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 
@@ -26,6 +29,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
     <link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic' rel='stylesheet' type='text/css'>
+
+    <style type="text/css">
+        .page-head {
+            /*background: url(../images/ba2.jpg) no-repeat center;*/
+            background: url("${request.contextPath}/principal/getImgnProd?ruta=ba2.jpg&tp=v&id=1") no-repeat center;
+            background-size: cover;
+            -webkit-background-size: cover;
+            -o-background-size: cover;
+            -ms-background-size: cover;
+            -moz-background-size: cover;
+            min-height: 217px;
+            padding-top: 85px;
+        }
+    </style
+
 </head>
 <body>
 <!-- header -->
@@ -193,7 +211,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- banner -->
 <div class="page-head">
     <div class="container">
-        <h3>Single</h3>
+        <h3>${publ.publtitl}</h3>
+%{--        <h3>Producto</h3>--}%
     </div>
 </div>
 <!-- //banner -->
@@ -201,9 +220,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="single">
     <div class="container">
         <div class="col-md-6 single-right-left animated wow slideInUp animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: slideInUp;">
-            <div class="grid images_3_of_2">
-                <div class="flexslider">
-                    <!-- FlexSlider -->
+                    <!-- FlexSlider http://flexslider.woothemes.com/asnavfor-rtl.html -->
                     <script>
                         // Can also be used with $(document).ready()
                         $(window).load(function() {
@@ -213,28 +230,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             });
                         });
                     </script>
-                    <!-- //FlexSlider-->
-                    <ul class="slides">
-                        <li data-thumb="images/d2.jpg">
-                            <div class="thumb-image"> <img src="images/d2.jpg" data-imagezoom="true" class="img-responsive"> </div>
-                        </li>
-                        <li data-thumb="images/d1.jpg">
-                            <div class="thumb-image"> <img src="images/d1.jpg" data-imagezoom="true" class="img-responsive"> </div>
-                        </li>
-                        <li data-thumb="images/d3.jpg">
-                            <div class="thumb-image"> <img src="images/d3.jpg" data-imagezoom="true" class="img-responsive"> </div>
-                        </li>
-                        <li data-thumb="images/d4.jpg">
-                            <div class="thumb-image"> <img src="images/d4.jpg" data-imagezoom="true" class="img-responsive"> </div>
-                        </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
+
+
+                    <div class="flexslider">
+                        <ul class="slides">
+                            <g:each in="${carrusel}" var="p" status="i">
+                            <li>
+                                <img src="${request.contextPath}/principal/getImgnProd?ruta=${p.ruta}&tp=c"/>
+                            </li>
+                            </g:each>
+                        </ul>
+                    </div>
         </div>
         <div class="col-md-6 single-right-left simpleCart_shelfItem animated wow slideInRight animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: slideInRight;">
-            <h3>Asics Gel Zaraca 4 Blue Sport Shoes</h3>
-            <p><span class="item_price">$550</span> <del>- $900</del></p>
+            <h3>${publ.publsbtl}</h3>
+            <p><span class="item_price">
+                ${g.formatNumber(number: publ.publpcun, format: "##,##0", maxFractionDigits: 2, minFractionDigits: 2)}</span>
+                <del>${g.formatNumber(number: publ.publpcun*1.1, format: "##,##0", maxFractionDigits: 2, minFractionDigits: 2)}</del></p>
             <div class="rating1">
                 <span class="starRating">
                     <input id="rating5" type="radio" name="rating" value="5">
@@ -249,37 +261,32 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <label for="rating1">1</label>
                 </span>
             </div>
-            <div class="description">
-                <h5>Check delivery, payment options and charges at your location</h5>
-                <input type="text" value="Enter pincode" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter pincode';}" required="">
-                <input type="submit" value="Check">
-            </div>
             <div class="color-quality">
                 <div class="color-quality-right">
-                    <h5>Quality :</h5>
+                    <h5>Cantidad :</h5>
                     <select id="country1" onchange="change_country(this.value)" class="frm-field required sect">
-                        <option value="null">5 Qty</option>
-                        <option value="null">6 Qty</option>
-                        <option value="null">7 Qty</option>
-                        <option value="null">10 Qty</option>
+                        <option value="null">1 Unidad</option>
+                        <option value="null">2 Unidades</option>
+                        <option value="null">3 Unidades</option>
+                        <option value="null">4 Unidades</option>
                     </select>
                 </div>
             </div>
             <div class="occasional">
-                <h5>Types :</h5>
+                <h5>Tipos :</h5>
                 <div class="colr ert">
-                    <label class="radio"><input type="radio" name="radio" checked=""><i></i>Casual Shoes</label>
+                    <label class="radio"><input type="radio" name="radio" checked=""><i></i>Empaque de lujo</label>
                 </div>
                 <div class="colr">
-                    <label class="radio"><input type="radio" name="radio"><i></i>Sports Shoes</label>
+                    <label class="radio"><input type="radio" name="radio"><i></i>Empaque normal</label>
                 </div>
                 <div class="colr">
-                    <label class="radio"><input type="radio" name="radio"><i></i>Formal Shoes</label>
+                    <label class="radio"><input type="radio" name="radio"><i></i>Sin empaque</label>
                 </div>
                 <div class="clearfix"> </div>
             </div>
             <div class="occasion-cart">
-                <a href="#" class="item_add hvr-outline-out button2">Add to cart</a>
+                <a href="#" class="item_add hvr-outline-out button2">Añadir al carrito</a>
             </div>
 
         </div>
@@ -288,21 +295,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div class="bootstrap-tab animated wow slideInUp animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: slideInUp;">
             <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
                 <ul id="myTab" class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Description</a></li>
-                    <li role="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Reviews(1)</a></li>
+                    <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Descripción</a></li>
+                    <li role="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Opiniones del producto(1)</a></li>
                     <li role="presentation" class="dropdown">
-                        <a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents">Information <span class="caret"></span></a>
+                        <a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents">Información adicional <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents">
-                            <li><a href="#dropdown1" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">cleanse</a></li>
-                            <li><a href="#dropdown2" tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2">fanny</a></li>
+                            <li><a href="#dropdown1" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">Forma de lavar</a></li>
+                            <li><a href="#dropdown2" tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2">Almacenamiento</a></li>
                         </ul>
                     </li>
                 </ul>
                 <div id="myTabContent" class="tab-content">
                     <div role="tabpanel" class="tab-pane fade in active bootstrap-tab-text" id="home" aria-labelledby="home-tab">
-                        <h5>Product Brief Description</h5>
+                        <h5>Descripción</h5>
                         <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.
-                            <span>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span></p>
+                            <span>${raw(publ.publtxto)}</span></p>
                     </div>
                     <div role="tabpanel" class="tab-pane fade bootstrap-tab-text" id="profile" aria-labelledby="profile-tab">
                         <div class="bootstrap-tab-text-grids">

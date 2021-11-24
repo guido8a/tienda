@@ -454,7 +454,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                          src="${request.contextPath}/principal/getImgnProd?ruta=${prod.rt}&tp=P&id=${prod.p}"/>
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
-                                            <a href="${createLink(controller: 'ver', action: 'producto',  params: [prod: 1])}" class="link-product-add-cart">Ver</a>
+                                            <a href="${createLink(controller: 'ver', action: 'producto',  params: [publ:prod.id])}"
+                                               class="link-product-add-cart">Ver</a>
                                         </div>
                                     </div>
                                     <span class="product-new-top">New</span>
