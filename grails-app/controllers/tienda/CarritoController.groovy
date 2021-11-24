@@ -48,6 +48,9 @@ class CarritoController {
                         println("error al agregar el producto del carrito " + detalle.errors)
                         render "no"
                     }else{
+                        carrito.cantidad += 1
+                        carrito.subtotal += Math.round((detalle.subtotal)*100)/100
+                        carrito.save(flush:true)
                         render "ok"
                     }
                 }
@@ -75,6 +78,11 @@ class CarritoController {
                         println("error al agregar el producto del carrito " + detalle.errors)
                         render "no"
                     }else{
+
+                        carrito.cantidad += 1
+                        carrito.subtotal += Math.round((detalle.subtotal)*100)/100
+                        carrito.save(flush:true)
+
                         render "ok"
                     }
                 }
@@ -88,10 +96,18 @@ class CarritoController {
     def borrarDetalle_ajax(){
         println("params " + params)
 
+        def carrito
         def detalle = DetalleCarrito.get(params.id)
 
         try{
             detalle.delete(flush:true)
+            carrito = Carrito.get(detalle.carrito.id)
+            def totalDetalles = DetalleCarrito.findAllByCarrito(carrito)?.subtotal?.sum()
+            carrito.subtotal = totalDetalles ? (Math.round((totalDetalles)*100)/100) : 0
+            if(carrito.cantidad >= 1){
+                carrito.cantidad += -1
+            }
+            carrito.save(flush:true)
             render "ok"
         }catch(e){
             println("error al borrar el detalle " + detalle.errors)
@@ -107,15 +123,21 @@ class CarritoController {
     }
 
     def guardarCantidad_ajax(){
+        def carrito
         def detalle = DetalleCarrito.get(params.id)
         detalle.cantidad = params.cantidad.toInteger()
-//        def valor = g.formatNumber(number: (params.cantidad.toInteger() * detalle.publicacion.precioUnidad), format: "##,##0", maxFractionDigits: 2, minFractionDigits: 2)
         detalle.subtotal = Math.round((params.cantidad.toInteger() * detalle.publicacion.precioUnidad)*100)/100
 
         if(!detalle.save(flush:true)){
             println("error al modificar la cantidad " + detalle.errors)
             render "no"
         }else{
+
+            carrito = Carrito.get(detalle.carrito.id)
+            def totalDetalles = DetalleCarrito.findAllByCarrito(carrito)?.subtotal?.sum()
+            carrito.subtotal = totalDetalles ? (Math.round((totalDetalles)*100)/100) : 0
+            carrito.save(flush:true)
+
             render "ok"
         }
     }

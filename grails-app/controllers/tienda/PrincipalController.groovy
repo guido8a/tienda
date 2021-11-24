@@ -268,4 +268,21 @@ class PrincipalController {
     def saveRegistro_ajax(){
         println("params -->" + params)
     }
+
+    def carrito_ajax(){
+        def cliente = null
+        def carrito
+
+        if(session.cliente){
+            cliente = Cliente.get(session.cliente.id)
+            carrito = Carrito.findByClienteAndEstado(cliente, 'A')
+        }else{
+
+        }
+
+        return[cliente: cliente, carrito: carrito]
+
+    }
+
+
 }

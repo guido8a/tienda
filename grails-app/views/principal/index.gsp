@@ -1,3 +1,4 @@
+<%@ page import="org.apache.poi.ss.util.Region" %>
 <!--
 Author: W3layouts
 Author URL: http://w3layouts.com
@@ -58,7 +59,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             %{--            <li><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Entrega gratuita de su orden</li>--}%
             <li><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><a href="mailto:info@example.com">Contáctenos</a></li>
             <g:if test="${session.cliente}">
-                <li><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span><a href="#" class="use1" ><span>Cerrar sesión ${cliente?.nombre}</span></a></li>
+                <li><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span><a href="${createLink(controller: 'cliente', action: 'logout')}" class="use1" ><span>Cerrar sesión ${cliente?.nombre}</span></a></li>
             </g:if>
             <g:else>
                 <li><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span><a href="#" class="use1" data-toggle="modal" data-target="#myModal4"><span>Cliente</span></a></li>
@@ -207,15 +208,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
 %{--        <g:if test="${cliente}">--}%
             <div class="top_nav_right">
-                <div class="cart box_1">
-                    <a href="${createLink(controller: 'carrito', action: 'carrito')}">
-                        <h3> <div class="total">
-                            <i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
-                            <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)</div>
+                <div class="cart box_1" id="divCarrito">
+%{--                    <a href="${createLink(controller: 'carrito', action: 'carrito')}">--}%
+%{--                        <h3> <div class="total">--}%
+%{--                            <i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>--}%
+%{--                            <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)</div>--}%
 
-                        </h3>
-                    </a>
-                    <p><a href="${createLink(controller: 'carrito', action: 'carrito')}" id="btnCarrito" class="simpleCart_empty">Empty Cart</a></p>
+%{--                        </h3>--}%
+%{--                    </a>--}%
+%{--                    <p><a href="${createLink(controller: 'carrito', action: 'carrito')}" id="btnCarrito" class="simpleCart_empty">Carrito de Compras</a></p>--}%
                 </div>
             </div>
 %{--        </g:if>--}%
@@ -1269,6 +1270,91 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <script type="text/javascript">
 
+    $("#btnOlvidoPass").click(function () {
+        cargarPassword();
+    });
+
+    function cargarPassword() {
+        bootbox.hideAll();
+        $.ajax({
+            type: "POST",
+            url: "${createLink(controller: 'cliente', action: 'password_ajax')}",
+            data: {},
+            success: function (msg) {
+                var b = bootbox.dialog({
+                    id: "dlgPassword",
+                    message: msg,
+                    buttons: {
+                        cancelar: {
+                            label: "<i class='fa fa-times'></i> Salir",
+                            className: "btn-gris",
+                            callback: function () {
+                            }
+                        },
+                        guardar: {
+                            id: "btnSave",
+                            label: "<i class='fa fa-check'></i> Aceptar",
+                            className: "btn-rojo",
+                            callback: function () {
+                                return submitFormPassword();
+                            } //callback
+                        } //guardar
+                    } //buttons
+                }); //dialog
+            } //success
+        }); //ajax
+    } //createEdit
+
+    function submitFormPassword() {
+        var $form = $("#frmPassword");
+        if ($form.valid()) {
+            var d = cargarLoader("Procesando...");
+            $.ajax({
+                type: "POST",
+                url: '${createLink(controller: 'cliente', action:'recuperarPassword_ajax')}',
+                data: $form.serialize(),
+                success: function (msg) {
+                    $("#myModal4").modal('hide');
+                    var parts = msg.split("_");
+                    if (parts[0] == 'ok') {
+                        bootbox.alert("<i class='fa fa-envelope fa-2x text-warning'></i> Un mail con su contraseña ha sido enviado a su correo " +
+                            "<br> <i class='fa fa-exclamation-circle fa-2x text-warning'></i> Si no ha recibido el correo, revise su bandeja de spam", function(){
+                            d.modal('hide');
+                            // bootbox.hideAll()
+                        })
+                    }else {
+                        if(parts[0] == 'er'){
+                            bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i>" + parts[1], function(){
+                                d.modal('hide');
+                            })
+                        }else{
+                            bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i>" + "Error al recuperar el password", function(){
+                                d.modal('hide');
+                            })
+                        }
+                    }
+                }
+            });
+        } else {
+            return false;
+        } //else
+    }
+
+
+    cargarBannerCarrito();
+
+    function cargarBannerCarrito(){
+        $.ajax({
+           type: 'POST',
+           url: '${createLink(controller: 'principal', action: 'carrito_ajax')}',
+           data:{
+           },
+           success: function (msg){
+               $("#divCarrito").html(msg)
+           }
+        });
+    }
+
     $(".item_add").click(function () {
         var prod = $(this).data("id");
             $.ajax({
@@ -1278,9 +1364,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     id: prod
                },
                success: function(msg){
-                   var parts = msg.split("_")
+                   var parts = msg.split("_");
                    if(parts[0] == 'ok'){
                        bootbox.alert("<i class='fa fa-check text-success fa-2x'></i> Producto agregado correctamente")
+                       cargarBannerCarrito();
                    }else{
                        if(parts[0] == 'er'){
                            bootbox.alert("<i class='fa fa-exclamation-triangle text-danger fa-2x'></i> " + parts[1])
