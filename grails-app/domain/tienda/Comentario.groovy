@@ -30,6 +30,6 @@ class Comentario {
         descripcion(size: 0..255, blank: true, nullable: true, attributes: [title: 'descripcion'])
         calificacion(blank: true, nullable: true)
         fecha(blank: true, nullable: true)
-        estado(blank: true, nullable: true)
+        estado(size: 0..1, blank: true, nullable: true)
     }
 }
