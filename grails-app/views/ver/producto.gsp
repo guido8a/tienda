@@ -321,10 +321,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                     <img src="images/men3.jpg" alt=" " class="img-responsive">
                                 </div>
                                 <div class="bootstrap-tab-text-grid-right">
-                                    <ul>
-                                        <li><a href="#">Admin</a></li>
-                                        <li><a href="#"><span class="glyphicon glyphicon-share" aria-hidden="true"></span>Reply</a></li>
-                                    </ul>
+%{--                                    <ul>--}%
+%{--                                        <li><a href="#">Admin</a></li>--}%
+%{--                                        <li><a href="#"><span class="glyphicon glyphicon-share" aria-hidden="true"></span>Reply</a></li>--}%
+%{--                                    </ul>--}%
                                     <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis
                                     suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem
                                     vel eum iure reprehenderit.</p>
