@@ -233,4 +233,41 @@ class ProductoController {
         render "${imag > 0 ? 'ok' : 'no' }"
     }
 
+    def agregarComentario_ajax(){
+
+        println("params " + params)
+
+        def publicacion = Publicacion.get(params.id)
+        def comentario
+
+        def cliente = null
+
+        if(session.cliente){
+            cliente = Cliente.get(session.cliente.id)
+        }
+
+        def comentarioExistente = Comentario.findAllByPublicacionAndCliente(publicacion, cliente)
+
+        if(comentarioExistente){
+            render "er_Ya existe un comentario para este producto"
+        }else{
+            comentario = new Comentario()
+            comentario.cliente = cliente
+            comentario.publicacion = publicacion
+            comentario.fecha = new Date()
+            comentario.descripcion = params.texto
+            comentario.calificacion = params.calificacion.toInteger()
+            comentario.estado = 'I'
+
+            if(!comentario.save(flush:true)){
+                println("error al guardar el comentario " + comentario.errors)
+                render "no"
+            }else{
+                render "ok"
+            }
+
+        }
+
+    }
+
 }

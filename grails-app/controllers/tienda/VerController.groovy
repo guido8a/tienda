@@ -9,7 +9,7 @@ class VerController {
     def producto() {
         def cn = dbConnectionService.getConnection()
         println "carrusel params: $params"
-        def publ = Publicacion.get(params.anun)
+        def publ = Publicacion.get(params.publ)
         def ctgr = Categoria.list([sort: 'descripcion'])
 
         def sql = "select publ.prod__id, publtitl, publ__id, publsbtl, publtxto, publpcun from publ " +
@@ -34,7 +34,44 @@ class VerController {
         if(session.cliente){
             cliente = Cliente.get(session.cliente.id)
         }
-        return [ctgr: ctgr, carrusel: carrusel, publ: prod, anuncio: params.anun, cliente:cliente]
+
+        def comentarios = Comentario.findAllByPublicacionAndEstado(publ, 'A')
+        def comentarioExistente = Comentario.findByPublicacionAndCliente(publ, cliente)
+        def carrito = Carrito.findAllByCliente(cliente)
+        def productoAdquirido = false
+
+        if(carrito){
+            productoAdquirido = DetalleCarrito.findAllByPublicacionAndCarritoInList(publ, carrito)
+        }
+
+//        println("pu " + params.publ)
+//        println("com " + comentarios)
+//        println("com2 " + comentarioExistente)
+
+        def existe = '0'
+
+        if(comentarios?.size() < 5){
+            if(comentarioExistente){
+                existe = '0'
+            }else{
+                if(productoAdquirido){
+                    existe = '1'
+                }else{
+                    existe = '2'
+                }
+            }
+        }else{
+            existe = '0'
+        }
+
+
+        def estrellas = 5
+
+        if(comentarios){
+           estrellas =  Math.round(comentarios.calificacion.sum()  / comentarios.size())
+        }
+
+        return [ctgr: ctgr, carrusel: carrusel, publ: prod, anuncio: params.anun, cliente:cliente, comentarios: comentarios, existe: existe, estrellas: estrellas]
     }
 
     def preguntas_ajax(){

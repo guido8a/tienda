@@ -37,17 +37,29 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic' rel='stylesheet' type='text/css'>
 
     <style type="text/css">
-        .page-head {
-            /*background: url(../images/ba2.jpg) no-repeat center;*/
-            background: url("${request.contextPath}/principal/getImgnProd?ruta=ba2.jpg&tp=v&id=1") no-repeat center;
-            background-size: cover;
-            -webkit-background-size: cover;
-            -o-background-size: cover;
-            -ms-background-size: cover;
-            -moz-background-size: cover;
-            min-height: 217px;
-            padding-top: 85px;
-        }
+    .page-head {
+        /*background: url(../images/ba2.jpg) no-repeat center;*/
+        background: url("${request.contextPath}/principal/getImgnProd?ruta=ba2.jpg&tp=v&id=1") no-repeat center;
+        background-size: cover;
+        -webkit-background-size: cover;
+        -o-background-size: cover;
+        -ms-background-size: cover;
+        -moz-background-size: cover;
+        min-height: 217px;
+        padding-top: 85px;
+    }
+
+    .borde{
+        border: solid 1px;
+        border-color: #eeb51f;
+    }
+
+    .borde2{
+        border: solid 1px;
+        border-color: #797979;
+    }
+
+
     </style>
 
 </head>
@@ -223,27 +235,27 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="single">
     <div class="container">
         <div class="col-md-6 single-right-left animated wow slideInUp animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: slideInUp;">
-                    <!-- FlexSlider http://flexslider.woothemes.com/asnavfor-rtl.html -->
-                    <script>
-                        // Can also be used with $(document).ready()
-                        $(window).load(function() {
-                            $('.flexslider').flexslider({
-                                animation: "slide",
-                                controlNav: "thumbnails"
-                            });
-                        });
-                    </script>
+            <!-- FlexSlider http://flexslider.woothemes.com/asnavfor-rtl.html -->
+            <script>
+                // Can also be used with $(document).ready()
+                $(window).load(function() {
+                    $('.flexslider').flexslider({
+                        animation: "slide",
+                        controlNav: "thumbnails"
+                    });
+                });
+            </script>
 
 
-                    <div class="flexslider">
-                        <ul class="slides">
-                            <g:each in="${carrusel}" var="p" status="i">
-                            <li>
-                                <img src="${request.contextPath}/principal/getImgnProd?ruta=${p.ruta}&tp=c"/>
-                            </li>
-                            </g:each>
-                        </ul>
-                    </div>
+            <div class="flexslider">
+                <ul class="slides">
+                    <g:each in="${carrusel}" var="p" status="i">
+                        <li>
+                            <img src="${request.contextPath}/principal/getImgnProd?ruta=${p.ruta}&tp=c"/>
+                        </li>
+                    </g:each>
+                </ul>
+            </div>
         </div>
         <div class="col-md-6 single-right-left simpleCart_shelfItem animated wow slideInRight animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: slideInRight;">
             <h3>${publ.publtitl}</h3>
@@ -255,24 +267,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="rating1">
                 <strong>Opinión : &nbsp;</strong>
                 <span class="starRating">
-                    <input id="rating5" type="radio" name="rating" value="5">
+                    <input id="rating5" type="radio" name="rating" value="5" ${estrellas == 5 ? 'checked' : ''}>
                     <label for="rating5">5</label>
-                    <input id="rating4" type="radio" name="rating" value="4" checked="">
+                    <input id="rating4" type="radio" name="rating" value="4" ${estrellas == 4 ? 'checked' : ''}>
                     <label for="rating4">4</label>
-                    <input id="rating3" type="radio" name="rating" value="3">
+                    <input id="rating3" type="radio" name="rating" value="3" ${estrellas == 3 ? 'checked' : ''}>
                     <label for="rating3">3</label>
-                    <input id="rating2" type="radio" name="rating" value="2">
+                    <input id="rating2" type="radio" name="rating" value="2" ${estrellas == 2 ? 'checked' : ''}>
                     <label for="rating2">2</label>
-                    <input id="rating1" type="radio" name="rating" value="1">
+                    <input id="rating1" type="radio" name="rating" value="1" ${estrellas == 1 ? 'checked' : ''}>
                     <label for="rating1">1</label>
                 </span>
             </div>
-%{--
-            <div class="color-quality">
-                <div class="color-quality-right">
-                </div>
-            </div>
---}%
             <div class="occasional">
                 <h5>Tipo de empacado :</h5>
                 <div class="colr ert">
@@ -297,7 +303,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
                 <ul id="myTab" class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Descripción</a></li>
-                    <li role="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Opiniones del producto(1)</a></li>
+                    <li role="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Opiniones del producto(${comentarios?.size() ?: 0})</a></li>
                     <li role="presentation" class="dropdown">
                         <a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents">Información adicional <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents">
@@ -310,39 +316,57 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div role="tabpanel" class="tab-pane fade in active bootstrap-tab-text" id="home" aria-labelledby="home-tab">
                         <h5>Descripción</h5>
                         <p>
-                            Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.
                             <span>${raw(publ.publtxto)}</span>
                         </p>
                     </div>
                     <div role="tabpanel" class="tab-pane fade bootstrap-tab-text" id="profile" aria-labelledby="profile-tab">
                         <div class="bootstrap-tab-text-grids">
-                            <div class="bootstrap-tab-text-grid">
-                                <div class="bootstrap-tab-text-grid-left">
-                                    <img src="images/men3.jpg" alt=" " class="img-responsive">
-                                </div>
-                                <div class="bootstrap-tab-text-grid-right">
-%{--                                    <ul>--}%
-%{--                                        <li><a href="#">Admin</a></li>--}%
-%{--                                        <li><a href="#"><span class="glyphicon glyphicon-share" aria-hidden="true"></span>Reply</a></li>--}%
-%{--                                    </ul>--}%
-                                    <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis
-                                    suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem
-                                    vel eum iure reprehenderit.</p>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
 
-                            <div class="add-review">
-                                <h4>add a review</h4>
-                                <form>
-                                    <input type="text" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}" required="">
-                                    <input type="email" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
+                            <g:each in="${comentarios}" var="comentario">
+                                <div class="bootstrap-tab-text-grid">
+                                    <div class="bootstrap-tab-text-grid-left borde2" style="text-align: center">
+                                        <strong>${comentario?.calificacion} Estrellas</strong>
+                                    </div>
+                                    <div class="bootstrap-tab-text-grid-right borde">
+                                        <p>${comentario?.descripcion}</p>
+                                    </div>
+                                    <div class="clearfix"> </div>
+                                </div>
+                            </g:each>
 
-                                    <textarea type="text" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message...';}" required="">Message...</textarea>
-                                    <input type="submit" value="SEND">
-                                </form>
-                            </div>
-                        </div>
+                            <g:if test="${cliente}">
+                                <g:if test="${existe == '1'}">
+                                    <div class="add-review">
+                                        <h4>Añadir comentario</h4>
+                                        <form>
+                                            <div class="col-md-2">
+                                                <g:select class="form-control" name="calificacion" from="${[5: '5 Estrellas', 4: '4 Estrellas', 3: '3 Estrellas', 2: '2 Estrellas', 1: '1 Estrella']}"
+                                                          optionKey="key" optionValue="value"/>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <textarea type="text" id="textoComentario" maxlength="255" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Comentario...';}" required="">Comentario...</textarea>
+                                            </div>
+
+                                            <div class="occasion-cart">
+                                                <a href="#"  class="btnEnviarComentario hvr-outline-out btn btn-lg" data-id="${publ.publ__id}">Enviar</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </g:if>
+                                <g:else>
+                                    <g:if test="${existe == '2'}">
+                                        <div class="add-review">
+                                            <h4>Para ingresar un comentario debe primero haber adquirido este producto</h4>
+                                        </div>
+                                    </g:if>
+                                </g:else>
+                            </g:if>
+                            <g:else>
+                                <div class="add-review">
+                                    <h4>Para ingresar un comentario debe primero ingresar al sistema</h4>
+                                </div>
+                            </g:else>
+                       </div>
                     </div>
                     <div role="tabpanel" class="tab-pane fade bootstrap-tab-text" id="dropdown1" aria-labelledby="dropdown1-tab">
                         <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
@@ -482,6 +506,38 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
 <script type="text/javascript">
+
+    $(".btnEnviarComentario").click(function (){
+        var d = cargarLoader("Procesando...");
+        var pub = $(this).data("id");
+        var cal = $("#calificacion option:selected").val();
+        $.ajax({
+            type: 'POST',
+            url: '${createLink(controller: 'producto', action: 'agregarComentario_ajax')}',
+            data:{
+                id: pub,
+                texto: $("#textoComentario").val(),
+                calificacion: cal
+            },
+            success: function(msg){
+                d.modal("hide");
+                var parts = msg.split("_");
+                if(parts[0] == 'ok'){
+                    bootbox.alert("<i class='fa fa-check text-success fa-2x'></i> Comentario agregado correctamente");
+                    setTimeout(function () {
+                        location.reload(true);
+                    }, 1000);
+                }else{
+                    if(parts[0] == 'er'){
+                        bootbox.alert("<i class='fa fa-exclamation-triangle text-danger fa-2x'></i>" + parts[1])
+                    }else{
+                        bootbox.alert("<i class='fa fa-exclamation-triangle text-danger fa-2x'></i> Error al agregar el comentario")
+                    }
+
+                }
+            }
+        });
+    });
 
     $(".item_add").click(function () {
         var prod = $(this).data("id");
