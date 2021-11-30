@@ -109,7 +109,7 @@ class ProductoController {
 
         //condicion fija
         def wh = " grpo.grpo__id = prod.grpo__id and sbct.sbct__id = grpo.sbct__id and ctgr.ctgr__id = sbct.ctgr__id "
-        def sqlWhere = "where ${wh} ${condicionAdicional}"
+        def sqlWhere = "where prodetdo != 'B' and ${wh} ${condicionAdicional}"
 
         def sqlOrder = "order by prodtitl limit 51"
 
