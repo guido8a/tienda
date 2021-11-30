@@ -46,43 +46,43 @@
 
         <div class="row-fluid">
             <div style="margin-left: 20px;">
-%{--                <div class="col-xs-8 col-md-8">--}%
-                    <div class="col-xs-2 col-md-2">
-                        <b>Categoría: </b>
-                        <g:select name="categoria" from="${tienda.Categoria.list().sort{it.descripcion}}" optionKey="id" optionValue="descripcion" class="form-control"/>
-                    </div>
-                    <div class="col-xs-3 col-md-3" id="divSubcategoria">
+                %{--                <div class="col-xs-8 col-md-8">--}%
+                <div class="col-xs-2 col-md-2">
+                    <b>Categoría: </b>
+                    <g:select name="categoria" from="${tienda.Categoria.list().sort{it.descripcion}}" optionKey="id" optionValue="descripcion" class="form-control"/>
+                </div>
+                <div class="col-xs-3 col-md-3" id="divSubcategoria">
 
-                    </div>
+                </div>
 
-                    <div class="col-xs-2 col-md-2" id="divGrupo">
+                <div class="col-xs-2 col-md-2" id="divGrupo">
 
-                    </div>
+                </div>
 
-                    <div class="col-xs-3 col-md-3">
-                        <b>Criterio: </b>
-                        <g:textField name="criterio" class="form-control" />
-                    </div>
+                <div class="col-xs-3 col-md-3">
+                    <b>Criterio: </b>
+                    <g:textField name="criterio" class="form-control" />
+                </div>
 
-                    <div class="btn-group col-xs-2 col-md-2" style="margin-left: -10px; margin-top: 18px;">
+                <div class="btn-group col-xs-2 col-md-2" style="margin-left: -10px; margin-top: 18px;">
 
-                        <a href="#" name="busqueda" class="btn btn-info" id="btnBusqueda" title="Buscar"
-                           style="height: 34px; width: 46px">
-                            <i class="fa fa-search"></i>
-                        </a>
+                    <a href="#" name="busqueda" class="btn btn-info" id="btnBusqueda" title="Buscar"
+                       style="height: 34px; width: 46px">
+                        <i class="fa fa-search"></i>
+                    </a>
 
-                        <a href="#" name="limpiarBus" class="btn btn-warning" id="btnLimpiarBusqueda"
-                           title="Borrar criterios" style="height: 34px; width: 34px">
-                            <i class="fa fa-eraser"></i>
-                        </a>
+                    <a href="#" name="limpiarBus" class="btn btn-warning" id="btnLimpiarBusqueda"
+                       title="Borrar criterios" style="height: 34px; width: 34px">
+                        <i class="fa fa-eraser"></i>
+                    </a>
 
 
-                        <a href="${createLink(controller: 'producto', action: 'form')}" class="btn btn-success" id="btnNuevo"
-                           title="Nuevo producto" style="height: 34px; width: 46px">
-                            <i class="fa fa-plus-square"></i>
-                        </a>
+                    <a href="${createLink(controller: 'producto', action: 'form')}" class="btn btn-success" id="btnNuevo"
+                       title="Nuevo producto" style="height: 34px; width: 46px">
+                        <i class="fa fa-plus-square"></i>
+                    </a>
 
-                    </div>
+                </div>
             </div>
 
         </div>
@@ -127,8 +127,8 @@
     cargarsubcategorias($("#categoria option:selected").val());
 
     $("#categoria").change(function () {
-       var cat = $(this).val();
-       cargarsubcategorias(cat)
+        var cat = $(this).val();
+        cargarsubcategorias(cat)
     });
 
     function cargarsubcategorias(categoria){
@@ -229,25 +229,25 @@
             separator_before : true,
             action : function ($element) {
                 var id = $element.attr("id");
-                // console.log('prod__id', id)
                 verProducto(id);
             }
         };
 
-        /*
-                var administrar = {
-                    label: "Administrar",
-                    icon: "fa fa-pencil",
-                    separator_before : true,
-                    submenu: {
-                        editar
-                    }
-                };
-        */
+        var comentario = {
+            label: "Comentarios",
+            icon: "fa fa-book",
+            separator_before : true,
+            action : function ($element) {
+                var id = $element.attr("id");
+                verComentarios(id);
+            }
+        };
+
 
         // items.administrar = administrar;
         items.editar = editar;
         if(etdo == 'A') items.publicar = publicar;
+        if(etdo == 'P') items.comentario = comentario;
 
         return items
     }
@@ -495,6 +495,10 @@
                 }
             }
         });
+    }
+
+    function verComentarios(id){
+        location.href="${createLink(controller: 'comentario', action: 'list')}?id=" + id
     }
 
 
