@@ -5,7 +5,7 @@ class VerController {
     def mailService
     def dbConnectionService
 
-    /* debe llegar el id de la publicación en anun */
+    /* debe llegar el id de la publicación */
     def producto() {
         def cn = dbConnectionService.getConnection()
         println "carrusel params: $params"
@@ -76,6 +76,38 @@ class VerController {
 
 
         return [ctgr: ctgr, carrusel: carrusel, publ: prod, anuncio: params.anun, cliente:cliente, comentarios: comentarios, existe: existe, estrellas: estrellas, atributos: detallePublicacion]
+    }
+
+    /* debe llegar el id de la publicación */
+    def single() {
+        def cn = dbConnectionService.getConnection()
+        println "carrusel params: $params"
+        def publ = Publicacion.get(params.anun)
+        def ctgr = Categoria.list([sort: 'descripcion'])
+
+        def sql = "select publ.prod__id, publtitl, publ__id, publsbtl, publtxto, publpcun from publ " +
+                "where publ__id = ${params.publ}"
+        println "sql: $sql"
+        def prod = cn.rows(sql.toString())[0]
+
+//        def atrb = Valores.findAllByProducto(producto.producto)
+//        def preguntas = Pregunta.findAllByProducto(producto.producto).sort{it.fecha}
+        def carrusel = []
+
+        sql = "select prod__id, dtpbvlor, dtpbpncp from publ, dtpb where publ.publ__id = ${params.publ} and " +
+                "dtpb.publ__id = publ.publ__id and dtpbtipo = 'I' order by dtpbpncp"
+        cn.eachRow(sql.toString()) { d ->
+            carrusel.add([ruta: "${d.prod__id}/${d.dtpbvlor}"])
+        }
+
+//        println"carrusel: $carrusel"
+
+        def cliente = null
+
+        if(session.cliente){
+            cliente = Cliente.get(session.cliente.id)
+        }
+        return [ctgr: ctgr, carrusel: carrusel, publ: prod, anuncio: params.anun, cliente:cliente]
     }
 
     def preguntas_ajax(){

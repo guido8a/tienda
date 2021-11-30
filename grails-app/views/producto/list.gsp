@@ -246,7 +246,7 @@
 
         // items.administrar = administrar;
         items.editar = editar;
-        if(etdo == 'A') items.publicar = publicar;
+        if(etdo != 'B') items.publicar = publicar;
         if(etdo == 'P') items.comentario = comentario;
 
         return items
