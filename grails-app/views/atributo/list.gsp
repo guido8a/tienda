@@ -57,14 +57,16 @@
         <thead>
         <tr>
             <th class="alinear" style="width: 15%">Orden</th>
-            <th class="alinear" style="width: 85%">Descripción</th>
+            <th class="alinear" style="width: 45%">Característica</th>
+            <th class="alinear" style="width: 40%">Valor</th>
         </tr>
         </thead>
         <tbody>
         <g:each in="${atributos}" status="i" var="atributo">
             <tr data-id="${atributo.id}">
                 <td style="width: 15%">${atributo?.orden}</td>
-                <td style="width: 85%">${atributo?.descripcion}</td>
+                <td style="width: 45%">${atributo?.descripcion}</td>
+                <td style="width: 40%">${atributo?.valor}</td>
             </tr>
         </g:each>
         </tbody>

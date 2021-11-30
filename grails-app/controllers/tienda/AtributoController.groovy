@@ -21,7 +21,7 @@ class AtributoController {
 
     def list(){
         def producto = Producto.get(params.id)
-        def atributos = Atributo.findAllByProducto(producto)
+        def atributos = Atributo.findAllByProducto(producto).sort{it.orden}
         return[producto: producto, atributos: atributos]
     }
 

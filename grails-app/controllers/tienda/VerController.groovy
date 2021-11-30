@@ -71,7 +71,11 @@ class VerController {
            estrellas =  Math.round(comentarios.calificacion.sum()  / comentarios.size())
         }
 
-        return [ctgr: ctgr, carrusel: carrusel, publ: prod, anuncio: params.anun, cliente:cliente, comentarios: comentarios, existe: existe, estrellas: estrellas]
+
+        def detallePublicacion = DetallePublicacion.findAllByPublicacionAndTipo(publ, 'V')
+
+
+        return [ctgr: ctgr, carrusel: carrusel, publ: prod, anuncio: params.anun, cliente:cliente, comentarios: comentarios, existe: existe, estrellas: estrellas, atributos: detallePublicacion]
     }
 
     def preguntas_ajax(){

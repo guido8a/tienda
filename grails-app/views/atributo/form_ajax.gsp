@@ -23,13 +23,26 @@
     <div class="form-group ${hasErrors(bean: atributo, field: 'descripcion', 'error')} required">
         <span class="grupo">
             <label for="descripcion" class="col-md-2 control-label text-info">
-                Descripción
+                Característica
             </label>
             <div class="col-md-6">
                 <g:textArea name="descripcion" maxlength="63" required="" style="height: 80px; width: 400px; resize: none" class="form-control required" value="${atributo?.descripcion}"/>
             </div>
         </span>
     </div>
+
+    <div class="form-group ${hasErrors(bean: atributo, field: 'valor', 'error')} required">
+        <span class="grupo">
+            <label for="valor" class="col-md-2 control-label text-info">
+                Valor
+            </label>
+            <div class="col-md-6">
+                <g:textArea name="valor" maxlength="255" required="" style="height: 80px; width: 400px; resize: none" class="form-control required" value="${atributo?.valor}"/>
+            </div>
+        </span>
+    </div>
+
+
 </g:form>
 
 <script type="text/javascript">
