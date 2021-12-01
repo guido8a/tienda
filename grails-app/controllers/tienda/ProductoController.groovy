@@ -267,7 +267,38 @@ class ProductoController {
             }
 
         }
+    }
 
+    def darDeBaja_ajax(){
+        def producto = Producto.get(params.id)
+        def publicacionActiva = Publicacion.findByProductoAndEstado(producto, 'A')
+
+        if(publicacionActiva){
+            publicacionActiva.estado = 'B'
+
+            if(!publicacionActiva.save(flush:true)){
+                println("error al dar de baja la publicacion " + publicacionActiva.errors)
+                render "er_Error al dar de baja la publicación"
+            }else{
+                producto.estado = 'B'
+
+                if(!producto.save(flush:true)){
+                    println("error al dar de baja el producto " + producto.errors)
+                    render "no"
+                }else{
+                    render "ok"
+                }
+            }
+        }else{
+            producto.estado = 'B'
+
+            if(!producto.save(flush:true)){
+                println("error al dar de baja el producto " + producto.errors)
+                render "no"
+            }else{
+                render "ok"
+            }
+        }
     }
 
 }

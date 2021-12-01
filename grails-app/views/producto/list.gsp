@@ -243,11 +243,22 @@
             }
         };
 
+        var eliminar = {
+            label: "Dar de Baja",
+            icon: "fa fa-ban",
+            separator_before : true,
+            action : function ($element) {
+                var id = $element.attr("id");
+                eliminarProducto(id);
+            }
+        };
+
 
         // items.administrar = administrar;
         items.editar = editar;
         if(etdo != 'B') items.publicar = publicar;
         if(etdo == 'P') items.comentario = comentario;
+        if(etdo != 'B') items.eliminar = eliminar;
 
         return items
     }
@@ -414,10 +425,10 @@
         });
     }
 
-    function negarProducto(id) {
+    function eliminarProducto(id) {
         bootbox.dialog({
             title   : "Negar producto",
-            message : "<i class='fa fa-user-slash fa-2x pull-left text-warning text-shadow'></i><span style='font-size: 14px; font-weight: bold'>&nbsp; ¿Está seguro que desea negar el anuncio de este producto?.</span>",
+            message : "<i class='fa fa-user-slash fa-2x pull-left text-warning text-shadow'></i><span style='font-size: 14px; font-weight: bold'>&nbsp; ¿Está seguro que desea dar de baja este producto?.</span>",
             buttons : {
                 cancelar : {
                     label     : "<i class='fa fa-times'></i> Cancelar",
@@ -432,19 +443,24 @@
                         var l2 = cargarLoader("Procesando...");
                         $.ajax({
                             type    : "POST",
-                            url     : "${createLink(controller: 'anuncio', action:'negarAnuncio_ajax')}",
+                            url     : "${createLink(controller: 'producto', action:'darDeBaja_ajax')}",
                             data    : {
                                 id:id
                             },
                             success : function (msg) {
-                                l2.modal("hide")
-                                if(msg == 'ok'){
-                                    log("Producto negado correctamente","success");
+                                l2.modal("hide");
+                                var parts = msg.split("_");
+                                if(parts[0] == 'ok'){
+                                    log("Producto inactivo correctamente","success");
                                     setTimeout(function () {
                                         location.reload(true);
                                     }, 1000);
                                 }else{
-                                    log("Error al negar el producto","error")
+                                    if(parts[0] == 'er'){
+                                        bootbox.alert(parts[1])
+                                    }else{
+                                        log("Error al dar de baja el producto","error")
+                                    }
                                 }
                             } //success
                         }); //ajax
