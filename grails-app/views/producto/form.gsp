@@ -132,8 +132,6 @@
                                 <g:textField name="estado_name" class="allCaps form-control" value="${producto?.estado == 'A' ? 'Activo' : 'Inactivo'}" readonly="true"/>
                             </span>
                         </div>
-
-
                     </div>
                 </div>
 
@@ -165,6 +163,24 @@
                         </div>
 
                     </div>
+                </div>
+
+                <div class="row izquierda">
+                    <div class="col-md-12 input-group">
+                        <span class="col-md-1 label label-primary text-info mediano">Precio unitario</span>
+                        <div class="col-md-2">
+                            <span class="grupo">
+                                <g:textField name="precioUnidad" class="form-control number" value="${g.formatNumber(number: producto?.precioUnidad, format: "##,##0", maxFractionDigits: 2, minFractionDigits: 2)}"/>
+                            </span>
+                        </div>
+
+                        <span class="col-md-1 label label-primary text-info mediano">Precio al por mayor</span>
+                        <div class="col-md-2">
+                            <span class="grupo">
+                                <g:textField name="precioMayor" class="form-control number" value="${g.formatNumber(number: producto?.precioMayor, format: "##,##0", maxFractionDigits: 2, minFractionDigits: 2)}"/>
+                            </span>
+                        </div>
+                   </div>
                 </div>
 
                 <div class="row izquierda" style="margin-bottom: 20px">

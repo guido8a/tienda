@@ -46,11 +46,10 @@ class Producto {
         texto(blank: true, nullable: true, attributes: [title: 'texto'])
         estado(blank: true, nullable: true, attributes: [title: 'estado'])
         fecha(blank: false, nullable: false, attributes: [title: 'fecha creacion'])
-//        sitio(size: 0..127, blank: true, nullable: true, attributes: [title: 'sitio'])
-//        latitud(blank: true, nullable: true, attributes: [title: 'latitud'])
-//        longitud(blank: true, nullable: true, attributes: [title: 'longitud'])
         fechaModificacion(blank: true, nullable: true, attributes: [title: 'fecha modificacion'])
         destacado(blank: true, nullable: true, attributes: [title: 'destacado'])
-        nuevo(size: 0..1, blank: true, nullable: true, attributes: [title: 'destacado'])
+        nuevo(size: 0..1, blank: true, nullable: true, attributes: [title: 'nuevo'])
+        precioUnidad(blank: true, nullable: true, attributes: [title: 'unidad'])
+        precioMayor(blank: true, nullable: true, attributes: [title: 'mayor'])
     }
 }

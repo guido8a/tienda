@@ -19,8 +19,8 @@ class CarritoController {
     }
 
     def agregarProducto_ajax(){
-        println("params " + params)
-        println("---> " + session.cliente)
+//        println("params " + params)
+//        println("---> " + session.cliente)
 
         def publicacion = Publicacion.get(params.id)
         def cliente
@@ -42,7 +42,7 @@ class CarritoController {
                     detalle.carrito = carrito
                     detalle.publicacion = publicacion
                     detalle.cantidad = 1
-                    detalle.subtotal = publicacion.producto.precioUnidad.toDouble()
+                    detalle.subtotal = publicacion.precioUnidad.toDouble()
 
                     if(!detalle.save(flush:true)){
                         println("error al agregar el producto del carrito " + detalle.errors)
@@ -72,7 +72,7 @@ class CarritoController {
                     detalle.carrito = carrito
                     detalle.publicacion = publicacion
                     detalle.cantidad = 1
-                    detalle.subtotal = publicacion.producto.precioUnidad.toDouble()
+                    detalle.subtotal = publicacion.precioUnidad.toDouble()
 
                     if(!detalle.save(flush:true)){
                         println("error al agregar el producto del carrito " + detalle.errors)
