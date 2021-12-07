@@ -293,8 +293,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <img class="img-responsive" alt="Imagen de promoción 1"
                      src="${request.contextPath}/principal/getImgnProd?ruta=wed1.jpg&tp=v&id=0"/>
                 <div class="wed-brand simpleCart_shelfItem">
-                    <h4>Colección Novias</h4>
-                    <h5>50% de descuento</h5>
+                    <h4>Cobija Fannel</h4>
+                    <h5>20% de descuento</h5>
                     <p><i>$500</i> <span class="item_price">$250</span><a class="item_add hvr-outline-out button2" href="#">Añadir al carrito</a></p>
                 </div>
             </div>
@@ -305,14 +305,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                              src="${request.contextPath}/principal/getImgnProd?ruta=levis1.png&tp=v&id=0"/>
                     </div>
                     <div class="mid-text">
-                        <h4>up to 40% <span>off</span></h4>
+                        <h4>Hasta el 40% <span>Descuento</span></h4>
                         <a class="hvr-outline-out button2" href="product.html">Comprar </a>
                     </div>
                     <div class="clearfix"></div>
                 </div>
                 <div class="new-levis">
                     <div class="mid-text">
-                        <h4>up to 50% <span>off</span></h4>
+                        <h4>Hasta el 50% <span>Descuento</span></h4>
                         <a class="hvr-outline-out button2" href="product.html">Comprar </a>
                     </div>
                     <div class="mid-img">
@@ -327,8 +327,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <img class="img-responsive" alt="Imagen de promoción 1"
                      src="${request.contextPath}/principal/getImgnProd?ruta=wed2.jpg&tp=v&id=0"/>
                 <div class="wed-brandtwo simpleCart_shelfItem">
-                    <h4>Spring / Summer</h4>
-                    <p>Shop Men</p>
+                    <h4>Manta Sherpa Mink</h4>
+                    <p>100% poliester</p>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -350,9 +350,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </div>
                 <div class="info-box">
                     <div class="info-content simpleCart_shelfItem">
-                        <h4>Mobiles</h4>
+                        <h4>Cobijas</h4>
                         <span class="separator"></span>
-                        <p><span class="item_price">$500</span></p>
+                        <p><span class="item_price">$150</span></p>
                         <span class="separator"></span>
                         <a class="item_add hvr-outline-out button2" href="#">Añadir al carrito </a>
                     </div>
@@ -360,11 +360,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </div>
         <div class="col-sm-6 content-img-right">
-            <h3>Special Offers and 50%<span>Discount On</span> Mobiles</h3>
+            <h3>Oferta especial 50%<span>Descuentos</span> Cobijas</h3>
         </div>
 
         <div class="col-sm-6 content-img-right">
-            <h3>Buy 1 get 1  free on <span> Branded</span> Watches</h3>
+            <h3>Compre 1 y lleve 2 <span> Cobijas</span> Extra suaves</h3>
         </div>
         <div class="col-sm-6 content-img-left text-center">
             <div class="content-grid-effect slow-zoom vertical">
@@ -374,9 +374,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </div>
                 <div class="info-box">
                     <div class="info-content simpleCart_shelfItem">
-                        <h4>Watches</h4>
+                        <h4>Cobijas</h4>
                         <span class="separator"></span>
-                        <p><span class="item_price">$250</span></p>
+                        <p><span class="item_price">$150</span></p>
                         <span class="separator"></span>
                         <a class="item_add hvr-outline-out button2" href="#">Añadir al carrito </a>
                     </div>
@@ -393,9 +393,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <div class="info-box">
                 <div class="info-content simpleCart_shelfItem">
-                    <h4>Shoes</h4>
+                    <h4>Alfombras</h4>
                     <span class="separator"></span>
-                    <p><span class="item_price">$150</span></p>
+                    <p><span class="item_price">$50</span></p>
                     <span class="separator"></span>
                     <a class="item_add hvr-outline-out button2" href="#">Añadir al carrito </a>
                 </div>
