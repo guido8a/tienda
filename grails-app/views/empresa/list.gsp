@@ -19,7 +19,7 @@
 <!-- botones -->
 <div class="btn-toolbar toolbar" style="margin-top: 10px">
     <div class="btn-group">
-        <g:link class="btn btn-default col-md-2" style="width: 100px;" controller="inicio" action="parametros"><i class="fa fa-arrow-left"></i> Parámetros</g:link>
+        <g:link class="btn btn-default col-md-2" style="width: 100px;" controller="inicio" action="index"><i class="fa fa-arrow-left"></i> Regresar</g:link>
         <g:link action="form" class="btn btn-info btnCrear">
             <i class="fa fa-file"></i> Nueva empresa
         </g:link>
@@ -242,7 +242,7 @@
                     separator_before : true,
                     action           : function ($element) {
                         var id = $element.data("id");
-                        location.href="${createLink(controller: 'empresa', action: 'administradores')}/" + id;
+                        location.href="${createLink(controller: 'persona', action: 'list')}/" + id;
                     }
                 },
                 imas : {

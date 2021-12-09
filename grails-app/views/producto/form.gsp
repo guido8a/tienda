@@ -201,12 +201,6 @@
 
 <script type="text/javascript">
 
-
-
-
-    //aaaaaaa
-
-
     $.switcher('input[type=checkbox]');
 
     CKEDITOR.replace( 'texto', {

@@ -66,21 +66,7 @@
                 ${personaInstance?.direccion}
             </div>
         </div>
-        <div class="row">
-            <label class="col-md-3  text-info">
-                Cargo
-            </label>
-            <div class="col-md-3">
-                ${personaInstance?.cargo}
-            </div>
 
-            <label class="col-md-2  text-info">
-                Título
-            </label>
-            <div class="col-md-4">
-                ${personaInstance?.titulo}
-            </div>
-        </div>
         <div class="row">
             <label class="col-md-3  text-info">
                 Activo
@@ -89,20 +75,16 @@
                 <strong>${personaInstance?.activo == 1 ? 'SI' : 'NO'}</strong>
             </div>
 
-            <label class="col-md-2  text-info">
-                Discapacidad
-            </label>
-            <div class="col-md-4">
-                ${personaInstance?.discapacidad == 1 ? 'SI' : 'NO'}
-            </div>
         </div>
         <div class="row">
-            <label class="col-md-3  text-info">
-                Fecha de Inicio
-            </label>
-            <div class="col-md-3">
-                ${personaInstance?.fechaInicio?.format("dd-MM-yyyy")}
-            </div>
+            <g:if test="${personaInstance?.fechaInicio}">
+                <label class="col-md-3  text-info">
+                    Fecha de Inicio
+                </label>
+                <div class="col-md-3">
+                    ${personaInstance?.fechaInicio?.format("dd-MM-yyyy")}
+                </div>
+            </g:if>
 
             <g:if test="${personaInstance?.fechaFin}">
                 <label class="col-md-2  text-info">

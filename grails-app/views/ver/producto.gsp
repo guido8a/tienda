@@ -330,17 +330,30 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div role="tabpanel" class="tab-pane fade bootstrap-tab-text" id="profile" aria-labelledby="profile-tab">
                         <div class="bootstrap-tab-text-grids">
 
-                            <g:each in="${comentarios}" var="comentario">
-                                <div class="bootstrap-tab-text-grid">
-                                    <div class="bootstrap-tab-text-grid-left borde2" style="text-align: center">
-                                        <strong>${comentario?.calificacion} Estrellas</strong>
-                                    </div>
-                                    <div class="bootstrap-tab-text-grid-right borde">
-                                        <p>${comentario?.descripcion}</p>
-                                    </div>
-                                    <div class="clearfix"> </div>
+
+                            <g:if test="${comentarios}">
+                                <table class="table table-condensed table-bordered table-striped table-hover" style="width:100%;margin-top: 20px !important;">
+                                    <thead style="width: 100%">
+                                    <tr>
+                                        <th style="width: 15%; font-size: 18px !important;" class="naranja">Calificación</th>
+                                        <th style="width: 85%; font-size: 18px !important;" class="naranja">Comentario</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <g:each in="${comentarios}" var="comentario">
+                                        <tr>
+                                            <td style="font-weight: bold; font-size: 16px !important;">${comentario?.calificacion} estrellas</td>
+                                            <td>${comentario?.descripcion}</td>
+                                        </tr>
+                                    </g:each>
+                                    </tbody>
+                                </table>
+                            </g:if>
+                            <g:else>
+                                <div class="add-review">
+                                    <h4> * No existe ningún comentario para el producto</h4>
                                 </div>
-                            </g:each>
+                            </g:else>
 
                             <g:if test="${cliente}">
                                 <g:if test="${existe == '1'}">
@@ -364,7 +377,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <g:else>
                                     <g:if test="${existe == '2'}">
                                         <div class="add-review">
-                                            <h4>Para ingresar un comentario debe primero haber adquirido este producto</h4>
+                                            <h4> Para ingresar un comentario debe primero haber adquirido este producto</h4>
                                         </div>
                                     </g:if>
                                 </g:else>

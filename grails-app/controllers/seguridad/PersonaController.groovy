@@ -447,8 +447,7 @@ class PersonaController {
             }
         }
 
-        def permisosUsu = PermisoUsuario.findAllByPersona(usu).permisoTramite.id
-        return [usuario: usu, perfilesUsu: pers, permisosUsu: permisosUsu]
+        return [usuario: usu, perfilesUsu: pers]
     }
 
 
@@ -597,27 +596,31 @@ class PersonaController {
     }
 
     def list() {
+
+        def empresa = Empresa.get(params.id)
+        def usuarios = Persona.findAllByEmpresa(empresa).sort{it.login}
+
+        return[usuarios: usuarios, empresa: empresa]
+
+
 //        println "list: $params"
 //        if (session.usuario.puedeAdmin) {
-        params.max = Math.min(params.max ? params.max.toInteger() : 15, 100)
-        params.sort = params.sort ?: "apellido"
-        params.perfil = params.perfil ?: ''
-        params.estado = params.estado ?: ''
-        def personaInstanceList = getLista(params, false)
-        def personaInstanceCount = getLista(params, true).size()
-        if (personaInstanceList.size() == 0 && params.offset && params.max) {
-            params.offset = params.offset - params.max
-            personaInstanceList = getLista(params, false)
-        }
-
-
-        println("p " + personaInstanceList)
-//        println("p2 " + personaInstanceCount)
-
-
-        return [personaInstanceList: personaInstanceList, personaInstanceCount: personaInstanceCount, params: params]
+//            params.max = Math.min(params.max ? params.max.toInteger() : 15, 100)
+//            params.sort = params.sort ?: "apellido"
+//            params.perfil = params.perfil ?: ''
+//            params.estado = params.estado ?: ''
+//            def personaInstanceList = getLista(params, false)
+//            def personaInstanceCount = getLista(params, true).size()
+//            if (personaInstanceList.size() == 0 && params.offset && params.max) {
+//                params.offset = params.offset - params.max
+//                personaInstanceList = getLista(params, false)
+//            }
+//
+//            println("p " + personaInstanceList)
+//
+//            return [personaInstanceList: personaInstanceList, personaInstanceCount: personaInstanceCount, params: params]
 //        } else {
-//            flash.message = "Está tratando de ingresar a un pantalla restringida para su perfil. Está acción será registrada."
+//            flash.message = "Está tratando de ingresar a un pantalla restringida para su perfil."
 //            response.sendError(403)
 //        }
     } //list
@@ -646,10 +649,8 @@ class PersonaController {
 
     def form_ajax() {
         println("params fp " + params)
-        def unidad = null
-        if(params.padre){
-            unidad = UnidadEjecutora.get(params.padre)
-        }
+
+        def empresa = Empresa.get(params.empresa)
         def personaInstance = new Persona(params)
         def perfiles = []
         if (params.id) {
@@ -666,8 +667,8 @@ class PersonaController {
             }
         }
         personaInstance.properties = params
-        return [personaInstance: personaInstance, perfiles: perfiles, unidad: unidad]
-    } //form para cargar con ajax en un dialog
+        return [personaInstance: personaInstance, perfiles: perfiles, empresa: empresa]
+    }
 
     def activar_ajax() {
         def persona = Persona.get(params.id)
@@ -944,37 +945,24 @@ class PersonaController {
         def mnsj = ""
         if (params.id) {
             def personaInstance = Persona.get(params.id)
-            /** comprueba que se pueda borrar **/
-/*
-            if (Base.findByPersona(personaInstance)) {
-                mnsj += "La persona tiene entradas en la base de conocimiento\n"
-            }
-*/
-/*
-            if (Actividad.findByIngresa(personaInstance)) {
-                mnsj += "La persona ha ingresado actividades\n"
-            }
-            if (Actividad.findByResponsable(personaInstance)) {
-                mnsj += "La persona posee actividades que realziar\n"
-            }
-*/
-            if (Acceso.findByUsuario(personaInstance)) {
-                mnsj += "La persona tiene permisos de ausentismo\n"
-            }
-            if (Acceso.findByAsignadoPor(personaInstance)) {
-                mnsj += "La persona ha registrado ausentismo\n"
-            }
-            if (PermisoUsuario.findByAsignadoPor(personaInstance)) {
-                mnsj += "La persona ha realizado Asignación de permisos\n"
-            }
-            if (PermisoUsuario.findByModificadoPor(personaInstance)) {
-                mnsj += "La persona ha realizado Modificación de permisos\n"
-            }
-            if (personaInstance.activo) {
-                mnsj += "La persona se halla activa\n"
-            }
 
-            if (!mnsj) {
+//            if (Acceso.findByUsuario(personaInstance)) {
+//                mnsj += "La persona tiene permisos de ausentismo\n"
+//            }
+//            if (Acceso.findByAsignadoPor(personaInstance)) {
+//                mnsj += "La persona ha registrado ausentismo\n"
+//            }
+//            if (PermisoUsuario.findByAsignadoPor(personaInstance)) {
+//                mnsj += "La persona ha realizado Asignación de permisos\n"
+//            }
+//            if (PermisoUsuario.findByModificadoPor(personaInstance)) {
+//                mnsj += "La persona ha realizado Modificación de permisos\n"
+//            }
+//            if (personaInstance.activo) {
+//                mnsj += "La persona se halla activa\n"
+//            }
+
+//            if (!mnsj) {
                 def prsn = personaInstance.nombre + " " + personaInstance.apellido
                 if (personaInstance) {
                     try {
@@ -982,29 +970,29 @@ class PersonaController {
                             pr.delete(flush: true)
                         }
 
-                        PermisoUsuario.findAllByPersona(personaInstance).each { pr ->
-                            pr.delete(flush: true)
-                        }
+//                        PermisoUsuario.findAllByPersona(personaInstance).each { pr ->
+//                            pr.delete(flush: true)
+//                        }
 
                         personaInstance.delete(flush: true)
                         render "OK_${prsn} ha sido eliminada(o) del sistema"
                     } catch (e) {
-                        render "NO_" + mnsj
+                        render "NO_" + "Error al eliminar el usuario del sistema"
                     }
                 } else {
                     notFound_ajax()
                 }
 
-            } else {
-                render "NO_" + mnsj
-            }
+//            } else {
+//                render "NO_" + mnsj
+//            }
         } else {
             notFound_ajax()
         }
     } //delete para eliminar via ajax
 
     protected void notFound_ajax() {
-        render "NO_No se encontró Persona."
+        render "NO_No se encontró la persona."
     } //notFound para ajax
 
 
@@ -1019,15 +1007,20 @@ class PersonaController {
     def guardarPerfiles_ajax () {
 //        println("params prfl " + params)
 
+        def errores = ''
         def personaInstance = Persona.get(params.id)
         def perfilActual = Prfl.get(session.perfil.id)
+        def usuarioActual = Persona.get(session.usuario.id)
         def sesionActual = Sesn.findByPerfilAndUsuarioAndFechaFinIsNull(perfilActual, personaInstance)
+        def sesionActualAdmin = Sesn.findByPerfilAndUsuarioAndFechaFinIsNull(perfilActual, usuarioActual)
         def perfilesOld = Sesn.findAllByUsuarioAndFechaFinIsNull(personaInstance)
+//        def perfilesOld = Sesn.findAllByUsuarioAndFechaFinIsNull(usuarioActual)
 
 //        println("old " + perfilesOld)
 //        println("perfiles " + perfiles)
 //        println("<<<< " + perfiles?.size())
 //        println("se ac " + sesionActual.perfil.descripcion)
+//        println("se ac " + sesionActual.usuario)
 
 //        if (perfiles?.size() > 0) {
         if (params.perfiles) {
@@ -1048,7 +1041,7 @@ class PersonaController {
             def perfilesDelete = perfilesOld.perfil.plus(perfilesSelected)
             perfilesDelete.removeAll(commons)
 
-            def errores = ''
+
 
 //            println("p i " + perfilesInsertar)
 //            println("p b " + perfilesDelete)
@@ -1075,7 +1068,7 @@ class PersonaController {
                         bandera = true
                     }else{
                         perfilesDelete.each { perfil ->
-                            def perfilB = Sesn.findByPerfilAndUsuarioAndFechaFinIsNull(perfil, personaInstance)
+                            def perfilB = Sesn.findByPerfilAndUsuarioAndFechaFinIsNull(perfil.perfil, personaInstance)
 
                             if(perfilB){
                                 perfilB.fechaFin = new Date()
@@ -1089,6 +1082,7 @@ class PersonaController {
                     }
 
                     if(bandera){
+                        println("entro1")
                         render "er_No puede borrar el perfil ${sesionActual}, está actualmente en uso"
                     }else{
                         if(errores != ''){
@@ -1104,14 +1098,15 @@ class PersonaController {
                 render "no"
             }
         }else{
-            if(sesionActual.usuario == personaInstance){
+//            if(sesionActual.usuario == personaInstance){
+            if(sesionActualAdmin.usuario == personaInstance){
                 render "er_No puede borrar el perfil ${sesionActual}, está actualmente en uso"
             }else{
 
                 def perfilesBorrar = Sesn.findAllByUsuario(personaInstance)
 
                 perfilesBorrar.each { perfil ->
-                    def perfilB = Sesn.findByPerfilAndUsuarioAndFechaFinIsNull(perfil, personaInstance)
+                    def perfilB = Sesn.findByPerfilAndUsuarioAndFechaFinIsNull(perfil.perfil, personaInstance)
 
                     if(perfilB){
                         perfilB.fechaFin = new Date()
@@ -1135,9 +1130,16 @@ class PersonaController {
 
     def savePersona_ajax(){
 
-//        println("params sp " + params)
+        println("params sp " + params)
+        def persona
 
-        def persona = Persona.get(params.id)
+        if(params.id){
+            persona = Persona.get(params.id)
+        }else{
+            persona = new Persona()
+            persona.fechaInicio = new Date()
+        }
+
         persona.properties = params
 
         if(!persona.save(flush:true)){
