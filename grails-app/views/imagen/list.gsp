@@ -68,13 +68,15 @@
                 <div class="col-md-12">
                     <div class="row" style="height: ${tam < 5 ? 250 : (tam < 9 ? 350 : (tam < 13 ? 450 : (tam < 17 ? 550 : 650)))}px">
                         <g:each in="${imagenes}" var="im" status="i">
-                            <div class="col-xs-3 col-md-3" style="height: 150px">
-                                <div class="product" id="product_${i+1}">
-                                    <a href="#" class="thumbnail ${im.pncp == '1' ? 'borde' : ''}">
-                                        <img src="${createLink(controller: 'imagen', action: 'getImage', params: [id: "${im.file}", pro: producto?.id] )}"  width="120" height="80" title="${im.file}"/>
-                                    </a>
+                            <g:if test="${im.est == 'A'}">
+                                <div class="col-xs-3 col-md-3" style="height: 150px">
+                                    <div class="product" id="product_${i+1}">
+                                        <a href="#" class="thumbnail ${im.pncp == '1' ? 'borde' : ''}">
+                                            <img src="${createLink(controller: 'imagen', action: 'getImage', params: [id: "${im.file}", pro: producto?.id] )}"  width="120" height="80" title="${im.file}"/>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
+                            </g:if>
                         </g:each>
                     </div>
                 </div>

@@ -44,31 +44,33 @@
 <g:if test="${tam > 0}">
     <div class="row">
         <g:each in="${imagenes}" var="file" status="i">
-            <div class="col-sm-3 ${i} ${file.pncp == '1' ? 'marco' : ''}" style="height: 150px">
-%{--                <div class="imag_pq ${file.pncp == '1' ? 'marco' : ''}">--}%
-                <div class="imag_pq">
-                    <g:if test="${file.pncp != '1'}">
-                        <a href="#" class="btn btn-rojo btn-sm btnPrincipal" data-id="${file?.id}"
-                           title="Asignar imagen principal">
-                            <i class="fa fa-parking"></i>
-                        </a>
-                    </g:if>
+            <g:if test="${file.est == 'A'}">
+                <div class="col-sm-3 ${i} ${file.pncp == '1' ? 'marco' : ''}" style="height: 150px">
+                    %{--                <div class="imag_pq ${file.pncp == '1' ? 'marco' : ''}">--}%
+                    <div class="imag_pq">
+                        <g:if test="${file.pncp != '1'}">
+                            <a href="#" class="btn btn-rojo btn-sm btnPrincipal" data-id="${file?.id}"
+                               title="Asignar imagen principal">
+                                <i class="fa fa-parking"></i>
+                            </a>
+                        </g:if>
 
-                    <a href="#" class="btn btn-gris btn-sm btn-delete pull-right" title="Eliminar" data-idim="${file?.id}"
-                       data-i="${i}" style="margin-bottom: 5px">
-                        <i class="fa fa-trash"></i>
-                    </a>
-%{--                    <a href="#" class="btn btn-gris btn-sm pull-right btnTexto" title="Texto de la imagen"--}%
-%{--                       data-id="${file?.id}" style="margin-bottom: 5px">--}%
-%{--                        <i class="fa fa-edit"></i>--}%
-%{--                    </a>--}%
-                    <img src="${createLink(controller: 'imagen', action: 'getImage', params: [id: file.file, pro: producto?.id] )}"
-                         class="imag_pq" />
-                    <div class="caption" style="text-align: center">
-                        <p>${file.file}</p>
+                        <a href="#" class="btn btn-gris btn-sm btn-delete pull-right" title="Eliminar" data-idim="${file?.id}"
+                           data-i="${i}" style="margin-bottom: 5px">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                        %{--                    <a href="#" class="btn btn-gris btn-sm pull-right btnTexto" title="Texto de la imagen"--}%
+                        %{--                       data-id="${file?.id}" style="margin-bottom: 5px">--}%
+                        %{--                        <i class="fa fa-edit"></i>--}%
+                        %{--                    </a>--}%
+                        <img src="${createLink(controller: 'imagen', action: 'getImage', params: [id: file.file, pro: producto?.id] )}"
+                             class="imag_pq" />
+                        <div class="caption" style="text-align: center">
+                            <p>${file.file}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </g:if>
         </g:each>
     </div>
 </g:if>

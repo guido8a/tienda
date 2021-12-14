@@ -40,7 +40,7 @@ class ImagenController {
                     imas.each {mm->
                         if (img) {
                             if (mm.ruta == file.name) {
-                                    imagenes.add([file: file.name, pncp: mm.principal])
+                                    imagenes.add([file: file.name, pncp: mm.principal, est: mm.estado])
                             }
                         }
                     }
@@ -96,7 +96,8 @@ class ImagenController {
                         file: file.name,
                         w   : img?.getWidth(),
                         h   : img?.getHeight(),
-                        pncp: im.principal
+                        pncp: im.principal,
+                        est: im.estado
                 ])
             }
         }
@@ -119,17 +120,25 @@ class ImagenController {
     def deleteImagen_ajax() {
         println "deleteImagen_ajax params $params"
         def imagen = Imagen.get(params.idim)
-        def imagenes = Imagen.findAllByProductoAndIdNotEqual(imagen.producto, imagen.id)
+        def imagenes = Imagen.findAllByProductoAndIdNotEqualAndEstado(imagen.producto, imagen.id, 'A')
+        def tienePrincipal = Imagen.findAllByProductoAndIdNotEqualAndEstadoAndPrincipal(imagen.producto, imagen.id, 'A', '1')
         def path = "/var/tienda/imagenes/productos/pro_" + imagen.producto.id + "/${imagen.ruta}"
 
         if(imagenes.size() == 0){
             render "er_No se puede borrar la imagen, el producto tiene una sola imagen asociada."
         }else{
             try{
-                def principal = imagenes[0]
-                principal.principal = 1
-                imagen.delete(flush: true)
-                def file = new File(path).delete()
+
+                if(!tienePrincipal){
+                    def principal = imagenes[0]
+                    principal.principal = 1
+                    principal.save(flush:true)
+                }
+
+                imagen.estado = 'I'
+                imagen.save(flush:true)
+//                imagen.delete(flush: true)
+//                def file = new File(path).delete()
                 render "ok"
             }catch(e){
                 println("error al borrar la imagen " + e)
@@ -226,6 +235,7 @@ class ImagenController {
                         println "transferTo --> $pathFile"
                         def imagenNueva = new Imagen()
                         imagenNueva.producto = producto
+                        imagenNueva.estado = 'A'
                         imagenNueva.ruta = nombre
 
                         if(canti.size() == 0){
