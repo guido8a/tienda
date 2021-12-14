@@ -38,6 +38,7 @@ class Producto {
             precioMayor column: 'prodpcmy'
         }
     }
+
     static constraints = {
         persona(blank: false, nullable: false)
         grupo(blank: false, nullable: false)
@@ -52,4 +53,5 @@ class Producto {
         precioUnidad(blank: true, nullable: true, attributes: [title: 'unidad'])
         precioMayor(blank: true, nullable: true, attributes: [title: 'mayor'])
     }
+
 }
