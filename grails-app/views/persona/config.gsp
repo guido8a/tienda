@@ -45,7 +45,8 @@
                 </p>
                 <g:form name="frmPerfiles" action="savePerfiles_ajax">
                     <ul class="fa-ul">
-                        <g:each in="${seguridad.Prfl.list([sort: 'nombre'])}" var="perfil">
+%{--                        <g:each in="${seguridad.Prfl.list([sort: 'nombre'])}" var="perfil">--}%
+                        <g:each in="${perfiles}" var="perfil">
                             <li class="perfil">
                                 <g:checkBox class="c2" name="c1" data-id="${perfil?.id}" value="${perfilesUsu.contains(perfil.id)}" checked="${perfilesUsu.contains(perfil.id) ? 'true' : 'false'}"/>
                                 <span>${perfil.nombre} ${perfil.observaciones ? '(' + perfil.observaciones + ')' : ''}</span>

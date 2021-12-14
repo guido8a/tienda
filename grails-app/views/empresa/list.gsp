@@ -127,7 +127,8 @@
         var data = id ? { id: id } : {};
         $.ajax({
             type    : "POST",
-            url     : "${createLink(action:'form_ajax')}",
+            %{--url     : "${createLink(action:'form_ajax')}",--}%
+            url     : "http://www.tedein.com.ec/demo/login/login",
             data    : data,
             success : function (msg) {
                 var b = bootbox.dialog({
@@ -237,7 +238,7 @@
                     }
                 },
                 admin : {
-                    label            : "Administradores",
+                    label            : "Usuarios",
                     icon             : "fa fa-user",
                     separator_before : true,
                     action           : function ($element) {

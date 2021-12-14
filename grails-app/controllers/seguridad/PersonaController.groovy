@@ -447,7 +447,22 @@ class PersonaController {
             }
         }
 
-        return [usuario: usu, perfilesUsu: pers]
+        def perfiles
+
+        def perfilAdmin = Prfl.findByCodigo('ADMN')
+        def usuarioActual = Persona.get(session.usuario.id)
+        def sesionActual = Sesn.findByPerfilAndUsuarioAndFechaFinIsNull(perfilAdmin, usuarioActual)
+
+
+
+        if(sesionActual){
+            perfiles = Prfl.list().sort{it.nombre}
+        }else{
+            def perfilesSinAccesso = [1,2]
+            perfiles = Prfl.findAllByIdNotInList(perfilesSinAccesso).sort{it.nombre}
+        }
+
+        return [usuario: usu, perfilesUsu: pers, perfiles: perfiles]
     }
 
 
@@ -598,7 +613,19 @@ class PersonaController {
     def list() {
 
         def empresa = Empresa.get(params.id)
-        def usuarios = Persona.findAllByEmpresa(empresa).sort{it.login}
+
+        def perfilAdmin = Prfl.findByCodigo('ADMN')
+        def usuarioActual = Persona.get(session.usuario.id)
+        def sesionActual = Sesn.findByPerfilAndUsuarioAndFechaFinIsNull(perfilAdmin, usuarioActual)
+        def usuarios
+
+
+        if(sesionActual){
+            usuarios = Persona.findAllByEmpresa(empresa).sort{it.login}
+        }else{
+            def sesionesAdmin = Sesn.findAllByPerfilAndFechaFinIsNull(perfilAdmin)
+            usuarios = Persona.findAllByEmpresaAndIdNotInList(empresa, sesionesAdmin.usuario.id).sort{it.login}
+        }
 
         return[usuarios: usuarios, empresa: empresa]
 
