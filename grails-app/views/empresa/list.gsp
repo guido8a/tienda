@@ -127,8 +127,11 @@
         var data = id ? { id: id } : {};
         $.ajax({
             type    : "POST",
+            crossDomain: true,
+            dataType:'jsonp',
             %{--url     : "${createLink(action:'form_ajax')}",--}%
-            url     : "http://www.tedein.com.ec/demo/login/login",
+            // url     : "http://www.tedein.com.ec/demo/login/login",
+            url     : "http://localhost:8080/venta_local/login/login",
             data    : data,
             success : function (msg) {
                 var b = bootbox.dialog({
