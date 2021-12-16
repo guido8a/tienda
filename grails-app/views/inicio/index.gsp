@@ -248,18 +248,18 @@
         </a>
 
 
-        <a href="${createLink(controller: 'tipoPago', action: 'list')}" style="text-decoration: none">
+        <a href="${createLink(controller: 'contabilidad', action: 'list')}" style="text-decoration: none">
             <div class="col-lg-6 mbr-col-md-10">
                 <div class="wrap">
                     <div style="width: 200px; height: 120px">
-                        <asset:image src="apli/proyecto.png" title="Documentos por cantón" width="80%" height="80%"/>
+                        <asset:image src="apli/proyecto.png" title="Contabilidad" width="80%" height="80%"/>
                     </div>
 
                     <div style="width: 450px; height: 120px">
-                        <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>Planes de publicación</span>
+                        <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>Contabilidad</span>
                         </h2>
 
-                        <p class="mbr-fonts-style text1 mbr-text display-6">Registro de períodos de publicación</p>
+                        <p class="mbr-fonts-style text1 mbr-text display-6">Registros contables</p>
                     </div>
                 </div>
             </div>
