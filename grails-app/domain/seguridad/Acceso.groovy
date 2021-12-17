@@ -19,6 +19,7 @@ class Acceso {
             accion column: 'accn__id'
             fecha column: 'accsfcha'
             desde column: 'accsdsde'
+            url column: 'accs_url'
         }
     }
     static constraints = {

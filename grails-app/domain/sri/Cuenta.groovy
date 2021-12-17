@@ -11,7 +11,6 @@ class Cuenta implements Serializable {
     Empresa empresa
     CuentaBanco cuentaBanco
     Nivel nivel
-//    Presupuesto presupuesto
     String estado
     String retencion    /*     S --> si    N--> no      */
     Impuesto impuesto
@@ -32,11 +31,10 @@ class Cuenta implements Serializable {
             empresa column: 'empr__id'
             cuentaBanco column: 'cnbn__id'
             nivel column: 'nvel__id'
-//            presupuesto column: 'prsp__id'
             estado column: 'cntaetdo'
             retencion column: 'cntartcn'
             impuesto column: 'impt__id'
-            resultado column: 'imptrstd'
+            resultado column: 'cntarslt'
         }
     }
 

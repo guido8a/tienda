@@ -542,7 +542,7 @@ class CuentaController {
     def copiarCuentas() {
 
         def empresa = Empresa.get(session.empresa.id)
-        def origen = Empresa.get(42)
+        def origen = Empresa.get(1)
 
         if (Cuenta.countByEmpresa(empresa) == 0) {
             recursivoCuentas2(null, null, origen, empresa)

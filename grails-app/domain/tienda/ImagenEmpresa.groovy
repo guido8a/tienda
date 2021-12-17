@@ -17,7 +17,7 @@ class ImagenEmpresa {
         version false
         columns {
             empresa column: 'empr__id'
-            ruta column: 'imepgruta'
+            ruta column: 'imepruta'
             estado column: 'imepetdo'
             orden column: 'imepordn'
         }
