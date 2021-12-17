@@ -145,6 +145,7 @@ class LoginController {
                 return
             } else {
                 session.usuario = user
+                session.empresa = user.empresa
 //                session.usuarioKerberos = user.login
                 session.time = new Date()
 //                session.unidad = user.unidadEjecutora
