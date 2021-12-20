@@ -1,3 +1,10 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: fabricio
+  Date: 17/12/21
+  Time: 11:49
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="seguridad.Persona" %>
 
@@ -165,122 +172,118 @@
     <g:set var="inst" value="${utilitarios.Parametros.get(1)}"/>
 
     <div style="text-align: center;margin-bottom: 20px"><h2 class="titl">
-        %{--            <p class="text-warning">${inst.institucion}</p>--}%
-        <p class="text-warning">Tienda en Línea</p>
+        <p class="text-warning">Sistema contable</p>
     </h2>
     </div>
 
     <div class="row mbr-justify-content-center">
 
-        <a href="${createLink(controller: 'empresa', action: 'list')}" style="text-decoration: none">
+        <a href="${createLink(controller: 'contabilidad', action: 'list')}" style="text-decoration: none">
             <div class="col-lg-6 mbr-col-md-10">
                 <div class="wrap">
                     <div style="width: 200px; height: 120px">
-                        <asset:image src="apli/portada.png" title="Instituto de Formación de Líderes"
+                        <asset:image src="apli/portada.png" title="Contabilidad"
                                      width="80%" height="80%"/>
                     </div>
 
                     <div style="width: 450px; height: 120px">
                         <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5">
-                            <span>Empresa</span></h2>
+                            <span>Contabilidad</span></h2>
 
-                        <p class="mbr-fonts-style text1 mbr-text display-6">La institución: Visión, Misión,
-                        Quienes somos, Objetivos, Ejes formativos, etc..</p>
+                        <p class="mbr-fonts-style text1 mbr-text display-6">Contabilidad</p>
                     </div>
                 </div>
             </div>
         </a>
 
-
-        <a href="${createLink(controller: 'producto', action: 'list')}" style="text-decoration: none">
+        <a href="${createLink(controller: 'cuenta', action: 'list')}" style="text-decoration: none">
             <div class="col-lg-6 mbr-col-md-10">
                 <div class="wrap">
                     <div style="width: 200px; height: 120px">
-                        <asset:image src="apli/cursos.png" title="Cursos y Contenidos" width="80%"
+                        <asset:image src="apli/cursos.png" title="Plan de cuentas" width="80%"
                                      height="80%"/>
                     </div>
 
                     <div style="width: 450px; height: 120px">
-                        <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>Productos</span>
+                        <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>Cuentas</span>
                         </h2>
 
-                        <p class="mbr-fonts-style text1 mbr-text display-6">Administración de los productos</p>
+                        <p class="mbr-fonts-style text1 mbr-text display-6">Plan de cuentas</p>
                     </div>
                 </div>
             </div>
         </a>
 
-        <a href="${createLink(controller: 'admnParticipante', action: 'index')}" style="text-decoration: none">
-            <div class="col-lg-6 mbr-col-md-10">
-                <div class="wrap">
-                    <div style="width: 200px; height: 120px">
-                        <asset:image src="apli/proyecto.png" title="Instructores" width="80%"
-                                     height="80%"/>
-                    </div>
+%{--        <a href="${createLink(controller: 'admnParticipante', action: 'index')}" style="text-decoration: none">--}%
+%{--            <div class="col-lg-6 mbr-col-md-10">--}%
+%{--                <div class="wrap">--}%
+%{--                    <div style="width: 200px; height: 120px">--}%
+%{--                        <asset:image src="apli/proyecto.png" title="Instructores" width="80%"--}%
+%{--                                     height="80%"/>--}%
+%{--                    </div>--}%
 
-                    <div style="width: 450px; height: 120px">
-                        <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>
-                            Instructores del Instituto</span></h2>
+%{--                    <div style="width: 450px; height: 120px">--}%
+%{--                        <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>--}%
+%{--                            Instructores del Instituto</span></h2>--}%
 
-                        <p class="mbr-fonts-style text1 mbr-text display-6">Adminsitración de Instructores del Instituto</p>
-                    </div>
-                </div>
-            </div>
-        </a>
-
-
-        <a href="${createLink(controller: 'admnParticipante', action: 'index')}" style="text-decoration: none">
-            <div class="col-lg-6 mbr-col-md-10">
-                <div class="wrap">
-                    <div style="width: 200px; height: 120px">
-                        <asset:image src="apli/proyecto.png" title="Participantes registrados" width="80%"
-                                     height="80%"/>
-                    </div>
-
-                    <div style="width: 450px; height: 120px">
-                        <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>
-                            Participantes Registrados</span></h2>
-
-                        <p class="mbr-fonts-style text1 mbr-text display-6">Administración de Participantes registrados</p>
-                    </div>
-                </div>
-            </div>
-        </a>
+%{--                        <p class="mbr-fonts-style text1 mbr-text display-6">Adminsitración de Instructores del Instituto</p>--}%
+%{--                    </div>--}%
+%{--                </div>--}%
+%{--            </div>--}%
+%{--        </a>--}%
 
 
-        <a href="${createLink(controller: 'contabilidad', action: 'index')}" style="text-decoration: none">
-            <div class="col-lg-6 mbr-col-md-10">
-                <div class="wrap">
-                    <div style="width: 200px; height: 120px">
-                        <asset:image src="apli/proyecto.png" title="Contabilidad" width="80%" height="80%"/>
-                    </div>
+%{--        <a href="${createLink(controller: 'admnParticipante', action: 'index')}" style="text-decoration: none">--}%
+%{--            <div class="col-lg-6 mbr-col-md-10">--}%
+%{--                <div class="wrap">--}%
+%{--                    <div style="width: 200px; height: 120px">--}%
+%{--                        <asset:image src="apli/proyecto.png" title="Participantes registrados" width="80%"--}%
+%{--                                     height="80%"/>--}%
+%{--                    </div>--}%
 
-                    <div style="width: 450px; height: 120px">
-                        <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>Sistema contable</span>
-                        </h2>
+%{--                    <div style="width: 450px; height: 120px">--}%
+%{--                        <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>--}%
+%{--                            Participantes Registrados</span></h2>--}%
 
-                        <p class="mbr-fonts-style text1 mbr-text display-6">Registros contables</p>
-                    </div>
-                </div>
-            </div>
-        </a>
+%{--                        <p class="mbr-fonts-style text1 mbr-text display-6">Administración de Participantes registrados</p>--}%
+%{--                    </div>--}%
+%{--                </div>--}%
+%{--            </div>--}%
+%{--        </a>--}%
 
-        <a href="${createLink(controller: 'canton', action: 'arbol')}" style="text-decoration: none">
-            <div class="col-lg-6 mbr-col-md-10">
-                <div class="wrap">
-                    <div style="width: 200px; height: 120px">
-                        <asset:image src="apli/proyecto.png" title="Cantones" width="80%" height="80%"/>
-                    </div>
+%{--        <a href="${createLink(controller: 'contabilidad', action: 'list')}" style="text-decoration: none">--}%
+%{--            <div class="col-lg-6 mbr-col-md-10">--}%
+%{--                <div class="wrap">--}%
+%{--                    <div style="width: 200px; height: 120px">--}%
+%{--                        <asset:image src="apli/proyecto.png" title="Contabilidad" width="80%" height="80%"/>--}%
+%{--                    </div>--}%
 
-                    <div style="width: 450px; height: 120px">
-                        <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>División política</span>
-                        </h2>
+%{--                    <div style="width: 450px; height: 120px">--}%
+%{--                        <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>Contabilidad</span>--}%
+%{--                        </h2>--}%
 
-                        <p class="mbr-fonts-style text1 mbr-text display-6">División política</p>
-                    </div>
-                </div>
-            </div>
-        </a>
+%{--                        <p class="mbr-fonts-style text1 mbr-text display-6">Registros contables</p>--}%
+%{--                    </div>--}%
+%{--                </div>--}%
+%{--            </div>--}%
+%{--        </a>--}%
+
+%{--        <a href="${createLink(controller: 'canton', action: 'arbol')}" style="text-decoration: none">--}%
+%{--            <div class="col-lg-6 mbr-col-md-10">--}%
+%{--                <div class="wrap">--}%
+%{--                    <div style="width: 200px; height: 120px">--}%
+%{--                        <asset:image src="apli/proyecto.png" title="Cantones" width="80%" height="80%"/>--}%
+%{--                    </div>--}%
+
+%{--                    <div style="width: 450px; height: 120px">--}%
+%{--                        <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>División política</span>--}%
+%{--                        </h2>--}%
+
+%{--                        <p class="mbr-fonts-style text1 mbr-text display-6">División política</p>--}%
+%{--                    </div>--}%
+%{--                </div>--}%
+%{--            </div>--}%
+%{--        </a>--}%
 
     </div>
     <script type="text/javascript">

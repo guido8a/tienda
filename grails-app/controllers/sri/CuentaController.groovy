@@ -167,7 +167,7 @@ class CuentaController {
         if (id == "#") {
             println("aqui ")
             //root
-            def hh = Cuenta.countByNivelAndEmpresa(Nivel.get(1), session.empresa, [sort: "numero"])
+            def hh = Cuenta.countByNivelAndEmpresa(Nivel.get(1), session.empresa)
             if (hh > 0) {
                 clase = "hasChildren jstree-closed"
             }
@@ -250,7 +250,7 @@ class CuentaController {
     }
 
     def list() {
-        def hh = Cuenta.countByNivelAndEmpresa(Nivel.get(1), session.empresa, [sort: "numero"])
+        def hh = Cuenta.countByNivelAndEmpresa(Nivel.get(1), session.empresa)
         return [hh: hh]
     }
 
@@ -566,6 +566,10 @@ class CuentaController {
     } //show para cargar con ajax en un dialog
 
     def form_ajax() {
+
+        println("params " + params)
+
+
         def cuentaInstance = new Cuenta(params)
         def hijos = 0
         if (params.id) {
@@ -595,7 +599,7 @@ class CuentaController {
                 cuentaInstance.numero = " "
             }
         }
-        return [cuentaInstance: cuentaInstance, hijos: hijos]
+        return [cuentaInstance: cuentaInstance, hijos: hijos, nivel: params.lvl]
     } //form para cargar con ajax en un dialog
 
 

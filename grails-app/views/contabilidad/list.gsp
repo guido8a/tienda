@@ -18,7 +18,7 @@
 <!-- botones -->
 <div class="btn-toolbar toolbar">
     <div class="btn-group">
-        <g:link class="btn btn-default col-md-2" style="width: 100px;" controller="inicio" action="index"><i class="fa fa-arrow-left"></i> Regresar</g:link>
+        <g:link class="btn btn-default col-md-2" style="width: 100px;" controller="contabilidad" action="index"><i class="fa fa-arrow-left"></i> Regresar</g:link>
         <a href="#" class="btn btn-info btnCrear">
             <i class="fa fa-file"></i> Nueva contabilidad
         </a>
@@ -47,14 +47,14 @@
                 <td>${fieldValue(bean: contabilidadInstance, field: "prefijo")}</td>
                 <td>${fieldValue(bean: contabilidadInstance, field: "descripcion")}</td>
                 <td>
-                    <a href="#" data-id="${contabilidadInstance.id}" class="btn btn-info btn-sm btn-show btn-ajax" title="Ver">
-                        <i class="fa fa-laptop"></i>
+                    <a href="#" data-id="${contabilidadInstance.id}" class="btn btn-info btn-xs btn-show btn-ajax" title="Ver">
+                        <i class="fa fa-search"></i>
                     </a>
-                    <a href="#" data-id="${contabilidadInstance.id}" class="btn btn-success btn-sm btn-edit btn-ajax" title="Editar">
-                        <i class="fa fa-pencil"></i>
+                    <a href="#" data-id="${contabilidadInstance.id}" class="btn btn-success btn-xs btn-edit btn-ajax" title="Editar">
+                        <i class="fa fa-edit"></i>
                     </a>
-                    <a href="#" data-id="${contabilidadInstance.id}" class="btn btn-danger btn-sm btn-delete btn-ajax" title="Eliminar">
-                        <i class="fa fa-trash-o"></i>
+                    <a href="#" data-id="${contabilidadInstance.id}" class="btn btn-danger btn-xs btn-delete btn-ajax" title="Eliminar">
+                        <i class="fa fa-trash"></i>
                     </a>
                 </td>
             </tr>
@@ -127,7 +127,7 @@
     function deleteRow(itemId) {
         bootbox.dialog({
             title   : "Alerta",
-            message : "<i class='fa fa-trash-o fa-3x pull-left text-danger text-shadow'></i><p>¿Está seguro que desea eliminar la Contabilidad seleccionada? Esta acción no se puede deshacer.</p>",
+            message : "<i class='fa fa-trash fa-3x pull-left text-danger text-shadow'></i><p>¿Está seguro que desea eliminar la Contabilidad seleccionada? Esta acción no se puede deshacer.</p>",
             buttons : {
                 cancelar : {
                     label     : "<i class='fa fa-times'></i> Cancelar",

@@ -33,7 +33,6 @@
             </div>
         </g:if>
 
-%{--        <g:if test="${cuentaInstance?.nivel}">--}%
             <div class="form-group ${hasErrors(bean: cuentaInstance, field: 'nivel', 'error')} required">
                 <span class="grupo">
                     <label class="col-md-2 control-label text-info">
@@ -41,11 +40,17 @@
                     </label>
 
                     <div class="col-md-2">
-
+                        <g:if test="${cuentaInstance?.id}">
+                            <g:hiddenField name="nivel" value="${cuentaInstance?.nivel?.id}"/>
+                            <p class="form-control-static">${cuentaInstance?.nivel?.descripcion ?: "Sin nivel - error"}</p>
+                        </g:if>
+                        <g:else>
+                            <g:hiddenField name="nivel" value="${sri.Nivel.findById(nivel.toInteger().plus(1)).id}"/>
+                            <p class="form-control-static">${sri.Nivel.findById(nivel.toInteger().plus(1)).descripcion ?: ''}</p>
+                        </g:else>
                     </div>
                 </span>
             </div>
-%{--        </g:if>--}%
 
         <div class="form-group ${hasErrors(bean: cuentaInstance, field: 'numero', 'error')} required">
             <span class="grupo">

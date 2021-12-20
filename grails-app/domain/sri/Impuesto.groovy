@@ -18,7 +18,7 @@ class Impuesto implements Serializable {
         columns {
             nombre column: 'imptnmbr'
             codigo column: 'imptcdgo'
-            porcentaje column: 'imptpctj'
+            porcentaje column: 'imptpcnt'
             retencion column: 'imptrtcn'
             sri column: 'impt_sri'
         }
@@ -27,6 +27,6 @@ class Impuesto implements Serializable {
         nombre(size: 1..40, blank: false, attributes: [title: 'descripcion'])
         codigo(size: 1..4, blank: false, attributes: [title: 'codigo'])
         sri(maxSize: 3, blank: true, nullable: true)
-
+        porcentaje(blank: true, nullable: true)
     }
 }

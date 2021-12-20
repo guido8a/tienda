@@ -20,7 +20,8 @@
                     </label>
 
                     <div class="col-md-3">
-                        <elm:datepicker name="fechaInicio" title="Fecha de inicio del periodo comtable" class="datepicker form-control required" value="${contabilidadInstance?.fechaInicio}"/>
+%{--                        <elm:datepicker name="fechaInicio" title="Fecha de inicio del periodo comtable" class="datepicker form-control required" value="${contabilidadInstance?.fechaInicio}"/>--}%
+                        <input name="fechaInicio" id='datetimepicker1' type='text' required="" class="form-control required" value="${contabilidadInstance?.fechaInicio}"/>
                     </div>
                     *
                 </span>
@@ -33,7 +34,8 @@
                     </label>
 
                     <div class="col-md-3">
-                        <elm:datepicker name="fechaCierre" title="Fecha de cierre del periodo comtable" class="datepicker form-control required" value="${contabilidadInstance?.fechaCierre}"/>
+%{--                        <elm:datepicker name="fechaCierre" title="Fecha de cierre del periodo comtable" class="datepicker form-control required" value="${contabilidadInstance?.fechaCierre}"/>--}%
+                        <input name="fechaCierre" id='datetimepicker2' type='text' required="" class="form-control required" value="${contabilidadInstance?.fechaCierre}"/>
                     </div>
                     *
                 </span>
@@ -217,6 +219,18 @@
     </g:form>
 
     <script type="text/javascript">
+
+        $(function () {
+            $('#datetimepicker1, #datetimepicker2').datetimepicker({
+                locale: 'es',
+                format: 'DD-MM-YYYY',
+                showClose: true,
+                icons: {
+                    close: 'closeText'
+                }
+            });
+        });
+
         var validator = $("#frmContabilidad").validate({
             errorClass     : "help-block",
             errorPlacement : function (error, element) {
