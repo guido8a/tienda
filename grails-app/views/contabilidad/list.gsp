@@ -5,7 +5,6 @@
   Time: 10:25
 --%>
 
-
 <head>
     <meta name="layout" content="main">
     <title>Lista de Contabilidades</title>

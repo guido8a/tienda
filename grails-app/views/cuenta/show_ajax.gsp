@@ -99,7 +99,7 @@
             </div>
 
             <div class="col-md-3">
-                ${cuentaInstance?.cuentaBanco?.encodeAsHTML()}
+                ${cuentaInstance?.cuentaBanco?.banco?.encodeAsHTML()}
             </div>
 
         </div>
@@ -112,7 +112,7 @@
             </div>
 
             <div class="col-md-3">
-                ${cuentaInstance?.impuesto?.encodeAsHTML()}
+                ${cuentaInstance?.impuesto?.nombre?.encodeAsHTML()}
             </div>
 
         </div>

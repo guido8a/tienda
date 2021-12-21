@@ -86,12 +86,12 @@
 
                 <div class="col-md-2">
                     <g:if test="${hijos == 0}">
-                        <g:select name="movimiento" from="${['1', '0']}"
-                                  class="form-control" value="${cuentaInstance?.movimiento ?: '0'}"
+                        <g:select name="movimiento" from="${['1' : 'SI', '0' : 'NO']}"
+                                  class="form-control" value="${cuentaInstance?.movimiento ?: '0'}" optionValue="value" optionKey="key"
                                   valueMessagePrefix="cuenta.movimiento"/>
                     </g:if>
                     <g:else>
-                        <g:message code="cuenta.movimiento.${cuentaInstance.movimiento}"/>
+                       ${cuentaInstance.movimiento == '1' ? 'SI' : 'NO'}
                     </g:else>
                 </div>
             </span>
@@ -106,7 +106,7 @@
                                   value="${cuentaInstance?.auxiliar ?: 'N'}" valueMessagePrefix="cuenta.auxiliar"/>
                     </g:if>
                     <g:else>
-                        <g:message code="cuenta.auxiliar.${cuentaInstance.auxiliar}"/>
+                        ${cuentaInstance.auxiliar == 'S' ? 'SI' : 'NO'}
                     </g:else>
                 </div>
             </span>

@@ -221,7 +221,8 @@
             };
         }
 
-        if (!nodeHasChildren && !nodeOcupado) {
+        // if (!nodeHasChildren && !nodeOcupado) {
+        if (!nodeHasChildren) {
             items.eliminar = {
                 label            : "Eliminar cuenta",
                 separator_before : true,
