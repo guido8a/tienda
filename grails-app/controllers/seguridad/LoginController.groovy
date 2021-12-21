@@ -1,5 +1,7 @@
 package seguridad
 
+import sri.Contabilidad
+
 class LoginController {
 
     def mail
@@ -132,6 +134,7 @@ class LoginController {
             flash.tipo = "error"
             flash.icon = "fa fa-exclamation-triangle"
         } else {
+            def ahora = new Date().clearTime()
             user = user[0]
 
             println "está activo " + user.estaActivo
@@ -149,6 +152,24 @@ class LoginController {
 //                session.usuarioKerberos = user.login
                 session.time = new Date()
 //                session.unidad = user.unidadEjecutora
+
+                def cont = Contabilidad.withCriteria {
+                    eq("institucion", user.empresa)
+                    le("fechaInicio", ahora)
+                    ge("fechaCierre", ahora)
+                    order("fechaCierre", "desc")
+                }
+                if (cont.size() == 0) {
+                    def conts = Contabilidad.findAllByInstitucion(user.empresa, [sort: "fechaCierre", order: "desc"])
+                    if (conts.size() > 0) {
+                        cont = conts[0]
+                    }
+                } else if (cont.size() == 1) {
+                    cont = cont[0]
+                } else {
+                    cont = cont[0]
+                }
+                session.contabilidad = cont
 
                 println "pone valores " + session.usuario
 

@@ -448,7 +448,7 @@ class ElementosTagLib {
             html += "        </div>"
         } else {
             DecimalFormatSymbols decimalSymbols = DecimalFormatSymbols.getInstance();
-        decimalSymbols.setDecimalSeparator('.');
+            decimalSymbols.setDecimalSeparator('.');
             //tipo documento
             if (tramite?.tipoDocumento?.codigo != 'OFI') {
 
@@ -628,6 +628,253 @@ class ElementosTagLib {
     }
 
 
+/*
+    def headerTramite2 = { attrs ->
+        def tramite = attrs.tramite
+
+        def rolPara = RolPersonaTramite.findByCodigo('R001')
+        def rolCC = RolPersonaTramite.findByCodigo('R002')
+
+        def para = PersonaDocumentoTramite.findAllByTramiteAndRolPersonaTramite(tramite, rolPara)
+        def cc = PersonaDocumentoTramite.findAllByTramiteAndRolPersonaTramite(tramite, rolCC)
+
+        /////////////////////////////
+
+        def padre = null
+//        def tramite = new Tramite(params)
+        def users = []
+        if (params.padre) {
+            padre = Tramite.get(params.padre)
+        }
+        if (params.id) {
+            tramite = Tramite.get(params.id)
+            padre = tramite.padre
+        } else {
+            tramite.fechaCreacion = new Date()
+        }
+
+        def persona = Persona.get(session.usuario.id)
+
+        def de = session.usuario
+        def disp, disponibles = []
+        def disp2 = []
+        def todos = []
+
+        if (session.usuario.puedeTramitar) {
+            disp = Departamento.list([sort: 'descripcion'])
+        } else {
+            disp = [persona.departamento]
+        }
+        disp.each { dep ->
+//            disponibles.add([id: dep.id * -1, label: dep.descripcion, obj: dep])
+            if (dep.id == persona.departamento.id) {
+//                def users = Persona.findAllByDepartamento(dep)
+                def usuarios = Persona.findAllByDepartamento(dep)
+                usuarios.each {
+                    if (it.id != de.id) {
+                        users += it
+                    }
+                }
+                for (int i = users.size() - 1; i > -1; i--) {
+                    if (!(users[i].estaActivo && users[i].puedeRecibir)) {
+                        users.remove(i)
+                    } else {
+                        disponibles.add([id: users[i].id, label: users[i].toString(), obj: users[i]])
+                    }
+                }
+            }
+
+
+        }
+
+        disp.each { dep ->
+            disp2.add([id: dep.id * -1, label: dep.descripcion, obj: dep])
+        }
+
+        todos = disponibles + disp2
+
+        //////////////////////////
+
+        def strPara = ""
+        def strPara2 = ""
+
+        para.each { p ->
+            if (p.persona) {
+                if (strPara != "") {
+                    strPara += ", "
+                }
+                strPara += util.nombrePersona(persona: p.persona)
+                strPara2 += p.persona.id
+            }
+            if (p.departamento) {
+                if (strPara != "") {
+                    strPara += ", "
+                }
+                strPara += p.departamento.descripcion
+                strPara2 += (p.departamento.id * -1)
+            }
+        }
+
+//        println("-->" + strPara2)
+
+        def html
+
+        if (!attrs.pdf) {
+            html = "<div style=\"margin-top: 30px;padding-bottom: 10px\" class=\"vertical-container\">"
+            html += "            <div class=\"titulo-azul titulo-horizontal\" style=\"margin-left: -50px\">"
+            html += "                ${tramite.tipoDocumento?.descripcion} ${attrs.extraTitulo ?: ''}"
+            html += "            </div>"
+            html += "            <div class=\"row row-low-margin-top\" style=\"margin-top: 5px;\">"
+            html += "                <div class=\"col-xs-1  negrilla negrilla-puntos\">"
+            html += "                    No."
+            html += "                </div>"
+            html += "                <div class=\"col-xs-10  col-buen-height\">"
+            html += "                    ${tramite.codigo}"
+            html += "                </div>"
+//            html += "                <div class=\"col-xs-4 negrilla\" style=\"padding-left: 0px;margin-top: 2px\">"
+//            html += "                    No. <span style=\"font-weight: 500; margin-left: 40px\">${tramite.codigo}</span>"
+//            html += "                </div>"
+            html += "            </div>"
+            html += "            <div class=\"row row-low-margin-top\">"
+            html += "                <div class=\"col-xs-1  negrilla negrilla-puntos\">"
+            html += "                    DE"
+            html += "                </div>"
+            html += "                <div class=\"col-xs-10  col-buen-height\">"
+            html += "                    ${tramite.de.departamento.descripcion} - (${tramite.de.nombre} ${tramite.de.apellido})"
+            html += "                </div>"
+            html += "            </div>"
+            if (tramite.tipoDocumento.codigo == "OFI") {
+                html += "                <div class=\"row row-low-margin-top\">"
+                html += "                    <div class=\"col-xs-1  negrilla negrilla-puntos\">"
+                html += "                        PARA"
+                html += "                    </div>"
+                html += ""
+                html += "                    <div class=\"col-xs-8  col-buen-height\">"
+                html += g.select(name: 'paraExt', optionKey: 'id', optionValue: 'nombre', from: OrigenTramite.list([sort: 'nombre']), class: 'form-control', value: strPara2)
+//                html += strPara
+                html += "                    </div>"
+                html += "                    <div class=\"col-xs-1  negrilla negrilla-puntos\">"
+                html += "                       <a href='#' class='btn btn-sm btn-info' id='btnInfoPara' style='margin-top: 7px;'>" +
+                        "                           <i class=\"fa fa-search\"></i>" +
+                        "                       </a>"
+                html += "                    </div>"
+
+                html += "                </div>"
+            } else {
+                if (para) {
+                    html += "                <div class=\"row row-low-margin-top\">"
+                    html += "                    <div class=\"col-xs-1  negrilla negrilla-puntos\">"
+                    html += "                        PARA"
+                    html += "                    </div>"
+                    html += ""
+                    html += "                    <div class=\"col-xs-8  col-buen-height\">"
+//                    html += g.select(name: 'para', optionKey: 'id', optionValue: 'label', from: todos, class: 'form-control', value: strPara2)
+                    html += elm.comboPara(name: "para", value: strPara2, "class": "form-control")
+//                html += strPara
+                    html += "                    </div>"
+                    html += "                    <div class=\"col-xs-1  negrilla negrilla-puntos\">"
+                    html += "                       <a href='#' class='btn btn-sm btn-info' id='btnInfoPara' style='margin-top: 7px;'>" +
+                            "                           <i class=\"fa fa-search\"></i>" +
+                            "                       </a>"
+                    html += "                    </div>"
+
+                    html += "                </div>"
+                }
+            }
+            html += "            <div class=\"row row-low-margin-top\">"
+            html += "                <div class=\"col-xs-1  negrilla negrilla-puntos\">"
+            html += "                    FECHA"
+            html += "                </div>"
+            html += "                <div class=\"col-xs-10  col-buen-height\">"
+            html += util.fechaConFormato(fecha: tramite.fechaCreacion, ciudad: "Quito")
+            html += "                </div>"
+            html += "            </div>"
+            html += ""
+            html += "            <div class=\"row row-low-margin-top\">"
+            html += "                <div class=\"col-xs-1  negrilla negrilla-puntos\">"
+            html += "                    ASUNTO"
+            html += "                </div>"
+            html += ""
+            html += "                <div class=\"col-xs-10  col-buen-height\">"
+            html += "                   <input type='text' name=\"asunto\" id=\"asunto\" value=\"${tramite.asunto}\" style=\"width: 460px\" class=\"form-control\"/>"
+            html += "                </div>"
+            html += "            </div>"
+            html += "        </div>"
+        } else {
+            html = "<div class=\"titulo-azul titulo-horizontal\">"
+            html += tramite.tipoDocumento?.descripcion
+            html += "</div>"
+            html += "<table class='tramiteHeader'>"
+            html += "<tr>"
+            html += "<td colspan='2'>"
+            html += "<b>No.</b> ${tramite.codigo}"
+            html += "</td>"
+            html += "</tr>"
+            html += "<tr>"
+            html += "<td class='negrilla'><b>DE</b></td>"
+            html += "<td>${tramite.de.departamento.descripcion}</td>"
+            html += "</tr>"
+            html += "<tr>"
+            html += "<td class='negrilla'><b>PARA</b></td>"
+            html += "<td>${strPara}</td>"
+            html += "</tr>"
+            html += "<tr>"
+            html += "<td class='negrilla'><b>FECHA</b></td>"
+            html += "<td>"
+            html += util.fechaConFormato(fecha: tramite.fechaCreacion, ciudad: "Quito")
+            html += "</td>"
+            html += "</tr>"
+            html += "<tr>"
+            html += "<td class='negrilla'><b>ASUNTO</b></td>"
+            html += "<td>${tramite.asunto}</td>"
+            html += "</tr>"
+            html += "</table>"
+        }
+        out << html
+    }
+*/
+
+    /**
+     * crea un datepicker
+     *  attrs:
+     *      class           clase
+     *      name            name
+     *      id              id (opcional, si no existe usa el mismo name)
+     *      value           value (groovy Date o String)
+     *      format          format para el Date (groovy)
+     *      minDate         fecha mínima para el datepicker. cualquier cosa anterior se deshabilita
+     *                          ej: +5d para 5 días después de la fecha actual
+     *      maxDate         fecha máxima para el datepicker. cualquier cosa posterior se deshabilita
+     *      orientation     String. Default: “auto”
+     *                               A space-separated string consisting of one or two of “left” or “right”, “top” or “bottom”, and “auto” (may be omitted);
+     *                                      for example, “top left”, “bottom” (horizontal orientation will default to “auto”), “right” (vertical orientation will default to “auto”),
+     *                                      “auto top”. Allows for fixed placement of the picker popup.
+     *                               “orientation” refers to the location of the picker popup’s “anchor”; you can also think of it as the location of the trigger element (input, component, etc)
+     *                               relative to the picker.
+     *                               “auto” triggers “smart orientation” of the picker.
+     *                                  Horizontal orientation will default to “left” and left offset will be tweaked to keep the picker inside the browser viewport;
+     *                                  vertical orientation will simply choose “top” or “bottom”, whichever will show more of the picker in the viewport.
+     *      autoclose       boolean. default: true cierra automaticamente el datepicker cuando se selecciona una fecha
+     *      todayHighlight  boolean. default: true marca la fecha actual
+     *      beforeShowDay   funcion. funcion que se ejecuta antes de mostrar el día. se puede utilizar para deshabilitar una fecha en particular
+     *                          ej:
+     *                               beforeShowDay: function (date){*                                   if (date.getMonth() == (new Date()).getMonth())
+     *                                       switch (date.getDate()){*                                           case 4:
+     *                                               return {*                                                   tooltip: 'Example tooltip',
+     *                                                   classes: 'active'
+     *};
+     *                                           case 8:
+     *                                               return false;
+     *                                           case 12:
+     *                                               return "green";
+     *}*}*                                }
+     *      onChangeDate    funcion. funcion q se ejecuta al cambiar una fecha. se manda solo el nombre, sin parentesis, como parametro recibe el datepicker y el objeto
+     *                          ej: onChangeDate="miFuncion"
+     *                          function miFuncion($elm, e) {*                              console.log($elm); //el objeto jquery del datepicker, el textfield
+     *                              console.log(e); //el objeto que pasa el plugin
+     *}*      daysOfWeekDisabled  lista de números para deshabilitar ciertos días: 0:domingo, 1:lunes, 2:martes, 3:miercoles, 4:jueves, 5:viernes, 6:sabado
+     *      img             imagen del calendario. clase de glyphicons o font awsome
+     **/
     def  datepicker = { attrs ->
         def name = attrs.name
         def nameInput = name + "_input"
@@ -1041,6 +1288,7 @@ class ElementosTagLib {
      * @attr readonly boolean value indicating whether the select is read only or editable (defaults to false - editable)
      */
     Closure select = { attrs ->
+        println "---> $attrs"
         if (!attrs.name) {
             throwTagError("Tag [select] is missing required attribute [name]")
         }
@@ -1540,97 +1788,48 @@ class ElementosTagLib {
     }
 
 
+    def tipoReformaStr = { attrs ->
+        def str = attrs.tipo + " "
+        switch (attrs.tipoSolicitud) {
+            case "E":
+                str += "de reasignación de recursos existentes"
+                break;
+            case "A":
+                str += "para creación de nueva actividad con financiamiento del área"
+                break;
+            case "C":
+                str += "para creación de nueva actividad sin financiamiento del área"
+                break;
+            case "I":
+                str += "para actividad existente sin financiamiento (incremento de recursos)" //no se usa
+                break;
+            case "P":
+                str += "para la inclusión de nuevas partidas presupuestarias"
+                break;
+            case "T":
+                str += "por modificación de techo presupuestario"
+                break;
+            case "X":
+                str += ""
+                break;
+            case "Z":
+                str += ""
+                break;
+            case "Q":
+                str += "Gasto Permanente"
+                break;
+            case "Y":
+                str += " de Gasto Permanente"
+                break;
 
-
-
-    /**
-     * Imprime el número del aval o de la solicidud con el formato '003'
-     * @param aval (opcional) el id del aval
-     * @param solicitud (opcional) el id de la solicitud
-     */
-    def imprimeNumero = { attrs ->
-//        println("imprimeNumero " + attrs)
-        def aval = null
-        def sol = null
-        if (attrs.aval) {
-            aval = Aval.get(attrs.aval)
         }
-        if (attrs.solicitud) {
-            sol = SolicitudAval.get(attrs.solicitud)
-        }
-        def num = null
-        def uno = 1
-        def output = ""
-        if (aval) {
-            num = aval.numeroAval.toString()
-        }
-        if (sol) {
-            num = sol.numero.toString()
-        }
-
-        num = num.toString().padLeft(3, '0')
-//        println("num1 " + num)
-        if (!num || num == "null") {
-            num = "000"
-        }
-        output += num
-        out << output
+        out << "" + str
     }
 
-    def selectMultiple = { attrs ->
-        println "selectMultiple ${attrs}"
-        def selected = ""
-        def texto = ""
-        def noSelection = attrs.remove('noSelection')
-        if (noSelection != null) {
-            noSelection = noSelection.entrySet().iterator().next()
-        }
-        def from = attrs.remove('from')
-        def value = attrs.remove('value')
-        def id = attrs.remove('id')
-        def lt = attrs.remove('letras')?: 40
-        lt = lt.toInteger()
-        println "lt: $lt"
-        if (attrs.selected) {
-            selected = true
-        }
-        def output = "<select id=\"" + id + "\" class=\"" + attrs.class + "\"" + " style=\"" + attrs.style + "\">"
-        if (noSelection) {
-//            noSelection.key, noSelection.value, value
-            output += "<option value=\"${(noSelection.key == null ? '' : noSelection.key)}\"${noSelection.key == value ? ' selected="selected"' : ''}>${noSelection.value.encodeAsHTML()}</option>"
-        }
 
-        def patron = "(?s)(.{1,${lt}})(?:\\s|\$)"
-        println "patron: $patron"
-        def tmp = "", text = ""
-        def tx = ""
-        def pos = 0
-        if (from) {
-            from.each { el ->
-                println "<option value=  ${el.descripcion}"
-                text = el.descripcion; pos = 0; tx = ""; tmp = ""
-                while(text.size() > lt) {
-                    tmp = text[0..(lt-1)]
-                    pos = tmp.lastIndexOf(' ')
-                    tx += tmp[0..(pos-1)] + '|'
-                    text = text[(pos+1).. (text.size()-1)]
-                }
-                texto = tx + text
-                println "-->: ${texto}"
-                output += "\n<option value='${el.id}' ${el.id == value ? 'selected' : ''}>${texto}</option>"
 
-//                <g:each in="${infold.SectorEconomico.list().sort{it.descripcion}}" var="scec">
-//                <option value="${scec.id}" ${scec.id == participante.sectorEconomico.id? 'selected' : ''}>
-//                ${scec.descripcion}</option>
-//                                        </g:each>
-            }
-        }
-//        output += num
-        out << output + "</select>"
-    }
 
     def wizardAvales = { attrs ->
-        println "wizardAvales $attrs"
         def paso = attrs.paso ? attrs.paso.toInteger() : 1
         def proceso = attrs.proceso ?: null
         def monto = 0
@@ -1708,5 +1907,41 @@ class ElementosTagLib {
 
         out << html
     }
+
+    /**
+     * Imprime el número del aval o de la solicidud con el formato '003'
+     * @param aval (opcional) el id del aval
+     * @param solicitud (opcional) el id de la solicitud
+     */
+    def imprimeNumero = { attrs ->
+//        println("imprimeNumero " + attrs)
+        def aval = null
+        def sol = null
+        if (attrs.aval) {
+            aval = Aval.get(attrs.aval)
+        }
+        if (attrs.solicitud) {
+            sol = SolicitudAval.get(attrs.solicitud)
+        }
+        def num = null
+        def uno = 1
+        def output = ""
+        if (aval) {
+            num = aval.numeroAval.toString()
+        }
+        if (sol) {
+            num = sol.numero.toString()
+        }
+
+        num = num.toString().padLeft(3, '0')
+//        println("num1 " + num)
+        if (!num || num == "null") {
+            num = "000"
+        }
+        output += num
+        out << output
+    }
+
+
 
 }
