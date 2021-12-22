@@ -1,4 +1,4 @@
-<%@ page import="cratos.Contabilidad; cratos.ProcesoFormaDePago; cratos.inventario.Bodega; cratos.Asiento; cratos.sri.TipoComprobanteSri" %>
+<%@ page import="sri.Contabilidad; sri.ProcesoFormaDePago; inventario.Bodega; sri.Asiento; sri.TipoComprobanteSri" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -215,8 +215,8 @@
                     <elm:datepicker name="fecha" title="Fecha de emisión del comprobante"
                                     class="datepicker form-control required col-xs-3 fechaE"
                                     value="${proceso?.fechaEmision?: new Date()}"
-                                    minDate="${(cratos.Contabilidad.get(session.contabilidad.id).fechaInicio - 30).format("dd-MM-yyyy")}"
-                                    maxDate="${cratos.Contabilidad.get(session.contabilidad.id).fechaCierre.format("dd-MM-yyyy")}"
+                                    minDate="${(sri.Contabilidad.get(session.contabilidad.id).fechaInicio - 30).format("dd-MM-yyyy")}"
+                                    maxDate="${sri.Contabilidad.get(session.contabilidad.id).fechaCierre.format("dd-MM-yyyy")}"
                                     style="width: 80px; margin-left: 5px"/>
                 </g:else>
             </div>
@@ -233,8 +233,8 @@
                     <elm:datepicker name="fechaingreso" title="Fecha de registro en el sistema"
                                     class="datepicker form-control required col-xs-3"
                                     value="${proceso?.fechaIngresoSistema?: new Date()}"
-                                    minDate="${cratos.Contabilidad.get(session.contabilidad.id).fechaInicio.format("dd-MM-yyyy")}"
-                                    maxDate="${cratos.Contabilidad.get(session.contabilidad.id).fechaCierre.format("dd-MM-yyyy")}"
+                                    minDate="${sri.Contabilidad.get(session.contabilidad.id).fechaInicio.format("dd-MM-yyyy")}"
+                                    maxDate="${sri.Contabilidad.get(session.contabilidad.id).fechaCierre.format("dd-MM-yyyy")}"
                                     style="width: 80px; margin-left: 5px"/>
                 </g:else>
             </div>
@@ -263,7 +263,7 @@
             <div class="col-xs-2 negrilla">
                 <g:select class="form-control required  cmbRequired tipoProcesoSel ${proceso ? '' : 'hidden'} "
                           name="tipoProceso" id="tipoProceso"
-                          from="${cratos.TipoProceso.list(sort: 'codigo')}" label="Proceso tipo: "
+                          from="${sri.TipoProceso.list(sort: 'codigo')}" label="Proceso tipo: "
                           value="${proceso?.tipoProceso?.id}" optionKey="id"
                           optionValue="descripcion" title="Tipo de la transacción" disabled="${proceso?.id ? true : false}"/>
             </div>
@@ -292,7 +292,7 @@
 
             <div class="col-xs-4 negrilla">
                 <g:select class="form-control required cmbRequired tipoProcesoSel" name="bodega" id="bodega"
-                          from="${cratos.inventario.Bodega.list(sort: 'descripcion')}" label="Bodega"
+                          from="${inventario.Bodega.list(sort: 'descripcion')}" label="Bodega"
                           value="${proceso?.bodega?.id}" optionKey="id"
                           optionValue="descripcion" title="Bodega que entrega" disabled="${proceso?.estado == 'R' ?: false}" />
             </div>
@@ -324,7 +324,7 @@
                         </div>
                         <div class="col-xs-2">
                             <g:select class="form-control" style="margin-left: -30px; width: 230px"
-                                      name="pais" from="${cratos.sri.Pais.list([sort: 'nombre'])}"
+                                      name="pais" from="${retenciones.Pais.list([sort: 'nombre'])}"
                                       optionKey="id" optionValue="nombre" value="${proceso?.pais?.id}"
                                       disabled="${proceso?.estado == 'R' ?: false}"/>
                         </div>
@@ -377,7 +377,7 @@
                     </div>
 
                     <div class="col-xs-7 negrilla" style="margin-left: -20px">
-                        <g:select name="tipoPago.id" id="comboFP" class=" form-control" from="${cratos.TipoPago.list()}"
+                        <g:select name="tipoPago.id" id="comboFP" class=" form-control" from="${sri.TipoPago.list()}"
                                   label="Tipo de pago: " optionKey="id" optionValue="descripcion"/>
                     </div>
 

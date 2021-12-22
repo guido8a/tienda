@@ -2,6 +2,7 @@ package sri
 
 import seguridad.Empresa
 import seguridad.Persona
+import inventario.Bodega
 
 
 class Proceso implements Serializable {

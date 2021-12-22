@@ -2,9 +2,10 @@ package sri
 
 import seguridad.Empresa
 import retenciones.Retencion
-import sri.Bodega
+import inventario.Bodega
 import sri.CentroCosto
 import sri.DetalleFactura
+import tienda.Cliente
 import tienda.Publicacion
 import seguridad.Persona
 import retenciones.Pais
@@ -34,7 +35,7 @@ class ProcesoController {
     def index = { redirect(action: "buscarPrcs") }
 
     def nuevoProceso = {
-//        println "nuevo proceso "+params
+        println "nuevo proceso $params"
 
         def estb = Empresa.get(session.empresa.id).establecimientos.tokenize(',')
 
@@ -48,6 +49,8 @@ class ProcesoController {
         if (params.id) {
             def proceso = Proceso.get(params.id).refresh()
             def fps = ProcesoFormaDePago.findAllByProceso(proceso)
+
+            println "porceso: ${proceso.tipoProceso}"
 
             render(view: "procesoForm", model: [proceso: proceso, fps: fps, estb: sucursal])
         } else
@@ -1398,13 +1401,12 @@ class ProcesoController {
         }
 
         switch (params.tipo) {
-            case ["1", "4"]:  //Pagos
-                tr = TipoRelacion.findAllByCodigoInList(['C','P'])
-                proveedores = Proveedor.findAllByTipoRelacionInList(tr)
+            case ["1", "4"]:  //Pagos proveedores
+                proveedores = Proveedor.findAll()
                 break
-            case ["2", "6", "7"]:  //ventas, NC y ND
-                tr = TipoRelacion.findAllByCodigoInList(['C','E'])
-                proveedores = Proveedor.findAllByTipoRelacionInList(tr)
+            case ["2", "6", "7"]:  //ventas, NC y ND - clientes
+//                proveedores = Proveedor.findAllByTipoRelacionInList(tr)
+                proveedores = Cliente.findAll()
                 break
         }
 //        println "proveedores: $proveedores"

@@ -1,5 +1,6 @@
 package sri
 
+import inventario.Bodega
 import sri.Proceso
 import tienda.Publicacion
 

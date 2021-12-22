@@ -18,7 +18,7 @@ class Proveedor {
     String estado
     String observaciones
     String telefono
-    TipoRelacion tipoRelacion
+//    TipoRelacion tipoRelacion
     String actividad
     String email
     String pais
@@ -53,7 +53,7 @@ class Proveedor {
             estado column: 'prveetdo'
             observaciones column: 'prveobsr'
 
-            tipoRelacion column: 'tprl__id'
+//            tipoRelacion column: 'tprl__id'
 
             actividad column: 'prveactv'
             email column: 'prvemail'
@@ -88,7 +88,7 @@ class Proveedor {
 
         telefono(blank: true, maxSize: 63, nullable: true, attributes: [title: 'telefono'])
 
-        tipoRelacion(blank: true, attributes: [title: 'tipoRelacion'])
+//        tipoRelacion(blank: true, attributes: [title: 'tipoRelacion'])
 
         actividad(blank: true, nullable: true, attributes: [title: 'actividad'])
         email(blank: true, nullable: true, attributes: [title: 'email'])

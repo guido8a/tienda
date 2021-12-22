@@ -24,7 +24,7 @@
 
 
 <div style="margin-top: -15px;" class="vertical-container">
-    <p class="css-icono" style="margin-bottom: -15px"><i class="fa fa-folder-open-o"></i></p>
+    <p class="css-icono" style="margin-bottom: -15px"><i class="far fa-folder-open"></i></p>
 
     <div class="linea45"></div>
 
@@ -32,7 +32,7 @@
     height: 40px; border-color: #0c6cc2; margin-left: 10px;">
             <div class="col-xs-5" style="margin-left: 5px; margin-top: 2px;">
                 <g:link class="btn btn-success" action="nuevoProceso" style="margin-left: -15px">
-                    <i class="fa fa-file-o"></i> Nueva Transacción
+                    <i class="far fa-file"></i> Nueva Transacción
                 </g:link>
                 <g:link class="btn btn-primary" action="procesosAnulados">
                     <i class="fa fa-times-circle"></i> Ir a Anulados
@@ -43,12 +43,12 @@
                 <g:if test="${contabilidades.size() > 0}">
                     <a href="#" class="btn btn-azul" id="btnCambiarConta" style="margin-left: 5px;"
                        title="Cambiar a otra Contabilidad">
-                        <i class="fa fa-refresh"></i> Cambiar
+                        <i class="fas fa-sync-alt"></i> Cambiar
                     </a>
                 </g:if>
                 <g:else>
                     <g:link class="btn btn-success" controller="contabilidad" action="list">
-                        <i class="fa fa-file-o"></i> Crear
+                        <i class="far fa-file"></i> Crear
                     </g:link>
                </g:else>
         </div>
@@ -263,7 +263,7 @@ como máximo 30 <span style="margin-left: 40px; color: #0b2c89">Se ordena por fe
 
         var editar = {
             label: " Ir al proceso",
-            icon: "fa fa-file-text-o",
+            icon: "far fa-file-alt",
             action: function () {
                 location.href = '${createLink(controller: "proceso", action: "nuevoProceso")}?id=' + id;
             }
@@ -271,7 +271,7 @@ como máximo 30 <span style="margin-left: 40px; color: #0b2c89">Se ordena por fe
 
         var retencion = {
             label: " Retenciones",
-            icon: "fa fa-money",
+            icon: "fas fa-dollar-sign",
             action: function () {
                 location.href = '${createLink(controller: "proceso", action: "detalleSri")}?id=' + id;
             }
@@ -279,7 +279,7 @@ como máximo 30 <span style="margin-left: 40px; color: #0b2c89">Se ordena por fe
 
         var rtcnVentas = {
             label: " Retenciones en Ventas",
-            icon: "fa fa-money",
+            icon: "fas fa-dollar-sign",
             action: function () {
                 location.href = '${createLink(controller: "proceso", action: "nuevoProceso")}?id=' + id;
             }

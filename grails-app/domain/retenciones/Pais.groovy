@@ -13,7 +13,7 @@ class Pais implements Serializable {
         version false
         columns {
             codigo column: 'paiscdgo'
-            nombre column: 'paisnmbr'
+            nombre column: 'paisdscr'
         }
     }
 
