@@ -12,7 +12,7 @@
         </div>
 
         <div class="col-xs-5">
-            <g:select name="formaPago_name" from="${cratos.TipoPago.list().sort{it.descripcion}}" optionKey="id" optionValue="descripcion" id="formaPago" class="form-control"/>
+            <g:select name="formaPago_name" from="${sri.TipoPago.list().sort{it.descripcion}}" optionKey="id" optionValue="descripcion" id="formaPago" class="form-control"/>
         </div>
 
         <div class="col-xs-1 negrilla text-info">
@@ -47,6 +47,7 @@
                 id: '${proceso?.id}'
             },
             success: function (msg){
+                console.log('-->', msg);
                 if(msg == 'ok'){
                     log("Forma de Pago agregada correctamente","success");
                     cargarTablaFormaPago();

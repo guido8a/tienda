@@ -1,27 +1,14 @@
 package sri
 
+import retenciones.ConceptoRetencionImpuestoRenta
 import seguridad.Empresa
 import retenciones.Retencion
 import inventario.Bodega
-import sri.CentroCosto
-import sri.DetalleFactura
+import inventario.CentroCosto
 import tienda.Cliente
-import tienda.Publicacion
 import seguridad.Persona
 import retenciones.Pais
 import retenciones.PorcentajeIva
-import sri.SustentoTributario
-import sri.TipoCmprSustento
-import sri.TipoComprobanteSri
-import sri.TipoTransaccion
-
-import java.sql.Connection
-
-import org.apache.poi.ss.usermodel.Row
-
-import java.text.DecimalFormat
-import java.text.NumberFormat
-
 
 class ProcesoController {
 
@@ -198,7 +185,7 @@ class ProcesoController {
                 proceso.proveedor = proveedor
                 proceso.pago = params.pago
                 proceso.documentoEmpresa = DocumentoEmpresa.get(params.libretin)
-                proceso.retencionVenta = params.retencionVenta
+//                proceso.retencionVenta = params.retencionVenta
 
                 break
 
@@ -262,53 +249,6 @@ class ProcesoController {
                 proveedor.save(flush: true)
             }
             proceso.refresh()
-
-//            if (proceso.errors.getErrorCount() == 0) {
-//
-//
-//                def formasPago = ProcesoFormaDePago.findAllByProceso(proceso)
-//
-//                formasPago.each {
-//                    it.delete(flush: true)
-//                }
-//
-//
-//
-//                if (params.data != "") {
-//                    def data = params.data.split(";")
-//                    def fp
-//                    def tppgLista = []
-//                    // println "data "+data
-//                    data.each {
-//                        if (it != "") {
-//                            println "porcesando... $it"
-//                            def tppg = TipoPago.get(it)
-//                            fp = ProcesoFormaDePago.findByProcesoAndTipoPago(proceso, tppg)
-//                            if(!fp) {
-//                                def psfp = new ProcesoFormaDePago()
-//                                psfp.proceso = proceso
-//                                psfp.tipoPago = tppg
-//                                psfp.save(flush: true)
-//                            }
-//                            tppgLista.add(tppg)
-//                        }
-//                    }
-////                    println "existentes: $tppgLista"
-//                    if(tppgLista) {
-//                        fp = ProcesoFormaDePago.findAllByProcesoAndTipoPagoNotInList(proceso, tppgLista)
-//                    } else {
-////                        println "borrar todo........."
-//                    }
-//
-////                    println "a borrar: $fp"
-//                    fp.each {
-//                        println "borrando: ${it}"
-//                        it.delete(flush: true)
-//                    }
-//                }
-//            } else {
-//                println "errores: ${proceso.errors}"
-//            }
 
             redirect(action: 'nuevoProceso', id: proceso.id)
 
@@ -375,7 +315,7 @@ class ProcesoController {
     }
 
     def cargaTcsr() {
-//        println "cargatcsr $params"
+        println "cargatcsr $params"
         def cn = dbConnectionService.getConnection()
         def tipo = 0
         def reembolso
@@ -395,9 +335,9 @@ class ProcesoController {
         def sql = "select cast(tittcdgo as integer) cdgo from titt, prve, tptr " +
                 "where prve.tpid__id = titt.tpid__id and prve__id = ${params.prve} and " +
                 "tptr.tptr__id = titt.tptr__id and tptrcdgo = '${tipo}'"
-//        println "sql1: $sql"
+        println "sql1: $sql"
         def titt = cn.rows(sql.toString())[0]?.cdgo
-//        println "identif: $titt"
+        println "identif: $titt"
         if(tipo == 2) {
             sql = "select tcst__id id, tcsrcdgo codigo, tcsrdscr descripcion from tcst, tcsr " +
                     "where tcsr.tcsr__id = tcst.tcsr__id and titt @> '{${titt}}' " +
@@ -407,7 +347,7 @@ class ProcesoController {
                     "where tcsr.tcsr__id = tcst.tcsr__id and titt @> '{${titt}}' and " +
                     "sstr @> '{${params.sstr}}' order by tcsrcdgo"
         }
-//        println "sql2: $sql"
+        println "sql2: $sql"
         def data = cn.rows(sql.toString())
         cn.close()
         [data: data, tpcpSri: params.tpcp, estado: params.etdo?:'', esta: params.esta, reembolso: reembolso]
@@ -2164,7 +2104,7 @@ class ProcesoController {
     def guardarDocRetencion_ajax () {
 //        println("params " + params)
         def proceso = Proceso.get(params.proceso)
-        proceso.retencionVenta = params.documento
+//        proceso.retencionVenta = params.documento
         proceso.retenidoIva = params.retenido.toDouble()
         proceso.retenidoRenta = params.renta.toDouble()
 
@@ -2230,10 +2170,11 @@ class ProcesoController {
             render "no_Revise el valor ingresado"
         }
 
-        println "... no es cero"
+        println "... no es cero --> tipo proc: ${proceso.tipoProceso.codigo.trim()}"
         if(proceso.tipoProceso.codigo.trim() == 'C') {
             println "compra con: ${formasPago.size()} registro de pago, valor: ${proceso.valor} "
             if((formasPago.size() < 1) && (proceso.valor >= 1000)) {
+                println "no_Ingrese una forma de pago!"
                 render "no_Ingrese una forma de pago!"
             }
             else {

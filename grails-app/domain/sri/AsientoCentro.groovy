@@ -1,5 +1,7 @@
 package sri
 
+import inventario.CentroCosto
+
 class AsientoCentro implements Serializable {
 
     Asiento asiento

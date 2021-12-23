@@ -78,7 +78,7 @@
         </g:if>
         <g:if test="${proceso?.tipoProceso?.codigo?.trim() == 'C'}">
             <g:link class="btn btn-success" action="detalleSri" id="${proceso?.id}" style="margin-bottom: 10px;">
-                <i class="fa fa-money"></i> Retenciones
+                <i class="far fa-money-bill-alt"></i> Retenciones
             </g:link>
         </g:if>
 
@@ -180,7 +180,7 @@
         <g:if test="${proceso && proceso?.tipoProceso?.codigo?.trim() in ['C','V']}">
         %{--<a href="#" class="btn btn-primary hidden" style="cursor: default; margin-right: 20px" id="abrir-fp">--}%
             <a href="#" class="btn btn-primary" style="cursor: default; margin-right: 20px" id="btnFormaPago">
-                <i class="fa fa-usd"></i>
+                <i class="fas fa-dollar-sign"></i>
                 Forma de Pago
             </a>
         </g:if>
@@ -489,8 +489,6 @@
     });
 
 
-
-
     $("#btnEnviarFactura").click(function () {
         bootbox.confirm("<i class='fa fa-warning fa-3x pull-left text-warning text-shadow'></i> Está seguro que desea enviar esta factura al SRI?", function (result) {
             if (result) {
@@ -556,7 +554,6 @@
                     location.reload()
                 }
             });
-//            }
         })
     });
 
@@ -650,61 +647,6 @@
                     align: 'right',
                     message: msg,
                     buttons : botones
-                    %{--buttons: {--}%
-                    %{--cancelar: {--}%
-                    %{--label: "<i class='fa fa-times'></i> Cancelar",--}%
-                    %{--className: "btn-primary",--}%
-                    %{--callback: function () {--}%
-                    %{--}--}%
-                    %{--},--}%
-                    %{--registrar:{--}%
-                    %{--label: "<i class='fa fa-check'></i> " + titulo,--}%
-                    %{--className: clase,--}%
-                    %{--callback: function () {--}%
-                    %{--bootbox.confirm("<i class='fa fa-exclamation-circle fa-3x pull-left text-warning text-shadow'>" +--}%
-                    %{--"</i>" + mnsj, function (result) {--}%
-                    %{--if (result) {--}%
-                    %{--$.ajax({--}%
-                    %{--type: 'POST',--}%
-                    %{--url: "${createLink(controller: 'retencion', action: 'registrarRetVentas')}",--}%
-                    %{--data: {--}%
-                    %{--id: "${proceso?.id}"--}%
-                    %{--},--}%
-                    %{--success: function (msg) {--}%
-                    %{--location.reload()--}%
-                    %{--}--}%
-                    %{--});--}%
-                    %{--}--}%
-                    %{--})--}%
-                    %{--}--}%
-                    %{--},--}%
-                    %{--aceptar:{--}%
-                    %{--label: "<i class='fa fa-save'></i> Guardar",--}%
-                    %{--className: "btn-success",--}%
-                    %{--callback: function () {--}%
-                    %{--$.ajax({--}%
-                    %{--type: 'POST',--}%
-                    %{--url: '${createLink(controller: 'proceso', action: 'guardarDocRetencion_ajax')}',--}%
-                    %{--data:{--}%
-                    %{--proceso :'${proceso?.id}',--}%
-                    %{--documento: $("#retencionVenta2").val(),--}%
-                    %{--retenido : $("#retenidoIva2").val(),--}%
-                    %{--renta: $("#retenidoRenta2").val()--}%
-                    %{--},--}%
-                    %{--success: function (msg){--}%
-                    %{--if(msg == 'ok'){--}%
-                    %{--log("Documento de retención guardado correctamente","success");--}%
-                    %{--setTimeout(function () {--}%
-                    %{--location.href="${createLink(controller: 'proceso', action: 'nuevoProceso')}/?id=" + '${proceso?.id}'--}%
-                    %{--}, 800);--}%
-                    %{--}else{--}%
-                    %{--log("Error al guardar el documento de retención","error")--}%
-                    %{--}--}%
-                    %{--}--}%
-                    %{--});--}%
-                    %{--}--}%
-                    %{--}--}%
-                    %{--}--}%
                 });
             }
         })
@@ -766,24 +708,6 @@
         });
     });
 
-    //    cargarBotonFormasPago($("#tipoProceso").val())
-    //
-    //    $("#tipoProceso").change(function () {
-    //        var sel = $(this).val()
-    //        console.log('tipo:', sel);
-    //        cargarBotonFormasPago(sel)
-    //    });
-    //
-    //    function cargarBotonFormasPago (sel) {
-    //        console.log ('lega:', sel);
-    //        if(sel == 1 || sel == 2){
-    //            console.log('mostrar');
-    //            $("#btnFormaPago").removeClass('hidden')
-    //        }else{
-    //            console.log('esconder');
-    //            $("#btnFormaPago").addClass('hidden')
-    //        }
-    //    }
 
     $("#btnDetalle").click(function () {
         location.href='${createLink(controller: 'detalleFactura', action: 'detalleGeneral')}/?id=' +
@@ -1143,6 +1067,7 @@
             var info = ""
             var tipoP = $(".tipoProcesoSel option:selected").val();
 
+            console.log('guardar proceso', tipoP);
 
             $("#listaErrores").html('');
             $("#divErrores").hide();
@@ -1197,7 +1122,7 @@
                 }
 
                 if('${proceso}'){
-
+                    console.log('total:', $("#total").val());
                     if(parseFloat($("#total").val()) >= 1000){
                         $.ajax({
                             type: 'POST',
@@ -1235,15 +1160,6 @@
                     }
                 }
 
-//                if($(".filaFP").size() <1){
-//                    info+="No ha asignado formas de pago para la transacción contable";
-//                    bandData=false
-//                }
-
-//                if(($(".filaFP").size() <1) && (parseFloat($("#total").val()) >= 1000)){
-//                    error += "<li> El valor del proceso requiere que se registre la forma de pago <li>"
-//                }
-
                 if (bandData) {
                     var data = "";
                     $(".filaFP").each(function () {
@@ -1275,22 +1191,12 @@
                     error += "<li>Seleccione el Gestor contable</li>"
                 }
 
-                /*
-                 if ($("#iva12").val() == 0 && $("#iva0").val() == 0 && $("#noIva").val() == 0) {
-                 error += "<li>Ingrese valores en la base imponible</li>"
-                 }
-                 */
-
                 if (!$("#numEstablecimiento").val()) {
                     error += "<li>Seleccione un libretín de facturas/li>"
                 }
                 if (!$("#serie").val() || !$("#libretin").val()) {
                     error += "<li>Ingrese el libretin y el secuencial de la factura a emitir</li>"
                 }
-
-//                if(($(".filaFP").size() <1)){
-//                    error += "<li>El proceso requiere que se registre la forma de pago</li>"
-//                }
 
                 if('${proceso}'){
                     $.ajax({
@@ -1351,10 +1257,6 @@
                         error += "<li>Ingrese valores en la base imponible</li>"
                     }
                 }
-
-//                if ($("#valorPago").val() == 0) {
-//                    error += "<li>Ingrese el valor del ajuste</li>"
-//                }
 
                 if (!$("#gestor").val()) {
                     error += "<li>Seleccione el Gestor contable</li>"
@@ -1475,8 +1377,6 @@
                     error += "<li>Seleccione el Gestor contable</li>"
                 }
             }
-
-
 
 
             if (error != "") {

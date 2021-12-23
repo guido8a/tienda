@@ -1,7 +1,7 @@
 package sri
 
 import inventario.Bodega
-import sri.Proceso
+import inventario.CentroCosto
 import tienda.Publicacion
 
 class DetalleFactura implements Serializable {

@@ -38,7 +38,7 @@
     <g:if test="${proceso?.estado != 'R'}">
         <div class="btn-group">
             <a href="#" class="btn btn-success" id="btnGuardar">
-                <i class="fa fa-floppy-o"></i> Guardar</a>
+                <i class="far fa-save"></i> Guardar</a>
         </div>
     </g:if>
 
@@ -309,7 +309,7 @@
 
             <div class="col-xs-3">
                 <g:select name="pcivServicios" id="pcivSrvc"
-                          from="${cratos.sri.PorcentajeIva.list([sort: 'descripcion', order: 'desc'])}" class="form-control pori"
+                          from="${retenciones.PorcentajeIva.list([sort: 'descripcion', order: 'desc'])}" class="form-control pori"
                           optionValue="descripcion" optionKey="id" value="${retencion?.pcntIvaServicios?.id}"/>
             </div>
 

@@ -1,4 +1,4 @@
-package sri
+package inventario
 
 import seguridad.Empresa
 

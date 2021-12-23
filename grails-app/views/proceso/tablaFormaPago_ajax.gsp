@@ -20,7 +20,8 @@
             <td style="text-align: left; width: 65%">${forma?.tipoPago?.descripcion}</td>
             <td style="text-align: center; width: 25%">${forma?.plazo}</td>
             <g:if test="${proceso?.estado != 'R'}">
-                <td style="text-align: center; width: 10%"><a href="#" class="btn btn-danger btnBorrarFormaPago" data-id="${forma?.id}"><i class="fa fa-trash-o"></i></a></td>
+                <td style="text-align: center; width: 10%"><a href="#" class="btn btn-danger btnBorrarFormaPago" data-id="${forma?.id}">
+                    <i class="far fa-trash-alt"></i></a></td>
             </g:if>
         </tr>
     </g:each>
