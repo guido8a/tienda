@@ -50,7 +50,7 @@
                                 <i class="fa fa-pencil"></i>
                             </a>
                             <a href="#" data-id="${centroCostoInstance.id}" class="btn btn-danger btn-sm btn-delete btn-ajax" title="Eliminar">
-                                <i class="fa fa-trash-o"></i>
+                                <i class="far fa-trash-alt"></i>
                             </a>
                         </td>
                     </tr>
@@ -70,7 +70,7 @@
                             <i class="fa fa-pencil"></i>
                         </a>
                         <a href="#" data-id="${centroCostoInstance.id}" class="btn btn-danger btn-sm btn-delete btn-ajax" title="Eliminar">
-                            <i class="fa fa-trash-o"></i>
+                            <i class="far fa-trash-alt"></i>
                         </a>
                     </td>
                 </tr>
@@ -114,7 +114,7 @@
     function deleteRow(itemId) {
         bootbox.dialog({
             title   : "Alerta",
-            message : "<i class='fa fa-trash-o fa-3x pull-left text-danger text-shadow'></i><p>¿Está seguro que desea eliminar el Centro de Costos seleccionado? Esta acción no se puede deshacer.</p>",
+            message : "<i class='far fa-trash-alt fa-3x pull-left text-danger text-shadow'></i><p>¿Está seguro que desea eliminar el Centro de Costos seleccionado? Esta acción no se puede deshacer.</p>",
             buttons : {
                 cancelar : {
                     label     : "Cancelar",
@@ -123,7 +123,7 @@
                     }
                 },
                 eliminar : {
-                    label     : "<i class='fa fa-trash-o'></i> Eliminar",
+                    label     : "<i class='far fa-trash-alt'></i> Eliminar",
                     className : "btn-danger",
                     callback  : function () {
                         openLoader("Eliminando");

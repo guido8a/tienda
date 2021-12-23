@@ -111,7 +111,7 @@
                 <g:form action="borrarProceso" class="br_prcs" style="display: inline">
                     <input type="hidden" name="id" value="${proceso?.id}">
                     <a class="btn btn-danger" id="btn-br-prcs" action="borrarProceso">
-                        <i class="fa fa-trash-o"></i>
+                        <i class="far fa-trash-alt"></i>
                         Anular Proceso
                     </a>
                 </g:form>

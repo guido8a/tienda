@@ -31,7 +31,7 @@
                             <i class="fa fa-pencil"></i>
                         </a>
                         <a href="#" class="btn btn-danger btn-sm borrarReemb" idr="${reembolso?.id}">
-                            <i class="fa fa-trash-o"></i>
+                            <i class="far fa-trash-alt"></i>
                         </a>
                     </div>
                 </g:if>
@@ -61,7 +61,7 @@
 
     $(".borrarReemb").click(function () {
         var id = $(this).attr('idr');
-        bootbox.confirm("<i class='fa fa-trash-o fa-3x pull-left text-danger text-shadow'></i> Está seguro de borrar el reembolso?", function (result) {
+        bootbox.confirm("<i class='far fa-trash-alt fa-3x pull-left text-danger text-shadow'></i> Está seguro de borrar el reembolso?", function (result) {
             if (result) {
                 $.ajax({
                    type: 'POST',

@@ -26,6 +26,7 @@
         border    : solid 2px cadetblue;
         padding   : 0 10px;
         margin    : 0 10px 0 0;
+        border-radius: 4px;
     }
 
     .info {

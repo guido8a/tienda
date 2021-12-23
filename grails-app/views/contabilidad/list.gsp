@@ -135,7 +135,7 @@
                     }
                 },
                 eliminar : {
-                    label     : "<i class='fa fa-trash-o'></i> Eliminar",
+                    label     : "<i class='far fa-trash-alt'></i> Eliminar",
                     className : "btn-danger",
                     callback  : function () {
                         openLoader("Eliminando");

@@ -12,7 +12,7 @@
             <td style="width: 80px; text-align: right">${tipo == '1' ? centro?.debe : centro?.haber}</td>
             <td style="width: 30px;text-align: center">
                 <a href="#" class="btn btn-danger btn-sm borrarCost" idcs="${centro?.id}">
-                    <i class="fa fa-trash-o"></i>
+                    <i class="far fa-trash-alt"></i>
                 </a>
             </td>
         </tr>

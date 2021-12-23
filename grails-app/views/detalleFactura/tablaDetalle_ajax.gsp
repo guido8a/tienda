@@ -33,7 +33,7 @@
             <g:else>
                 <td style="width: 60px; text-align: center">
                     <a href="#" class="btn btn-danger btn-sm btnBorrarItemDetalle"
-                       title="Borrar Item" idI="${detalle?.id}"><i class="fa fa-trash-o"></i></a>
+                       title="Borrar Item" idI="${detalle?.id}"><i class="far fa-trash-alt"></i></a>
 
                     <a href="#" class="btn btn-success btn-sm btnEditarItem"
                        title="Editar Item"  idI="${detalle?.id}"><i class="fa fa-pencil"></i></a>

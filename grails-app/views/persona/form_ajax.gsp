@@ -228,7 +228,7 @@ option[selected]{
         //     $tdBtn.attr("width", "35");
         //     var $btnDelete = $("<a>");
         //     $btnDelete.addClass("btn btn-danger btn-xs");
-        //     $btnDelete.html("<i class='fa fa-trash-o'></i> ");
+        //     $btnDelete.html("<i class='far fa-trash-alt'></i> ");
         //     $tdBtn.append($btnDelete);
         //
         //     $btnDelete.click(function () {

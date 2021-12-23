@@ -1,4 +1,4 @@
-<%@ page import="cratos.Retencion; cratos.AsientoCentro" %>
+<%@ page import="retenciones.Retencion; sri.AsientoCentro" %>
 <style type="text/css">
 .colorAtras {
     background-color: #dfa58f;
@@ -41,7 +41,7 @@
 <div class="col-xs-6 etiqueta"><label>Comprobante:</label> ${comprobante?.descripcion}</div>
 <div class="col-xs-2 etiqueta"><label>Tipo:</label> ${comprobante?.proceso?.tipoProceso?.descripcion}</div>
 <div class="col-xs-2 etiqueta"><label>Número:</label> ${comprobante?.prefijo}${comprobante?.numero}</div>
-<div class="col-xs-2 etiqueta"><label>Valor:</label> <g:formatNumber number="${comprobante?.tipo?.codigo == 'R' ? cratos.Retencion.findByProceso(proceso)?.total : comprobante?.proceso?.valor}" maxFractionDigits="2" format="##,##0"/></div>
+<div class="col-xs-2 etiqueta"><label>Valor:</label> <g:formatNumber number="${comprobante?.tipo?.codigo == 'R' ? retenciones.Retencion.findByProceso(proceso)?.total : comprobante?.proceso?.valor}" maxFractionDigits="2" format="##,##0"/></div>
 
 <g:if test="${comprobante?.registrado != 'S'}">
     <div class="btn-group" style="float: right; margin-top: -90px">
@@ -81,7 +81,7 @@
                 <tr class="colorAsiento">
                     <td width="100px">${asiento?.cuenta?.numero}</td>
                     <td width="520px">${asiento?.cuenta?.descripcion}</td>
-                    <td width="50px">${cratos.AsientoCentro.findAllByAsiento(asiento) ? cratos.AsientoCentro.findAllByAsiento(asiento)?.first()?.centroCosto?.codigo : ''}</td>
+                    <td width="50px">${sri.AsientoCentro.findAllByAsiento(asiento) ? sri.AsientoCentro.findAllByAsiento(asiento)?.first()?.centroCosto?.codigo : ''}</td>
                     <td width="100px"
                         class="derecha">${asiento.debe ? g.formatNumber(number: asiento.debe, format: '##,##0', minFractionDigits: 2, maxFractionDigits: 2) : 0.00}</td>
                     <td width="100px"
@@ -111,8 +111,8 @@
                         </div>
                     </td>
                 </tr>
-                <g:if test="${cratos.Auxiliar.findAllByAsiento(asiento)}">
-                    <g:set var="auxiliares1" value="${cratos.Auxiliar.findAllByAsiento(asiento).sort{it.proveedor.nombre}}"/>
+                <g:if test="${sri.Auxiliar.findAllByAsiento(asiento)}">
+                    <g:set var="auxiliares1" value="${sri.Auxiliar.findAllByAsiento(asiento).sort{it.proveedor.nombre}}"/>
                     <g:set var="cabecera" value="N"/>
                     <g:each in="${auxiliares1}" var="auxiliar">
                         <g:if test="${cabecera != 'S'}">
@@ -142,7 +142,7 @@
                                         </a>
                                         <a href="#" class="btn btn-danger btn-sm btnEliminarAuxiliar"
                                            idAu="${auxiliar?.id}" title="Eliminar auxiliar">
-                                            <i class="fa fa-trash-o"></i>
+                                            <i class="far fa-trash-alt"></i>
                                         </a>
                                     </div>
                                 </g:if>
@@ -161,8 +161,8 @@
             </g:each>
             <tr class="colorAsiento">
                 <td colspan="3" class="total derecha">Totales del asiento</td>
-                <td class="total derecha ${Math.round(sumadebe*100)/100 != (comprobante?.tipo?.codigo == 'R' ? cratos.Retencion.findByProceso(proceso)?.total : proceso?.valor) ? 'rojo' : ''}"><g:formatNumber number="${Math.round(sumadebe*100)/100}" format="##,##0" maxFractionDigits="2" minFractionDigits="2"/> </td>
-                <td class="total derecha ${Math.round(sumahber*100)/100 != (comprobante?.tipo?.codigo == 'R' ? cratos.Retencion.findByProceso(proceso)?.total : proceso?.valor) ? 'rojo' : ''}"><g:formatNumber number="${Math.round(sumahber*100)/100}" format="##,##0" maxFractionDigits="2" minFractionDigits="2"/> </td>
+                <td class="total derecha ${Math.round(sumadebe*100)/100 != (comprobante?.tipo?.codigo == 'R' ? retenciones.Retencion.findByProceso(proceso)?.total : proceso?.valor) ? 'rojo' : ''}"><g:formatNumber number="${Math.round(sumadebe*100)/100}" format="##,##0" maxFractionDigits="2" minFractionDigits="2"/> </td>
+                <td class="total derecha ${Math.round(sumahber*100)/100 != (comprobante?.tipo?.codigo == 'R' ? retenciones.Retencion.findByProceso(proceso)?.total : proceso?.valor) ? 'rojo' : ''}"><g:formatNumber number="${Math.round(sumahber*100)/100}" format="##,##0" maxFractionDigits="2" minFractionDigits="2"/> </td>
                 <td class="total derecha" ${Math.round((sumadebe - sumahber)*100)/100 != 0 ? 'rojo' : ''}>Dif: ${Math.round((sumadebe - sumahber)*100)/100}</td>
             </tr>
             </tbody>
@@ -202,7 +202,7 @@
 
     $(".btnBorrarAsientos").click(function (){
         var comprobante = $(this).attr('comp');
-        bootbox.confirm("<i class='fa fa-trash-o fa-3x pull-left text-danger text-shadow'></i> Está seguro de borrar todos los asientos con valor 0.00 ?", function (result) {
+        bootbox.confirm("<i class='far fa-trash-alt fa-3x pull-left text-danger text-shadow'></i> Está seguro de borrar todos los asientos con valor 0.00 ?", function (result) {
             if (result) {
                 openLoader("Borrando...")
                 $.ajax({
@@ -277,7 +277,7 @@
         var idAsiento = $(this).attr('idAs');
         bootbox.dialog({
             title: "Alerta",
-            message: "<i class='fa fa-trash-o fa-3x pull-left text-danger text-shadow'></i><p>¿Está seguro que desea eliminar el asiento contable?</p>",
+            message: "<i class='far fa-trash-alt fa-3x pull-left text-danger text-shadow'></i><p>¿Está seguro que desea eliminar el asiento contable?</p>",
             buttons: {
                 cancelar: {
                     label: "<i class='fa fa-times'></i> Cancelar",
@@ -286,7 +286,7 @@
                     }
                 },
                 eliminar: {
-                    label: "<i class='fa fa-trash-o'></i> Borrar",
+                    label: "<i class='far fa-trash-alt'></i> Borrar",
                     className: "btn-danger",
                     callback: function () {
                         openLoader("Borrando..");
@@ -391,7 +391,7 @@
         var idAuxiliar = $(this).attr('idAu');
         bootbox.dialog({
             title: "Alerta",
-            message: "<i class='fa fa-trash-o fa-3x pull-left text-danger text-shadow'></i><p>¿Está seguro que desea eliminar el auxiliar contable?</p>",
+            message: "<i class='far fa-trash-alt fa-3x pull-left text-danger text-shadow'></i><p>¿Está seguro que desea eliminar el auxiliar contable?</p>",
             buttons: {
                 cancelar: {
                     label: "<i class='fa fa-times'></i> Cancelar",
@@ -400,7 +400,7 @@
                     }
                 },
                 eliminar: {
-                    label: "<i class='fa fa-trash-o'></i> Borrar",
+                    label: "<i class='far fa-trash-alt'></i> Borrar",
                     className: "btn-danger",
                     callback: function () {
                         openLoader("Borrando..");
