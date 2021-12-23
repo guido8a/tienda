@@ -38,5 +38,18 @@ class NivelController {
         }
     }
 
+    def delete_ajax(){
+
+        def nivel = Nivel.get(params.id)
+
+        try{
+            nivel.delete(flush:true)
+            render"ok"
+        }catch(e){
+            println("error al borrar el nivel " + nivel.errors)
+            render "no"
+        }
+    }
+
 
 }

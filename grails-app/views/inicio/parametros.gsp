@@ -8,7 +8,7 @@
     <style type="text/css">
 
     .tab-content, .left, .right {
-        height : 600px;
+        height : 450px;
     }
 
     .tab-content {
@@ -39,7 +39,7 @@
     }
 
     .left {
-        width : 600px;
+        width : 800px;
         text-align: justify;
         /*background : red;*/
     }
@@ -53,6 +53,10 @@
 
     .fa-ul li {
         margin-bottom : 10px;
+    }
+
+    .tam{
+        font-size: 14px;
     }
 
     </style>
@@ -71,19 +75,19 @@
     <li class="active"><a href="#generales" data-toggle="tab">Generales</a></li>
     <li><a href="#empresa" data-toggle="tab">Empresa</a></li>
     <li><a href="#activos" data-toggle="tab">Artículos de inventario y facturación</a></li>
-    <li><a href="#nomina" data-toggle="tab">Nómina</a></li>
+%{--    <li><a href="#nomina" data-toggle="tab">Nómina</a></li>--}%
     <li><a href="#sri" data-toggle="tab">SRI / ATS</a></li>
 </ul>
 
 <!-- Tab panes -->
-<div class="tab-content ui-corner-bottom">
+<div class="tab-content ui-corner-bottom tam">
     <div class="tab-pane active" id="generales">
         <div class="left pull-left">
             <ul class="fa-ul">
                 <li>
                     <i class="fa-li ${iconGen}"></i>
                     <span id="nivel">
-                        <g:link controller="nivel" action="list">Nivel</g:link> de detalle de las cuentas contables y de
+                        <g:link controller="nivel" action="list" class="descripcion">Nivel</g:link> de detalle de las cuentas contables y de
                         presupuesto (partidas)
                     </span>
 
@@ -99,7 +103,7 @@
                 <li>
                     <i class="fa-li ${iconGen}"></i>
                     <span id="tipoPago">
-                        <g:link controller="tipoPago" action="list">Tipo de pago</g:link> o forma de pago
+                        <g:link controller="tipoPago" action="list" class="descripcion">Tipo de pago</g:link> o forma de pago
                         que se acuerda con los proveedores, puede ser contado, crédito, o mediante un tiempo de espera antes
                         de realizar la efectivización del pago, ejemplo tarjetas de crédito con fechas de corte prefijadas
                     </span>
@@ -119,7 +123,7 @@
                 <li>
                     <i class="fa-li ${iconGen}"></i>
                     <span id="fuente">
-                        <g:link controller="fuente" action="list">Fuente de transacciones</g:link> nombre de los módulos
+                        <g:link controller="fuente" action="list" class="descripcion">Fuente de transacciones</g:link> nombre de los módulos
                         del sistema que pueden generar transacciones contables
                     </span>
 
@@ -137,7 +141,7 @@
                 <li>
                     <i class="fa-li ${iconGen}"></i>
                     <span id="tipoDocPago">
-                        <g:link controller="tipoDocumentoPago" action="list">Forma de Pago</g:link> para
+                        <g:link controller="tipoDocumentoPago" action="list" class="descripcion">Forma de Pago</g:link> para
                         el registro de la forma de pago a proveedores y clientes.
                     </span>
 
@@ -152,7 +156,7 @@
                 <li>
                     <i class="fa-li ${iconGen}"></i>
                     <span id="tipoComprobante">
-                        <g:link controller="tipoComprobante" action="list">Tipos de comprobante contable</g:link> usualmente
+                        <g:link controller="tipoComprobante" action="list" class="descripcion">Tipos de comprobante contable</g:link> usualmente
                         se trata de ingresos, egresos y diarios
                     </span>
 
@@ -169,7 +173,7 @@
                 <li>
                     <i class="fa-li ${iconGen}"></i>
                     <span id="tipoCuenta">
-                        <g:link controller="tipoCuenta" action="list">Tipo de cuenta bancaria</g:link> que puede estar
+                        <g:link controller="tipoCuenta" action="list" class="descripcion">Tipo de cuenta bancaria</g:link> que puede estar
                         asociada a una cuenta contable, por ejemplo caja bancos está asociada a una cuenta corriente
                     </span>
 
@@ -183,29 +187,29 @@
                     </div>
                 </li>
 
-                <li>
-                    <i class="fa-li ${iconGen}"></i>
-                    <span id="tipoRelacion">
-                        <g:link controller="tipoRelacion" action="list">Tipo de Relación</g:link> predominante con la persona
-                        natural o jurídica, ya sea como Proveedor, Cliente o los dos roles.
-                    </span>
+%{--                <li>--}%
+%{--                    <i class="fa-li ${iconGen}"></i>--}%
+%{--                    <span id="tipoRelacion">--}%
+%{--                        <g:link controller="tipoRelacion" action="list">Tipo de Relación</g:link> predominante con la persona--}%
+%{--                        natural o jurídica, ya sea como Proveedor, Cliente o los dos roles.--}%
+%{--                    </span>--}%
 
-                    <div class="descripcion hide">
-                        <h4>Tipo de Relaci&oacute;n</h4>
+%{--                    <div class="descripcion hide">--}%
+%{--                        <h4>Tipo de Relaci&oacute;n</h4>--}%
 
-                        <p>Tipos de relación que puede darse con una persona natural o jurídica, como un proveedor o como un cliente.</p>
+%{--                        <p>Tipos de relación que puede darse con una persona natural o jurídica, como un proveedor o como un cliente.</p>--}%
 
-                        <p>Si una persona posee los dos roles, se requiere que se indique se debe indicar los dos roles
-                        o promoverlo al tipo Proveedor/Cliente.</p>
+%{--                        <p>Si una persona posee los dos roles, se requiere que se indique se debe indicar los dos roles--}%
+%{--                        o promoverlo al tipo Proveedor/Cliente.</p>--}%
 
-                        <p class="info">No se debe editar este parámetro.</p>
-                    </div>
-                </li>
+%{--                        <p class="info">No se debe editar este parámetro.</p>--}%
+%{--                    </div>--}%
+%{--                </li>--}%
 
                 <li>
                     <i class="fa-li ${iconGen}"></i>
                     <span id="tipoPersona">
-                        <g:link controller="tipoPersona" action="list">Tipo de Persona</g:link> natural o jurídica
+                        <g:link controller="tipoPersona" action="list" class="descripcion">Tipo de Persona</g:link> natural o jurídica
                         de un Proveedor o Cliente.
                     </span>
 
@@ -221,7 +225,7 @@
                 <li>
                     <i class="fa-li ${iconGen}"></i>
                     <span id="tipoProv">
-                        <g:link controller="tipoProveedor" action="list">Tipo de Proveedor</g:link> como contribuyentes
+                        <g:link controller="tipoProveedor" action="list" class="descripcion">Tipo de Proveedor</g:link> como contribuyentes
                         normales, especiales y el estado.
                     </span>
 
@@ -235,7 +239,7 @@
                 <li>
                     <i class="fa-li ${iconGen}"></i>
                     <span id="paramsAux">
-                        <g:link controller="parametrosAuxiliares" action="list">IVA</g:link> para definir
+                        <g:link controller="parametrosAuxiliares" action="list" class="descripcion">IVA</g:link> para definir
                         valores del IVA.
                     </span>
 
@@ -249,7 +253,7 @@
                 <li>
                     <i class="fa-li ${iconGen}"></i>
                     <span id="conceptoIR">
-                        <a href="#" id="btnCR">Concepto de Retención IR</a>
+                        <a href="#" id="btnCR" class="descripcion">Concepto de Retención IR</a>
                     </span>
 
                     <div class="descripcion hide">
@@ -262,8 +266,7 @@
                 <li>
                     <i class="fa-li ${iconGen}"></i>
                     <span id="anio">
-                        <g:link controller="anio" action="list">Año</g:link>
-
+                        <g:link controller="anio" action="list" class="descripcion">Año</g:link>
                     </span>
 
                     <div class="descripcion hide">
@@ -276,7 +279,7 @@
                 <li>
                     <i class="fa-li ${iconGen}"></i>
                     <span id="valorAnual">
-                        <g:link controller="valorAnual" action="list">Valor Anual</g:link>
+                        <g:link controller="valorAnual" action="list" class="descripcion">Valor Anual</g:link>
 
                     </span>
 
@@ -286,19 +289,19 @@
                         <p>Valor Anual</p>
                     </div>
                 </li>
-                <li>
-                    <i class="fa-li ${iconGen}"></i>
-                    <span id="rolPagos">
-                        <g:link controller="rolPagos" action="list">Rol de Pagos</g:link>
+%{--                <li>--}%
+%{--                    <i class="fa-li ${iconGen}"></i>--}%
+%{--                    <span id="rolPagos">--}%
+%{--                        <g:link controller="rolPagos" action="list" class="descripcion">Rol de Pagos</g:link>--}%
 
-                    </span>
+%{--                    </span>--}%
 
-                    <div class="descripcion hide">
-                        <h4>Rol de Pagos</h4>
+%{--                    <div class="descripcion hide">--}%
+%{--                        <h4>Rol de Pagos</h4>--}%
 
-                        <p>Rol de Pagos</p>
-                    </div>
-                </li>
+%{--                        <p>Rol de Pagos</p>--}%
+%{--                    </div>--}%
+%{--                </li>--}%
 
 
             </ul>
@@ -347,35 +350,6 @@
     <div class="tab-pane" id="activos">
         <div class="left pull-left">
             <ul class="fa-ul">
-                %{--<li>--}%
-                %{--<i class="fa-li ${iconAct}"></i>--}%
-                %{--<span id="unidad">--}%
-                %{--<g:link controller="unidad" action="list">Unidades</g:link> de conteo o control de los los items.--}%
-                %{--</span>--}%
-
-                %{--<div class="descripcion hide">--}%
-                %{--<h4>Unidad de Medida</h4>--}%
-
-                %{--<p>Unidad de control o conteo de obras para el plan anual de adquisiciones (PAC) y para fijar las metas.</p>--}%
-
-                %{--<p>Pueden ser: kil&oacute;metros, metros, escuelas, unidades, etc.</p>--}%
-                %{--</div>--}%
-                %{--</li>--}%
-                %{--<li>--}%
-                %{--<i class="fa-li ${iconAct}"></i>--}%
-                %{--<span id="marca">--}%
-                %{--<g:link controller="marca" action="list">Marcas</g:link> de los distintos items que se posee como--}%
-                %{--inventarios o como activos fijos.--}%
-                %{--</span>--}%
-
-                %{--<div class="descripcion hide">--}%
-                %{--<h4>Marcas</h4>--}%
-
-                %{--<p>Marca de los artículos d einventario y de los activos fijos de la Empresa.</p>--}%
-
-                %{--<p>Se de be crear un "Sin Marca" para aquellos bienes que no tienen marca</p>--}%
-                %{--</div>--}%
-                %{--</li>--}%
                 <li>
                     <i class="fa-li ${iconAct}"></i>
                     <span id="grupos">
@@ -437,139 +411,6 @@
         </div>
     </div>
 
-    <div class="tab-pane" id="nomina">
-        <div class="left pull-left">
-            <ul class="fa-ul">
-                <li>
-                    <i class="fa-li ${iconNom}"></i>
-                    <span id="tipoContrato">
-                        <g:link controller="tipoContrato" action="list">Tipos de contrato</g:link> que se aplican a sus
-                        empleados para la generación de la nómina
-                    </span>
-
-                    <div class="descripcion hide">
-                        <h4>Tipo de Contrato</h4>
-
-                        <p>Tipos de contrato para el cálculo de la nómina de cada empleado. Cada tiṕo de contrato posee
-                        un conjunto específico de rubros de ingresos, egresos y provisiones</p>
-                    </div>
-                </li>
-                <li>
-                    <i class="fa-li ${iconNom}"></i>
-                    <span id="tipoRubro">
-                        <g:link controller="tipoRubro" action="list">Tipo de rubro</g:link> que componen los ingresos y
-                        egresos de nómina de un empleado
-                    </span>
-
-                    <div class="descripcion hide">
-                        <h4>Tipo de Rubro</h4>
-
-                        <p>Tipo de rubro de nómina.</p>
-
-                        <p>Pueden ser Ingresos, egresos y provisiones.</p>
-                    </div>
-                </li>
-                <li>
-                    <i class="fa-li ${iconNom}"></i>
-                    <span id="rubro">
-                        <g:link controller="rubro" action="list">Rubro de nómina</g:link> que pueden ser ingresos, egresos y provisiones.
-                    </span>
-
-                    <div class="descripcion hide">
-                        <h4>Rubros de la Nómina</h4>
-
-                        <p>Rubros o conceptos por los que se hacen pagos o retenciones al empleado.</p>
-
-                        <p>Existen tambien rubros que pueden ser de valores fijos en proporción al sueldo base, y otros cuyo valor
-                        se ingrese mes a mes.</p>
-                    </div>
-                </li>
-                %{--<li>--}%
-                %{--<i class="fa-li ${iconNom}"></i>--}%
-                %{--<span id="cargo">--}%
-                %{--<g:link controller="cargo" action="list">Cargos</g:link> que puede tener un empleado.--}%
-                %{--</span>--}%
-
-                %{--<div class="descripcion hide">--}%
-                %{--<h4>Cargos de la Empresa</h4>--}%
-
-                %{--<p>Cargos que existen en la Empresa.</p>--}%
-
-                %{--<p>Cada empleado de la Empresa será asociado a un cargo.</p>--}%
-                %{--</div>--}%
-                %{--</li>--}%
-                <li>
-                    <i class="fa-li ${iconNom}"></i>
-                    <span id="estadoCivil">
-                        <g:link controller="estadoCivil" action="list">Estado civil</g:link> de la persona.
-                    </span>
-
-                    <div class="descripcion hide">
-                        <h4>Estado Civil</h4>
-
-                        <p>Valores de Estado civil que se pueden aceptar del personal de la empresa.</p>
-                    </div>
-                </li>
-                <li>
-                    <i class="fa-li ${iconNom}"></i>
-                    <span id="profesion">
-                        <g:link controller="profesion" action="list">Profesión</g:link> del empleado, o título académico
-                        principal.
-                    </span>
-
-                    <div class="descripcion hide">
-                        <h4>Profesión de la Persona</h4>
-
-                        <p>Profesiones con sus respectivas abreviaciones del personal de la empresa.</p>
-
-                        <p class="info">Por ejemplopara ingeniero, la abrviatura es "Ing".</p>
-                    </div>
-                </li>
-                <li>
-                    <i class="fa-li ${iconNom}"></i>
-                    <span id="nacionalidad">
-                        <g:link controller="nacionalidad" action="list">Nacionalidad</g:link> del empelado.
-                    </span>
-
-                    <div class="descripcion hide">
-                        <h4>Nacionalidad</h4>
-
-                        <p>Nacionalidad de la persona de la empresa.</p>
-                    </div>
-                </li>
-                <li>
-                    <i class="fa-li ${iconNom}"></i>
-                    <span id="meses">
-                        <g:link controller="mes" action="list">Meses del año</g:link> para generar la nómina.
-                    </span>
-
-                    <div class="descripcion hide">
-                        <h4>Meses del año</h4>
-
-                        <p>Meses de año para usarse en los reportes.</p>
-                    </div>
-                </li>
-                <li>
-                    <i class="fa-li ${iconNom}"></i>
-                    <span id="base">
-                        <g:link controller="base" action="list">Tabla de valores para declarar el impuesto a la renta</g:link>
-                        de acuerdo al SRI, definida año por año.
-                    </span>
-
-                    <div class="descripcion hide">
-                        <h4>Tabla del Impuesto a la Renta</h4>
-
-                        <p>Valores de fracción básica, impuesto, % de excedente, etc.</p>
-                    </div>
-                </li>
-            </ul>
-        </div>
-
-        <div class="nomina right pull-right">
-        </div>
-    </div>
-
-
     <div class="tab-pane" id="sri">
         <div class="left pull-left">
             <ul class="fa-ul">
@@ -616,18 +457,18 @@
                     </div>
                 </li>
 
-                <li>
-                    <i class="fa-li ${iconGen}"></i>
-                    <span id="tipoST">
-                        <g:link controller="sustentoTributario" action="list">Tipo de Sustento Tributario</g:link>
-                    </span>
+%{--                <li>--}%
+%{--                    <i class="fa-li ${iconGen}"></i>--}%
+%{--                    <span id="tipoST">--}%
+%{--                        <g:link controller="sustentoTributario" action="list">Tipo de Sustento Tributario</g:link>--}%
+%{--                    </span>--}%
 
-                    <div class="descripcion hide">
-                        <h4>Tipo de Sustento Tributario</h4>
+%{--                    <div class="descripcion hide">--}%
+%{--                        <h4>Tipo de Sustento Tributario</h4>--}%
 
-                        <p>Tipo de Sustento Tributario</p>
-                    </div>
-                </li>
+%{--                        <p>Tipo de Sustento Tributario</p>--}%
+%{--                    </div>--}%
+%{--                </li>--}%
             </ul>
         </div>
 

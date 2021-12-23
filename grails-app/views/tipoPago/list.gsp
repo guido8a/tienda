@@ -1,9 +1,15 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: fabricio
+  Date: 22/12/21
+  Time: 11:15
+--%>
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="layout" content="main">
-    <title>Niveles</title>
+    <title>Tipos de Pago</title>
 </head>
 <body>
 
@@ -11,36 +17,39 @@
 
 <!-- botones -->
 <div class="btn-toolbar toolbar">
+
     <div class="btn-group">
         <g:link class="btn btn-default col-md-2" style="width: 100px;" controller="inicio" action="parametros"><i class="fa fa-arrow-left"></i> Regresar</g:link>
         <g:link action="form" class="btn btn-info btnCrear">
-            <i class="fa fa-file"></i> Nuevo nivel
+            <i class="fa fa-file"></i> Nuevo tipo de Pago
         </g:link>
     </div>
 </div>
 
-<div class="vertical-container vertical-container-list" style="width: 50%">
-    <p class="css-vertical-text">Niveles</p>
+<div class="vertical-container vertical-container-list">
+    <p class="css-vertical-text">Lista de Tipos de Pago</p>
 
     <div class="linea"></div>
     <table class="table table-condensed table-bordered table-striped table-hover">
         <thead>
         <tr>
-            <th style="width: 75%">Descripción</th>
-            <th style="width: 25%">Acciones</th>
+            <th style="width: 15%">Código</th>
+            <th style="width: 70%">Descripción</th>
+            <th style="width: 15%">Acciones</th>
         </tr>
         </thead>
         <tbody>
-        <g:each in="${niveles}" status="i" var="nivelInstance">
-            <tr data-id="${nivelInstance.id}">
+        <g:each in="${tipoPagoInstanceList}" status="i" var="tipoPagoInstance">
+            <tr data-id="${tipoPagoInstance.id}">
 
-                <td>${fieldValue(bean: nivelInstance, field: "descripcion")}</td>
+                <td>${fieldValue(bean: tipoPagoInstance, field: "codigo")}</td>
+                <td>${fieldValue(bean: tipoPagoInstance, field: "descripcion")}</td>
 
                 <td style="text-align: center">
-                    <a href="#" data-id="${nivelInstance.id}" class="btn btn-success btn-sm btn-edit btn-ajax" title="Editar">
+                    <a href="#" data-id="${tipoPagoInstance.id}" class="btn btn-success btn-sm btn-edit btn-ajax" title="Editar">
                         <i class="fa fa-edit"></i>
                     </a>
-                    <a href="#" data-id="${nivelInstance.id}" class="btn btn-danger btn-sm btn-delete btn-ajax" title="Eliminar">
+                    <a href="#" data-id="${tipoPagoInstance.id}" class="btn btn-danger btn-sm btn-delete btn-ajax" title="Eliminar">
                         <i class="fa fa-trash"></i>
                     </a>
                 </td>
@@ -53,9 +62,10 @@
 <script type="text/javascript">
     var id = null;
     function submitForm() {
-        var $form = $("#frmNivel");
+        var $form = $("#frmTipoPago");
         var $btn = $("#dlgCreateEdit").find("#btnSave");
         if ($form.valid()) {
+            $btn.replaceWith(spinner);
             openLoader("Grabando");
             $.ajax({
                 type    : "POST",
@@ -64,13 +74,18 @@
                 success : function (msg) {
                     closeLoader();
                     if (msg == "ok") {
-                        log("Nivel guardado correctamente","success");
+                        log("Tipo de pago guardado correctamente","success");
                         setTimeout(function () {
                             location.reload(true);
                         }, 1000);
                     } else {
-                        log("Error al guardar el nivel","error");
-                        return false;
+                        if(msg == 'er'){
+                            bootbox.alert("Código ya existente");
+                        }else{
+                            log("Error al guardar el tipo de pago","error");
+                            return false;
+                        }
+
                     }
                 }
             });
@@ -81,7 +96,7 @@
     function deleteRow(itemId) {
         bootbox.dialog({
             title   : "Alerta",
-            message : "<i class='fa fa-trash fa-3x pull-left text-danger text-shadow'></i><p>¿Está seguro que desea eliminar el Nivel seleccionado? Esta acción no se puede deshacer.</p>",
+            message : "<i class='fa fa-trash fa-3x pull-left text-danger text-shadow'></i><p>¿Está seguro que desea eliminar el Tipo de Pago seleccionado? Esta acción no se puede deshacer.</p>",
             buttons : {
                 cancelar : {
                     label     : "Cancelar",
@@ -103,12 +118,12 @@
                             success : function (msg) {
                                 closeLoader();
                                 if (msg == "ok") {
-                                    log("Nivel borrado correctamente","success");
+                                    log("Tipo de pago borrado correctamente","success");
                                     setTimeout(function () {
                                         location.reload(true);
                                     }, 1000);
                                 } else {
-                                    log("Error al borrar el nivel","error");
+                                    log("Error al borrar el tipo de pago","error");
                                     return false;
                                 }
                             }
@@ -119,7 +134,7 @@
         });
     }
     function createEditRow(id) {
-        var title = id ? "Editar" : "Nuevo";
+        var title = id ? "Editar" : "Crear";
         var data = id ? { id: id } : {};
         $.ajax({
             type    : "POST",
@@ -128,7 +143,7 @@
             success : function (msg) {
                 var b = bootbox.dialog({
                     id      : "dlgCreateEdit",
-                    title   : title + " Nivel",
+                    title   : title + " Tipo de Pago",
                     message : msg,
                     buttons : {
                         cancelar : {
@@ -160,6 +175,7 @@
             createEditRow();
             return false;
         });
+
         $(".btn-edit").click(function () {
             var id = $(this).data("id");
             createEditRow(id);

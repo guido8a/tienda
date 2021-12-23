@@ -1,9 +1,16 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: fabricio
+  Date: 23/12/21
+  Time: 9:44
+--%>
+
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="layout" content="main">
-    <title>Niveles</title>
+    <title>Formas de Pago</title>
 </head>
 <body>
 
@@ -14,13 +21,14 @@
     <div class="btn-group">
         <g:link class="btn btn-default col-md-2" style="width: 100px;" controller="inicio" action="parametros"><i class="fa fa-arrow-left"></i> Regresar</g:link>
         <g:link action="form" class="btn btn-info btnCrear">
-            <i class="fa fa-file"></i> Nuevo nivel
+            <i class="fa fa-file"></i> Nueva forma de pago
         </g:link>
     </div>
+
 </div>
 
 <div class="vertical-container vertical-container-list" style="width: 50%">
-    <p class="css-vertical-text">Niveles</p>
+    <p class="css-vertical-text">Forma de Pago</p>
 
     <div class="linea"></div>
     <table class="table table-condensed table-bordered table-striped table-hover">
@@ -31,16 +39,14 @@
         </tr>
         </thead>
         <tbody>
-        <g:each in="${niveles}" status="i" var="nivelInstance">
-            <tr data-id="${nivelInstance.id}">
-
-                <td>${fieldValue(bean: nivelInstance, field: "descripcion")}</td>
-
-                <td style="text-align: center">
-                    <a href="#" data-id="${nivelInstance.id}" class="btn btn-success btn-sm btn-edit btn-ajax" title="Editar">
+        <g:each in="${formaDePagoInstanceList}" status="i" var="formaDePagoInstance">
+            <tr data-id="${formaDePagoInstance.id}" style="text-align: center">
+                <td>${fieldValue(bean: formaDePagoInstance, field: "descripcion")}</td>
+                <td>
+                    <a href="#" data-id="${formaDePagoInstance.id}" class="btn btn-success btn-sm btn-edit btn-ajax" title="Editar">
                         <i class="fa fa-edit"></i>
                     </a>
-                    <a href="#" data-id="${nivelInstance.id}" class="btn btn-danger btn-sm btn-delete btn-ajax" title="Eliminar">
+                    <a href="#" data-id="${formaDePagoInstance.id}" class="btn btn-danger btn-sm btn-delete btn-ajax" title="Eliminar">
                         <i class="fa fa-trash"></i>
                     </a>
                 </td>
@@ -53,9 +59,10 @@
 <script type="text/javascript">
     var id = null;
     function submitForm() {
-        var $form = $("#frmNivel");
+        var $form = $("#frmFormaDePago");
         var $btn = $("#dlgCreateEdit").find("#btnSave");
         if ($form.valid()) {
+            $btn.replaceWith(spinner);
             openLoader("Grabando");
             $.ajax({
                 type    : "POST",
@@ -64,12 +71,12 @@
                 success : function (msg) {
                     closeLoader();
                     if (msg == "ok") {
-                        log("Nivel guardado correctamente","success");
+                        log("Forma de pago guardado correctamente","success");
                         setTimeout(function () {
                             location.reload(true);
                         }, 1000);
                     } else {
-                        log("Error al guardar el nivel","error");
+                        log("Error al guardar la forma de pago","error");
                         return false;
                     }
                 }
@@ -81,7 +88,7 @@
     function deleteRow(itemId) {
         bootbox.dialog({
             title   : "Alerta",
-            message : "<i class='fa fa-trash fa-3x pull-left text-danger text-shadow'></i><p>¿Está seguro que desea eliminar el Nivel seleccionado? Esta acción no se puede deshacer.</p>",
+            message : "<i class='fa fa-trash fa-3x pull-left text-danger text-shadow'></i><p>¿Está seguro que desea eliminar la Forma de Pago seleccionado? Esta acción no se puede deshacer.</p>",
             buttons : {
                 cancelar : {
                     label     : "Cancelar",
@@ -103,12 +110,12 @@
                             success : function (msg) {
                                 closeLoader();
                                 if (msg == "ok") {
-                                    log("Nivel borrado correctamente","success");
+                                    log("Forma de pago borrado correctamente","success");
                                     setTimeout(function () {
                                         location.reload(true);
                                     }, 1000);
                                 } else {
-                                    log("Error al borrar el nivel","error");
+                                    log("Error al borrar la forma de pago","error");
                                     return false;
                                 }
                             }
@@ -119,7 +126,7 @@
         });
     }
     function createEditRow(id) {
-        var title = id ? "Editar" : "Nuevo";
+        var title = id ? "Editar" : "Crear";
         var data = id ? { id: id } : {};
         $.ajax({
             type    : "POST",
@@ -128,7 +135,7 @@
             success : function (msg) {
                 var b = bootbox.dialog({
                     id      : "dlgCreateEdit",
-                    title   : title + " Nivel",
+                    title   : title + " Forma De Pago",
                     message : msg,
                     buttons : {
                         cancelar : {
@@ -160,6 +167,7 @@
             createEditRow();
             return false;
         });
+
         $(".btn-edit").click(function () {
             var id = $(this).data("id");
             createEditRow(id);
