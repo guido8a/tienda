@@ -151,13 +151,13 @@ class DetalleFacturaController  {
     }
 
     def guardarDetalle_ajax () {
-//        println("params " + params)
+        println("params " + params)
 
         def proceso = Proceso.get(params.proceso)
         def item = Producto.get(params.item)
         def bodega = Bodega.get(params.bodega)
-        def centroCostos = CentroCosto.get(params.centro)
-        def especifico = DetalleFactura.findByProcesoAndProductoAndBodegaAndCentroCosto(proceso,item,bodega,centroCostos)
+//        def centroCostos = CentroCosto.get(params.centro)
+        def especifico = DetalleFactura.findByProcesoAndProductoAndBodega(proceso,item,bodega)
         def detalle
         if(params.descuento == ''){
             params.descuento = 0
@@ -172,7 +172,7 @@ class DetalleFacturaController  {
             original = params.original.toInteger()
         }else{
             res.each { im->
-                if(item.codigo == im.itemcdgo){
+                if(item.codigo == im.prodcdgo){
                     original = im.exst.toInteger()
                 }
             }
@@ -186,7 +186,7 @@ class DetalleFacturaController  {
             if(params.id){
                 detalle = DetalleFactura.get(params.id)
                 detalle.precioUnitario = params.precio.toDouble()
-                detalle.centroCosto = centroCostos
+//                detalle.centroCosto = centroCostos
                 detalle.bodega = bodega
                 detalle.cantidad = params.cantidad.toDouble()
             }else{
@@ -201,9 +201,9 @@ class DetalleFacturaController  {
                 }else{
                     detalle = new DetalleFactura()
                     detalle.proceso = proceso
-                    detalle.item = item
+                    detalle.producto = item
                     detalle.precioUnitario = params.precio.toDouble()
-                    detalle.centroCosto = centroCostos
+//                    detalle.centroCosto = centroCostos
                     detalle.bodega = bodega
                     detalle.cantidad = params.cantidad.toDouble()
                 }
@@ -240,7 +240,7 @@ class DetalleFacturaController  {
     def tablaDetalle_ajax() {
         def cn = dbConnectionService.getConnection()
         def proceso = Proceso.get(params.proceso)
-        def detalles = DetalleFactura.findAllByProceso(proceso).sort{it?.item?.codigo}
+        def detalles = DetalleFactura.findAllByProceso(proceso).sort{it?.producto?.codigo}
         def totl = cn.rows("select * from total_detalle(${params.proceso},1)".toString())[0]
         def truncar
         if(detalles && proceso.estado == 'R'){
@@ -253,7 +253,9 @@ class DetalleFacturaController  {
 
     def cargarEdicion_ajax () {
         def detalle = DetalleFactura.get(params.detalle)
-        render detalle.id + "_" + detalle.item.codigo + "_" + detalle.item.nombre + "_" + detalle.precioUnitario + "_" + detalle.cantidad.toInteger() + "_" + detalle.descuento + "_" + detalle?.bodega?.id + "_" + detalle?.centroCosto?.id + "_" + detalle?.item?.id
+        render detalle.id + "_" + detalle.producto.codigo + "_" + detalle.producto.titulo + "_" + detalle.precioUnitario +
+                "_" + detalle.cantidad.toInteger() + "_" + detalle.descuento + "_" + detalle?.bodega?.id + "_" +
+                "_" + detalle?.producto?.id
     }
 
     def borrarItemDetalle_ajax () {

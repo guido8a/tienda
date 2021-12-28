@@ -4,7 +4,6 @@ import seguridad.Empresa
 
 class TipoIva {
 
-    Empresa empresa
     String descripcion
 
     static mapping = {
@@ -14,7 +13,6 @@ class TipoIva {
         id generator: 'identity'
         version false
         columns {
-           empresa column: 'empr__id'
            descripcion column: 'tpivdscr'
         }
     }

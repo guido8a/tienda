@@ -113,17 +113,17 @@
     </g:if>
 
 
-    <div class="col-xs-2" style="margin-top: 25px; margin-bottom: 15px; margin-left: -10px; width: 110px">
-        <a href="#" id="btnBuscar" class="btn btn-info" title="Buscar Item">
+    <div class="col-xs-2" style="margin-top: 15px; margin-bottom: 15px; margin-left: -10px; width: 120px">
+        <a href="#" id="btnBuscar" class="btn btn-info btn-sm" title="Buscar Item">
             <i class="fa fa-search"></i>
         </a>
-        <a href="#" id="btnAgregar" class="btn btn-success" title="Agregar Item al detalle">
+        <a href="#" id="btnAgregar" class="btn btn-success btn-sm" title="Agregar Item al detalle">
             <i class="fa fa-plus"></i>
         </a>
-        <a href="#" id="btnGuardar" class="btn btn-success hidden" title="Guardar Item">
+        <a href="#" id="btnGuardar" class="btn btn-success btn-sm hidden" title="Guardar Item">
             <i class="fa fa-save"></i>
         </a>
-        <a href="#" id="btnCancelar" class="btn btn-warning hidden" title="Cancelar Edición">
+        <a href="#" id="btnCancelar" class="btn btn-warning btn-sm hidden" title="Cancelar Edición">
             <i class="fa fa-times-circle"></i>
         </a>
     </div>
@@ -134,21 +134,19 @@
     <p class="css-vertical-text">Tabla de Items</p>
 
     <div class="linea" style="height: 98%;"></div>
-    <table class="table table-bordered table-hover table-condensed" style="margin-top: 10px">
+    <table class="table table-bordered table-hover table-condensed" style="margin-top: 10px;margin-bottom: 0px;">
         <thead>
         <tr>
-            <th style="width: 90px">Código</th>
-            <th style="width: 200px">Descripción</th>
-            <th style="width: 50px">Bodega</th>
-            <th style="width: 50px">C. Cost.</th>
-            <th style="width: 30px">Uni</th>
-            <th style="width: 40px">Canti</th>
-            <th style="width: 80px">P.U.</th>
+            <th style="width: 8%">Código</th>
+            <th style="width: 44%">Descripción</th>
+            <th style="width: 10%">Bodega</th>
+            <th style="width: 6%">Canti</th>
+            <th style="width: 8%">P.U.</th>
             <g:if test="${proceso?.tipoProceso?.id != 8}">
-                <th style="width: 50px">% Desc</th>
+                <th style="width: 6%">% Desc</th>
             </g:if>
-            <th style="width: 90px">Total</th>
-            <th style="width: 60px"><i class="fa fa-pencil"></i></th>
+            <th style="width: 8%">Total</th>
+            <th style="width: 10%"><i class="fa fa-edit"></i></th>
         </tr>
         </thead>
     </table>

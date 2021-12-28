@@ -39,7 +39,7 @@ class DetalleFactura implements Serializable {
         }
     }
     static constraints = {
-        publicacion(blank: false, nullable: false, attributes: [title: 'item'])
+        producto(blank: false, nullable: false, attributes: [title: 'item'])
         proceso(blank: false, nullable: false, attributes: [title: 'proceso'])
 //        centroCosto(blank: true, nullable: true, attributes: [title: 'centro de costo'])
         bodega(blank: true, nullable: true, attributes: [title: 'bodega'])

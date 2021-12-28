@@ -15,28 +15,27 @@
 <table class="table table-bordered table-hover table-condensed">
     <tbody>
     <g:each in="${detalles}" var="detalle">
-        <tr style="color:${detalle.item.tipoIVA.id == 2? '#000000' : '#005060'}">
-            <td style="width: 90px;">${detalle?.item?.codigo}</td>
-            <td style="width: 200px">${detalle?.item?.nombre}</td>
-            <td style="width: 50px">${detalle?.bodega?.descripcion}</td>
-            <td style="width: 50px">${detalle?.centroCosto?.nombre?.take(5)}</td>
-            <td style="width: 30px">${detalle?.item?.unidad}</td>
-            <td style="width: 45px; text-align: right">${detalle?.cantidad?.toInteger()}</td>
-            <td style="width: 80px; text-align: right"><g:formatNumber number="${detalle?.precioUnitario}" maxFractionDigits="4" minFractionDigits="4"/></td>
+        <tr style="color:${detalle.producto.tipoIva.id == 2? '#000000' : '#005060'}">
+            <td style="width: 8%;">${detalle?.producto?.codigo}</td>
+            <td style="width: 44%">${detalle?.producto?.titulo}</td>
+            <td style="width: 10%">${detalle?.bodega?.descripcion}</td>
+%{--            <td style="width: 30px">${detalle?.producto?.unidad}</td>--}%
+            <td style="width: 6%; text-align: right">${detalle?.cantidad?.toInteger()}</td>
+            <td style="width: 8%; text-align: right"><g:formatNumber number="${detalle?.precioUnitario}" maxFractionDigits="4" minFractionDigits="4"/></td>
             <g:if test="${detalle?.proceso?.tipoProceso?.codigo?.trim() != 'T'}">
-                <td style="width: 50px;text-align: right">${detalle?.descuento}</td>
+                <td style="width: 6%;text-align: right">${detalle?.descuento}</td>
             </g:if>
-            <td style="width: 90px;text-align: right"><g:formatNumber number="${detalle?.cantidad * detalle?.precioUnitario}" maxFractionDigits="2" minFractionDigits="2"/></td>
+            <td style="width: 8%;text-align: right"><g:formatNumber number="${detalle?.cantidad * detalle?.precioUnitario}" maxFractionDigits="2" minFractionDigits="2"/></td>
             <g:if test="${truncar}">
-                <td style="width: 60px; text-align: center"></td>
+                <td style="width: 8%; text-align: center"></td>
             </g:if>
             <g:else>
-                <td style="width: 60px; text-align: center">
+                <td style="width: 10%; text-align: center">
                     <a href="#" class="btn btn-danger btn-sm btnBorrarItemDetalle"
                        title="Borrar Item" idI="${detalle?.id}"><i class="far fa-trash-alt"></i></a>
 
                     <a href="#" class="btn btn-success btn-sm btnEditarItem"
-                       title="Editar Item"  idI="${detalle?.id}"><i class="fa fa-pencil"></i></a>
+                       title="Editar Item"  idI="${detalle?.id}"><i class="fa fa-edit"></i></a>
                 </td>
             </g:else>
 
