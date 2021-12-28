@@ -9,7 +9,7 @@
 
 .colorAsiento {
     color: #0b0b0b;
-    background-color: #7ac6ff;
+    background-color: #d6eeff;
 }
 
 .derecha {
@@ -22,12 +22,12 @@
 
 .dato {
     font-weight: normal;
-    background-color: #ffd5af;
+    background-color: #fff3e1;
 }
 .total {
     /*font-weight: bold;*/
-    background-color: #1270c3;
-    color: #fdcfa0;
+    background-color: #465570;
+    color: #fdf5f0;
 }
 
 .rojo{
@@ -64,7 +64,7 @@
         <th width="50px">CC</th>
         <th width="100px">DEBE</th>
         <th width="100px">HABER</th>
-        <th width="133px"><i class="fa fa-pencil"></i></th>
+        <th width="133px"><i class="far fa-edit"></i></th>
     </tr>
     </thead>
 </table>
@@ -91,12 +91,12 @@
                             <g:if test="${asiento?.comprobante?.registrado != 'S'}">
                                 <a href="#" class="btn btn-success btn-sm btnEditarAsiento" idAs="${asiento?.id}"
                                    title="Editar asiento">
-                                    <i class="fa fa-pencil"></i>
+                                    <i class="far fa-edit"></i>
                                 </a>
                             </g:if>
                             <a href="#" class="btn btn-azul btn-sm btnCentroCostos" idAs="${asiento?.id}" nomAs="${asiento?.cuenta?.descripcion}"
                                title="Centro de Costos">
-                                <i class="fa fa-dollar"></i>
+                                <i class="far fa-money-bill-alt"></i>
                             </a>
                             <g:if test="${asiento?.comprobante?.registrado != 'S'}">
                                 <a href="#" class="btn btn-warning btn-sm btnAgregarAuxiliar" idAs="${asiento?.id}"
@@ -122,7 +122,7 @@
                                 <td class="colorAtras"></td>
                                 <td class="colorAtras">Debe</td>
                                 <td class="colorAtras">Haber</td>
-                                <td class="colorAtras"><i class="fa fa-pencil"></i></td>
+                                <td class="colorAtras"><i class="far fa-edit"></i></td>
                                 <g:set var="cabecera" value="S"/>
                             </tr>
                         </g:if>
@@ -138,7 +138,7 @@
                                     <div class="btn-group">
                                         <a href="#" class="btn btn-success btn-sm btnEditarAuxiliar"
                                            idAu="${auxiliar?.id}" title="Editar auxiliar">
-                                            <i class="fa fa-pencil"></i>
+                                            <i class="far fa-edit"></i>
                                         </a>
                                         <a href="#" class="btn btn-danger btn-sm btnEliminarAuxiliar"
                                            idAu="${auxiliar?.id}" title="Eliminar auxiliar">

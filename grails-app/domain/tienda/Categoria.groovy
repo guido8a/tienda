@@ -1,7 +1,10 @@
 package tienda
 
+import seguridad.Empresa
+
 class Categoria {
 
+    Empresa empresa
     String descripcion
     Integer orden
 
@@ -12,6 +15,7 @@ class Categoria {
         id generator: 'identity'
         version false
         columns {
+           empresa column: 'empr__id'
            descripcion column: 'ctgrdscr'
            orden column: 'ctgrordn'
         }

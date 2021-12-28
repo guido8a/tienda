@@ -2,14 +2,15 @@ package sri
 
 import inventario.Bodega
 import inventario.CentroCosto
+import tienda.Producto
 import tienda.Publicacion
 
 class DetalleFactura implements Serializable {
 
 //    Item item
-    Publicacion publicacion
+    Producto producto
     Proceso proceso
-    CentroCosto centroCosto
+//    CentroCosto centroCosto
     Bodega bodega
 
     double cantidad
@@ -26,9 +27,9 @@ class DetalleFactura implements Serializable {
         id generator: 'identity'
         version false
         columns {
-            publicacion column: 'publ__id'
+            producto column: 'prod__id'
             proceso column: 'prcs__id'
-            centroCosto column: 'cncs__id'
+//            centroCosto column: 'cncs__id'
             bodega column: 'bdga__id'
 
             cantidad column: 'dtfccntd'
@@ -40,7 +41,7 @@ class DetalleFactura implements Serializable {
     static constraints = {
         publicacion(blank: false, nullable: false, attributes: [title: 'item'])
         proceso(blank: false, nullable: false, attributes: [title: 'proceso'])
-        centroCosto(blank: true, nullable: true, attributes: [title: 'centro de costo'])
+//        centroCosto(blank: true, nullable: true, attributes: [title: 'centro de costo'])
         bodega(blank: true, nullable: true, attributes: [title: 'bodega'])
 
         cantidad(blank: false, attributes: [title: 'cantidad'])

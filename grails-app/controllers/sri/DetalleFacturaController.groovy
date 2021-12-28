@@ -5,6 +5,7 @@ import inventario.Bodega
 import inventario.CentroCosto
 import org.springframework.dao.DataIntegrityViolationException
 import seguridad.Empresa
+import tienda.Producto
 
 class DetalleFacturaController  {
 
@@ -136,13 +137,13 @@ class DetalleFacturaController  {
         def cn = dbConnectionService.getConnection()
         def sql
         if(params.nombre && params.codigo){
-            sql = "select * from lsta_item('${proceso?.id}','${bodega?.id}') where itemcdgo ilike '${params.codigo}' and itemnmbr ilike '%${params.nombre}%' "
+            sql = "select * from lsta_prod('${proceso?.id}','${bodega?.id}') where itemcdgo ilike '${params.codigo}' and itemnmbr ilike '%${params.nombre}%' "
         }else if (params.nombre){
-            sql = "select * from lsta_item('${proceso?.id}','${bodega?.id}') where itemnmbr ilike '%${params.nombre}%' "
+            sql = "select * from lsta_prod('${proceso?.id}','${bodega?.id}') where itemnmbr ilike '%${params.nombre}%' "
         }else if(params.codigo){
-            sql = "select * from lsta_item('${proceso?.id}','${bodega?.id}') where itemcdgo ilike '%${params.codigo}%' "
+            sql = "select * from lsta_prod('${proceso?.id}','${bodega?.id}') where itemcdgo ilike '%${params.codigo}%' "
         }else{
-            sql = "select * from lsta_item('${proceso?.id}','${bodega?.id}')"
+            sql = "select * from lsta_prod('${proceso?.id}','${bodega?.id}')"
         }
         def res = cn.rows(sql.toString())
         println "sql $sql"
@@ -153,17 +154,17 @@ class DetalleFacturaController  {
 //        println("params " + params)
 
         def proceso = Proceso.get(params.proceso)
-        def item = Item.get(params.item)
+        def item = Producto.get(params.item)
         def bodega = Bodega.get(params.bodega)
         def centroCostos = CentroCosto.get(params.centro)
-        def especifico = DetalleFactura.findByProcesoAndItemAndBodegaAndCentroCosto(proceso,item,bodega,centroCostos)
+        def especifico = DetalleFactura.findByProcesoAndProductoAndBodegaAndCentroCosto(proceso,item,bodega,centroCostos)
         def detalle
         if(params.descuento == ''){
             params.descuento = 0
         }
 
         def cn = dbConnectionService.getConnection()
-        def sql = "select * from lsta_item('${proceso?.id}','${bodega?.id}')"
+        def sql = "select * from lsta_prod('${proceso?.id}','${bodega?.id}')"
         def res = cn.rows(sql.toString())
         def original = 0
 
@@ -240,7 +241,7 @@ class DetalleFacturaController  {
         def cn = dbConnectionService.getConnection()
         def proceso = Proceso.get(params.proceso)
         def detalles = DetalleFactura.findAllByProceso(proceso).sort{it?.item?.codigo}
-        def totl = cn.rows("select * from total_detalle(${params.proceso},0,0)".toString())[0]
+        def totl = cn.rows("select * from total_detalle(${params.proceso},1)".toString())[0]
         def truncar
         if(detalles && proceso.estado == 'R'){
             truncar = true

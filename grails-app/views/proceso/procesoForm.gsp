@@ -71,7 +71,7 @@
     <div class="btn-group" style="margin-right: 10px">
         <g:if test="${proceso?.estado == 'R'}">
             <a href="#" class="btn btn-success" id="comprobanteN">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
                 Comprobante
             </a>
 
@@ -148,7 +148,7 @@
             %{--</g:if>--}%
                 <g:if test="${proceso?.tipoProceso?.codigo?.trim() in ['P','I', 'A']}">
                     <a href="#" class="btn btn-info" id="btnConciliar">
-                        <i class="fa fa-pencil-square-o"></i>
+                        <i class="far fa-check-circle"></i>
                         Conciliar Total
                     </a>
                 </g:if>
@@ -161,13 +161,13 @@
         %{--</g:link>--}%
         %{--</g:if>--}%
             <g:if test="${proceso?.tipoProceso?.codigo?.trim() in ['C','V','T','NC']}">
-                <a href="#" class="btn btn-success" id="btnDetalle" style="color: #0b0b0b">
+                <a href="#" class="btn btn-success" id="btnDetalle">
                     <i class="fa fa-list"></i>
                     Detalle
                 </a>
             </g:if>
             <g:if test="${proceso?.tipoProceso?.codigo?.trim() == 'V' && proceso?.estado == 'R'}">
-                <a href="#" class="btn btn-info" id="btnDocRetencion" style="color: #0b0b0b">
+                <a href="#" class="btn btn-info" id="btnDocRetencion">
                     <i class="fa fa-clipboard"></i>
                     Retención en Ventas
                 </a>
@@ -490,7 +490,8 @@
 
 
     $("#btnEnviarFactura").click(function () {
-        bootbox.confirm("<i class='fa fa-warning fa-3x pull-left text-warning text-shadow'></i> Está seguro que desea enviar esta factura al SRI?", function (result) {
+        bootbox.confirm("<i class='fas fa-exclamation-triangle fa-3x pull-left text-warning text-shadow'></i> " +
+            "<span style='margin-left: 20px; font-size: large'>Está seguro que desea enviar esta factura al SRI?</span>", function (result) {
             if (result) {
                 openLoader('Enviando al SRI...');
                 $.ajax({
@@ -668,7 +669,7 @@
                     message: msg,
                     buttons: {
                         cancelar: {
-                            label: "<i class='fa fa-times'></i> Cancelar",
+                            label: "<i class='far fa-check-circle'></i> Cancelar",
                             className: "btn-primary",
                             callback: function () {
                             }

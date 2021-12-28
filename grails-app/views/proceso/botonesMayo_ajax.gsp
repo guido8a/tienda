@@ -10,14 +10,14 @@
         <g:if test="${comprobante.registrado != 'S'}">
             <g:if test="${band}">
                 <a href="#" class="btn btnMayorizar btn-success" id="reg_${comprobante?.id}" idComp="${comprobante?.id}" style="margin-bottom: 10px;">
-                    <i class="fa fa-pencil-square-o"></i>
+                    <i class="far fa-edit"></i>
                     Mayorizar
                 </a>
             </g:if>
         </g:if>
         <g:else>
             <a href="#" class="btn btn-danger" id="desmayo" idComp="${comprobante?.id}" style="margin-bottom: 10px;">
-                <i class="fa fa-pencil-square-o "></i>
+                <i class="far fa-edit"></i>
                 Desmayorizar
             </a>
             <a href="#" class="btn btn-info" id="imprimir" iden="${comprobante?.proceso?.id}" nombre="${comprobante.prefijo + comprobante.numero}" style="margin-bottom: 10px;">
