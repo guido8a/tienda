@@ -207,21 +207,21 @@
 %{--                    </div>--}%
 %{--                </li>--}%
 
-                <li>
-                    <i class="fa-li ${iconGen}"></i>
-                    <span id="tipoPersona">
-                        <g:link controller="tipoPersona" action="list" class="descripcion">Tipo de Persona</g:link> natural o jurídica
-                        de un Proveedor o Cliente.
-                    </span>
+%{--                <li>--}%
+%{--                    <i class="fa-li ${iconGen}"></i>--}%
+%{--                    <span id="tipoPersona">--}%
+%{--                        <g:link controller="tipoPersona" action="list" class="descripcion">Tipo de Persona</g:link> natural o jurídica--}%
+%{--                        de un Proveedor o Cliente.--}%
+%{--                    </span>--}%
 
-                    <div class="descripcion hide">
-                        <h4>Tipo de Persona</h4>
+%{--                    <div class="descripcion hide">--}%
+%{--                        <h4>Tipo de Persona</h4>--}%
 
-                        <p>Tipos de persona: natural o jurídica que posee un proveedor o un cliente.</p>
+%{--                        <p>Tipos de persona: natural o jurídica que posee un proveedor o un cliente.</p>--}%
 
-                        <p class="info">No se debe editar este parámetro.</p>
-                    </div>
-                </li>
+%{--                        <p class="info">No se debe editar este parámetro.</p>--}%
+%{--                    </div>--}%
+%{--                </li>--}%
 
                 <li>
                     <i class="fa-li ${iconGen}"></i>
@@ -251,18 +251,18 @@
                     </div>
                 </li>
 
-                <li>
-                    <i class="fa-li ${iconGen}"></i>
-                    <span id="conceptoIR">
-                        <a href="#" id="btnCR" class="descripcion">Concepto de Retención IR</a>
-                    </span>
+%{--                <li>--}%
+%{--                    <i class="fa-li ${iconGen}"></i>--}%
+%{--                    <span id="conceptoIR">--}%
+%{--                        <a href="#" id="btnCR" class="descripcion">Concepto de Retención IR</a>--}%
+%{--                    </span>--}%
 
-                    <div class="descripcion hide">
-                        <h4>Concepto de Retención IR</h4>
+%{--                    <div class="descripcion hide">--}%
+%{--                        <h4>Concepto de Retención IR</h4>--}%
 
-                        <p>Concepto de Retención IR</p>
-                    </div>
-                </li>
+%{--                        <p>Concepto de Retención IR</p>--}%
+%{--                    </div>--}%
+%{--                </li>--}%
 
                 <li>
                     <i class="fa-li ${iconGen}"></i>
@@ -277,19 +277,19 @@
                     </div>
                 </li>
 
-                <li>
-                    <i class="fa-li ${iconGen}"></i>
-                    <span id="valorAnual">
-                        <g:link controller="valorAnual" action="list" class="descripcion">Valor Anual</g:link>
+%{--                <li>--}%
+%{--                    <i class="fa-li ${iconGen}"></i>--}%
+%{--                    <span id="valorAnual">--}%
+%{--                        <g:link controller="valorAnual" action="list" class="descripcion">Valor Anual</g:link>--}%
 
-                    </span>
+%{--                    </span>--}%
 
-                    <div class="descripcion hide">
-                        <h4>Valor Anual</h4>
+%{--                    <div class="descripcion hide">--}%
+%{--                        <h4>Valor Anual</h4>--}%
 
-                        <p>Valor Anual</p>
-                    </div>
-                </li>
+%{--                        <p>Valor Anual</p>--}%
+%{--                    </div>--}%
+%{--                </li>--}%
 %{--                <li>--}%
 %{--                    <i class="fa-li ${iconGen}"></i>--}%
 %{--                    <span id="rolPagos">--}%
@@ -316,7 +316,7 @@
         <div class="left pull-left">
             <ul class="fa-ul">
                 <li>
-                    <i class="fa-li ${iconEmpr}"></i>
+                    <i class="fa fa-building"></i>
                     <span id="paramsEmp">
                         <g:link controller="empresa" action="list">Parámetros de la Empresa</g:link> para definir la forma de
                         funcionamiento de la contabilidad, centros de costos y control de inventarios.
@@ -329,7 +329,7 @@
                     </div>
                 </li>
                 <li>
-                    <i class="fa-li ${iconEmpr}"></i>
+                    <i class="fa fa-building"></i>
                     <span id="tipoEmpresa">
                         <g:link controller="tipoEmpresa" action="list">Tipo de Empresa</g:link>, clasificación para registro
                         y control de empresas que reciben el servicio

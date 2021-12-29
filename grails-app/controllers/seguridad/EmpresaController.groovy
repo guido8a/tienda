@@ -15,8 +15,18 @@ import static java.awt.RenderingHints.VALUE_INTERPOLATION_BICUBIC
 class EmpresaController {
 
     def list(){
-        def empresas = Empresa.list().sort{it.nombre}
-        return[empresas:empresas]
+        def usro = Persona.get(session?.usuario?.id)
+        def empresas
+        def band = 0
+
+        if(usro.login == 'admin') {
+            empresas = Empresa.list([sort: 'nombre'])
+            band = 1
+        } else {
+            empresas = Empresa.findAllById(session.empresa.id)
+        }
+
+        return[empresas:empresas, band: band]
     }
 
     def form_ajax(){
@@ -369,6 +379,58 @@ class EmpresaController {
         }else{
             return false
         }
+    }
+
+    def formContabilidad(){
+        def empresa = Empresa.get(params.id)
+        return[empresaInstance: empresa]
+    }
+
+    def saveFormCont_ajax(){
+//        println("params " + params)
+
+        def empresa = Empresa.get(params.id)
+
+        params.fechaInicio = new Date().parse("dd-MM-yyyy", params.fechaInicio)
+
+        if(params.fechaFin){
+            params.fechaFin = new Date().parse("dd-MM-yyyy", params.fechaFin)
+        }
+
+        if(params."contribuyenteEspecial_name"){
+            params.contribuyenteEspecial = 'S'
+        }else{
+            params.contribuyenteEspecial = 'N'
+        }
+
+        if(params."obligadaContabilidad_name"){
+            params.obligadaContabilidad =  '1'
+        }else{
+            params.obligadaContabilidad =  '0'
+        }
+
+        if(params."tipoEmision_name"){
+            params.tipoEmision = 'E'
+        }else{
+            params.tipoEmision = 'F'
+        }
+
+        if(params."ambiente_name"){
+            params.ambiente = '2'
+        }else{
+            params.ambiente = '1'
+        }
+
+        empresa.properties = params
+
+
+        if(!empresa.save(flush:true)){
+            println("error al guardar los datos de la contabilidad de la empresa " + empresa.errors)
+            render "no"
+        }else{
+            render "ok"
+        }
+
     }
 
 }

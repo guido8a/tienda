@@ -6,13 +6,29 @@ class InicioController {
     def diasLaborablesService
 
     def index() {
+
+        def usro = Persona.get(session?.usuario?.id)
+        def band = 0
+
+        if(usro.login == 'admin') {
+            band = 1
+        } else {
+            band = 0
+        }
+
         println "inicio sesión: ${session.usuario} -- ${session.perfil}"
+
+        return[band: band]
     }
 
     def parametros = {
 
-    }
+        def usro = Persona.get(session?.usuario?.id)
 
+        if(usro.login != 'admin') {
+            render(view: 'index')
+        }
+    }
 
     /** carga datos desde un CSV - utf-8: si ya existe lo actualiza
      * */

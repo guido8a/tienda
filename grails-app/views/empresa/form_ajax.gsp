@@ -6,7 +6,7 @@
 --%>
 
 
-<g:form class="form-horizontal" name="frmEmpresa" role="form" action="save_ajax" method="POST">
+<g:form class="form-horizontal" name="frmEmpresa" role="form" controller="empresa" action="save_ajax" method="POST">
     <g:hiddenField name="id" value="${empresa?.id}" />
 
     <div class="form-group ${hasErrors(bean: empresa, field: 'ruc', 'error')} required">
@@ -142,23 +142,23 @@
         success        : function (label) {
             label.parents(".grupo").removeClass('has-error');
         },
-        rules          : {
-            ruc : {
-                remote : {
-                    url  : "${createLink(action: 'validarRuc_ajax')}",
-                    type : "post",
-                    data : {
-                        id : "${empresa.id}",
-                        ruc: $("#ruc").val()
-                    }
-                }
-            }
-        },
-        messages       : {
-            ruc : {
-                remote : "RUC ya ingresado"
-            }
-        }
+        %{--rules          : {--}%
+        %{--    ruc : {--}%
+        %{--        remote : {--}%
+        %{--            url  : "${createLink(action: 'validarRuc_ajax')}",--}%
+        %{--            type : "post",--}%
+        %{--            data : {--}%
+        %{--                id : "${empresa.id}",--}%
+        %{--                ruc: $("#ruc").val()--}%
+        %{--            }--}%
+        %{--        }--}%
+        %{--    }--}%
+        %{--},--}%
+        %{--messages       : {--}%
+        %{--    ruc : {--}%
+        %{--        remote : "RUC ya ingresado"--}%
+        %{--    }--}%
+        %{--}--}%
 
     });
     $(".form-control").keydown(function (ev) {

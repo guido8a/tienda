@@ -232,23 +232,23 @@
             </div>
         </a>
 
-        <a href="${createLink(controller: 'inicio', action: 'parametros')}" style="text-decoration: none">
-            <div class="col-lg-6 mbr-col-md-10">
-                <div class="wrap">
-                    <div style="width: 200px; height: 120px">
-                        <asset:image src="apli/cursos.png" title="Plan de cuentas" width="80%"
-                                     height="80%"/>
-                    </div>
+%{--        <a href="${createLink(controller: 'inicio', action: 'parametros')}" style="text-decoration: none">--}%
+%{--            <div class="col-lg-6 mbr-col-md-10">--}%
+%{--                <div class="wrap">--}%
+%{--                    <div style="width: 200px; height: 120px">--}%
+%{--                        <asset:image src="apli/cursos.png" title="Plan de cuentas" width="80%"--}%
+%{--                                     height="80%"/>--}%
+%{--                    </div>--}%
 
-                    <div style="width: 450px; height: 120px">
-                        <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>Parámetros</span>
-                        </h2>
+%{--                    <div style="width: 450px; height: 120px">--}%
+%{--                        <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>Parámetros</span>--}%
+%{--                        </h2>--}%
 
-                        <p class="mbr-fonts-style text1 mbr-text display-6">Parámetros del sistema</p>
-                    </div>
-                </div>
-            </div>
-        </a>
+%{--                        <p class="mbr-fonts-style text1 mbr-text display-6">Parámetros del sistema</p>--}%
+%{--                    </div>--}%
+%{--                </div>--}%
+%{--            </div>--}%
+%{--        </a>--}%
 
 
 %{--        <a href="${createLink(controller: 'admnParticipante', action: 'index')}" style="text-decoration: none">--}%
