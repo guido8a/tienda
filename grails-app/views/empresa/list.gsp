@@ -356,11 +356,20 @@
             };
 
             var sucursales = {
-                label: " Sucursales",
+                label: " Establecimientos",
                 icon: "fa fa-building",
                 separator_before : true,
                 action: function () {
                     sucursalesForm(id)
+                }
+            };
+
+            var documentos = {
+                label: " Secuenciales de facturas",
+                icon: "fa fa-envelope",
+                separator_before : true,
+                action: function () {
+                    location.href="${createLink(controller: 'documentoEmpresa', action: 'list')}/" + id;
                 }
             };
 
@@ -396,6 +405,7 @@
             items.editar = editar;
             items.contabilidad = contabilidad;
             items.sucursales = sucursales;
+            items.documentos = documentos;
             items.usuarios = usuarios;
             items.imagenes = imagenes;
 
