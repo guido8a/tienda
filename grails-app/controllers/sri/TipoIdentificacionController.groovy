@@ -1,35 +1,33 @@
 package sri
 
-
-class TipoComprobanteController {
-
+class TipoIdentificacionController {
 
     def list(){
-        def tipos = TipoComprobante.list().sort{it.codigo}
-        return[tipoComprobanteInstanceList: tipos]
+        def tipos = TipoIdentificacion.list().sort{it.descripcion}
+        return [tipoIdentificacionInstanceList: tipos]
     }
 
     def form_ajax(){
-        def comprobante
+        def tipo
 
         if(params.id){
-            comprobante = TipoComprobante.get(params.id)
+            tipo = TipoIdentificacion.get(params.id)
         }else{
-            comprobante = new TipoComprobante()
+            tipo = new TipoIdentificacion()
         }
 
-        return[tipoComprobanteInstance: comprobante]
+        return[tipoIdentificacionInstance:tipo]
     }
 
     def save_ajax(){
 
         def tipo
 
-        def existente = TipoComprobante.findByCodigo(params.codigo.toUpperCase())
+        def existente = TipoIdentificacion.findByCodigo(params.codigo.toUpperCase())
 
         if(existente){
             if(params.id){
-                tipo = TipoComprobante.get(params.id)
+                tipo = TipoIdentificacion.get(params.id)
                 if(tipo.id != existente.id){
                     render"er"
                     return true
@@ -40,40 +38,36 @@ class TipoComprobanteController {
             }
         }
 
-
         if(params.id){
-            tipo = TipoComprobante.get(params.id)
+            tipo = TipoIdentificacion.get(params.id)
         }else{
-            tipo = new TipoComprobante()
+            tipo = new TipoIdentificacion()
         }
-
 
         params.codigo = params.codigo.toUpperCase()
         tipo.properties = params
 
         if(!tipo.save(flush:true)){
-            println("error al guardar el tipo de comprobante " + tipo.errors)
+            println("error al guardar el tipo de identificacion " + tipo.errors)
             render "no"
         }else{
             render "ok"
         }
+
     }
 
     def delete_ajax(){
 
-        def tipo = TipoComprobante.get(params.id)
+        def tipo = TipoIdentificacion.get(params.id)
 
         try{
             tipo.delete(flush:true)
             render "ok"
         }catch(e){
-            println("error al borrar el tipo de comprobante")
-            render "no"
+            println("error al borrar el tipo de identificacion " + tipo.errors)
+            render"no"
         }
     }
-
-
-
 
 
 }

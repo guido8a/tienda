@@ -227,6 +227,43 @@
         }); //ajax
     } //createEdit
 
+    function sucursalesForm(id) {
+        $.ajax({
+            type    : "POST",
+            url     : "${createLink(action:'sucursales_ajax')}",
+            data    : {
+                id: id
+            },
+            success : function (msg) {
+                var b = bootbox.dialog({
+                    id      : "dlgCreateEditSuc",
+                    title   : "Sucursales de la empresa",
+                    class: "modal-lg",
+                    message : msg,
+                    buttons : {
+                        cancelar : {
+                            label     : "Cancelar",
+                            className : "btn-primary",
+                            callback  : function () {
+                            }
+                        },
+                        guardar  : {
+                            id        : "btnSave",
+                            label     : "<i class='fa fa-save'></i> Guardar",
+                            className : "btn-success",
+                            callback  : function () {
+                                return submitFormSuc();
+                            } //callback
+                        } //guardar
+                    } //buttons
+                }); //dialog
+                setTimeout(function () {
+                    b.find(".form-control").not(".datepicker").first().focus()
+                }, 500);
+            } //success
+        }); //ajax
+    } //createEdit
+
     function submitFormCont() {
         var $form = $("#frmEmpresaCont");
         if ($form.valid()) {
@@ -318,6 +355,15 @@
                 }
             };
 
+            var sucursales = {
+                label: " Sucursales",
+                icon: "fa fa-building",
+                separator_before : true,
+                action: function () {
+                    sucursalesForm(id)
+                }
+            };
+
             var usuarios = {
                 label: " Usuarios",
                 icon: "fa fa-user",
@@ -349,6 +395,7 @@
             items.ver = ver;
             items.editar = editar;
             items.contabilidad = contabilidad;
+            items.sucursales = sucursales;
             items.usuarios = usuarios;
             items.imagenes = imagenes;
 

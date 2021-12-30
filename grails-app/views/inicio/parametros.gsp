@@ -75,7 +75,7 @@
 <ul class="nav nav-tabs">
     <li class="active"><a href="#generales" data-toggle="tab">Generales</a></li>
     <li><a href="#empresa" data-toggle="tab">Empresa</a></li>
-    <li><a href="#activos" data-toggle="tab">Artículos de inventario y facturación</a></li>
+%{--    <li><a href="#activos" data-toggle="tab">Artículos de inventario y facturación</a></li>--}%
 %{--    <li><a href="#nomina" data-toggle="tab">Nómina</a></li>--}%
     <li><a href="#sri" data-toggle="tab">SRI / ATS</a></li>
 </ul>
@@ -348,69 +348,69 @@
         </div>
     </div>
 
-    <div class="tab-pane" id="activos">
-        <div class="left pull-left">
-            <ul class="fa-ul">
-                <li>
-                    <i class="fa-li ${iconAct}"></i>
-                    <span id="grupos">
-                        <g:link controller="grupo" action="list">Grupos</g:link> de ítems, sirve para clasificar y controlar
-                        los ítems clasificados por grupos.
-                    </span>
+%{--    <div class="tab-pane" id="activos">--}%
+%{--        <div class="left pull-left">--}%
+%{--            <ul class="fa-ul">--}%
+%{--                <li>--}%
+%{--                    <i class="fa-li ${iconAct}"></i>--}%
+%{--                    <span id="grupos">--}%
+%{--                        <g:link controller="grupo" action="list">Grupos</g:link> de ítems, sirve para clasificar y controlar--}%
+%{--                        los ítems clasificados por grupos.--}%
+%{--                    </span>--}%
 
-                    <div class="descripcion hide">
-                        <h4>Grupo de Ítems</h4>
+%{--                    <div class="descripcion hide">--}%
+%{--                        <h4>Grupo de Ítems</h4>--}%
 
-                        <p>Los grupos de ítems, sirven para clasificar y controlar los ítems clasificados por características.</p>
+%{--                        <p>Los grupos de ítems, sirven para clasificar y controlar los ítems clasificados por características.</p>--}%
 
-                        <p>El manejo de grupos permite obtener estadísticas de ventas, adquisiciones y transferencias.</p>
-                    </div>
-                </li>
-                <li>
-                    <i class="fa-li ${iconAct}"></i>
-                    <span id="tipoTarjeta">
-                        <g:link controller="tipoTarjeta" action="list">Tipo de tarjeta</g:link> de crédito para el pago
-                        de las facturas
-                    </span>
+%{--                        <p>El manejo de grupos permite obtener estadísticas de ventas, adquisiciones y transferencias.</p>--}%
+%{--                    </div>--}%
+%{--                </li>--}%
+%{--                <li>--}%
+%{--                    <i class="fa-li ${iconAct}"></i>--}%
+%{--                    <span id="tipoTarjeta">--}%
+%{--                        <g:link controller="tipoTarjeta" action="list">Tipo de tarjeta</g:link> de crédito para el pago--}%
+%{--                        de las facturas--}%
+%{--                    </span>--}%
 
-                    <div class="descripcion hide">
-                        <h4>Tipo de Tarjeta</h4>
+%{--                    <div class="descripcion hide">--}%
+%{--                        <h4>Tipo de Tarjeta</h4>--}%
 
-                        <p>Se trata de los difentes tipos de tarjeta de crédito existentes.</p>
-                    </div>
-                </li>
-                <li>
-                    <i class="fa-li ${iconAct}"></i>
-                    <span id="tipoFactura">
-                        <g:link controller="tipoFactura" action="list">Tipo de Factura</g:link> para discriminar entre
-                        facturas, notas de venta y proformas
-                    </span>
+%{--                        <p>Se trata de los difentes tipos de tarjeta de crédito existentes.</p>--}%
+%{--                    </div>--}%
+%{--                </li>--}%
+%{--                <li>--}%
+%{--                    <i class="fa-li ${iconAct}"></i>--}%
+%{--                    <span id="tipoFactura">--}%
+%{--                        <g:link controller="tipoFactura" action="list">Tipo de Factura</g:link> para discriminar entre--}%
+%{--                        facturas, notas de venta y proformas--}%
+%{--                    </span>--}%
 
-                    <div class="descripcion hide">
-                        <h4>Tipo de Factura</h4>
+%{--                    <div class="descripcion hide">--}%
+%{--                        <h4>Tipo de Factura</h4>--}%
 
-                        <p>Maneja los difernetes tipos de facturas que pueden existir, tales como Facturas, proformas, notas de venta.</p>
-                    </div>
-                </li>
-                <li>
-                    <i class="fa-li ${iconAct}"></i>
-                    <span id="formaPago">
-                        <g:link controller="formaDePago" action="list">Forma de pago</g:link> de la factura
-                        puede ser en efectivo, con tarjeta de crédito o con cheque.
-                    </span>
+%{--                        <p>Maneja los difernetes tipos de facturas que pueden existir, tales como Facturas, proformas, notas de venta.</p>--}%
+%{--                    </div>--}%
+%{--                </li>--}%
+%{--                <li>--}%
+%{--                    <i class="fa-li ${iconAct}"></i>--}%
+%{--                    <span id="formaPago">--}%
+%{--                        <g:link controller="formaDePago" action="list">Forma de pago</g:link> de la factura--}%
+%{--                        puede ser en efectivo, con tarjeta de crédito o con cheque.--}%
+%{--                    </span>--}%
 
-                    <div class="descripcion hide">
-                        <h4>Forma de pago de la Factura</h4>
+%{--                    <div class="descripcion hide">--}%
+%{--                        <h4>Forma de pago de la Factura</h4>--}%
 
-                        <p>Se trata de si el pago se realiza en efectivo, cheque o tarjeta de crédito.</p>
-                    </div>
-                </li>
-            </ul>
-        </div>
+%{--                        <p>Se trata de si el pago se realiza en efectivo, cheque o tarjeta de crédito.</p>--}%
+%{--                    </div>--}%
+%{--                </li>--}%
+%{--            </ul>--}%
+%{--        </div>--}%
 
-        <div class="activos right pull-right">
-        </div>
-    </div>
+%{--        <div class="activos right pull-right">--}%
+%{--        </div>--}%
+%{--    </div>--}%
 
     <div class="tab-pane" id="sri">
         <div class="left pull-left">
@@ -445,18 +445,18 @@
                     </div>
                 </li>
 
-                <li>
-                    <i class="fa-li ${iconGen}"></i>
-                    <span id="tipoCom">
-                        <g:link controller="tipoComprobanteSri" action="list">Tipo de Comprobante SRI</g:link>
-                    </span>
+%{--                <li>--}%
+%{--                    <i class="fa-li ${iconGen}"></i>--}%
+%{--                    <span id="tipoCom">--}%
+%{--                        <g:link controller="tipoComprobanteSri" action="list">Tipo de Comprobante SRI</g:link>--}%
+%{--                    </span>--}%
 
-                    <div class="descripcion hide">
-                        <h4>Tipo de Comprobante SRI</h4>
+%{--                    <div class="descripcion hide">--}%
+%{--                        <h4>Tipo de Comprobante SRI</h4>--}%
 
-                        <p>Tipo de Comprobante SRI.</p>
-                    </div>
-                </li>
+%{--                        <p>Tipo de Comprobante SRI.</p>--}%
+%{--                    </div>--}%
+%{--                </li>--}%
 
 %{--                <li>--}%
 %{--                    <i class="fa-li ${iconGen}"></i>--}%

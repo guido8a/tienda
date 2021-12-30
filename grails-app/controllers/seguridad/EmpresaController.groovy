@@ -1,6 +1,7 @@
 package seguridad
 
 import groovy.io.FileType
+import sri.Establecimiento
 import tienda.Imagen
 import tienda.ImagenEmpresa
 import tienda.Producto
@@ -431,6 +432,56 @@ class EmpresaController {
             render "ok"
         }
 
+    }
+
+    def sucursales_ajax(){
+        def empresa = Empresa.get(params.id)
+        return [empresa: empresa]
+    }
+
+    def tablaSucursales_ajax(){
+        def empresa = Empresa.get(params.id)
+        def sucursales = Establecimiento.findAllByEmpresa(empresa).sort{it.numero}
+        return[sucursales: sucursales]
+    }
+
+    def guardarSucursal_ajax(){
+        println("params " + params)
+
+
+        def empresa = Empresa.get(params.id)
+        def sucursal
+
+        if(params.sucursal != ''){
+            sucursal = Establecimiento.get(params.sucursal)
+        }else{
+            sucursal = new Establecimiento()
+            sucursal.empresa = empresa
+        }
+
+        sucursal.direccion = params.direccion
+        sucursal.numero = params.numero
+        sucursal.nombre = params.nombre
+
+        if(!sucursal.save(flush:true)){
+            println("error al guardar la sucursal " + sucursal.errors)
+            render"no"
+        }else{
+            render"ok"
+        }
+
+    }
+
+    def borrarSucursal_ajax(){
+        def sucursal = Establecimiento.get(params.id)
+
+        try{
+            sucursal.delete(flush: true)
+            render "ok"
+        }catch(e){
+            println("error al borrar la sucursal " + sucursal.errors)
+            render "no"
+        }
     }
 
 }

@@ -1,35 +1,35 @@
 package sri
 
 
-class TipoComprobanteController {
-
+class TipoTransaccionController {
 
     def list(){
-        def tipos = TipoComprobante.list().sort{it.codigo}
-        return[tipoComprobanteInstanceList: tipos]
+        def tipo = TipoTransaccion.list().sort{it.codigo}
+        return [tipoTransaccionInstanceList:tipo]
     }
 
     def form_ajax(){
-        def comprobante
+
+        def tipo
 
         if(params.id){
-            comprobante = TipoComprobante.get(params.id)
+            tipo = TipoTransaccion.get(params.id)
         }else{
-            comprobante = new TipoComprobante()
+            tipo = new TipoTransaccion()
         }
 
-        return[tipoComprobanteInstance: comprobante]
+        return[tipoTransaccionInstance:tipo]
     }
 
     def save_ajax(){
 
         def tipo
 
-        def existente = TipoComprobante.findByCodigo(params.codigo.toUpperCase())
+        def existente = TipoTransaccion.findByCodigo(params.codigo.toUpperCase())
 
         if(existente){
             if(params.id){
-                tipo = TipoComprobante.get(params.id)
+                tipo = TipoTransaccion.get(params.id)
                 if(tipo.id != existente.id){
                     render"er"
                     return true
@@ -42,9 +42,9 @@ class TipoComprobanteController {
 
 
         if(params.id){
-            tipo = TipoComprobante.get(params.id)
+            tipo = TipoTransaccion.get(params.id)
         }else{
-            tipo = new TipoComprobante()
+            tipo = new TipoTransaccion()
         }
 
 
@@ -52,7 +52,7 @@ class TipoComprobanteController {
         tipo.properties = params
 
         if(!tipo.save(flush:true)){
-            println("error al guardar el tipo de comprobante " + tipo.errors)
+            println("error al guardar el tipo de transacción " + tipo.errors)
             render "no"
         }else{
             render "ok"
@@ -60,20 +60,15 @@ class TipoComprobanteController {
     }
 
     def delete_ajax(){
-
-        def tipo = TipoComprobante.get(params.id)
+        def tipo = TipoTransaccion.get(params.id)
 
         try{
             tipo.delete(flush:true)
             render "ok"
         }catch(e){
-            println("error al borrar el tipo de comprobante")
+            println("error al borrar el tipo de transacción")
             render "no"
         }
     }
-
-
-
-
 
 }
