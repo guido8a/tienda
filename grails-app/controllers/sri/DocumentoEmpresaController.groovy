@@ -67,7 +67,7 @@ class DocumentoEmpresaController {
 
         if(params.id){
             documentoEmpresa = DocumentoEmpresa.get(params.id)
-            documentoEmpresa.properties = params
+//            documentoEmpresa.properties = params
         } else {
             documentoEmpresa = new DocumentoEmpresa(params)
             documentoEmpresa.fechaIngreso = new Date()
