@@ -40,7 +40,6 @@ class DocumentoEmpresaController {
 
         println("params " + params)
         def documentoEmpresa
-//        def empresa = Empresa.get(session.empresa.id)
         def empresa = Empresa.get(params.empresa)
         def establecimiento = Establecimiento.get(params.numeroEstablecimiento)
         def fechaFin = new Date().parse("dd-MM-yyyy",params.fechaFin)
@@ -67,15 +66,17 @@ class DocumentoEmpresaController {
 
         if(params.id){
             documentoEmpresa = DocumentoEmpresa.get(params.id)
-//            documentoEmpresa.properties = params
         } else {
-            documentoEmpresa = new DocumentoEmpresa(params)
+            documentoEmpresa = new DocumentoEmpresa()
             documentoEmpresa.fechaIngreso = new Date()
         }
 
-        println("--> " + fechaInicio)
-        println("--> " + fechaFin)
-
+        documentoEmpresa.numeroEmision = params.numeroEmision.toInteger()
+        documentoEmpresa.numeroDesde = params.numeroDesde.toInteger()
+        documentoEmpresa.digitosEnSecuencial = params.digitosEnSecuencial.toInteger()
+        documentoEmpresa.numeroHasta = params.numeroHasta.toInteger()
+        documentoEmpresa.autorizacion = params.autorizacion
+        documentoEmpresa.tipo = params.tipo
         documentoEmpresa.fechaAutorizacion = fechaInicio
         documentoEmpresa.fechaInicio = fechaInicio
         documentoEmpresa.fechaFin = fechaFin
@@ -90,15 +91,6 @@ class DocumentoEmpresaController {
         }else{
             render "OK_Libretín creado correctamente"
         }
-
-//        try {
-//            documentoEmpresa.save(flush: true)
-//            println "grabó....."
-//            render "OK_Libretín creado correctamente"
-//        }catch (e){
-//            println("error libretin " + e + documentoEmpresa.errors)
-//            render "no_Error al guardar la información del libretín"
-//        }
     }
 
     def delete() {
