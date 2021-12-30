@@ -33,7 +33,8 @@ class DocumentoEmpresaController {
         def documentoEmpresa = DocumentoEmpresa.get(params.id)
         def usado = Proceso.findByDocumentoEmpresa(documentoEmpresa)
         println ".....verificar_ajax: $usado"
-        render (usado?.size() > 0)
+//        render (usado?.size() > 0)
+        render (usado ? true :  false)
     }
 
     def save_ajax() {
