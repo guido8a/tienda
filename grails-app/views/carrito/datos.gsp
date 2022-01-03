@@ -147,8 +147,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </div>
 
                             <div style="margin-top: 16px">
-                                <h4>País:</h4>
-                                <g:select name="pais" from="${retenciones.Pais.list().sort{it.nombre}}" class="form-control espa" optionValue="nombre" optionKey="id" value="${cliente?.pais ?: 239}"/>
+                                <h4>Usted es empleado o accionista de esta tienda?:</h4>
+                                <g:select name="pais" from="${['N': 'NO', 'S' : 'SI']}" class="form-control espa" optionValue="value" optionKey="key" value="${cliente?.relacion}"/>
                             </div>
 
                         </div>
