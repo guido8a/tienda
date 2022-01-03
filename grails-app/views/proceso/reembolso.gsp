@@ -54,7 +54,7 @@
                 <th width="200px">Tipo de Comprobante</th>
                 <th width="80px">Documento</th>
                 <th width="80px">Valor</th>
-                <th width="45px"><i class="fa fa-pencil"></i></th>
+                <th width="45px"><i class="fa fa-edit"></i></th>
             </tr>
             </thead>
         </table>

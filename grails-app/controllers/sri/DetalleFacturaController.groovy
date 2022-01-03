@@ -241,8 +241,10 @@ class DetalleFacturaController  {
         def cn = dbConnectionService.getConnection()
         def proceso = Proceso.get(params.proceso)
         def detalles = DetalleFactura.findAllByProceso(proceso).sort{it?.producto?.codigo}
-        def totl = cn.rows("select * from total_detalle(${params.proceso},1)".toString())[0]
+        def sql = "select * from total_detalle(${params.proceso}, ${params.bodega})"
+        def totl = cn.rows(sql.toString())[0]
         def truncar
+        println "params: $params, \n sql: $sql"
         if(detalles && proceso.estado == 'R'){
             truncar = true
         }else{

@@ -268,7 +268,7 @@ class ProcesoController {
 
     def registrar = {
         if (request.method == 'POST') {
-//            println "registrar " + params
+            println "registrar " + params
             def proceso = Proceso.get(params.id)
             if (proceso.estado == "R") {
                 render("El proceso ya ha sido registrado previamente")
@@ -2186,6 +2186,7 @@ class ProcesoController {
             if(formasPago.size() > 0){
                 render "ok"
             }else{
+                println "Ventas: no_Ingrese una forma de pago!"
                 render "no_Ingrese una forma de pago!"
             }
         }

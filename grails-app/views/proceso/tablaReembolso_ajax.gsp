@@ -28,7 +28,7 @@
                 <g:if test="${reembolso.proceso.estado != 'R'}">
                     <div class="btn-group">
                         <a href="#" class="btn btn-success btn-sm editarReemb" idr="${reembolso?.id}">
-                            <i class="fa fa-pencil"></i>
+                            <i class="fa fa-edit"></i>
                         </a>
                         <a href="#" class="btn btn-danger btn-sm borrarReemb" idr="${reembolso?.id}">
                             <i class="far fa-trash-alt"></i>

@@ -21,7 +21,7 @@ class ClienteController {
         }else{
 
             params.fecha = new Date()
-            params.login = params.mail
+//            params.login = params.mail
 
             def cliente = new Cliente()
             cliente.properties = params
@@ -83,7 +83,7 @@ class ClienteController {
     def ingreso_ajax(){
         println "valida ingreso " + params
         def user = Cliente.withCriteria {
-            eq("login", params.login, [ignoreCase: true])
+            eq("mail", params.mail, [ignoreCase: true])
         }
 
         if (user.size() == 0) {

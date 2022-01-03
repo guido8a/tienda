@@ -1227,7 +1227,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <form id="frmIngreso">
                                 <div class="sign-in">
                                     <h4>Usuario :</h4>
-                                    <g:textField name="login" required="" class="email form-control required"/>
+                                    <g:textField name="mail" required="" class="email form-control required"/>
                                     %{--                                    <input type="text" value="Ingrese su usuario" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su usuario';}" required="">--}%
                                 </div>
                                 <div class="sign-in">

@@ -32,7 +32,7 @@
         <th style="width: 70px">Por Pagar</th>
         <th style="width: 70px">Pagado</th>
         <th style="width: 70px">Saldo</th>
-        <th style="width: 50px"><i class="fa fa-pencil"></i> </th>
+        <th style="width: 50px"><i class="fa fa-edit"></i> </th>
     </tr>
     </thead>
 </table>

@@ -297,7 +297,8 @@
             type: 'POST',
             url: '${createLink(controller: 'detalleFactura', action: 'tablaDetalle_ajax')}',
             data: {
-                proceso: '${proceso?.id}'
+                proceso: '${proceso?.id}',
+                bodega: $("#bodegas").val()
             },
             success: function (msg) {
                 $("#divTablaDetalle").html(msg)

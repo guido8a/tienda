@@ -27,7 +27,7 @@
     <tr>
         <th style="width: 170px">Centro</th>
         <th style="width: 80px">Valor</th>
-        <th style="width: 30px"><i class="fa fa-pencil"></i></th>
+        <th style="width: 30px"><i class="fa fa-edit"></i></th>
     </tr>
     </thead>
 </table>

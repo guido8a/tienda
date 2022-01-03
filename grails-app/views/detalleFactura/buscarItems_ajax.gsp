@@ -37,8 +37,8 @@
 </table>
 
 <div class="row-fluid"  style="width: 99.7%;height: 250px;overflow-y: auto;float: right;">
-    <div class="span12">
-        <div id="divTablaItems" style="width: 1030px; height: 250px;"></div>
+    <div>
+        <div id="divTablaItems" style="height: 250px;"></div>
     </div>
 </div>
 

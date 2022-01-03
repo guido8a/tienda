@@ -18,7 +18,7 @@ class Cliente {
     String mail
     String telefono
     Date fecha
-    String login
+//    String login
     String password
     String relacion
 

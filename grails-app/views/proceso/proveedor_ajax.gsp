@@ -31,7 +31,7 @@
             </g:if>
             <g:if test="${proceso?.estado != 'R'}">
                 <a href="#" id="btn_editar" class="btn btn-info" title="Editar proveedor">
-                    <i class="fa fa-pencil"></i>
+                    <i class="fa fa-edit"></i>
                 </a>
             </g:if>
             <g:if test="${proceso?.estado != 'R'}">
@@ -75,7 +75,7 @@
                 </a>
                 <g:if test="${proceso?.estado != 'R'}">
                     <a href="#" id="btn_editar" class="btn btn-info" title="Editar cliente">
-                        <i class="fa fa-pencil"></i>
+                        <i class="fa fa-edit"></i>
                     </a>
                 </g:if>
                 <g:if test="${proceso?.estado != 'R'}">
