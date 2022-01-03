@@ -50,9 +50,9 @@ class Producto {
     static constraints = {
         persona(blank: false, nullable: false)
         grupo(blank: false, nullable: false)
-        tipoIva(blank: false, nullable: false)
-        marca(blank: false, nullable: false)
-        codigo(blank: false, nullable: false, attributes: [title: 'código'])
+        tipoIva(blank: true, nullable: true)
+        marca(blank: true, nullable: true)
+        codigo(blank: true, nullable: true, attributes: [title: 'código'])
         titulo(size: 0..255, blank: false, nullable: false, attributes: [title: 'titulo'])
         subtitulo(size: 0..255, blank: true, nullable: true, attributes: [title: 'subtitulo'])
         texto(blank: true, nullable: true, attributes: [title: 'texto'])
@@ -63,7 +63,7 @@ class Producto {
         nuevo(size: 0..1, blank: true, nullable: true, attributes: [title: 'nuevo'])
         precioUnidad(blank: true, nullable: true, attributes: [title: 'unidad'])
         precioMayor(blank: true, nullable: true, attributes: [title: 'mayor'])
-        ice(blank: false, nullable: false, attributes: [title: 'ICE'])
+        ice(blank: true, nullable: true, attributes: [title: 'ICE'])
     }
 
 }

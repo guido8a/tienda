@@ -141,4 +141,22 @@ class CarritoController {
             render "ok"
         }
     }
+
+    def datos(){
+
+        def cliente = null
+
+        if(session.cliente){
+            cliente = Cliente.get(session.cliente.id)
+            return[cliente: cliente]
+        }else{
+            redirect(controller: 'principal', action: 'index')
+        }
+    }
+
+
+    def guardarCliente_ajax(){
+        println("datos " + params)
+        render "ok"
+    }
 }

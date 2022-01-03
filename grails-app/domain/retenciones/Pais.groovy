@@ -18,6 +18,6 @@ class Pais implements Serializable {
     }
 
     static constraints = {
-        nombre(maxSize: 127)
+        nombre(maxSize: 31)
     }
 }
