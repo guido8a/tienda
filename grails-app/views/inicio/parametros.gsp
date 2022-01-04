@@ -188,41 +188,6 @@
                     </div>
                 </li>
 
-%{--                <li>--}%
-%{--                    <i class="fa-li ${iconGen}"></i>--}%
-%{--                    <span id="tipoRelacion">--}%
-%{--                        <g:link controller="tipoRelacion" action="list">Tipo de Relación</g:link> predominante con la persona--}%
-%{--                        natural o jurídica, ya sea como Proveedor, Cliente o los dos roles.--}%
-%{--                    </span>--}%
-
-%{--                    <div class="descripcion hide">--}%
-%{--                        <h4>Tipo de Relaci&oacute;n</h4>--}%
-
-%{--                        <p>Tipos de relación que puede darse con una persona natural o jurídica, como un proveedor o como un cliente.</p>--}%
-
-%{--                        <p>Si una persona posee los dos roles, se requiere que se indique se debe indicar los dos roles--}%
-%{--                        o promoverlo al tipo Proveedor/Cliente.</p>--}%
-
-%{--                        <p class="info">No se debe editar este parámetro.</p>--}%
-%{--                    </div>--}%
-%{--                </li>--}%
-
-%{--                <li>--}%
-%{--                    <i class="fa-li ${iconGen}"></i>--}%
-%{--                    <span id="tipoPersona">--}%
-%{--                        <g:link controller="tipoPersona" action="list" class="descripcion">Tipo de Persona</g:link> natural o jurídica--}%
-%{--                        de un Proveedor o Cliente.--}%
-%{--                    </span>--}%
-
-%{--                    <div class="descripcion hide">--}%
-%{--                        <h4>Tipo de Persona</h4>--}%
-
-%{--                        <p>Tipos de persona: natural o jurídica que posee un proveedor o un cliente.</p>--}%
-
-%{--                        <p class="info">No se debe editar este parámetro.</p>--}%
-%{--                    </div>--}%
-%{--                </li>--}%
-
                 <li>
                     <i class="fa-li ${iconGen}"></i>
                     <span id="tipoProv">
@@ -234,6 +199,19 @@
                         <h4>Tipo de Proveedor</h4>
 
                         <p>Sirve para distinguir los varios tipos de proveedores como contribuyentes especiales, particulares y el fisco.</p>
+                    </div>
+                </li>
+
+                <li>
+                    <i class="fa-li ${iconGen}"></i>
+                    <span id="tipoProc">
+                        <g:link controller="tipoProceso" action="list" class="descripcion">Tipo de Proceso</g:link>
+                    </span>
+
+                    <div class="descripcion hide">
+                        <h4>Tipo de Proceso</h4>
+
+                        <p></p>
                     </div>
                 </li>
 
