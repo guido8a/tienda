@@ -93,7 +93,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- check out -->
 <div class="checkout">
     <div class="container">
-%{--        <h3>Datos del cliente</h3>--}%
+        %{--        <h3>Datos del cliente</h3>--}%
         <div class="table-responsive checkout-right animated wow slideInUp" data-wow-delay=".5s">
             <form id="frmCliente">
                 <div class="login-grids">
@@ -128,12 +128,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             %{--                        <form id="frmIngreso">--}%
                             <div>
                                 <h4>Tipo de cliente:</h4>
-                                <g:select name="tipoPersona" from="${sri.TipoPersona.list()}" class="form-control espa" optionValue="descripcion" optionKey="id" value="${cliente?.tipoPersona}"/>
+                                <g:select name="tipoPersona" from="${sri.TipoPersona.list()}" class="form-control espa" optionValue="descripcion" optionKey="id" value="${cliente?.tipoPersona?.id}"/>
                             </div>
 
                             <div style="margin-top: 18px">
                                 <h4>Tipo :</h4>
-                                <g:select name="tipoIdentificacion" from="${sri.TipoIdentificacion.list()}" class="form-control espa" optionValue="descripcion" optionKey="id" value="${cliente?.tipoIdentificacion}"/>
+                                <g:select name="tipoIdentificacion" from="${sri.TipoIdentificacion.list()}" class="form-control espa" optionValue="descripcion" optionKey="id" value="${cliente?.tipoIdentificacion?.id}"/>
                             </div>
 
                             <div style="margin-top: 16px">
@@ -143,19 +143,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                             <div style="margin-top: 16px">
                                 <h4>País:</h4>
-                                <g:select name="pais" from="${retenciones.Pais.list().sort{it.nombre}}" class="form-control espa" optionValue="nombre" optionKey="id" value="${cliente?.pais ?: 239}"/>
+                                <g:select name="pais" from="${retenciones.Pais.list().sort{it.nombre}}" class="form-control espa" optionValue="nombre" optionKey="id" value="${cliente?.pais?.id ?: 239}"/>
                             </div>
 
                             <div style="margin-top: 16px">
                                 <h4>Usted es empleado o accionista de esta tienda?:</h4>
-                                <g:select name="pais" from="${['N': 'NO', 'S' : 'SI']}" class="form-control espa" optionValue="value" optionKey="key" value="${cliente?.relacion}"/>
+                                <g:select name="relacion" from="${['N': 'NO', 'S' : 'SI']}" class="form-control espa" optionValue="value" optionKey="key" value="${cliente?.relacion}"/>
                             </div>
 
                         </div>
                     </div>
                 </div>
             </form>
-%{--            <div class="clearfix"></div>--}%
+            %{--            <div class="clearfix"></div>--}%
         </div>
 
 
@@ -174,7 +174,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <a href="${createLink(controller: 'carrito', action: 'carrito')}"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Regresar</a>
                 <a href="#">Siguiente paso <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> </a>
             </div>
-%{--            <div class="clearfix"> </div>--}%
+            %{--            <div class="clearfix"> </div>--}%
         </div>
     </div>
 </div>
@@ -285,6 +285,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     d.modal('hide');
                     if(msg == 'ok'){
                         bootbox.alert("<i class='fa fa-check text-success fa-2x'></i> Datos del cliente guardados correctamente");
+                        setTimeout(function () {
+                            location.reload(true);
+                        }, 1500);
                     }else{
                         bootbox.alert("<i class='fa fa-exclamation-triangle text-danger fa-2x'></i> Error al guardar los datos del cliente")
                     }

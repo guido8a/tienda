@@ -1,5 +1,9 @@
 package tienda
 
+import retenciones.Pais
+import sri.TipoIdentificacion
+import sri.TipoPersona
+
 
 class CarritoController {
 
@@ -157,6 +161,30 @@ class CarritoController {
 
     def guardarCliente_ajax(){
         println("datos " + params)
-        render "ok"
+
+        if(session.cliente){
+            def cliente = Cliente.get(session.cliente.id)
+
+            def pais = Pais.get(params.pais)
+            def tipoIdentificacion = TipoIdentificacion.get(params.tipoIdentificacion)
+            def tipoPersona = TipoPersona.get(params.tipoPersona)
+
+            params.pais = pais
+            params.tipoPersona = tipoPersona
+            params.tipoIdentificacion = tipoIdentificacion
+            cliente.properties = params
+
+            if(!cliente.save(flush:true)){
+                println("error al guardar la informacion del cliente " + cliente.errors)
+                render "no"
+            }else{
+                render "ok"
+            }
+
+        }else{
+            redirect(controller: 'principal', action: 'index')
+        }
+
+
     }
 }

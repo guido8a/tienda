@@ -1,5 +1,7 @@
 package sri
 
+import geografia.Canton
+import retenciones.Pais
 import seguridad.Empresa
 
 class Proveedor {
@@ -7,6 +9,7 @@ class Proveedor {
     TipoPersona tipoPersona
     Empresa empresa
     TipoIdentificacion tipoIdentificacion
+    Pais pais
     Canton canton
     String ruc
     String nombre
@@ -21,7 +24,6 @@ class Proveedor {
 //    TipoRelacion tipoRelacion
     String actividad
     String email
-    String pais
     String nombreCheque
     String autorizacionSri
 //    Date fechaCaducidad
@@ -41,7 +43,7 @@ class Proveedor {
             empresa column:            'empr__id'
             tipoIdentificacion column: 'tpid__id'
             canton column:             'cntn__id'
-
+            pais column: 'pais__id'
             ruc column: 'prve_ruc'
             nombre column: 'prvenmbr'
             direccion column: 'prvedire'
@@ -57,7 +59,7 @@ class Proveedor {
 
             actividad column: 'prveactv'
             email column: 'prvemail'
-            pais column: 'prvepais'
+//            pais column: 'prvepais'
             nombreCheque column: 'prvenbch'
             telefono column: 'prvetlfn'
             autorizacionSri column: 'prveatrz'
@@ -74,6 +76,7 @@ class Proveedor {
 
         empresa(blank: true, nullable: true)
         canton(blank: true, nullable: true)
+        pais(blank: true, nullable: true)
 
         ruc(size: 1..13, blank: false, attributes: [title: 'ruc'])
         nombre(blank: true, nullable: true, maxSize: 63, attributes: [title: 'nombre'])
@@ -92,7 +95,7 @@ class Proveedor {
 
         actividad(blank: true, nullable: true, attributes: [title: 'actividad'])
         email(blank: true, nullable: true, attributes: [title: 'email'])
-        pais(blank: true, nullable: true, attributes: [title: 'pais'])
+//        pais(blank: true, nullable: true, attributes: [title: 'pais'])
         nombreCheque(blank: true, nullable: true, attributes: [title: 'nombreCheque'])
         autorizacionSri(blank: true,nullable: true, size: 1..40)
 //        fechaCaducidad(blank:true,nullable: true)

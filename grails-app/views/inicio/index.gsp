@@ -265,6 +265,25 @@
             </div>
         </a>
 
+
+        <a href="${createLink(controller: 'proveedor', action: 'list')}" style="text-decoration: none">
+            <div class="col-lg-6 mbr-col-md-10">
+                <div class="wrap">
+                    <div style="width: 200px; height: 120px">
+                        <asset:image src="apli/proyecto.png" title="Cantones" width="80%" height="80%"/>
+                    </div>
+
+                    <div style="width: 450px; height: 120px">
+                        <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>Proveedores</span>
+                        </h2>
+
+                        <p class="mbr-fonts-style text1 mbr-text display-6">Proveedores</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+
         <g:if test="${band == 1}">
             <a href="${createLink(controller: 'inicio', action: 'parametros')}" style="text-decoration: none">
                 <div class="col-lg-6 mbr-col-md-10">
@@ -283,6 +302,8 @@
                 </div>
             </a>
         </g:if>
+
+
 
 
     </div>

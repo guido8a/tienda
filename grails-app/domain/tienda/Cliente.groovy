@@ -40,7 +40,7 @@ class Cliente {
             mail column: 'clntmail'
             telefono column: 'clnttelf'
             fecha column: 'clntfcha'
-            login column: 'clntlogn'
+//            login column: 'clntlogn'
             password column: 'clntpass'
             relacion column: 'clntrlcn'
         }
@@ -52,7 +52,7 @@ class Cliente {
         mail(size:0..63, blank: true, nullable: true, attributes: [title: 'mail'])
         telefono(size:0..15, blank: true, nullable: true, attributes: [title: 'telefono'])
         fecha(blank: true, nullable: true, attributes: [title: 'fecha'])
-        login(size: 0..255, blank: true, nullable: true, attributes: [title: 'login'])
+//        login(size: 0..255, blank: true, nullable: true, attributes: [title: 'login'])
         password(size: 0..63, blank: true, nullable: true, attributes: [title: 'password'])
         relacion(size: 0..2, blank: true, nullable: true, attributes: [title: 'relacion'])
         tipoPersona(blank: true, nullable: true, attributes: [title: 'relacion'])
