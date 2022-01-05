@@ -43,7 +43,7 @@
     <div class="alert ${flash.tipo == 'error' ? 'alert-danger' : flash.tipo == 'success' ? 'alert-success' : 'alert-info'} ${flash.clase}">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <g:if test="${flash.tipo == 'error'}">
-            <i class="fa fa-warning fa-2x pull-left"></i>
+            <i class="fas fa-exclamation-triangle fa-2x pull-left"></i>
         </g:if>
         <g:elseif test="${flash.tipo == 'success'}">
             <i class="fa fa-check-square fa-2x pull-left"></i>

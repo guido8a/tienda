@@ -169,7 +169,7 @@
                 if(msg == 'ok'){
                     location.href='${createLink(controller: 'proceso', action: 'nuevoProceso')}/?id=' + '${proceso?.id}'
                 }else{
-                    bootbox.confirm("<i class='fa fa-warning fa-3x pull-left text-warning text-shadow'></i> La sumatoria de los valores de reembolsos no es igual al total del valor de la transacción!. <br> Desea abandonar esta pantalla?", function (result) {
+                    bootbox.confirm("<i class='fas fa-exclamation-triangle fa-3x pull-left text-warning text-shadow'></i> La sumatoria de los valores de reembolsos no es igual al total del valor de la transacción!. <br> Desea abandonar esta pantalla?", function (result) {
                         if(result){
                             location.href='${createLink(controller: 'proceso', action: 'nuevoProceso')}/?id=' + '${proceso?.id}'
                         }

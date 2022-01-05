@@ -46,7 +46,7 @@
 
     function showAlert(msg) {
         bootbox.alert("<div class='alert alert-danger'>" +
-                      "<i class='fa fa-warning fa-2x text-danger pull-left'></i> " +
+                      "<i class='fas fa-exclamation-triangle fa-2x text-danger pull-left'></i> " +
                       msg +
                       "</div>");
     }

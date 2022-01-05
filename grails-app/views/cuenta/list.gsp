@@ -55,7 +55,7 @@
     </g:if>
     <g:else>
         <div class="alert alert-danger" style="width: 700px;">
-            <i class="fa fa-warning fa-4x pull-left"></i>
+            <i class="fas fa-exclamation-triangle fa-4x pull-left"></i>
 
             <h3>Alerta</h3>
 
@@ -346,7 +346,7 @@
                             label     : "<i class='fa fa-save'></i> Aceptar",
                             className : "btn-success",
                             callback  : function () {
-                                bootbox.confirm("<i class='fa fa-warning fa-3x pull-left text-danger text-shadow'></i> Desea mover la cuenta hacia el padre seleccionado?", function (res) {
+                                bootbox.confirm("<i class='fas fa-exclamation-triangle fa-3x pull-left text-danger text-shadow'></i> Desea mover la cuenta hacia el padre seleccionado?", function (res) {
                                     if (res) {
                                         $.ajax({
                                             type: 'POST',

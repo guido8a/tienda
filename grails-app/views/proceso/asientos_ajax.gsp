@@ -41,17 +41,18 @@
 <div class="col-xs-6 etiqueta"><label>Comprobante:</label> ${comprobante?.descripcion}</div>
 <div class="col-xs-2 etiqueta"><label>Tipo:</label> ${comprobante?.proceso?.tipoProceso?.descripcion}</div>
 <div class="col-xs-2 etiqueta"><label>Número:</label> ${comprobante?.prefijo}${comprobante?.numero}</div>
-<div class="col-xs-2 etiqueta"><label>Valor:</label> <g:formatNumber number="${comprobante?.tipo?.codigo == 'R' ? retenciones.Retencion.findByProceso(proceso)?.total : comprobante?.proceso?.valor}" maxFractionDigits="2" format="##,##0"/></div>
+<div class="col-xs-2 etiqueta"><label>Valor:</label>
+    <g:formatNumber number="${comprobante?.tipo?.codigo == 'R' ? retenciones.Retencion.findByProceso(proceso)?.total : comprobante?.proceso?.valor}" maxFractionDigits="2" format="##,##0"/></div>
 
 <g:if test="${comprobante?.registrado != 'S'}">
     <div class="btn-group" style="float: right; margin-top: -90px">
-        <a href="#" class="btn btn-success btnAgregarAsiento" comp="${comprobante?.id}"
+        <a href="#" class="btn btn-success btn-sm btnAgregarAsiento" comp="${comprobante?.id}"
            title="Agregar asiento contable">
-            <i class="fa fa-plus"> Agregar Cuenta</i>
+            <i class="fa fa-plus"></i>
         </a>
-        <a href="#" class="btn btn-danger btnBorrarAsientos" comp="${comprobante?.id}"
+        <a href="#" class="btn btn-sm btn-danger btnBorrarAsientos" comp="${comprobante?.id}"
            title="Borrar los asientos con valores en 0 al debe y al haber">
-            <i class="fa fa-minus"> Borrar Cuentas con 0</i>
+            <i class="fa fa-minus"></i>
         </a>
     </div>
 </g:if>
@@ -89,21 +90,21 @@
                     <td width="130px" style="text-align: center">
                         <div class="btn-group">
                             <g:if test="${asiento?.comprobante?.registrado != 'S'}">
-                                <a href="#" class="btn btn-success btn-sm btnEditarAsiento" idAs="${asiento?.id}"
+                                <a href="#" class="btn btn-success btn-xs btnEditarAsiento" idAs="${asiento?.id}"
                                    title="Editar asiento">
                                     <i class="far fa-edit"></i>
                                 </a>
                             </g:if>
-                            <a href="#" class="btn btn-azul btn-sm btnCentroCostos" idAs="${asiento?.id}" nomAs="${asiento?.cuenta?.descripcion}"
+                            <a href="#" class="btn btn-azul btn-xs btnCentroCostos" idAs="${asiento?.id}" nomAs="${asiento?.cuenta?.descripcion}"
                                title="Centro de Costos">
                                 <i class="far fa-money-bill-alt"></i>
                             </a>
                             <g:if test="${asiento?.comprobante?.registrado != 'S'}">
-                                <a href="#" class="btn btn-warning btn-sm btnAgregarAuxiliar" idAs="${asiento?.id}"
+                                <a href="#" class="btn btn-warning btn-xs btnAgregarAuxiliar" idAs="${asiento?.id}"
                                    title="Agregar auxiliar">
                                     <i class="fa fa-plus"></i>
                                 </a>
-                                <a href="#" class="btn btn-danger btn-sm btnEliminarAsiento" idAs="${asiento?.id}"
+                                <a href="#" class="btn btn-danger btn-xs btnEliminarAsiento" idAs="${asiento?.id}"
                                    title="Eliminar asiento">
                                     <i class="fa fa-times"></i>
                                 </a>
@@ -136,11 +137,11 @@
                             <td class="dato" style="text-align: center; width: 100px">
                                 <g:if test="${auxiliar?.asiento?.comprobante?.registrado != 'S'}">
                                     <div class="btn-group">
-                                        <a href="#" class="btn btn-success btn-sm btnEditarAuxiliar"
+                                        <a href="#" class="btn btn-success btn-xs btnEditarAuxiliar"
                                            idAu="${auxiliar?.id}" title="Editar auxiliar">
                                             <i class="far fa-edit"></i>
                                         </a>
-                                        <a href="#" class="btn btn-danger btn-sm btnEliminarAuxiliar"
+                                        <a href="#" class="btn btn-danger btn-xs btnEliminarAuxiliar"
                                            idAu="${auxiliar?.id}" title="Eliminar auxiliar">
                                             <i class="far fa-trash-alt"></i>
                                         </a>
@@ -148,7 +149,7 @@
                                 </g:if>
                                 <g:else>
                                     <div class="btn-group">
-                                        <a href="#" class="btn btn-info btn-sm btnVerAuxiliar"
+                                        <a href="#" class="btn btn-info btn-xs btnVerAuxiliar"
                                            idAuxi="${auxiliar?.id}" title="Ver auxiliar">
                                             <i class="fa fa-search"></i>
                                         </a>

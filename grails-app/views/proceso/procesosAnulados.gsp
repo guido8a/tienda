@@ -29,7 +29,7 @@
             <div class="col-md-8">
                 <b>Contabilidad:</b>
                 <g:select name="contabilidad"  class="form-control label-shared" id="contabilidad" style="width:450px"
-                          from="${cratos.Contabilidad.findAllByInstitucion(session.empresa,[sort:'id',order:'desc'])}"
+                          from="${sri.Contabilidad.findAllByInstitucion(session.empresa,[sort:'id',order:'desc'])}"
                           value="${contabilidad.id}" optionKey="id"/>
             </div>
         </div>
@@ -49,7 +49,7 @@
                     <tr>
                         <td>${p.descripcion}</td>
                         <td>${p.fecha.format("dd/MM/yyyy")}</td>
-                        <g:set var="comp" value="${cratos.Comprobante.findByProceso(p)}"/>
+                        <g:set var="comp" value="${sri.Comprobante.findByProceso(p)}"/>
                         <g:if test="${comp}">
                             <td><g:link controller="proceso" action="verComprobante" id="${comp.id}">${comp?.prefijo+""+comp?.numero}</g:link></td>
                         </g:if>

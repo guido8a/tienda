@@ -25,7 +25,7 @@
     </g:link>
     <g:if test="${proceso?.tipoProceso?.codigo?.trim() == 'C' && proceso?.tipoCmprSustento?.tipoComprobanteSri?.codigo?.trim() == '41'}">
         <a href="#" class="btn btn-success" id="reembolsoN">
-            <i class="fa fa-thumbs-up"></i>
+            <i class="far fa-thumbs-up"></i>
             Reembolso
         </a>
     </g:if>

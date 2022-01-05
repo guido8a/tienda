@@ -27,7 +27,7 @@
                     <b>Contabilidad actual:</b>
                 </div>
 
-                <div class="col-md-8">
+                <div class="col-md-9">
                     ${contabilidad}
                 </div>
             </div>
@@ -37,7 +37,7 @@
                     <b>Cambiar a contabilidad:</b>
                 </div>
 
-                <div class="col-md-8 text-info">
+                <div class="col-md-9 text-info">
                     <g:select name="contabilidad" from="${contabilidades}" class="form-control text-info" optionKey="id"/>
                 </div>
             </div>
@@ -58,7 +58,7 @@
         var cont = $("#contabilidad option:selected").val();
 
         if(cont == null){
-            bootbox.alert("<i class='fa fa-warning fa-3x pull-left text-danger text-shadow'></i> No existe ninguna contabilidad seleccionada")
+            bootbox.alert("<i class='fas fa-exclamation-triangle fa-3x pull-left text-danger text-shadow'></i> No existe ninguna contabilidad seleccionada")
         }else{
             $("#frmContabilidad").submit();
         }

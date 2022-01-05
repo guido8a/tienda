@@ -1611,7 +1611,7 @@ class ProcesoController {
         if(data?.size() > 30){
             data.pop()   //descarta el último puesto que son 21
             msg = "<div class='alert-danger' style='margin-top:-20px; diplay:block; height:25px;margin-bottom: 20px;'>" +
-                    " <i class='fa fa-warning fa-2x pull-left'></i> Su búsqueda ha generado más de 30 resultados. " +
+                    " <i class='fas fa-exclamation-triangle fa-2x pull-left'></i> Su búsqueda ha generado más de 30 resultados. " +
                     "Use más letras para especificar mejor la búsqueda.</div>"
         }
         cn.close()
