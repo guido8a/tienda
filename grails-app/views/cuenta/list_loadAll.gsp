@@ -1,4 +1,4 @@
-<%@ page import="cratos.Cuenta" %>
+<%@ page import="sri.Cuenta" %>
 <!doctype html>
 <html>
     <head>

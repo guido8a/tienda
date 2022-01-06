@@ -1,4 +1,4 @@
-<%@ page import="cratos.Cuenta" %>
+<%@ page import="sri.Cuenta" %>
 
 <g:form action="save" class="form-cuenta" method="post">
     <g:hiddenField name="id" value="${cuentaInstance?.id}"/>
