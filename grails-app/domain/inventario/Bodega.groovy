@@ -29,8 +29,8 @@ class Bodega implements Serializable{
         }
         static constraints = {
             nombre(size:1..63, blank:false, nullable:false )
-            descripcion(size:3..255, blank:true, nullable:true )
-            direccion(size:3..255, blank:true, nullable:true )
+            descripcion(size:0..255, blank:true, nullable:true )
+            direccion(size:0..255, blank:true, nullable:true )
             telefono(blank:true, nullable:true )
             tipo(blank:false, nullable:false )
         }

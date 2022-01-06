@@ -264,6 +264,36 @@
         }); //ajax
     } //createEdit
 
+
+    function bodegasList(id) {
+        $.ajax({
+            type    : "POST",
+            url     : "${createLink(controller: 'bodega', action:'bodega_ajax')}",
+            data    : {
+                empresa: id
+            },
+            success : function (msg) {
+                var b = bootbox.dialog({
+                    id      : "dlgCreateEditBod",
+                    title   : "Bodegas de la empresa",
+                    class: "modal-lg",
+                    message : msg,
+                    buttons : {
+                        cancelar : {
+                            label     : "Cancelar",
+                            className : "btn-primary",
+                            callback  : function () {
+                            }
+                        }
+                    } //buttons
+                }); //dialog
+                setTimeout(function () {
+                    b.find(".form-control").not(".datepicker").first().focus()
+                }, 500);
+            } //success
+        }); //ajax
+    } //createEdit
+
     function submitFormCont() {
         var $form = $("#frmEmpresaCont");
         if ($form.valid()) {
@@ -364,6 +394,15 @@
                 }
             };
 
+            var bodegas = {
+                label: " Bodegas",
+                icon: "fa fa-box",
+                separator_before : true,
+                action: function () {
+                    bodegasList(id)
+                }
+            };
+
             var documentos = {
                 label: " Secuenciales de facturas",
                 icon: "fa fa-envelope",
@@ -405,6 +444,7 @@
             items.editar = editar;
             items.contabilidad = contabilidad;
             items.sucursales = sucursales;
+            items.bodegas = bodegas;
             items.documentos = documentos;
             items.usuarios = usuarios;
             items.imagenes = imagenes;

@@ -1,4 +1,5 @@
 import org.grails.core.io.ResourceLocator
+import seguridad.Empresa
 
 /**
  * Tags para facilitar la creación de reportes (HTML -> PDF)
@@ -165,36 +166,20 @@ class ReportesTagLib {
         println("AQUI atributos headerReporte  " + attrs)
         def title = attrs.title ?: ""
         def titulo = attrs.titulo ?: ""
-        def unidadEjecutora
-        def unidadAutonoma
+        def empresa
 
         if(!attrs.anio){
             attrs.anio = new Date().format("yyyy")
         }
 
-        println "attrs.unidad: ${attrs.unidad.class}"
-
-
-//        println "....3"
-
-//        println("ue " + unidadEjecutora)
-//        println("ua " + unidadAutonoma)
-//        println("anio " + attrs.anio)
-
-
-
         def subtitulo = attrs.subtitulo ?: ""
 
         def estilo = attrs.estilo ?: "center"
-
-        def form
-        if(attrs.title.contains("permanente")) {
-            form = attrs.form ?: 'GAF-001'
-        }  else {
-            form = attrs.form ?: 'GPE-DPI-01'
-        }
-
         def h = 55
+
+        if(attrs.empresa){
+            empresa = Empresa.get(attrs.empresa)
+        }
 
 //        def logoPath = resource(dir: 'images', file: 'logo-pdf-header.png')
 //        ResourceLocator grailsResourceLocator
@@ -207,15 +192,11 @@ class ReportesTagLib {
         html += "${logoPath}\n"
         html += '</div>' + "\n"
 
-//        html += "<div class='tituloRprt'>"
-//        html += "<div class='tituloReporteSinLinea'>"
-//        html += "Empresa pública YACHAY EP"
-//        html += '</div>'
-//        html += '</div>'
-
-        html += "<div class='tituloRprt tituloReporteSinLinea'>"
-        html += "Empresa pública YACHAY EP"
-        html += '</div>'
+        if(attrs.empresa){
+            html += "<div class='tituloRprt tituloReporteSinLinea'>"
+            html += "${empresa?.nombre}"
+            html += '</div>'
+        }
 
         if (titulo) {
             html += "<div class='tituloRprt'>"
@@ -242,48 +223,67 @@ class ReportesTagLib {
             html += '</div>'
         }
 
-        if (attrs.unidad || attrs.numero != null) {
-            html += "<div class='numeracion'>" + "\n"
-            html += "<table border='1' ${estilo == 'right' ? 'style=\'float: right\'' : ''}>" + "\n"
-            html += "<tr>" + "\n"
-            html += "<td style='background: #0F243E;'>Form. ${form}</td>" + "\n"
-            html += "<td style='background: #008080;'>Numeración:</td>" + "\n"
-//            html += "<td style='background: #008080;'>${attrs.unidad ?: ''}</td>" + "\n"
-            if(attrs.unidad.id)
-            {
-//                println "atrr: ${attrs.title.trim().toLowerCase()}"
-                if(attrs.title.trim().toLowerCase() in ['aval de poa', 'reforma al poa']) {
 
-                    html += "<td style='background: #008080;'>${attrs.anio}-GPE</td>" + "\n"
-                }
-                if(attrs.title.trim().toLowerCase() in ['solicitud de reforma al poa', 'solicitud de aval de poa']) {
-                    html += "<td style='background: #008080;'>${attrs.anio}-${unidadAutonoma?.codigo}</td>" + "\n"
-                }
-
-                if(attrs.title.trim().toLowerCase() in ['aval de poa de gasto permanente', 'ajuste al poa de gasto permanente', 'reforma al poa de gasto permanente']){
-                    html += "<td style='background: #008080;'>${attrs.anio}-GAF</td>" + "\n"
-                }
-
-                if(attrs.title.toLowerCase() in ['solicitud de aval de poa permanente', 'solicitud de reforma al poa de gasto permanente']) {
-                    if(direccionesGaf.contains(unidadEjecutora.codigo)){
-                        html += "<td style='background: #008080;'>${attrs.anio}-${unidadEjecutora?.codigo}</td>" + "\n"
-                    }else{
-                        html += "<td style='background: #008080;'>${attrs.anio}-${unidadAutonoma?.codigo}</td>" + "\n"
-                    }
-
-                } else {
-//                    html += "<td style='background: #008080;'>${attrs.anio}</td>" + "\n"
-                }
-
-            }else{
-//                html += "<td style='background: #008080;'>${attrs.anio}</td>" + "\n"
+        if (attrs.empresa) {
+            if (subtitulo == "") {
+                html += "<div class='tituloReporte'>" + "\n"
+            } else {
+                html += "<div class='tituloReporteSinLinea'>" + "\n"
             }
 
-            html += "<td style='background: #008080;'>No. ${attrs.numero != null ? attrs.numero.toString().padLeft(3, '0') : ''}</td>" + "\n"
-            html += "</tr>" + "\n"
-            html += "</table>" + "\n"
-            html += "</div>" + "\n"
+            html += '</div>' + "\n"
+            if (subtitulo != "") {
+                html += "<div class='datosRprt'>"
+                html += "Dirección: ${empresa?.direccion ?: ''}"
+                html += '</div>'
+                html += "<div class='datosRprt'>"
+                html += "Telf.: ${empresa?.telefono ?: ''}"
+                html += '</div>'
+                html += "<div class='datosRprt'>"
+                html += "R.U.C.: ${empresa?.ruc ?: ''}"
+                html += '</div>'
+            }
         }
+
+
+//        if (attrs.unidad || attrs.numero != null) {
+//            html += "<div class='numeracion'>" + "\n"
+//            html += "<table border='1' ${estilo == 'right' ? 'style=\'float: right\'' : ''}>" + "\n"
+//            html += "<tr>" + "\n"
+//            html += "<td style='background: #0F243E;'>Form. ${form}</td>" + "\n"
+//            html += "<td style='background: #008080;'>Numeración:</td>" + "\n"
+//            if(attrs.unidad.id)
+//            {
+//                if(attrs.title.trim().toLowerCase() in ['aval de poa', 'reforma al poa']) {
+//
+//                    html += "<td style='background: #008080;'>${attrs.anio}-GPE</td>" + "\n"
+//                }
+//                if(attrs.title.trim().toLowerCase() in ['solicitud de reforma al poa', 'solicitud de aval de poa']) {
+//                    html += "<td style='background: #008080;'>${attrs.anio}-${unidadAutonoma?.codigo}</td>" + "\n"
+//                }
+//
+//                if(attrs.title.trim().toLowerCase() in ['aval de poa de gasto permanente', 'ajuste al poa de gasto permanente', 'reforma al poa de gasto permanente']){
+//                    html += "<td style='background: #008080;'>${attrs.anio}-GAF</td>" + "\n"
+//                }
+//
+//                if(attrs.title.toLowerCase() in ['solicitud de aval de poa permanente', 'solicitud de reforma al poa de gasto permanente']) {
+//                    if(direccionesGaf.contains(unidadEjecutora.codigo)){
+//                        html += "<td style='background: #008080;'>${attrs.anio}-${unidadEjecutora?.codigo}</td>" + "\n"
+//                    }else{
+//                        html += "<td style='background: #008080;'>${attrs.anio}-${unidadAutonoma?.codigo}</td>" + "\n"
+//                    }
+//
+//                } else {
+//                }
+//
+//            }else{
+//            }
+//
+//            html += "<td style='background: #008080;'>No. ${attrs.numero != null ? attrs.numero.toString().padLeft(3, '0') : ''}</td>" + "\n"
+//            html += "</tr>" + "\n"
+//            html += "</table>" + "\n"
+//            html += "</div>" + "\n"
+//        }
 
         out << raw(html)
     }
