@@ -162,7 +162,7 @@
                 <i class="fa fa-clipboard fa-5x"></i><br/>
                 Retenciones por Código
             </a>
-            <a href="#" class="link btn btn-primary btn-ajax" data-toggle="modal" disabled="" data-target="#modalAts" title="Permite la generació del ATS en un período determinado">
+            <a href="#" class="link btn btn-primary btn-ajax" data-toggle="modal"  data-target="#modalAts" title="Permite la generació del ATS en un período determinado">
                 <i class="fa fa-file-alt fa-5x"></i><br/>
                 ATS
             </a>
@@ -1470,7 +1470,7 @@
                                 message : msgs,
                                 buttons : {
                                     sobreescribir : {
-                                        label     : "<i class='fa fa-pencil'></i> Sobreescribir",
+                                        label     : "<i class='fa fa-edit'></i> Sobreescribir",
                                         className : "btn-primary",
                                         callback  : function () {
                                             crearXML(mes, anio, 1);
@@ -1484,7 +1484,7 @@
                                         }
                                     },
                                     archivos      : {
-                                        label     : "<i class='fa fa-files-o'></i> Archivos",
+                                        label     : "<i class='fa fa-archive'></i> Archivos",
                                         className : "btn-default",
                                         callback  : function () {
                                             location.href = "${createLink(controller: 'xml', action:'downloads')}";
@@ -1505,7 +1505,7 @@
                             message : "Archivo generado exitosamente",
                             buttons : {
                                 descargar : {
-                                    label     : "<i class='fa fa-download'> Descargar",
+                                    label     : "<i class='fa fa-download'></i> Descargar",
                                     className : "btn-success",
                                     callback  : function () {
                                         location.href = "${createLink(controller: 'xml', action:'downloadFile')}?mes=" + mes;
