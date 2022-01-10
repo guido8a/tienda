@@ -2039,10 +2039,10 @@ class ProcesoController {
     def revisarFecha_ajax() {
         println("params revisar fecha " + params)
         if(params.desde && params.hasta){
-//            def desde = new Date().parse("dd-MM-yyyy", params.desde)
-//            def hasta = new Date().parse("dd-MM-yyyy", params.hasta)
-            def desde = new Date().parse("MM/dd/yyyy", params.desde)
-            def hasta = new Date().parse("MM/dd/yyyy", params.hasta)
+            def desde = new Date().parse("dd-MM-yyyy", params.desde)
+            def hasta = new Date().parse("dd-MM-yyyy", params.hasta)
+//            def desde = new Date().parse("MM/dd/yyyy", params.desde)
+//            def hasta = new Date().parse("MM/dd/yyyy", params.hasta)
 
             if(desde > hasta){
                 render "no"

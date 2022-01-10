@@ -5,30 +5,23 @@
   Time: 11:07
 --%>
 
-<%--
-  Created by IntelliJ IDEA.
-  User: gato
-  Date: 16/08/17
-  Time: 10:32
---%>
 
 <div class="row" style="margin-bottom: 10px">
     <div class="col-xs-4 negrilla">
         Número:
-        <input type="text" class=" form-control label-shared validacionNumeroSinPuntos" style="width: 200px" name="numero_name" id="numeroCuenta"/>
+        <input type="text" class=" form-control label-shared validacionNumeroSinPuntos"  name="numero_name" id="numeroCuenta"/>
     </div>
-    <div class="col-xs-5 negrilla">
+    <div class="col-xs-4 negrilla">
         Descripción:
-        <input type="text" class=" form-control label-shared" style="width: 250px" name="desc_name" id="descCuenta"/>
+        <input type="text" class=" form-control label-shared"  name="desc_name" id="descCuenta"/>
     </div>
-    <div class="col-xs-3 negrilla">
-        <a href="#" class="btn btn-azul btnBuscarCuenta">
+    <div class="col-xs-3 negrilla" style="margin-top: 18px">
+        <a href="#" class="btn btn-primary btnBuscarCuenta">
             <i class="fa fa-search"></i>
             Buscar
         </a>
         <a href="#" class="btn btn-warning btnLimpiar" title="Limpiar Búsqueda">
             <i class="fa fa-eraser"></i>
-            Limpiar
         </a>
     </div>
 </div>
@@ -36,17 +29,15 @@
 <table class="table table-bordered table-hover table-condensed">
     <thead>
     <tr>
-        <th style="width: 50px">Número</th>
-        <th style="width: 250px">Descripción</th>
-        <th style="width: 30px"><i class="fa fa-check"></i></th>
+        <th style="width: 20%">Número</th>
+        <th style="width: 65%">Descripción</th>
+        <th style="width: 15%">Seleccionar</th>
     </tr>
     </thead>
 </table>
 
-<div class="row-fluid"  style="width: 99.7%;height: 250px;overflow-y: auto;float: right;">
-    <div class="span12">
-        <div id="divTablaCuentas" style="width: 1030px; height: 250px;"></div>
-    </div>
+<div class="span12">
+    <div id="divTablaCuentas" style="width: 100%; height: 250px;"></div>
 </div>
 
 <script type="text/javascript">
@@ -65,9 +56,9 @@
          39         -> flecha der
          */
         return ((ev.keyCode >= 48 && ev.keyCode <= 57) ||
-        (ev.keyCode >= 96 && ev.keyCode <= 105) ||
-        ev.keyCode == 8 || ev.keyCode == 46 || ev.keyCode == 9 ||
-        ev.keyCode == 37 || ev.keyCode == 39 );
+            (ev.keyCode >= 96 && ev.keyCode <= 105) ||
+            ev.keyCode == 8 || ev.keyCode == 46 || ev.keyCode == 9 ||
+            ev.keyCode == 37 || ev.keyCode == 39 );
     }
 
 

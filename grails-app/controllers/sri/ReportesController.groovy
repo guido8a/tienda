@@ -875,9 +875,6 @@ order by rplnnmro
         return[proceso: proceso, empresa: empresa, comprobante: comprobante]
     }
 
-    def rep(){
-        renderPdf(template:'/reportes/reporte', filename: 'reporte.pdf')
-    }
 
 }
 

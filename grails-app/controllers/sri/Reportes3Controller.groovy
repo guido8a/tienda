@@ -17,10 +17,13 @@ import com.lowagie.text.pdf.PdfImportedPage
 import com.lowagie.text.pdf.PdfPTable
 import com.lowagie.text.pdf.PdfReader
 import com.lowagie.text.pdf.PdfWriter
+import inventario.Bodega
 import pdf.PdfService
 import org.apache.poi.ss.usermodel.Row
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import seguridad.Empresa
+import seguridad.Persona
+import tienda.Producto
 
 //import org.krysalis.barcode4j.impl.code128.Code128Bean
 //import org.krysalis.barcode4j.impl.code128.EAN128Bean
@@ -592,7 +595,7 @@ class Reportes3Controller {
         return [empresa: params.empresa,proceso: proceso, comprobante: comprobante, asientos: asientos]
     }
 
-    def imprimirLibroDiario () {
+    def _libroDiario () {
         def contabilidad = Contabilidad.get(params.cont)
         def periodo = Periodo.get(params.periodo)
         def empresa = Empresa.get(params.empresa)
@@ -610,27 +613,24 @@ class Reportes3Controller {
             }
 
         }
-        return[comprobantes: comprobantes, empresa: params.empresa]
 
+        renderPdf(template:'/reportes3/libroDiario', model: [comprobantes: comprobantes, empresa: params.empresa, contabilidad: contabilidad], filename: 'libroDiario.pdf')
     }
 
-    def reporteSituacion () {
+    def _reporteSituacion () {
 
-
-//        println("params " + params)
+        println("params " + params)
         def periodoFinal = Periodo.get(params.periodo).fechaFin.format("yyyy-MM-dd")
         def empresa = Empresa.get(params.empresa)
+        def contabilidad = Contabilidad.get(params.cont)
 
         def cn = dbConnectionService.getConnection()
         def sql = "select * from estado_st(${params.periodo},${params.nivel})"
-//        def sql = "select * from estado_st(${params.periodo},${params.nivel}) where slin + debe + hber > 0"
         println("sql " + sql)
         def data = cn.rows(sql.toString())
         cn.close()
 
-//        println("data " + data)
-
-        return[periodo: periodoFinal, empresa: empresa.id, cuentas: data]
+        renderPdf(template:'/reportes3/reporteSituacion', model: [periodo: periodoFinal, empresa: empresa.id, cuentas: data, contabilidad: contabilidad], filename: 'estadoDeSituacion.pdf')
     }
 
 
@@ -692,27 +692,27 @@ class Reportes3Controller {
         return[proceso: proceso, empresa: empresa, detalles: detalles]
     }
 
-    def modalKardex4_ajax () {
-
+    def kardex4_ajax () {
+        def usuario = Persona.get(session.usuario.id)
+        def empresa = usuario.empresa
+        return[empresa: empresa]
     }
 
-    def kardex4 (){
+    def _kardex4 (){
         println("params " + params)
         def desde = new Date().parse("dd-MM-yyyy", params.desde)
         def hasta = new Date().parse("dd-MM-yyyy", params.hasta)
         def contabilidad = Contabilidad.get(params.cont)
         def bodega = Bodega.get(params.bodega)
-        def item = Item.get(params.item)
+        def item = Producto.get(params.item)
         def d = desde.format("dd-MM-yyyy")
         def h = hasta.format("dd-MM-yyyy")
 
         def cn = dbConnectionService.getConnection()
         def res = cn.rows("select * from rp_kardex('${contabilidad?.id}','${bodega?.id}','${item?.id}', '${d}', '${h}')")
 
-        return[res: res, empresa: params.emp, desde: desde, hasta: hasta, item: item]
+        renderPdf(template:'/reportes3/kardex4', model: [res: res, empresa: params.emp, desde: desde, hasta: hasta, item: item, contabilidad: contabilidad], filename: 'existenciasPorProducto.pdf')
     }
-
-
 
     def _correo () {
 
@@ -902,12 +902,13 @@ class Reportes3Controller {
         response.getOutputStream().write(b)
     }
 
-    def reporteResultadoIntegral () {
+    def _resultadoIntegral () {
 
 //        println("params " + params)
 
         def periodo = Periodo.get(params.per);
         def empresa = Empresa.get(params.empresa)
+        def contabilidad = Contabilidad.get(params.cont)
 
         def cuenta4 = Cuenta.findAllByNumeroIlikeAndEmpresa("4%", empresa, [sort: "numero"])
         def cuenta5 = Cuenta.findAllByNumeroIlikeAndEmpresa("5%", empresa, [sort: "numero"])
@@ -968,8 +969,9 @@ class Reportes3Controller {
 
         }
 
-        return [periodo: periodo, empresa: empresa, cuenta4: cuenta4, cuenta5: cuenta5, cuenta6: cuenta6, saldo4: saldo4.values(),
-                saldo5: saldo5.values(), saldo6: saldo6.values(), total4: total4, total5: total5, total6: total6, maxLvl: maxLvl]
+        renderPdf(template:'/reportes3/resultadoIntegral', model: [periodo: periodo, empresa: empresa?.id, cuenta4: cuenta4, cuenta5: cuenta5, cuenta6: cuenta6, saldo4: saldo4.values(),
+                                                            saldo5: saldo5.values(), saldo6: saldo6.values(), total4: total4, total5: total5, total6: total6, maxLvl: maxLvl, contabilidad: contabilidad], filename: 'resultadoIntegral.pdf')
+
     }
 
     private static int[] arregloEnteros(array) {

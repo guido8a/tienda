@@ -160,9 +160,9 @@
             </a>
             <a href="#" class="link btn btn-info btn-ajax" data-target="#retencionesCodigo" data-toggle="modal">
                 <i class="fa fa-clipboard fa-5x"></i><br/>
-                Retenciones X Código
+                Retenciones por Código
             </a>
-            <a href="#" class="link btn btn-primary btn-ajax" data-toggle="modal" data-target="#modalAts" title="Permite la generació del ATS en un período determinado">
+            <a href="#" class="link btn btn-primary btn-ajax" data-toggle="modal" disabled="" data-target="#modalAts" title="Permite la generació del ATS en un período determinado">
                 <i class="fa fa-file-alt fa-5x"></i><br/>
                 ATS
             </a>
@@ -177,9 +177,9 @@
                 <i class="fa fa-book fa-5x"></i><br/>
                 Kardex
             </a>
-            <a href="#" class="link btn btn-success btn-ajax btnKardex2"  data-toggle="modal">
-                <i class="fa fa-book fa-5x"></i><br/>
-                Kardex por item
+            <a href="#" class="link btn btn-success btn-ajax btnKardex2" data-toggle="modal">
+                <i class="fa fa-parking fa-5x"></i><br/>
+                Kardex por producto
             </a>
             <a href="#" class="link btn btn-success btn-ajax btnKardex3" data-toggle="modal">
                 <i class="fa fa-chart-bar fa-5x"></i><br/>
@@ -187,7 +187,7 @@
             </a>
             <a href="#" class="link btn btn-success btn-ajax btnKardex4" data-toggle="modal">
                 <i class="fa fa-chart-bar fa-5x"></i><br/>
-                Existencias x Item
+                Existencias por producto
             </a>
             <a href="#" class="link btn btn-success btn-ajax btnCostoVentas" data-toggle="modal">
                 <i class="fa fa-file-invoice-dollar fa-5x"></i><br/>
@@ -540,8 +540,7 @@
                         <label>Desde: </label>
                     </div>
                     <div class="col-md-5">
-                        <elm:datepicker name="fechaDesde" title="Fecha desde" id="fechaD" class="datepicker form-control fechaDe"
-                                        maxDate="new Date()"/>
+                        <input name="fechaDesde"  id='datetimepicker1' type='text' required="" class="form-control fechaDe required"/>
                     </div>
                 </div>
 
@@ -550,8 +549,7 @@
                         <label>Hasta: </label>
                     </div>
                     <div class="col-md-5">
-                        <elm:datepicker name="fechaHasta" title="Fecha hasta" id="fechaH" class="datepicker form-control fechaHa"
-                                        maxDate="new Date()"/>
+                        <input name="fechaHasta"  id='datetimepicker2' type='text' required="" class="form-control fechaHa required"/>
                     </div>
                 </div>
 
@@ -609,8 +607,7 @@
                         <label>Desde: </label>
                     </div>
                     <div class="col-md-5">
-                        <elm:datepicker name="fechaDesde" title="Fecha desde" id="fechaDR" class="datepicker form-control fechaDeR"
-                                        maxDate="new Date()"/>
+                        <input name="fechaDesde"  id='datetimepicker3' type='text' required="" class="form-control fechaDeR required"/>
                     </div>
                 </div>
 
@@ -619,8 +616,7 @@
                         <label>Hasta: </label>
                     </div>
                     <div class="col-md-5">
-                        <elm:datepicker name="fechaHasta" title="Fecha hasta" id="fechaHR" class="datepicker form-control fechaHaR"
-                                        maxDate="new Date()"/>
+                        <input name="fechaHasta"  id='datetimepicker4' type='text' required="" class="form-control fechaHaR required"/>
                     </div>
                 </div>
 
@@ -655,7 +651,7 @@
                 <div class="fila" style="margin-bottom: 15px">
                     <label class="uno">Bodega:</label>
                     <g:select name="bode_name" id="bode"
-                              from="${contabilidad}"
+                              from="${inventario.Bodega.list().sort{it.descripcion}}"
                               optionKey="id" optionValue="descripcion" noSelection="['-1': 'Seleccione la bodega']"
                               class="form-control dos"/>
                 </div>
@@ -664,8 +660,9 @@
                         <label>Desde: </label>
                     </div>
                     <div class="col-md-5">
-                        <elm:datepicker name="fechaDesde" title="Fecha desde" id="fechaDK" class="datepicker form-control fechaDeK"
-                                        maxDate="new Date()"/>
+                        <input name="fechaDesde"  id='datetimepicker7' type='text' required="" class="form-control fechaDeK required"/>
+%{--                        <elm:datepicker name="fechaDesde" title="Fecha desde" id="fechaDK" class="datepicker form-control fechaDeK"--}%
+%{--                                        maxDate="new Date()"/>--}%
                     </div>
                 </div>
 
@@ -674,8 +671,9 @@
                         <label>Hasta: </label>
                     </div>
                     <div class="col-md-5">
-                        <elm:datepicker name="fechaHasta" title="Fecha hasta" id="fechaHK" class="datepicker form-control fechaHaK"
-                                        maxDate="new Date()"/>
+                        <input name="fechaHasta"  id='datetimepicker8' type='text' required="" class="form-control fechaHaK required"/>
+%{--                        <elm:datepicker name="fechaHasta" title="Fecha hasta" id="fechaHK" class="datepicker form-control fechaHaK"--}%
+%{--                                        maxDate="new Date()"/>--}%
                     </div>
                 </div>
 
@@ -712,8 +710,9 @@
                         <label>Desde: </label>
                     </div>
                     <div class="col-md-5">
-                        <elm:datepicker name="fechaDesde" title="Fecha desde" id="fechaDRC" class="datepicker form-control fechaDeRC"
-                                        maxDate="new Date()"/>
+                        <input name="fechaDesde"  id='datetimepicker5' type='text' required="" class="form-control fechaDeRC required"/>
+%{--                        <elm:datepicker name="fechaDesde" title="Fecha desde" id="fechaDRC" class="datepicker form-control fechaDeRC"--}%
+%{--                                        maxDate="new Date()"/>--}%
                     </div>
                 </div>
 
@@ -722,8 +721,9 @@
                         <label>Hasta: </label>
                     </div>
                     <div class="col-md-5">
-                        <elm:datepicker name="fechaHasta" title="Fecha hasta" id="fechaHRC" class="datepicker form-control fechaHaRC"
-                                        maxDate="new Date()"/>
+                        <input name="fechaDesde"  id='datetimepicker6' type='text' required="" class="form-control fechaHaRC required"/>
+%{--                        <elm:datepicker name="fechaHasta" title="Fecha hasta" id="fechaHRC" class="datepicker form-control fechaHaRC"--}%
+%{--                                        maxDate="new Date()"/>--}%
                     </div>
                 </div>
 
@@ -771,8 +771,9 @@
                         <label>Desde: </label>
                     </div>
                     <div class="col-md-5">
-                        <elm:datepicker name="fechaDesde" title="Fecha desde" id="fechaDC" class="datepicker form-control fechaDeC"
-                                        maxDate="new Date()"/>
+                        <input name="fechaDesde"  id='datetimepicker9' type='text' required="" class="form-control fechaDeC required"/>
+%{--                        <elm:datepicker name="fechaDesde" title="Fecha desde" id="fechaDC" class="datepicker form-control fechaDeC"--}%
+%{--                                        maxDate="new Date()"/>--}%
                     </div>
                 </div>
 
@@ -781,8 +782,9 @@
                         <label>Hasta: </label>
                     </div>
                     <div class="col-md-5">
-                        <elm:datepicker name="fechaHasta" title="Fecha hasta" id="fechaHC" class="datepicker form-control fechaHaC"
-                                        maxDate="new Date()"/>
+                        <input name="fechaHasta"  id='datetimepicker10' type='text' required="" class="form-control fechaHaC required"/>
+%{--                        <elm:datepicker name="fechaHasta" title="Fecha hasta" id="fechaHC" class="datepicker form-control fechaHaC"--}%
+%{--                                        maxDate="new Date()"/>--}%
                     </div>
                 </div>
 
@@ -819,8 +821,9 @@
                         <label>Desde: </label>
                     </div>
                     <div class="col-md-5">
-                        <elm:datepicker name="fechaDesde" title="Fecha desde" id="fechaDV" class="datepicker form-control fechaDeV"
-                                        maxDate="new Date()"/>
+                        <input name="fechaDesde"  id='datetimepicker11' type='text' required="" class="form-control fechaDeV required"/>
+%{--                        <elm:datepicker name="fechaDesde" title="Fecha desde" id="fechaDV" class="datepicker form-control fechaDeV"--}%
+%{--                                        maxDate="new Date()"/>--}%
                     </div>
                 </div>
 
@@ -829,8 +832,9 @@
                         <label>Hasta: </label>
                     </div>
                     <div class="col-md-5">
-                        <elm:datepicker name="fechaHasta" title="Fecha hasta" id="fechaHV" class="datepicker form-control fechaHaV"
-                                        maxDate="new Date()"/>
+                        <input name="fechaHasta"  id='datetimepicker12' type='text' required="" class="form-control fechaHaV required"/>
+%{--                        <elm:datepicker name="fechaHasta" title="Fecha hasta" id="fechaHV" class="datepicker form-control fechaHaV"--}%
+%{--                                        maxDate="new Date()"/>--}%
                     </div>
                 </div>
 
@@ -849,18 +853,35 @@
 
 <script type="text/javascript">
 
+    $(function () {
+        $('#datetimepicker1, #datetimepicker2, #datetimepicker3, #datetimepicker4, #datetimepicker5, #datetimepicker6, #datetimepicker7, #datetimepicker8, #datetimepicker9, #datetimepicker10').datetimepicker({
+            locale: 'es',
+            format: 'DD-MM-YYYY',
+            showClose: true,
+            icons: {
+                close: 'closeText'
+            }
+        });
+        $('#datetimepicker11, #datetimepicker12').datetimepicker({
+            locale: 'es',
+            format: 'DD-MM-YYYY',
+            showClose: true,
+            icons: {
+                close: 'closeText'
+            }
+        });
+    });
+
     $(".btnCostoVentas").click(function () {
         $.ajax({
             type: 'POST',
-            url:'${createLink(controller: 'reportes2', action: 'modalCostoVentas_ajax')}',
-            data:{
-
-            },
+            url:'${createLink(controller: 'reportes2', action: 'costoVentas_ajax')}',
+            data:{  },
             success: function (msg){
                 var b = bootbox.dialog({
                     id      : "dlgKardex3",
-                    title   : "Existencias",
-                    class: "long",
+                    title   : "Costo de ventas",
+                    class: "modal-lg",
                     message : msg,
                     buttons : {
                         cancelar : {
@@ -879,15 +900,13 @@
     $(".btnKardex4").click(function () {
         $.ajax({
             type: 'POST',
-            url:'${createLink(controller: 'reportes3', action: 'modalKardex4_ajax')}',
-            data:{
-
-            },
+            url:'${createLink(controller: 'reportes3', action: 'kardex4_ajax')}',
+            data:{  },
             success: function (msg){
                 var b = bootbox.dialog({
                     id      : "dlgKardex4",
-                    title   : "Existencias x Item",
-                    class: "long",
+                    title   : "Existencias por Producto",
+                    class: "modal-lg",
                     message : msg,
                     buttons : {
                         cancelar : {
@@ -905,15 +924,13 @@
     $(".btnKardex3").click(function () {
         $.ajax({
             type: 'POST',
-            url:'${createLink(controller: 'reportes2', action: 'modalKardex3_ajax')}',
-            data:{
-
-            },
+            url:'${createLink(controller: 'reportes2', action: 'kardex3_ajax')}',
+            data:{},
             success: function (msg){
                 var b = bootbox.dialog({
                     id      : "dlgKardex3",
                     title   : "Existencias",
-                    class: "long",
+                    class: "modal-lg",
                     message : msg,
                     buttons : {
                         cancelar : {
@@ -931,15 +948,13 @@
     $(".btnKardex2").click(function () {
         $.ajax({
             type: 'POST',
-            url:'${createLink(controller: 'reportes2', action: 'modalKardex2_ajax')}',
-            data:{
-
-            },
+            url:'${createLink(controller: 'reportes2', action: 'kardex2_ajax')}',
+            data:{ },
             success: function (msg){
                 var b = bootbox.dialog({
                     id      : "dlgKardex2",
-                    title   : "Kardex x Item",
-                    class: "long",
+                    title   : "Kardex por Producto",
+                    class: "modal-lg",
                     message : msg,
                     buttons : {
                         cancelar : {
@@ -966,9 +981,7 @@
         $.ajax({
             type: 'POST',
             url:'${createLink(controller: 'cuenta', action: 'buscadorCuentas_ajax')}',
-            data:{
-
-            },
+            data:{ },
             success: function (msg){
                 bootbox.dialog({
                     title: 'Buscar cuenta',
@@ -979,7 +992,6 @@
                             label: "<i class='fa fa-times'></i> Cancelar",
                             className: "btn-primary",
                             callback: function () {
-//                                bootbox.hideAll();
                             }
                         }
                     }
@@ -987,7 +999,6 @@
             }
         });
     }
-
 
     cargarSelComprobante($("#compTipo option:selected").val());
 
@@ -1009,7 +1020,6 @@
         });
     }
 
-
     function prepare() {
         $(".fa-ul li span").each(function () {
             var id = $(this).parents(".tab-pane").attr("id");
@@ -1022,7 +1032,6 @@
 
     function updateCuenta() {
         var per = $("#periodo2").val();
-        ////console.log(per);
         $.ajax({
             type    : "POST",
             url     : "${createLink(controller: 'reportes2', action:'updateCuenta')}",
@@ -1037,8 +1046,6 @@
 
     function updatePeriodo(cual) {
         var cont = $("#contP" + cual).val();
-
-//                console.log("cont" + cont);
 
         $.ajax({
             type    : "POST",
@@ -1131,8 +1138,6 @@
         $(".btnAceptarPlan").click(function () {
             var cont = $("#contCuentas").val();
             location.href = "${g.createLink(controller:'reportes' , action: '_planDeCuentas')}?cont=" + cont + "&empresa=${empresa?.id}";
-            %{--url = "${g.createLink(controller:'reportes' , action: '_planDeCuentas')}?cont=" + cont + "Wempresa=${empresa?.id}";--}%
-            %{--location.href = "${g.createLink(action: 'pdfLink',controller: 'pdf')}?url=" + url + "&filename=planDeCuentas.pdf"--}%
         });
 
         $(".btnAceptarPlanExcel").click(function () {
@@ -1141,12 +1146,8 @@
         });
 
         $(".btnAceptarGestor").click(function () {
-            openLoader("Imprimiendo...")
-            var cont = $("#contContable").val()
+            var cont = $("#contContable").val();
             location.href = "${g.createLink(controller:'reportes' , action: '_gestorContable')}?cont=" + cont + "&empresa=${empresa?.id}";
-            %{--url = "${g.createLink(controller:'reportes' , action: 'gestorContable')}?cont=" + cont + "Wempresa=${empresa.id}";--}%
-            %{--location.href = "${g.createLink(action: 'pdfLink',controller: 'pdf')}?url=" + url + "&filename=gestorContable.pdf"--}%
-            closeLoader()
         });
 
         $(".btnAceptarComprobante").click(function () {
@@ -1187,21 +1188,13 @@
             });
         });
 
-
-        %{--$("#excelPrueba").click(function () {--}%
-        %{--location.href = "${g.createLink(controller: 'reportes3', action: 'reporteExcel')}"--}%
-        %{--});--}%
-
-
         $(".btnAceptarBalance").click(function () {
             var cont = $("#contP").val();
             var per = $("#periodo").val();
             if (cont == '-1') {
                 bootbox.alert("Debe elegir una contabilidad!")
             } else {
-                url = "${g.createLink(controller:'reportes2' , action: 'balanceComprobacion')}?cont=" + cont + "Wemp=${empresa.id}" + "Wperiodo=" + per;
-                location.href = "${g.createLink(action: 'pdfLink',controller: 'pdf')}?url=" + url + "&filename=balanceComprobacion.pdf"
-
+                location.href = "${g.createLink(controller:'reportes2' , action: '_balanceComprobacion')}?cont=" + cont + "&emp=${empresa.id}" + "&periodo=" + per;
             }
         });
 
@@ -1224,8 +1217,7 @@
             if (cont == '-1') {
                 bootbox.alert("Debe elegir una contabilidad!")
             } else {
-                url = "${g.createLink(controller:'reportes3' , action: 'reporteResultadoIntegral')}?cont=" + cont + "Wempresa=${empresa.id}" + "Wper=" + per;
-                location.href = "${g.createLink(action: 'pdfLink',controller: 'pdf')}?url=" + url + "&filename=resultadoIntegral.pdf"
+                location.href = "${g.createLink(controller:'reportes3' , action: '_resultadoIntegral')}?cont=" + cont + "&empresa=${empresa.id}" + "&per=" + per;
             }
         });
 
@@ -1254,9 +1246,7 @@
                             },
                             success: function (msg){
                                 if(msg == 'ok'){
-                                    %{--url = "${g.createLink(controller:'reportes2' , action: 'libroMayor')}?cont=" + cont + "Wemp=${session.empresa.id}" + "Wper=" + per + "Wcnta=" + cnta + "Wdesde=" + fechaDesde + "Whasta=" + fechaHasta;--}%
-                                    url = "${g.createLink(controller:'reportes2' , action: 'libroMayor')}?cont=" + cont + "Wemp=${empresa.id}" + "Wcnta=" + cnta + "Wdesde=" + fechaDesde + "Whasta=" + fechaHasta;
-                                    location.href = "${g.createLink(action: 'pdfLink',controller: 'pdf')}?url=" + url + "&filename=libroMayor.pdf"
+                                    location.href = "${g.createLink(controller:'reportes2' , action: '_libroMayor')}?cont=" + cont + "&emp=${empresa.id}" + "&cnta=" + cnta + "&desde=" + fechaDesde + "&hasta=" + fechaHasta;
                                 }else{
                                     bootbox.alert("<i class='fa fa-exclamation-circle fa-3x pull-left text-warning text-shadow'></i> La fecha ingresada en 'Hasta' es menor a la fecha ingresada en 'Desde' ");
                                     return false;
@@ -1288,8 +1278,7 @@
                         },
                         success: function (msg){
                             if(msg == 'ok'){
-                                url = "${g.createLink(controller:'reportes2' , action: 'retenciones')}?cont=" + cont + "Wemp=${empresa.id}" + "Wdesde=" + fechaDesde + "Whasta=" + fechaHasta;
-                                location.href = "${g.createLink(action: 'pdfLink',controller: 'pdf')}?url=" + url + "&filename=retenciones.pdf"
+                                location.href = "${g.createLink(controller:'reportes2' , action: '_retenciones')}?cont=" + cont + "&emp=${empresa.id}" + "&desde=" + fechaDesde + "&hasta=" + fechaHasta;
                             }else{
                                 bootbox.alert("<i class='fa fa-exclamation-circle fa-3x pull-left text-warning text-shadow'></i> La fecha ingresada en 'Hasta' es menor a la fecha ingresada en 'Desde' ");
                                 return false;
@@ -1325,15 +1314,13 @@
                             },
                             success: function (msg){
                                 if(msg == 'ok'){
-                                    url = "${g.createLink(controller:'reportes2' , action: 'kardexGeneral')}?cont=" + cont + "Wemp=${empresa.id}" + "Wdesde=" + fechaDesde + "Whasta=" + fechaHasta + "Wbodega=" + bodega;
-                                    location.href = "${g.createLink(action: 'pdfLink',controller: 'pdf')}?url=" + url + "&filename=kardex.pdf"
+                                    location.href = "${g.createLink(controller:'reportes2' , action: '_kardexGeneral')}?cont=" + cont + "&emp=${empresa.id}" + "&desde=" + fechaDesde + "&hasta=" + fechaHasta + "&bodega=" + bodega;
                                 }else{
                                     bootbox.alert("<i class='fa fa-exclamation-circle fa-3x pull-left text-warning text-shadow'></i> La fecha ingresada en 'Hasta' es menor a la fecha ingresada en 'Desde' ");
                                     return false;
                                 }
                             }
                         });
-
                     }
                 }
             }
@@ -1359,8 +1346,7 @@
                         },
                         success: function (msg){
                             if(msg == 'ok'){
-                                url = "${g.createLink(controller:'reportes2' , action: 'retencionesCodigo')}?cont=" + cont + "Wemp=${empresa.id}" + "Wdesde=" + fechaDesde + "Whasta=" + fechaHasta;
-                                location.href = "${g.createLink(action: 'pdfLink',controller: 'pdf')}?url=" + url + "&filename=retencionesCodigo.pdf"
+                                location.href = "${g.createLink(controller:'reportes2' , action: '_retencionesCodigo')}?cont=" + cont + "&emp=${empresa.id}" + "&desde=" + fechaDesde + "&hasta=" + fechaHasta;
                             }else{
                                 bootbox.alert("<i class='fa fa-exclamation-circle fa-3x pull-left text-warning text-shadow'></i> La fecha ingresada en 'Hasta' es menor a la fecha ingresada en 'Desde' ");
                                 return false;
@@ -1392,8 +1378,7 @@
                         },
                         success: function (msg){
                             if(msg == 'ok'){
-                                url = "${g.createLink(controller:'reportes2' , action: 'compras')}?cont=" + cont + "Wemp=${empresa.id}" + "Wdesde=" + fechaDesde + "Whasta=" + fechaHasta + "Wtipo=" + tipo;
-                                location.href = "${g.createLink(action: 'pdfLink',controller: 'pdf')}?url=" + url + "&filename=compras.pdf"
+                                location.href = "${g.createLink(controller:'reportes2' , action: '_compras')}?cont=" + cont + "&emp=${empresa.id}" + "&desde=" + fechaDesde + "&hasta=" + fechaHasta + "&tipo=" + tipo;
                             }else{
                                 bootbox.alert("<i class='fa fa-exclamation-circle fa-3x pull-left text-warning text-shadow'></i> La fecha ingresada en 'Hasta' es menor a la fecha ingresada en 'Desde' ");
                                 return false;
@@ -1425,8 +1410,7 @@
                         },
                         success: function (msg){
                             if(msg == 'ok'){
-                                url = "${g.createLink(controller:'reportes2' , action: 'ventas')}?cont=" + cont + "Wemp=${empresa.id}" + "Wdesde=" + fechaDesde + "Whasta=" + fechaHasta;
-                                location.href = "${g.createLink(action: 'pdfLink',controller: 'pdf')}?url=" + url + "&filename=ventas.pdf"
+                                location.href = "${g.createLink(controller:'reportes2' , action: '_ventas')}?cont=" + cont + "&emp=${empresa.id}" + "&desde=" + fechaDesde + "&hasta=" + fechaHasta;
                             }else{
                                 bootbox.alert("<i class='fa fa-exclamation-circle fa-3x pull-left text-warning text-shadow'></i> La fecha ingresada en 'Hasta' es menor a la fecha ingresada en 'Desde' ");
                                 return false;
@@ -1446,8 +1430,7 @@
         $(".btnAceptarLibro").click(function () {
             var cont = $("#contP11").val();
             var per = $("#periodo11").val();
-            var url = "${g.createLink(controller: 'reportes3', action: 'imprimirLibroDiario')}?cont=" + cont + "Wperiodo=" + per + "Wempresa=${empresa.id}";
-            location.href = "${g.createLink(action: 'pdfLink',controller: 'pdf')}?url=" + url + "&filename=libroDiario.pdf";
+            location.href = "${g.createLink(controller: 'reportes3', action: '_libroDiario')}?cont=" + cont + "&periodo=" + per + "&empresa=${empresa.id}";
         });
 
         $(".btnAceptarAts").click(function () {
@@ -1461,8 +1444,8 @@
             var cont = $("#contP15").val();
             var per = $("#periodo15").val();
             var nivel = $("#nivelSituacion").val();
-            var url = "${g.createLink(controller: 'reportes3', action: 'reporteSituacion')}?cont=" + cont + "Wperiodo=" + per + "Wempresa=${empresa.id}" + "Wnivel=" + nivel;
-            location.href = "${g.createLink(action: 'pdfLink',controller: 'pdf')}?url=" + url + "&filename=situacion.pdf";
+            location.href= "${g.createLink(controller: 'reportes3', action: '_reporteSituacion')}?cont=" + cont + "&periodo=" + per + "&empresa=${empresa.id}" + "&nivel=" + nivel;
+            %{--location.href = "${g.createLink(action: 'pdfLink',controller: 'pdf')}?url=" + url + "&filename=situacion.pdf";--}%
         });
 
         function crearXML(mes, anio, override) {

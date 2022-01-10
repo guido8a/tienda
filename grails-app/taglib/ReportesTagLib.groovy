@@ -244,47 +244,6 @@ class ReportesTagLib {
                 html += '</div>'
             }
         }
-
-
-//        if (attrs.unidad || attrs.numero != null) {
-//            html += "<div class='numeracion'>" + "\n"
-//            html += "<table border='1' ${estilo == 'right' ? 'style=\'float: right\'' : ''}>" + "\n"
-//            html += "<tr>" + "\n"
-//            html += "<td style='background: #0F243E;'>Form. ${form}</td>" + "\n"
-//            html += "<td style='background: #008080;'>Numeración:</td>" + "\n"
-//            if(attrs.unidad.id)
-//            {
-//                if(attrs.title.trim().toLowerCase() in ['aval de poa', 'reforma al poa']) {
-//
-//                    html += "<td style='background: #008080;'>${attrs.anio}-GPE</td>" + "\n"
-//                }
-//                if(attrs.title.trim().toLowerCase() in ['solicitud de reforma al poa', 'solicitud de aval de poa']) {
-//                    html += "<td style='background: #008080;'>${attrs.anio}-${unidadAutonoma?.codigo}</td>" + "\n"
-//                }
-//
-//                if(attrs.title.trim().toLowerCase() in ['aval de poa de gasto permanente', 'ajuste al poa de gasto permanente', 'reforma al poa de gasto permanente']){
-//                    html += "<td style='background: #008080;'>${attrs.anio}-GAF</td>" + "\n"
-//                }
-//
-//                if(attrs.title.toLowerCase() in ['solicitud de aval de poa permanente', 'solicitud de reforma al poa de gasto permanente']) {
-//                    if(direccionesGaf.contains(unidadEjecutora.codigo)){
-//                        html += "<td style='background: #008080;'>${attrs.anio}-${unidadEjecutora?.codigo}</td>" + "\n"
-//                    }else{
-//                        html += "<td style='background: #008080;'>${attrs.anio}-${unidadAutonoma?.codigo}</td>" + "\n"
-//                    }
-//
-//                } else {
-//                }
-//
-//            }else{
-//            }
-//
-//            html += "<td style='background: #008080;'>No. ${attrs.numero != null ? attrs.numero.toString().padLeft(3, '0') : ''}</td>" + "\n"
-//            html += "</tr>" + "\n"
-//            html += "</table>" + "\n"
-//            html += "</div>" + "\n"
-//        }
-
         out << raw(html)
     }
 
@@ -294,18 +253,26 @@ class ReportesTagLib {
     def footerReporte = { attrs ->
         def html = ""
         def h = 50
-//        def logoPath = resource(dir: 'images', file: 'logo-pdf-footer.png')
+        def empresa
         def logoPath = "${asset.image src: 'apli/logo.png', style:'height:${h}px; float:right; margin-left: 1cm; margin-bottom: 1cm;'}"
+
+
+        if(attrs.empresa){
+            empresa = Empresa.get(attrs.empresa)
+        }
+
 
         html += '<div id="footer">'
 //        html += "<div class='fechaReporte' style='font-size: 8.5pt; margin-bottom: 15px;'>Impreso el ${new Date().format('dd-MM-yyyy HH:mm')}</div>"
 //        html += "<img src='${logoPath}' style='height:${h}px; float:right; margin-left: 1cm; margin-bottom: 1cm;'/>"
         html += "${logoPath}"
         html += "<div style='float:right; font-size:8pt;'>"
-        html += "Amazonas N26-146 y La Niña<br/>"
-        html += "Telf. +(593)2304 9100<br/>"
-        html += "Quito - Ecuador<br/>"
-        html += "www.yachay.gob.ec<br/>"
+        html +=  "${empresa?.direccion ?: ''}<br/>"
+        html +=  "Telf. ${empresa?.telefono ?: ''}<br/>"
+//        html += "Amazonas N26-146 y La Niña<br/>"
+//        html += "Telf. +(593)2304 9100<br/>"
+//        html += "Quito - Ecuador<br/>"
+//        html += "www.yachay.gob.ec<br/>"
         html += "</div>"
         html += "</div>"
 
