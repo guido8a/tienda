@@ -16,6 +16,7 @@ class CarritoController {
             cliente = Cliente.get(session.cliente.id)
             carrito = Carrito.findByClienteAndEstado(cliente, 'A')
             productos = DetalleCarrito.findAllByCarrito(carrito).sort{it.publicacion.producto.titulo}
+
             return[cliente: cliente, productos: productos]
         }else{
             redirect(controller: 'principal', action: 'index')
