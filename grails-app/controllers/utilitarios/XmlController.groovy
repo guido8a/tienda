@@ -439,8 +439,8 @@ class XmlController {
 
     def vlorRtcnIVA(prcs, pcnt) {
         def cn = dbConnectionService.getConnection()
-        def sql = "select rtcn_iva from rtcn, pciv where prcs__id = ${prcs} and " +
-                "pciv.pciv__id = rtcn.pciv__id and pcivvlor = ${pcnt}"
+        def sql = "select rtnc_iva from rtnc, pciv where prcs__id = ${prcs} and " +
+                "pciv.pciv__id = rtnc.pciv__id and pcivvlor = ${pcnt}"
         def retencion = cn.rows(sql.toString())[0]?.rtcn_iva ?: 0.0
         retencion.toDouble()
     }

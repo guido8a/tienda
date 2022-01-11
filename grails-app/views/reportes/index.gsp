@@ -1436,8 +1436,17 @@
         $(".btnAceptarAts").click(function () {
             var cont = $("#contP20").val();
             var prms = $("#periodo20").val();
-            // console.log('cont', cont, 'mes', prms)
-            crearXML(prms, cont, 0);
+
+            if (cont == '-1') {
+                bootbox.alert("<i class='fa fa-exclamation-circle fa-3x pull-left text-warning text-shadow'></i>  Seleccione una contabilidad!")
+            } else {
+                if(prms == ''){
+                    bootbox.alert("<i class='fa fa-exclamation-circle fa-3x pull-left text-warning text-shadow'></i>  Seleccione un período!")
+                }else{
+                    crearXML(prms, cont, 0);
+                }
+            }
+
         });
 
         $(".btnAceptarSituacionN").click(function () {

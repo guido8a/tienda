@@ -1,5 +1,7 @@
 package tienda
 
+import seguridad.Persona
+
 
 class CategoriaController {
 
@@ -13,6 +15,10 @@ class CategoriaController {
 
 
     def makeTreeNode(params) {
+
+        def usuario = Persona.get(session.usuario.id)
+        def empresa = usuario.empresa
+
         println "makeTreeNode categorias.. $params"
         def id = params.id
         def tipo = ""
@@ -37,7 +43,7 @@ class CategoriaController {
         if (id == "#") {
             //root
 //            def hh = Provincia.countByZonaIsNull()
-            def hh = Categoria.count()
+            def hh = Categoria.findAllByEmpresa(empresa).size()
             if (hh > 0) {
                 clase = "hasChildren jstree-closed"
             }
@@ -50,7 +56,7 @@ class CategoriaController {
 
 
             if(id == 'root'){
-                hijos = Categoria.findAll().sort{it.descripcion}
+                hijos = Categoria.findAllByEmpresa(empresa).sort{it.descripcion}
                 def data = ""
                 ico = ", \"icon\":\"fa fa-copyright text-success\""
                 hijos.each { hijo ->

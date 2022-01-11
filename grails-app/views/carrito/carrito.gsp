@@ -126,7 +126,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</div>
 						</td>
 						<td class="invert">${detalle?.publicacion?.producto?.titulo}</td>
-						<td class="invert sbt_${detalle?.id}" data-id="${detalle?.id}" data-valor="${detalle?.publicacion?.precioUnidad}">
+						<td class="invert sbt_${detalle?.id}" data-id="${detalle?.id}" data-valor="${detalle?.publicacion?.precioUnidad}" data-mayor="${detalle?.publicacion?.precioMayor}">
 							${g.formatNumber(number: detalle?.subtotal, format: "##,##0", maxFractionDigits: 2, minFractionDigits: 2)}</td>
 					</tr>
 				</g:each>
@@ -137,7 +137,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						var idDiv = $(this).data("id");
 						var divUpd = $(this).parent().find('.v_' +  idDiv), newVal = parseInt(divUpd.text(), 10)+1;
 						divUpd.text(newVal);
-						var s = $(".sbt_" + idDiv).data("valor");
+						var s
+						if(newVal >= 10){
+							s = $(".sbt_" + idDiv).data("mayor");
+						}else{
+							s = $(".sbt_" + idDiv).data("valor");
+						}
 						guardarCantidad(idDiv, newVal);
 						$('.sbt_' + idDiv).text( (Math.round((s * newVal) * 100) / 100).toFixed(2))
 					});
@@ -147,7 +152,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						var divUpd = $(this).parent().find('.v_' +  idDiv), newVal = parseInt(divUpd.text(), 10)-1;
 						if(newVal>=1){
 							divUpd.text(newVal);
-							var s = $(".sbt_" + idDiv).data("valor");
+							var s
+							if(newVal >= 10){
+								s = $(".sbt_" + idDiv).data("mayor");
+							}else{
+								s = $(".sbt_" + idDiv).data("valor");
+							}
 							guardarCantidad(idDiv, newVal);
 							$('.sbt_' + idDiv).text( (Math.round((s * newVal) * 100) / 100).toFixed(2))
 						}else{
@@ -158,6 +168,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</script>
 				<!--quantity-->
 			</table>
+
+			<p style="font-size: 11px">* Precio al por mayor se aplica a partir de 10 productos en adelante.</p>
 		</div>
 		<div class="checkout-left">
 			<div class="checkout-right-basket animated wow slideInRight" data-wow-delay=".5s">

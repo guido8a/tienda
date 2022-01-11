@@ -270,7 +270,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <p><span class="item_price">
                 Precio : &nbsp;
                 ${g.formatNumber(number: publ.publpcun, format: "##,##0", maxFractionDigits: 2, minFractionDigits: 2)}</span>
-                <del>${g.formatNumber(number: publ.publpcun*1.1, format: "##,##0", maxFractionDigits: 2, minFractionDigits: 2)}</del></p>
+                (${g.formatNumber(number: publ.publpcmy*1.1, format: "##,##0", maxFractionDigits: 2, minFractionDigits: 2)} - Al por mayor)</p>
+
+            <p style="font-size: 11px">* Precio al por mayor se aplica a partir de 10 productos en adelante.</p>
             <div class="rating1">
                 <strong>Opinión : &nbsp;</strong>
                 <span class="starRating">

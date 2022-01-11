@@ -12,7 +12,7 @@ class VerController {
         def publ = Publicacion.get(params.publ)
         def ctgr = Categoria.list([sort: 'descripcion'])
 
-        def sql = "select publ.prod__id, publtitl, publ__id, publsbtl, publtxto, publpcun from publ " +
+        def sql = "select publ.prod__id, publtitl, publ__id, publsbtl, publtxto, publpcun, publpcmy from publ " +
                 "where publ__id = ${params.publ}"
         println "sql: $sql"
         def prod = cn.rows(sql.toString())[0]

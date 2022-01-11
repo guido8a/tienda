@@ -4,6 +4,8 @@ class DetalleCarrito {
 
     Carrito carrito
     Publicacion publicacion
+    Producto producto
+    Double precioUnitario
     int cantidad
     Double subtotal
 
@@ -16,6 +18,8 @@ class DetalleCarrito {
         columns {
             carrito column: 'crro__id'
             publicacion column: 'publ__id'
+            producto column: 'prod__id'
+            precioUnitario column: 'dtcrpcun'
             cantidad column: 'dtcrcntd'
             subtotal column: 'dtcrsbtt'
         }
@@ -25,5 +29,7 @@ class DetalleCarrito {
         publicacion(blank: false, nullable: false)
         cantidad(blank:false, nullable: false)
         subtotal(blank:false, nullable: false)
+        producto(blank:false, nullable: false)
+        precioUnitario(blank:false, nullable: false)
     }
 }

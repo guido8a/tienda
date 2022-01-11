@@ -45,6 +45,8 @@ class CarritoController {
                     detalle = new DetalleCarrito()
                     detalle.carrito = carrito
                     detalle.publicacion = publicacion
+                    detalle.producto = publicacion.producto
+                    detalle.precioUnitario = publicacion.precioUnidad.toDouble()
                     detalle.cantidad = 1
                     detalle.subtotal = publicacion.precioUnidad.toDouble()
 
@@ -75,6 +77,8 @@ class CarritoController {
                     detalle = new DetalleCarrito()
                     detalle.carrito = carrito
                     detalle.publicacion = publicacion
+                    detalle.producto = publicacion.producto
+                    detalle.precioUnitario = publicacion.precioUnidad.toDouble()
                     detalle.cantidad = 1
                     detalle.subtotal = publicacion.precioUnidad.toDouble()
 
@@ -130,7 +134,14 @@ class CarritoController {
         def carrito
         def detalle = DetalleCarrito.get(params.id)
         detalle.cantidad = params.cantidad.toInteger()
-        detalle.subtotal = Math.round((params.cantidad.toInteger() * detalle.publicacion.precioUnidad)*100)/100
+
+        if(params.cantidad.toInteger() >= 10){
+            detalle.precioUnitario = detalle.publicacion.precioMayor
+            detalle.subtotal = Math.round((params.cantidad.toInteger() * detalle.publicacion.precioMayor)*100)/100
+        }else{
+            detalle.precioUnitario = detalle.publicacion.precioUnidad
+            detalle.subtotal = Math.round((params.cantidad.toInteger() * detalle.publicacion.precioUnidad)*100)/100
+        }
 
         if(!detalle.save(flush:true)){
             println("error al modificar la cantidad " + detalle.errors)
