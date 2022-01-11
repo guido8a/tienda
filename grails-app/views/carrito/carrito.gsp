@@ -1,3 +1,4 @@
+<%@ page import="tienda.Producto" %>
 <!--
 Author: W3layouts
 Author URL: http://w3layouts.com
@@ -95,41 +96,59 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</tr>
 				</thead>
 
-				<g:each in="${productos}" var="detalle">
-					<tr class="rem_${detalle?.id}">
-						<td class="invert-closeb">
-							<div class="rem">
-								<div class="close1" data-cl="rem_${detalle?.id}" data-id="${detalle?.id}"> </div>
-							</div>
-							%{--							<script>$(document).ready(function(c) {--}%
-							%{--								$('.close1').on('click', function(c){--}%
-							%{--									$('.rem1').fadeOut('slow', function(c){--}%
-							%{--										$('.rem1').remove();--}%
-							%{--									});--}%
-							%{--								});--}%
-							%{--							});--}%
-							%{--							</script>--}%
-						</td>
-						<td class="invert-image">
-							<a href="${createLink(controller: 'ver', action: 'producto')}?publ=${detalle?.publicacion?.id}"}>
-								<img alt="Sin Imagen" style="width: 100px; height: 100px" class="pro-image-front"
-									 src="${request.contextPath}/principal/getImgnProd?ruta=${tienda.Imagen.findByProductoAndPrincipal(detalle.publicacion.producto, '1').ruta}&tp=P&id=${detalle?.publicacion?.producto?.id}"/>
-							</a>
-						</td>
-						<td class="invert">
-							<div class="quantity">
-								<div class="quantity-select">
-									<div class="entry value-minus" data-id="${detalle?.id}">&nbsp;</div>
-									<div class="entry value v_${detalle?.id}"><span>${detalle?.cantidad}</span></div>
-									<div class="entry value-plus active" data-id="${detalle?.id}">&nbsp;</div>
+				<g:if test="${productos}">
+					<g:each in="${productos}" var="detalle">
+%{--						<tr class="rem_${detalle?.id}">--}%
+						<tr class="rem_${detalle.dtcr__id}">
+							<td class="invert-closeb">
+								<div class="rem">
+%{--									<div class="close1" data-cl="rem_${detalle?.id}" data-id="${detalle?.id}"> </div>--}%
+									<div class="close1" data-cl="rem_${detalle.dtcr__id}" data-id="${detalle.dtcr__id}"> </div>
 								</div>
-							</div>
-						</td>
-						<td class="invert">${detalle?.publicacion?.producto?.titulo}</td>
-						<td class="invert sbt_${detalle?.id}" data-id="${detalle?.id}" data-valor="${detalle?.publicacion?.precioUnidad}" data-mayor="${detalle?.publicacion?.precioMayor}">
-							${g.formatNumber(number: detalle?.subtotal, format: "##,##0", maxFractionDigits: 2, minFractionDigits: 2)}</td>
-					</tr>
-				</g:each>
+								%{--							<script>$(document).ready(function(c) {--}%
+								%{--								$('.close1').on('click', function(c){--}%
+								%{--									$('.rem1').fadeOut('slow', function(c){--}%
+								%{--										$('.rem1').remove();--}%
+								%{--									});--}%
+								%{--								});--}%
+								%{--							});--}%
+								%{--							</script>--}%
+							</td>
+							<td class="invert-image">
+%{--								<a href="${createLink(controller: 'ver', action: 'producto')}?publ=${detalle?.publicacion?.id}"}>--}%
+								<a href="${createLink(controller: 'ver', action: 'producto')}?publ=${detalle.publ__id}"}>
+									<img alt="Sin Imagen" style="width: 100px; height: 100px" class="pro-image-front"
+%{--										 src="${request.contextPath}/principal/getImgnProd?ruta=${tienda.Imagen.findByProductoAndPrincipal(detalle.publicacion.producto, '1').ruta}&tp=P&id=${detalle?.publicacion?.producto?.id}"/>--}%
+										 src="${request.contextPath}/principal/getImgnProd?ruta=${tienda.Imagen.findByProductoAndPrincipal(tienda.Producto.get(detalle.prod__id), '1').ruta}&tp=P&id=${detalle.prod__id}"/>
+								</a>
+							</td>
+							<td class="invert">
+								<div class="quantity">
+									<div class="quantity-select">
+%{--										<div class="entry value-minus" data-id="${detalle?.id}">&nbsp;</div>--}%
+										<div class="entry value-minus" data-id="${detalle.dtcr__id}">&nbsp;</div>
+%{--										<div class="entry value v_${detalle?.id}"><span>${detalle?.cantidad}</span></div>--}%
+										<div class="entry value v_${detalle.dtcr__id}"><span>${detalle?.dtcrcntd}</span></div>
+%{--										<div class="entry value-plus active" data-id="${detalle?.id}">&nbsp;</div>--}%
+										<div class="entry value-plus active" data-id="${detalle.dtcr__id}">&nbsp;</div>
+									</div>
+								</div>
+							</td>
+%{--							<td class="invert">${detalle?.publicacion?.producto?.titulo}</td>--}%
+							<td class="invert">${detalle.publtitl}</td>
+%{--							<td class="invert sbt_${detalle?.id}" data-id="${detalle?.id}" data-valor="${detalle?.publicacion?.precioUnidad}" data-mayor="${detalle?.publicacion?.precioMayor}">--}%
+%{--								${g.formatNumber(number: detalle?.subtotal, format: "##,##0", maxFractionDigits: 2, minFractionDigits: 2)}</td>--}%
+
+							<td class="invert sbt_${detalle.dtcr__id}" data-id="${detalle.dtcr__id}" data-valor="${detalle.publpcun}" data-mayor="${detalle.publpcmy}">
+								${g.formatNumber(number: detalle.dtcrsbtt, format: "##,##0", maxFractionDigits: 2, minFractionDigits: 2)}</td>
+						</tr>
+					</g:each>
+
+				</g:if>
+				<g:else>
+						<div class="alert alert-warning">No tiene productos agregados a su carrito de compras!</div>
+				</g:else>
+
 
 			<!--quantity-->
 				<script>
