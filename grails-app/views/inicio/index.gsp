@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>Tienda en Línea</title>
+    <title>Tienda en Línea - Administración</title>
     <meta name="layout" content="main"/>
     <style type="text/css">
     @page {
@@ -166,7 +166,7 @@
 
     <div style="text-align: center;margin-bottom: 20px"><h2 class="titl">
         %{--            <p class="text-warning">${inst.institucion}</p>--}%
-        <p class="text-warning">Tienda en Línea</p>
+        <p class="text-warning">Tienda en Línea -  Administración</p>
     </h2>
     </div>
 

@@ -123,11 +123,11 @@ class ProductoController {
 
 //        println("---> " + "$sqlSelect $sqlWhere $sqlOrder".toString())
 
-       return "$sqlSelect $sqlWhere $sqlOrder".toString()
+        return "$sqlSelect $sqlWhere $sqlOrder".toString()
     }
 
     def guardarProducto_ajax(){
-        println("params sv pr" + params)
+//        println("params sv pr" + params)
 
         def usuario = Persona.get(session.usuario.id)
 
@@ -143,7 +143,9 @@ class ProductoController {
             producto.persona = usuario
         }
 
-        params.texto = params.texto2
+//        params.texto = reemplazar(params.texto2)
+//        params.texto = reemplazar(params.texto)
+
 
         def totalDestacados = Producto.withCriteria {
             eq("destacado","S")

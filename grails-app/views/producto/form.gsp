@@ -203,6 +203,7 @@
 
     $.switcher('input[type=checkbox]');
 
+
     CKEDITOR.replace( 'texto', {
          height                  : 150,
          width                   : 1000,
@@ -222,10 +223,17 @@
     });
 
     $("#btnGuardar").click(function () {
-        var texto = CKEDITOR.instances.texto.getData();
+        var textoOriginal = CKEDITOR.instances.texto.getData();
+        // var texto = textoOriginal.replace("&aacute;", "á");
         var $form = $("#frmProducto");
         var destacado = $(".des").is(":checked");
         var nuevo = $(".nvo").is(":checked");
+        var id = $("#id").val();
+        var titulo = $("#titulo").val();
+        var subtitulo = $("#subtitulo").val();
+        var precioUnidad = $("#precioUnidad").val();
+        var precioMayor = $("#precioMayor").val();
+        var grupo = $("#grupo option:selected").val();
         if ($form.valid()) {
             if($("#grupo option:selected").val() == '' || $("#grupo option:selected").val() == null){
                 bootbox.alert("<i class='fa fa-exclamation-triangle fa-2x text-warning'></i> Seleccione un grupo")
@@ -234,7 +242,18 @@
                 $.ajax({
                     type: 'POST',
                     url: '${createLink(controller: 'producto', action: 'guardarProducto_ajax')}',
-                    data: $form.serialize() + "&texto2=" + texto + "&destacado2=" + destacado + "&nuevo2=" + nuevo,
+                    // data: $form.serialize() + "&texto2=" + texto + "&destacado2=" + destacado + "&nuevo2=" + nuevo,
+                    data:{
+                        id: id,
+                        titulo: titulo,
+                        subtitulo: subtitulo,
+                        grupo: grupo,
+                        texto: textoOriginal,
+                        destacado2: destacado,
+                        nuevo2: nuevo,
+                        precioMayor: precioMayor,
+                        precioUnidad: precioUnidad
+                    },
                     success: function (msg) {
                         r.modal("hide");
                         var parts = msg.split("_");

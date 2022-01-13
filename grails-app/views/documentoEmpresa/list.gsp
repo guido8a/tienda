@@ -29,7 +29,7 @@
 <!-- botones -->
 <div class="btn-toolbar toolbar">
     <div class="btn-group">
-        <g:link class="btn btn-default col-md-2" style="width: 100px;" controller="inicio" action="parametros"><i class="fa fa-arrow-left"></i> Regresar</g:link>
+        <g:link class="btn btn-default col-md-2" style="width: 100px;" controller="empresa" action="list"><i class="fa fa-arrow-left"></i> Regresar</g:link>
         <g:link action="form" class="btn btn-info btnCrear">
             <i class="fa fa-file"></i> Nuevo libretín
         </g:link>

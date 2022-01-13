@@ -17,8 +17,24 @@ class CarritoController {
         if(session.cliente){
             cliente = Cliente.get(session.cliente.id)
             carrito = Carrito.findByClienteAndEstado(cliente, 'A')
+            def productosRevisar
 
             if(carrito){
+
+                productosRevisar = DetalleCarrito.findAllByCarrito(carrito)
+
+                productosRevisar.each { dtc->
+
+                    if(dtc.publicacion.estado == 'B'){
+                        carrito.subtotal = carrito.subtotal - dtc.subtotal
+                        carrito.cantidad = carrito.cantidad - dtc.cantidad
+                        carrito.save(flush:true)
+                        dtc.delete(flush:true)
+                    }else{
+
+                    }
+                }
+
 //                productos = DetalleCarrito.findAllByCarrito(carrito).sort{it.publicacion.producto.titulo}
                 def sql = "select prod.prod__id, dtcr.publ__id, dtcr__id, publtitl, publsbtl, publpcun, dtcrcntd, " +
                         "dtcrsbtt, publpcmy from publ, prod, dtcr where prod.prod__id = publ.prod__id and " +
@@ -144,7 +160,18 @@ class CarritoController {
     def totales_ajax(){
         def cliente = Cliente.get(session.cliente.id)
         def carrito = Carrito.findByClienteAndEstado(cliente, 'A')
-        def productos = DetalleCarrito.findAllByCarrito(carrito).sort{it.publicacion.producto.titulo}
+        def productos
+//        def productos = DetalleCarrito.findAllByCarrito(carrito).sort{it.publicacion.producto.titulo}
+
+
+        def sql = "select prod.prod__id, dtcr.publ__id, dtcr__id, publtitl, publsbtl, publpcun, dtcrcntd, " +
+                "dtcrsbtt, publpcmy from publ, prod, dtcr where prod.prod__id = publ.prod__id and " +
+                "publ.publ__id = dtcr.publ__id and crro__id = ${carrito?.id} and publetdo = 'A'"
+        def cn = dbConnectionService.getConnection()
+        def res = cn.rows(sql.toString());
+
+        productos = res
+
         return[cliente: cliente, productos: productos]
     }
 
