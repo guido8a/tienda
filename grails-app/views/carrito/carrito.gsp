@@ -135,7 +135,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								</div>
 							</td>
 %{--							<td class="invert">${detalle?.publicacion?.producto?.titulo}</td>--}%
-							<td class="invert">${detalle.publtitl}</td>
+							<td class="invert"><h5>${detalle.publtitl}</h5><br>${detalle.publsbtl}</td>
+%{--							<td class="invert">${detalle.publtitl}</td>--}%
 %{--							<td class="invert sbt_${detalle?.id}" data-id="${detalle?.id}" data-valor="${detalle?.publicacion?.precioUnidad}" data-mayor="${detalle?.publicacion?.precioMayor}">--}%
 %{--								${g.formatNumber(number: detalle?.subtotal, format: "##,##0", maxFractionDigits: 2, minFractionDigits: 2)}</td>--}%
 

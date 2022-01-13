@@ -19,11 +19,13 @@ class ServicioSriController {
     def firmaSri(archivo){
         def sri = new  XAdESBESSignature()
         def empresa_id = session.empresa.id
-        def pathxml = servletContext.getRealPath("/") + "xml/" + empresa_id + "/"  //web-app/xml
-        def firma = pathxml + "firma.p12"
+//        def pathxml = servletContext.getRealPath("/") + "xml/" + empresa_id + "/"  //web-app/xml
+        def pathBase = "/var/tienda/empresas/empr_" + empresa_id
+        def pathxml = pathBase + "/xml/"
+        def firma = pathBase + "/firma.p12"
 
         //sri.firmar(input_file_path, key_store_path, key_store_password, output_path, out_file_name)
-        sri.firmar(pathxml + archivo, firma, "FcoPaliz1959", pathxml, "f${archivo}")
+        sri.firmar(pathxml + archivo, firma, "GuidoE60cMo", pathxml, "f${archivo}")
     }
 
     /**
@@ -98,7 +100,10 @@ class ServicioSriController {
 
     def facturaElectronica(){
         def empresa_id = session.empresa.id
-        def pathxml = servletContext.getRealPath("/") + "xml/" + empresa_id + "/"  //web-app/xml
+//        def pathxml = servletContext.getRealPath("/") + "xml/" + empresa_id + "/"  //web-app/xml
+        def pathBase = "/var/tienda/empresas/empr_" + empresa_id
+        def pathxml = pathBase + "/xml/"
+
         println "facturaElectrónica: $params"   // debe enviarse prcs__id de la factura
         def prcs = Proceso.get(params.id)
         def clave = facturaXml(prcs)
@@ -144,11 +149,14 @@ class ServicioSriController {
         def cddc = CodigoDocumento.findByDescripcionIlike('factura')
         def hoy = new Date().format('yyyy-MM-dd')
         def valorIva = utilitarioService.valorIva(hoy)
-
-        def pathxml = servletContext.getRealPath("/") + "xml/" + empresa_id + "/"  //web-app/xml
+        def pathBase = "/var/tienda/empresas/empr_" + empresa_id
+        def pathxml = pathBase + "/xml/"
+//        def pathxml = servletContext.getRealPath("/") + "xml/" + empresa_id + "/"  //web-app/xml
         def path = pathxml + "fc_${clave}.xml"
         new File(pathxml).mkdirs()
         def file = new File(path)
+
+        println "dcdc: ${cddc?.codigo}"
 
         if (!file.exists()) {
             sql = "select tpidcdgo, emprnmbr, empr_ruc, emprtpem, emprdire, emprambt, emprrzsc, emprnmbr, " +
@@ -160,9 +168,9 @@ class ServicioSriController {
             println "...empresa: $sql  --> ${empr}"
 
             /** detalle de la facura **/
-            sql = "select itemcdgo, itemnmbr, dtfccntd, dtfcpcun, dtfcdsct, tpiv__id " +
-                    "from dtfc, item where prcs__id = ${prcs.id} and item.item__id = dtfc.item__id " +
-                    "order by tpiv__id, itemcdgo"
+            sql = "select prodcdgo itemcdgo, prodtitl itemnmbr, dtfccntd, dtfcpcun, dtfcdsct, tpiv__id " +
+                    "from dtfc, prod where prcs__id = ${prcs.id} and prod.prod__id = dtfc.prod__id " +
+                    "order by tpiv__id, prodcdgo"
             def dtfc = cn.rows(sql.toString())
 
 
@@ -305,9 +313,12 @@ class ServicioSriController {
     def enviar(archivo, clave) {
 //        def prcs = Proceso.get(params.id)
         def empresa_id = session.empresa.id
-        def path = servletContext.getRealPath("/") + "xml/" + empresa_id
-        def pathxml = servletContext.getRealPath("/") + "xml/" + empresa_id + "/f${archivo}"
-//        def arch_xml = new File(path + "xml/46/enviar.xml").text
+//        def path = servletContext.getRealPath("/") + "xml/" + empresa_id
+        def pathBase = "/var/tienda/empresas/empr_" + empresa_id
+        def path = pathBase + "/xml/"
+//        def pathxml = servletContext.getRealPath("/") + "xml/" + empresa_id + "/f${archivo}"
+        def pathxml = pathBase + "/${archivo}"
+
         def arch_xml = new File(pathxml).text.encodeAsBase64()
 
         def sobre_xml = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" " +
