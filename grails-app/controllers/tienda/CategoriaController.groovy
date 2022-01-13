@@ -56,7 +56,8 @@ class CategoriaController {
 
 
             if(id == 'root'){
-                hijos = Categoria.findAllByEmpresa(empresa).sort{it.descripcion}
+//                hijos = Categoria.findAllByEmpresa(empresa).sort{it.descripcion}
+                hijos = Categoria.findAllByEmpresa(empresa, [sort: 'descripcion'])
                 def data = ""
                 ico = ", \"icon\":\"fa fa-copyright text-success\""
                 hijos.each { hijo ->
@@ -71,7 +72,7 @@ class CategoriaController {
             }else{
                 switch(tipo) {
                     case "cat":
-                        hijos = Subcategoria.findAllByCategoria(Categoria.get(id), [sort: params.sort])
+                        hijos = Subcategoria.findAllByCategoria(Categoria.get(id), [sort: 'orden'])
                         liId = "scat_"
 //                    println "tipo: $tipo, ${hijos.size()}"
                         ico = ", \"icon\":\"fa fa-parking text-info\""

@@ -15,6 +15,12 @@ class PrincipalController {
         def grupo, productos = [], ls = []
         def busqueda = ""
         def enCategoria = ""
+        def appUrl
+        if (grails.util.Environment.getCurrent().name == 'development') {
+            appUrl = '/'
+        } else {
+            appUrl = '/tienda/'
+        }
 
         if(params.grpo) {
             grupo = Grupo.get(params.grpo)
@@ -79,7 +85,7 @@ class PrincipalController {
         }
 
 
-        [ctgr: ctgr, productos: productos, grpo: params.grpo, cliente: cliente]
+        [ctgr: ctgr, productos: productos, grpo: params.grpo, cliente: cliente, appUrl: appUrl]
     }
 
 

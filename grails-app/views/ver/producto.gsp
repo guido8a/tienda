@@ -94,7 +94,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="header-bot">
     <div class="container">
         <div class="col-md-3 header-left">
-            <h1><a href="index.html">
+            <h1><a href="${appUrl}">
                 <asset:image src="apli/logo3.jpg"/>
             </a></h1>
         </div>

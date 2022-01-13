@@ -11,6 +11,12 @@ class VerController {
         println "carrusel params: $params"
         def publ = Publicacion.get(params.publ)
         def ctgr = Categoria.list([sort: 'descripcion'])
+        def appUrl
+        if (grails.util.Environment.getCurrent().name == 'development') {
+            appUrl = '/'
+        } else {
+            appUrl = '/tienda/'
+        }
 
         def sql = "select publ.prod__id, publtitl, publ__id, publsbtl, publtxto, publpcun, publpcmy from publ " +
                 "where publ__id = ${params.publ}"
@@ -74,8 +80,9 @@ class VerController {
 
         def detallePublicacion = DetallePublicacion.findAllByPublicacionAndTipo(publ, 'V')
 
-
-        return [ctgr: ctgr, carrusel: carrusel, publ: prod, anuncio: params.anun, cliente:cliente, comentarios: comentarios, existe: existe, estrellas: estrellas, atributos: detallePublicacion]
+        return [ctgr: ctgr, carrusel: carrusel, publ: prod, anuncio: params.anun, cliente:cliente,
+                comentarios: comentarios, existe: existe, estrellas: estrellas, atributos: detallePublicacion,
+                appUrl: appUrl]
     }
 
     /* debe llegar el id de la publicación */
