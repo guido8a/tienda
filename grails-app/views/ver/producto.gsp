@@ -147,7 +147,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav menu__list">
-                            <li class="active menu__item "><a class="menu__link" href="index.html">Home <span class="sr-only">(current)</span></a></li>
+                            <li class="active menu__item "><a class="menu__link" href="${appUrl}">Home <span class="sr-only">(current)</span></a></li>
                             <li class="dropdown menu__item">
                                 <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">men's wear <span class="caret"></span></a>
                                 <ul class="dropdown-menu multi-column columns-3">
