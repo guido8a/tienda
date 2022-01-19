@@ -64,12 +64,12 @@
     <table class="table table-bordered table-hover table-condensed" style="width: 100%">
         <thead>
         <tr>
-            <th style="width: 110px">Ruc</th>
-            <th style="width: 230px">Nombre</th>
-            <th style="width: 80px">Tipo</th>
-            <th style="width: 70px">Identificación</th>
-            <th style="width: 130px">Dirección</th>
-            <th width="90px">Acciones</th>
+            <th style="width: 13%">Ruc</th>
+            <th style="width: 33%">Nombre</th>
+            <th style="width: 11%">Tipo</th>
+            <th style="width: 10%">Identificación</th>
+            <th style="width: 20%">Dirección</th>
+            <th style="width: 13%">Acciones</th>
         </tr>
         </thead>
     </table>

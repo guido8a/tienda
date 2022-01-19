@@ -35,10 +35,13 @@
     </div>
     <div class="btn-group">
         <g:if test="${!truncar}">
-            <g:link class="btn btn-success btn-ajax" id="${proceso?.id}" controller="proceso"
-                    action="actlProceso">
+%{--            <g:link class="btn btn-success btn-ajax" id="${proceso?.id}" controller="proceso"--}%
+%{--                    action="actlProceso">--}%
+%{--                <i class="fa fa-save"></i> Guardar--}%
+%{--            </g:link>--}%
+            <a href="#" class="btn btn-success" id="btnGuardarDetalleVentas">
                 <i class="fa fa-save"></i> Guardar
-            </g:link>
+            </a>
         </g:if>
         <g:if test="${proceso?.tipoProceso?.codigo?.trim() == 'V'}">
             <a href="#" class="btn btn-info" id="btnImprimirDetalle">
@@ -65,11 +68,11 @@
                       optionKey="id"/>
         </div>
 
-        <div class="col-xs-5" style="text-align: center">
-            <b>Centro de Costos</b>
-            <g:select from="${centros}" name="centroName" id="centros" class="form-control" optionValue="nombre"
-                      optionKey="id"/>
-        </div>
+%{--        <div class="col-xs-5" style="text-align: center">--}%
+%{--            <b>Centro de Costos</b>--}%
+%{--            <g:select from="${centros}" name="centroName" id="centros" class="form-control" optionValue="nombre"--}%
+%{--                      optionKey="id"/>--}%
+%{--        </div>--}%
 
     </div>
     <g:hiddenField name="idItem_name" id="idItem" value=""/>
@@ -155,6 +158,31 @@
 </div>
 
 <script type="text/javascript">
+
+    $("#btnGuardarDetalleVentas").click(function () {
+        var bodega = $("#bodegas option:selected").val();
+        $.ajax({
+            type: 'POST',
+            url: '${createLink(controller: 'proceso', action: 'actlProceso')}',
+            data: {
+                bodega: bodega,
+                id: '${proceso?.id}',
+            },
+            success: function (msg) {
+                var parts = msg.split("_");
+                if (parts[0] == 'ok') {
+                    log("Detalle guardado correctamente", "success");
+                    cargarTablaDetalle();
+                } else {
+                    if(msg == 'er'){
+                        bootbox.alert("Debe ingresar algún item en el detalle!")
+                    }else{
+                        log("Error al guardar el detalle", "error");
+                    }
+                }
+            }
+        });
+    });
 
     $("#btnImprimirDetalle").click(function () {
 
@@ -267,7 +295,7 @@
                     cantidad: cantidad,
                     descuento: descuento,
                     bodega: bodega,
-                    centro: centro,
+                    // centro: centro,
                     proceso: '${proceso?.id}',
                     id: id,
                     original: original

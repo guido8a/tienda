@@ -73,7 +73,7 @@
 
 <!-- Nav tabs -->
 <ul class="nav nav-tabs">
-    <li class="active"><a href="#generales" data-toggle="tab">Generales</a></li>
+    <li class="active"><a href="#generales" data-toggle="tab">Contable</a></li>
     <li><a href="#empresa" data-toggle="tab">Empresa</a></li>
 %{--    <li><a href="#activos" data-toggle="tab">Artículos de inventario y facturación</a></li>--}%
 %{--    <li><a href="#nomina" data-toggle="tab">Nómina</a></li>--}%
@@ -205,13 +205,13 @@
                 <li>
                     <i class="fa-li ${iconGen}"></i>
                     <span id="tipoProc">
-                        <g:link controller="tipoProceso" action="list" class="descripcion">Tipo de Proceso</g:link>
+                        <g:link controller="tipoProceso" action="list" class="descripcion">Tipo de Proceso</g:link> diferentes tipos de procesos contables
                     </span>
 
                     <div class="descripcion hide">
                         <h4>Tipo de Proceso</h4>
 
-                        <p></p>
+                        <p>Diferentes tipos de procesos contables</p>
                     </div>
                 </li>
 
@@ -245,13 +245,13 @@
                 <li>
                     <i class="fa-li ${iconGen}"></i>
                     <span id="anio">
-                        <g:link controller="anio" action="list" class="descripcion">Año</g:link>
+                        <g:link controller="anio" action="list" class="descripcion">Año</g:link> administración de los años y sus respectivos sueldos básicos
                     </span>
 
                     <div class="descripcion hide">
                         <h4>Año</h4>
 
-                        <p>Año</p>
+                        <p>Administración de los años y sus respectivos sueldos básicos</p>
                     </div>
                 </li>
 

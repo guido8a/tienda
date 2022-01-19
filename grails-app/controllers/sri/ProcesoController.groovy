@@ -47,6 +47,7 @@ class ProcesoController {
     /** actualiza los valores de proceso a los totales de detalle **/
     def actlProceso = {
         println "actlProceso $params"
+        def bodega = Bodega.get(params.bodega)
         def proceso = Proceso.get(params.id)
         def detalle = DetalleFactura.findByProceso(proceso)
         def cn = dbConnectionService.getConnection()
@@ -55,7 +56,8 @@ class ProcesoController {
 
         if(detalle) {
             if(proceso.estado != 'R') {
-                def sql = "select * from total_detalle(${proceso.id}, 0, 0)"
+//                def sql = "select * from total_detalle(${proceso.id}, 0, 0)"
+                def sql = "select * from total_detalle(${proceso.id}, ${bodega?.id})"
                 //  base__nz | basecero | basenoiv | iva  | ice  | dsct | flte | totl
                 // ----------+----------+----------+------+------+------+------+------
                 //      4.50 |     0.00 |     0.00 | 0.54 | 0.00 | 0.00 | 0.00 | 5.04
@@ -74,11 +76,17 @@ class ProcesoController {
                     }
 */
                 }
-                println "...graba datos de detalle --> ${proceso.gestor}"
-                proceso.save(flush: true)
+//                println "...graba datos de detalle --> ${proceso.gestor}"
+               if(!proceso.save(flush: true)){
+                   render "no"
+               }else{
+                   render "ok"
+               }
             }
+        }else{
+            render "er"
         }
-        redirect(action: 'nuevoProceso', id: proceso.id)
+//        redirect(action: 'nuevoProceso', id: proceso.id)
     }
 
     def save = {

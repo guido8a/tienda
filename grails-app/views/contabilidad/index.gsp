@@ -232,6 +232,24 @@
             </div>
         </a>
 
+        <a href="${createLink(controller: 'proceso', action: 'buscarPrcs')}" style="text-decoration: none">
+            <div class="col-lg-6 mbr-col-md-10">
+                <div class="wrap">
+                    <div style="width: 200px; height: 120px">
+                        <asset:image src="apli/cursos.png" title="Plan de cuentas" width="80%"
+                                     height="80%"/>
+                    </div>
+
+                    <div style="width: 450px; height: 120px">
+                        <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>Procesos</span>
+                        </h2>
+
+                        <p class="mbr-fonts-style text1 mbr-text display-6">Procesos contables</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+
         <a href="${createLink(controller: 'reportes', action: 'index')}" style="text-decoration: none">
             <div class="col-lg-6 mbr-col-md-10">
                 <div class="wrap">
@@ -248,7 +266,7 @@
                     </div>
                 </div>
             </div>
-        </a>
+        </a
 
 %{--        <a href="${createLink(controller: 'inicio', action: 'parametros')}" style="text-decoration: none">--}%
 %{--            <div class="col-lg-6 mbr-col-md-10">--}%
