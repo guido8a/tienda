@@ -682,14 +682,14 @@ class ProcesoController {
 
         if(params?.par?.trim() == ""){
             sql = "select prve__id id, prve_ruc ruc, prvenmbr nombre, tppvdscr tipoProveedor, prveatrz from prve, tppv " +
-                    "where tppv.tppv__id = prve.tppv__id and tprl__id in (${tipo}) and empr__id = ${session?.empresa?.id} order by prve_ruc;"
+                    "where tppv.tppv__id = prve.tppv__id and empr__id = ${session?.empresa?.id} order by prve_ruc;"
         }else{
             if(params.tipo == "1"){
                 sql = "select prve__id id, prve_ruc ruc, prvenmbr nombre, tppvdscr tipoProveedor, prveatrz from prve, tppv " +
                         "where tppv.tppv__id = prve.tppv__id and tprl__id in (${tipo}) and empr__id = ${session?.empresa?.id} and prve_ruc like '%${params.par}%' order by prve_ruc;"
             }else{
                 sql = "select prve__id id, prve_ruc ruc, prvenmbr nombre, tppvdscr tipoProveedor, prveatrz from prve, tppv " +
-                        "where tppv.tppv__id = prve.tppv__id and tprl__id in (${tipo}) and empr__id = ${session?.empresa?.id} and prvenmbr ilike '%${params.par}%' order by prve_ruc;"
+                        "where tppv.tppv__id = prve.tppv__id and empr__id = ${session?.empresa?.id} and prvenmbr ilike '%${params.par}%' order by prve_ruc;"
             }
         }
 
