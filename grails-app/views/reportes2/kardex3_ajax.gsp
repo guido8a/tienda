@@ -20,7 +20,7 @@
 
 <div class="fila">
     <div class="col-md-1">
-        <label class="letra">Grupo: </label>
+        <label class="letra">Categoría: </label>
     </div>
     <div class="col-md-3">
         <g:select name="grupo_name" id="grupo2"
@@ -30,13 +30,13 @@
     </div>
 
     <div class="col-md-1">
-        <label class="letra">Subgrupo: </label>
+        <label class="letra">Subcategoría: </label>
     </div>
     <div class="col-md-3" id="divSubgrupo">
     </div>
 
     <div class="col-md-1">
-        <label class="letra">Departamento: </label>
+        <label class="letra">Grupo: </label>
     </div>
     <div class="col-md-3" id="divDepartamento">
     </div>

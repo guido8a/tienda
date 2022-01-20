@@ -1,3 +1,4 @@
+<%@ page import="sri.TipoDocumentoPago" %>
 <div class="row">
     <div class="col-md-2">
         <label>Cuenta:</label>
@@ -50,7 +51,7 @@
         <label>Forma de Pago:</label>
     </div>
     <div class="col-md-4">
-        <g:select name="tipo_name" from="${cratos.TipoDocumentoPago.list().sort{it.descripcion}}" optionKey="id" optionValue="descripcion"
+        <g:select name="tipo_name" from="${sri.TipoDocumentoPago.list().sort{it.descripcion}}" optionKey="id" optionValue="descripcion"
                   id="tipoPago" class="form-control" value="${auxiliar?.tipoDocumentoPago?.id}"
                   noSelection="${['-1': 'Seleccione...']}"/>
     </div>
@@ -59,8 +60,9 @@
         <label>Fecha de Pago:</label>
     </div>
     <div class="col-md-4">
-        <elm:datepicker name="fechapago_name" title="Fecha de pago" class="datepicker form-control required fechaPago"
-                        value="${auxiliar?.fechaPago}"/>
+%{--        <elm:datepicker name="fechapago_name" title="Fecha de pago" class="datepicker form-control required fechaPago"--}%
+%{--                        value="${auxiliar?.fechaPago}"/>--}%
+        <input name="fechapago_name"  id='datetimepicker1' type='text' required="" class="form-control fechaPago required"  value="${auxiliar?.fechaPago}"/>
     </div>
 </div>
 
@@ -112,6 +114,21 @@
 <g:hiddenField name="asiento_name" id="asientoId" value="${asiento?.id}"/>
 
 <script type="text/javascript">
+
+
+
+    $(function () {
+        $('#datetimepicker1, #datetimepicker2').datetimepicker({
+            locale: 'es',
+            format: 'DD-MM-YYYY',
+            showClose: true,
+            icons: {
+                close: 'closeText'
+            }
+        });
+    });
+
+
     function validarNum(ev) {
         /*
          48-57      -> numeros

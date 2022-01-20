@@ -78,7 +78,7 @@
         <tbody>
         <g:each in="${res}" var="kardex" status="j">
             <tr style="width: 700px">
-                <td style="width: 300px">${kardex?.item?.nombre}</td>
+                <td style="width: 300px">${kardex?.producto?.titulo}</td>
                 <td class="centro" style="width: 100px">${kardex?.proceso?.tipoProceso?.descripcion}</td>
                 <td class="centro" style="width: 100px"><g:formatDate date="${kardex?.fecha}" format="dd-MM-yyyy" /></td>
                 <td class="derecha" style="width: 100px"><g:formatNumber number="${kardex?.cantidad}" format="##,##0" locale="en_US" maxFractionDigits="2" minFractionDigits="2"/></td>

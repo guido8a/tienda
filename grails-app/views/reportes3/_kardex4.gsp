@@ -56,7 +56,7 @@
 <rep:headerFooter title="${'Existencias por producto'}" subtitulo="${sri.Contabilidad.get(contabilidad?.id)?.descripcion ?: ''}" empresa="${empresa}"/>
 
 <h1>
-    ITEM: ${item?.codigo + " - " + item?.nombre}
+    ITEM: ${item?.codigo + " - " + item?.titulo}
 </h1>
 
 <h2>
