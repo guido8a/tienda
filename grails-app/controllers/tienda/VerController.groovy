@@ -42,7 +42,9 @@ class VerController {
         }
 
         def comentarios = Comentario.findAllByPublicacionAndEstado(publ, 'A')
+        def preguntas = Pregunta.findAllByPublicacionAndEstado(publ, 'A')
         def comentarioExistente = Comentario.findByPublicacionAndCliente(publ, cliente)
+//        def preguntaExistente = Pregunta.findByPublicacionAndCliente(publ, cliente)
         def carrito = Carrito.findAllByCliente(cliente)
         def productoAdquirido = false
 
@@ -82,7 +84,7 @@ class VerController {
 
         return [ctgr: ctgr, carrusel: carrusel, publ: prod, anuncio: params.anun, cliente:cliente,
                 comentarios: comentarios, existe: existe, estrellas: estrellas, atributos: detallePublicacion,
-                appUrl: appUrl]
+                appUrl: appUrl, preguntas: preguntas]
     }
 
     /* debe llegar el id de la publicación */

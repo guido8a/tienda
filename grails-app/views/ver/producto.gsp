@@ -321,6 +321,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         %{--                            <li><a href="#dropdown2" tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2">Almacenamiento</a></li>--}%
                         %{--                        </ul>--}%
                     </li>
+                    <li role="presentation"><a href="#preguntas" role="tab" id="preguntas-tab" data-toggle="tab" aria-controls="preguntas">Preguntas del producto(${preguntas?.size() ?: 0})</a></li>
                 </ul>
                 <div id="myTabContent" class="tab-content">
                     <div role="tabpanel" class="tab-pane fade in active bootstrap-tab-text" id="home" aria-labelledby="home-tab">
@@ -427,6 +428,70 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                         </div>
                     </div>
+
+
+
+
+
+                    <div role="tabpanel" class="tab-pane fade bootstrap-tab-text" id="preguntas" aria-labelledby="preguntas-tab">
+                        <div class="bootstrap-tab-text-grids">
+                            <g:if test="${preguntas.size() > 0}">
+                                <table class="table table-condensed table-bordered table-striped table-hover" style="width:100%;margin-top: 20px !important;">
+                                    <thead style="width: 100%">
+                                    <tr>
+                                        <th style="width: 15%; font-size: 18px !important;" class="naranja">Pregunta</th>
+                                        <th style="width: 85%; font-size: 18px !important;" class="naranja">Respuesta</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <g:each in="${preguntas}" var="pregunta">
+                                        <tr>
+                                            <td style="font-weight: bold; font-size: 16px !important;">${pregunta?.texto}</td>
+                                            <td>${pregunta?.respuesta}</td>
+                                        </tr>
+                                    </g:each>
+                                    </tbody>
+                                </table>
+                            </g:if>
+                            <g:else>
+                                <div class="add-review">
+                                    <h4> * No existe ninguna pregunta sobre el producto</h4>
+                                </div>
+                            </g:else>
+
+%{--                            <g:if test="${cliente}">--}%
+%{--                                <g:if test="${existe == '1'}">--}%
+                                    <div class="add-review">
+                                        <h4>Añadir pregunta</h4>
+                                        <form>
+                                            <div class="col-md-12">
+                                                <textarea type="text" id="textoPregunta" maxlength="255" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Comentario...';}" required="">Pregunta...</textarea>
+                                            </div>
+
+                                            <div class="occasion-cart">
+                                                <a href="#"  class="btnEnviarPregunta hvr-outline-out btn btn-lg" data-id="${publ.publ__id}">Enviar</a>
+                                            </div>
+                                        </form>
+                                    </div>
+%{--                                </g:if>--}%
+%{--                                <g:else>--}%
+%{--                                    <g:if test="${existe == '2'}">--}%
+%{--                                        <div class="add-review">--}%
+%{--                                            <h4> Para ingresar un comentario debe primero haber adquirido este producto</h4>--}%
+%{--                                        </div>--}%
+%{--                                    </g:if>--}%
+%{--                                </g:else>--}%
+%{--                            </g:if>--}%
+%{--                            <g:else>--}%
+%{--                                <div class="add-review">--}%
+%{--                                    <h4>Para ingresar un comentario debe primero ingresar al sistema</h4>--}%
+%{--                                </div>--}%
+%{--                            </g:else>--}%
+                        </div>
+                    </div>
+
+
+
                     %{--                    <div role="tabpanel" class="tab-pane fade bootstrap-tab-text" id="dropdown1" aria-labelledby="dropdown1-tab">--}%
                     %{--                        <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>--}%
                     %{--                    </div>--}%
@@ -565,6 +630,36 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
 <script type="text/javascript">
+
+    $(".btnEnviarPregunta").click(function (){
+        var d = cargarLoader("Procesando...");
+        var pub = $(this).data("id");
+        $.ajax({
+            type: 'POST',
+            url: '${createLink(controller: 'pregunta', action: 'agregarPregunta_ajax')}',
+            data:{
+                id: pub,
+                texto: $("#textoPregunta").val(),
+            },
+            success: function(msg){
+                d.modal("hide");
+                var parts = msg.split("_");
+                if(parts[0] == 'ok'){
+                    bootbox.alert("<i class='fa fa-check text-success fa-2x'></i> Pregunta agregada correctamente");
+                    setTimeout(function () {
+                        location.reload(true);
+                    }, 1000);
+                }else{
+                    if(parts[0] == 'er'){
+                        bootbox.alert("<i class='fa fa-exclamation-triangle text-danger fa-2x'></i>" + parts[1])
+                    }else{
+                        bootbox.alert("<i class='fa fa-exclamation-triangle text-danger fa-2x'></i> Error al agregar la pregunta")
+                    }
+
+                }
+            }
+        });
+    });
 
     $(".btnEnviarComentario").click(function (){
         var d = cargarLoader("Procesando...");

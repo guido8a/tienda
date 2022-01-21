@@ -243,6 +243,16 @@
             }
         };
 
+        var pregunta = {
+            label: "Preguntas",
+            icon: "fa fa-question-circle",
+            separator_before : true,
+            action : function ($element) {
+                var id = $element.attr("id");
+                verPreguntas(id);
+            }
+        };
+
         var eliminar = {
             label: "Dar de Baja",
             icon: "fa fa-ban",
@@ -258,6 +268,7 @@
         items.editar = editar;
         if(etdo != 'B') items.publicar = publicar;
         if(etdo == 'P') items.comentario = comentario;
+        if(etdo == 'P') items.pregunta = pregunta;
         if(etdo != 'B') items.eliminar = eliminar;
 
         return items
@@ -516,6 +527,11 @@
     function verComentarios(id){
         location.href="${createLink(controller: 'comentario', action: 'list')}?id=" + id
     }
+
+    function verPreguntas(id){
+        location.href="${createLink(controller: 'pregunta', action: 'list')}?id=" + id
+    }
+
 
 
 

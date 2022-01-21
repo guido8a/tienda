@@ -14,6 +14,7 @@ class WardInterceptor {
 //                .excludes(controller:'subcategoria')
 //                .excludes(controller:'grupo')
                 .excludes(controller:'producto')
+                .excludes(controller:'pregunta')
     }
 
     boolean before() {
