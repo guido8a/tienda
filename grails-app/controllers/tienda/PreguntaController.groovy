@@ -36,5 +36,52 @@ class PreguntaController {
         return[preguntas: preguntas, publicacion: publicacion]
     }
 
+    def negar_ajax(){
+        def pregunta = Pregunta.get(params.id)
+
+        pregunta.estado = 'N'
+
+        if(!pregunta.save(flush: true)){
+            println("error al negar la pregunta " + pregunta.errors)
+            render "no"
+        }else{
+            render "ok"
+        }
+    }
+
+    def activar_ajax(){
+        def pregunta = Pregunta.get(params.id)
+
+        pregunta.estado = 'A'
+
+        if(!pregunta.save(flush: true)){
+            println("error al activar la pregunta " + pregunta.errors)
+            render "no"
+        }else{
+            render "ok"
+        }
+    }
+
+    def respuesta_ajax(){
+        def pregunta = Pregunta.get(params.id)
+        return[pregunta:pregunta]
+    }
+
+    def guardarRespuesta_ajax(){
+        println("params " + params)
+        def pregunta = Pregunta.get(params.id)
+
+        pregunta.respuesta = params.respuesta
+        pregunta.fechaRespuesta = new Date();
+
+        if(!pregunta.save(flush: true)){
+            println("error al guardar la pregunta " + pregunta.errors)
+            render "no"
+        }else{
+            render "ok"
+        }
+
+    }
+
 
 }

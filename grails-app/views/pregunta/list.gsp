@@ -34,10 +34,10 @@
     <tbody>
     <g:each in="${preguntas}" status="i" var="pregunta">
         <tr data-id="${pregunta.id}" data-etdo="${pregunta?.estado}">
-            <td style="width: 66%">${pregunta?.texto}</td>
-            <td style="width: 66%">${pregunta?.respuesta}</td>
-            <td style="width: 8%">${pregunta?.fecha?.format("dd-MM-yyyy")}</td>
-            <td style="width: 8%">${pregunta?.estado == 'A' ? 'Aprobado' : (pregunta?.estado == 'R' ? 'Ingresado' : 'Negado')}</td>
+            <td style="width: 40%">${pregunta?.texto}</td>
+            <td style="width: 40%">${pregunta?.respuesta}</td>
+            <td style="width: 10%">${pregunta?.fecha?.format("dd-MM-yyyy")}</td>
+            <td style="width: 10%">${pregunta?.estado == 'A' ? 'Aprobado' : (pregunta?.estado == 'R' ? 'Ingresado' : 'Negado')}</td>
         </tr>
     </g:each>
     </tbody>
@@ -47,33 +47,92 @@
 
 <script type="text/javascript">
 
+    function responderPregunta(id) {
+        // var v = cargarLoader("Procesando...");
+        $.ajax({
+            type    : "POST",
+            url     : "${createLink(controller: 'pregunta', action:'respuesta_ajax')}",
+            data    : {id: id},
+            success : function (msg) {
+                var b = bootbox.dialog({
+                    id      : "dlgCreateEdit",
+                    title   : "Respuesta",
+                    message : msg,
+                    buttons : {
+                        cancelar : {
+                            label     : "Cancelar",
+                            className : "btn-primary",
+                            callback  : function () {
+                            }
+                        },
+                        guardar  : {
+                            id        : "btnSave",
+                            label     : "<i class='fa fa-save'></i> Guardar",
+                            className : "btn-success",
+                            callback  : function () {
+                                return guardarRespuesta(id);
+                            } //callback
+                        } //guardar
+                    } //buttons
+                }); //dialog
+                setTimeout(function () {
+                    b.find(".form-control").first().focus()
+                }, 500);
+            } //success
+        }); //ajax
+    }
 
-    function aceptarComentario(id) {
+    function guardarRespuesta(id) {
+        var rs = $("#respuesta").val()
         var v = cargarLoader("Procesando...");
         $.ajax({
             type    : "POST",
-            url     : '${createLink(controller: 'comentario' ,action:'aceptar_ajax')}',
+            url     : '${createLink(controller: 'pregunta' ,action:'guardarRespuesta_ajax')}',
+            data    : {
+                id : id,
+                respuesta: rs
+            },
+            success : function (msg) {
+                v.modal("hide");
+                if(msg == 'ok'){
+                    log("Pregunta guardada correctamente","success");
+                    setTimeout(function () {
+                        location.reload(true)
+                    }, 1000);
+                }else{
+                    log("Error al guardar la pregunta","error")
+                }
+            }
+        });
+    }
+
+
+    function activarPregunta(id) {
+        var v = cargarLoader("Procesando...");
+        $.ajax({
+            type    : "POST",
+            url     : '${createLink(controller: 'pregunta' ,action:'activar_ajax')}',
             data    : {
                 id : id
             },
             success : function (msg) {
                 v.modal("hide");
                 if(msg == 'ok'){
-                    log("Comentario aprobado correctamente","success");
+                    log("Pregunta activada correctamente","success");
                     setTimeout(function () {
                         location.reload(true)
                     }, 1000);
                 }else{
-                    log("Error al aprobar el comentario","error")
+                    log("Error al activar la pregunta","error")
                 }
             }
         });
     }
 
-    function negarComentario(id) {
+    function negarPregunta(id) {
         bootbox.dialog({
             title   : "Alerta",
-            message : "<i class='fa fa-trash fa-3x pull-left text-danger text-shadow'></i><p>¿Está seguro que desea negar este comentario?.</p>",
+            message : "<i class='fa fa-trash fa-3x pull-left text-danger text-shadow'></i><p>¿Está seguro que desea negar esta pregunta?.</p>",
             buttons : {
                 cancelar : {
                     label     : "Cancelar",
@@ -88,19 +147,19 @@
                         var v = cargarLoader("Procesando...");
                         $.ajax({
                             type    : "POST",
-                            url     : '${createLink(controller: 'comentario' ,action:'negar_ajax')}',
+                            url     : '${createLink(controller: 'pregunta' ,action:'negar_ajax')}',
                             data    : {
                                 id : id
                             },
                             success : function (msg) {
                                 v.modal("hide");
                                 if(msg == 'ok'){
-                                    log("Comentario negado correctamente","success");
+                                    log("Pregunta negada correctamente","success");
                                     setTimeout(function () {
                                         location.reload(true)
                                     }, 1000);
                                 }else{
-                                    log("Error al negar el comentario","error")
+                                    log("Error al negar la pregunta","error")
                                 }
                             }
                         });
@@ -129,12 +188,20 @@
                 }
             };
 
+            var responder = {
+                label: "Responder",
+                icon: "fa fa-comment-dots",
+                action : function ($element) {
+                    responderPregunta(id)
+                }
+            };
+
             var aceptar = {
-                label: "Aceptar",
+                label: "Activar",
                 icon: "fa fa-check",
                 separator_before : true,
                 action : function ($element) {
-                    aceptarComentario(id)
+                    activarPregunta(id)
                 }
             };
 
@@ -143,12 +210,13 @@
                 icon: "fa fa-ban",
                 separator_before : true,
                 action : function ($element) {
-                    negarComentario(id);
+                    negarPregunta(id);
                 }
             };
 
-            if(etdo == 'N' || etdo == 'I') items.aceptar = aceptar;
-            if(etdo == 'A' || etdo == 'I') items.negar = negar;
+            if(etdo == 'A' || etdo == 'R') items.responder = responder;
+            if(etdo == 'N' || etdo == 'R') items.aceptar = aceptar;
+            if(etdo == 'A' || etdo == 'R') items.negar = negar;
 
             return items
         }
