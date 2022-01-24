@@ -1,9 +1,9 @@
-package infold
+package tienda
 
 import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
 
-class InfoldSpec extends Specification implements DomainUnitTest<Infold> {
+class InfoldSpec extends Specification implements DomainUnitTest<Tienda> {
 
     def setup() {
     }

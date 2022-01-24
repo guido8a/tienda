@@ -1,4 +1,4 @@
-package infold
+package tienda
 
 import grails.testing.mixin.integration.Integration
 import grails.gorm.transactions.Rollback

@@ -1,4 +1,4 @@
-package infold
+package tienda
 
 import grails.testing.gorm.DomainUnitTest
 import grails.testing.web.controllers.ControllerUnitTest
