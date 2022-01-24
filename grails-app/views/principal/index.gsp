@@ -1196,17 +1196,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <form id="frmRegistro">
                                 <div>
                                     <h4>Nombre :</h4>
-                                    <g:textField name="nombre" minlength="3" maxlength="31" required="" class="form-control required"/>
+                                    <g:textField name="nombre" minlength="3" maxlength="31" required="" class="form-control required" style="color: #000000 !important;"/>
                                     %{--                                    <input type="text" id="nombreCliente" value="Ingrese su nombre" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su nombre';}" required="">--}%
                                 </div>
                                 <div class="sign-up">
                                     <h4>Apellido :</h4>
-                                    <g:textField name="apellido" minlength="3" maxlength="31" class="form-control required"/>
+                                    <g:textField name="apellido" minlength="3" maxlength="31" class="form-control required" style="color: #000000 !important;"/>
                                     %{--                                    <input type="text" id="apellidoCliente" value="Ingrese su apellido" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su apellido';}" required="">--}%
                                 </div>
                                 <div class="sign-up">
                                     <h4>Email :</h4>
-                                    <g:textField name="mail" maxlength="63" required="" class="email form-control unique noEspacios required"/>
+                                    <g:textField name="mail" maxlength="63" required="" class="email form-control unique noEspacios required" style="color: #000000 !important;"/>
                                     %{--                                    <input type="text" id="mailCliente" class="mail email" value="Ingrese su dirección de correo" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su dirección de correo';}" required="">--}%
                                 </div>
 
@@ -1227,13 +1227,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <form id="frmIngreso">
                                 <div class="sign-in">
                                     <h4>Usuario :</h4>
-                                    <g:textField name="mail" required="" class="email form-control required"/>
+                                    <g:textField name="mail" required="" class="email form-control required" style="color: #000000 !important;"/>
                                     %{-- <input type="text" value="Ingrese su usuario" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su usuario';}" required="">--}%
                                 </div>
                                 <div class="sign-in">
                                     <h4>Password :</h4>
                                     %{--                                    <g:textField name="password" required="" type="password" class="noEspacios form-control input-sm required"/>--}%
-                                    <input type="password" name="password" class="required" value="Ingrese su clave" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su clave';}" required="">
+                                    <input type="password" name="password" style="color: #000000 !important;" class="required" value="Ingrese su clave" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Ingrese su clave';}" required="">
                                     ¿Olvidó su contraseña? <a href="#" class="" id="btnOlvidoPass"> <i class="fa fa-user-secret"></i> Recuperar contraseña </a>
                                 </div>
                                 <div class="single-bottom" style="margin-bottom: 34px">

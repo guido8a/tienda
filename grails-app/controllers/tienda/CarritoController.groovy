@@ -1,8 +1,16 @@
 package tienda
 
+import inventario.Bodega
 import retenciones.Pais
+import seguridad.Empresa
+import sri.Contabilidad
+import sri.DocumentoEmpresa
+import sri.Gestor
+import sri.TipoCmprSustento
 import sri.TipoIdentificacion
 import sri.TipoPersona
+import sri.TipoProceso
+import sri.TipoTransaccion
 
 
 class CarritoController {
@@ -30,8 +38,6 @@ class CarritoController {
                         carrito.cantidad = carrito.cantidad - dtc.cantidad
                         carrito.save(flush:true)
                         dtc.delete(flush:true)
-                    }else{
-
                     }
                 }
 
@@ -206,11 +212,14 @@ class CarritoController {
 
     def datos(){
 
+        println("params dt " + params)
+
+        def empresa = Empresa.get(params.empresa)
         def cliente = null
 
         if(session.cliente){
             cliente = Cliente.get(session.cliente.id)
-            return[cliente: cliente]
+            return[cliente: cliente, empresa: empresa]
         }else{
             redirect(controller: 'principal', action: 'index')
         }
@@ -219,6 +228,8 @@ class CarritoController {
 
     def guardarCliente_ajax(){
         println("datos " + params)
+
+        def empresa = Empresa.get(params.empresa)
 
         if(session.cliente){
             def cliente = Cliente.get(session.cliente.id)
@@ -236,13 +247,111 @@ class CarritoController {
                 println("error al guardar la informacion del cliente " + cliente.errors)
                 render "no"
             }else{
-                render "ok"
+
+                if(generarProcesoVentas(empresa?.id, cliente?.id)){
+                    render "ok"
+                }else{
+                    println("error al generar el proceso de ventas ")
+                    render "no"
+                }
+
             }
 
         }else{
             redirect(controller: 'principal', action: 'index')
         }
+    }
 
+    def generarProcesoVentas(empresa, cliente){
+
+        def clienteActual = Cliente.get(cliente)
+        def carrito = Carrito.findByClienteAndEstado(clienteActual, 'A')
+        def empresaActual = Empresa.get(empresa)
+        def gestor = Gestor.get(22)
+        def contabilidad = Contabilidad.findByFechaInicioLessThanEqualsAndFechaCierreGreaterThanEqualsAndInstitucion(new Date(), new Date(), empresaActual)
+        //proveedor no
+        //comprobante no
+        def tipoProceso = TipoProceso.get(2)
+        def libretin = DocumentoEmpresa.findByFechaInicioLessThanEqualsAndFechaFinGreaterThanEqualsAndEmpresa(new Date(), new Date(), empresaActual)
+
+         //tipoEmision no
+        //rolPagos no
+
+        def tipoTransaccion = TipoTransaccion.get(2)
+
+        //sustentoTributario no
+        //modificaCmpr no
+
+        def tipoCmprSustento = TipoCmprSustento.get(12)
+
+        def fecha = new Date()
+        def fechaRegistro = null
+        def fechaIngreso = new Date()
+        def fechaEmision = new Date()
+
+
+       def sql = "select coalesce(max(prcsfcsc), 0) mxmo from prcs, fcdt " +
+                "where tpps__id = ${tipoProceso?.id} and fcdt.fcdt__id = prcs.fcdt__id and " +
+                "prcs.fcdt__id = ${libretin?.id} and prcsfcsc between fcdtdsde and fcdthsta and " +
+                "and empr__id = ${empresaActual?.id}"
+        def cn = dbConnectionService.getConnection()
+
+        def numEstablecimiento = libretin.numeroEstablecimiento
+        def numeroEmision = libretin.numeroEmision
+        def secuencial = cn.rows(sql.toString())[0]?.mxmo + 1
+
+        def documento = numEstablecimiento + "-" + numeroEmision + "-" + secuencial
+
+        def facturaEstablecimiento = numEstablecimiento
+        def facturaPuntoEmision = numeroEmision
+        def facturaSecuencial = secuencial.toInteger()
+
+        def descripcion = "Venta " +  " - " + documento + " generada el " + new Date()
+        def estado = 'N'
+
+        //establecimiento no
+
+        def sqlIva = "select paux_iva from paux where ${new Date()} between pauxfcin and " +
+                "coalesce(pauxfcfn, now())"
+        def valorIva = cn.rows(sqlIva.toString())[0]?.paux_iva
+
+        def baseImponibleIva = carrito?.subtotal
+        def baseImponibleIva0 = 0
+        def baseImponibleNoIva = 0
+        def excentoIva = 0
+        def ivaGenerado = baseImponibleIva * valorIva.toDouble()
+        def iceGenerado = 0
+        def impuesto = 0
+        def valor = baseImponibleIva + ivaGenerado
+        def flete = 0
+        def retenidoIva = 0
+        def retenidoRenta = 0
+
+        //procesoSerie01 no
+        //procesoSerie02 no
+
+        //facturaAutorizacion no
+        // pagono
+        def pais = Pais.findByCodigo('593')
+        //normaLegal no
+        //convenio no
+        //claveAcceso no
+
+        //modificaSerie01 no
+        //modificaSerie02 no
+        //modificaScnc no
+        // modificaAutorizacion no
+
+        //bodega no
+        //bodegaRecibe no
+
+        String retEstado = 'N'
+
+
+        println("conta " + contabilidad)
+        println("libretin " + libretin)
+
+        return true
 
     }
 }

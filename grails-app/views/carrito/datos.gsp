@@ -160,7 +160,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
         <div class="sign-up" style="text-align: center; margin-top: 20px">
-            <a href="#" id="btnGuardarDatos" class="btn btn-warning btn-lg" title="Registrar nuevo cliente">
+            <a href="#" id="btnGuardarDatos" class="btn btn-warning btn-lg" title="Guardar datos">
                 <i class="fa fa-file"></i> Guardar
             </a>
         </div>
@@ -280,7 +280,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             $.ajax({
                 type: 'POST',
                 url: '${createLink(controller: 'carrito', action: 'guardarCliente_ajax')}',
-                data: $form.serialize(),
+                data: $form.serialize() + "&empresa=" + '${empresa?.id}',
                 success: function (msg) {
                     d.modal('hide');
                     if(msg == 'ok'){
