@@ -24,6 +24,8 @@ class ServicioSriController {
         def pathxml = pathBase + "/xml/"
         def firma = pathBase + "/firma.p12"
 
+        println "pathxml: $pathxml, firma en: $firma"
+        println "inicia firmar..."
         //sri.firmar(input_file_path, key_store_path, key_store_password, output_path, out_file_name)
         sri.firmar(pathxml + archivo, firma, "GuidoE60cMo", pathxml, "f${archivo}")
     }
@@ -108,11 +110,9 @@ class ServicioSriController {
         def prcs = Proceso.get(params.id)
         def clave = facturaXml(prcs)
         def archivo = "fc_${clave}.xml"
-//        def archivo = "hola.pdf"  //** no funcina con pdfs
 
-        println "archivo: $archivo"
-//        def archivo = "fc_667.xml"
-        println "finaliza xml de facura en --> ${archivo}"
+        println "Fin crear xml\n e inicia la firma de xml: ${archivo}"
+
         firmaSri(archivo)
         println "finaliza firma..."
         //se envía al SRI y si todo va bien se pone TipoEmision = 1, caso contrario 2
