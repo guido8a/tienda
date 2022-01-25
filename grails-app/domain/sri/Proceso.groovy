@@ -4,6 +4,7 @@ import retenciones.Pais
 import seguridad.Empresa
 import seguridad.Persona
 import inventario.Bodega
+import tienda.Carrito
 
 
 class Proceso implements Serializable {
@@ -15,6 +16,7 @@ class Proceso implements Serializable {
     Persona usuario
     TipoProceso tipoProceso
     DocumentoEmpresa documentoEmpresa
+    Carrito carrito
 
     Establecimiento establecimiento
     String tipoEmision
@@ -91,6 +93,7 @@ class Proceso implements Serializable {
             proveedor column: 'prve__id'
             comprobante column: 'cmpr__id'
             usuario column: 'prsn__id'
+            carrito column: 'crro__id'
 
             tipoProceso column: 'tpps__id'
             documentoEmpresa column: 'fcdt__id'
@@ -158,6 +161,7 @@ class Proceso implements Serializable {
         usuario(blank: true, nullable: true, attributes: [title: 'usuario'])
         tipoProceso(nullable: false,blank: false)
         documentoEmpresa(nullable: true,blank: true)
+        carrito(nullable: true, blank: true)
 
         rolPagos(blank: true, nullable: true, attributes: [title: 'rolPagos'])
 

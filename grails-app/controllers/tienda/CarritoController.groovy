@@ -4,6 +4,7 @@ import inventario.Bodega
 import retenciones.Pais
 import seguridad.Empresa
 import sri.Contabilidad
+import sri.DetalleFactura
 import sri.DocumentoEmpresa
 import sri.Gestor
 import sri.Proceso
@@ -248,16 +249,13 @@ class CarritoController {
                 println("error al guardar la informacion del cliente " + cliente.errors)
                 render "no"
             }else{
-
                 if(generarProcesoVentas(empresa?.id, cliente?.id)){
                     render "ok"
                 }else{
                     println("error al generar el proceso de ventas ")
                     render "no"
                 }
-
             }
-
         }else{
             redirect(controller: 'principal', action: 'index')
         }
@@ -350,15 +348,15 @@ class CarritoController {
 
         String retEstado = 'N'
 
-        println("conta " + contabilidad)
-        println("libretin " + libretin)
-
+//        println("conta " + contabilidad)
+//        println("libretin " + libretin)
 
         def proceso = new Proceso()
 
         proceso.gestor = gestor
         proceso.contabilidad = contabilidad
         proceso.empresa = empresaActual
+        proceso.carrito = carrito
         proceso.proveedor = null
         proceso.comprobante = null
         proceso.usuario = null
@@ -409,8 +407,64 @@ class CarritoController {
             println("error al guardar el proceso " + proceso.errors)
             return false
         }else{
+            if(generacionDetalleFactura(carrito?.id, proceso?.id)){
+                return true
+            }else{
+                proceso.delete(flush: true)
+                return false
+            }
+        }
+    }
+
+    def generacionDetalleFactura(carrito, proceso){
+        def procesoActual = Proceso.get(proceso)
+        def carritoActual = Carrito.get(carrito)
+        def detalles = DetalleCarrito.findAllByCarrito(carritoActual)
+        def errores = ''
+        def ids = []
+
+        detalles.each {det->
+
+            def detFactura = new DetalleFactura()
+            detFactura.proceso = procesoActual
+            detFactura.cantidad = det.cantidad
+            detFactura.producto = det.publicacion.producto
+            detFactura.precioUnitario = det.precioUnitario
+            detFactura.bodega = null
+            detFactura.observaciones = 'Generado mediante venta online, proceso # ' + proceso.id + " - " + new Date().format("dd-MM-yyyy")
+            detFactura.descuento = 0
+
+           if(!detFactura.save(flush:true)){
+               println("error al guardar el detalle de la factura " + detFactura.errors)
+               errores += detFactura.errors
+           }else{
+               ids += detFactura.id
+           }
+        }
+
+        if(errores != ''){
+            println("error al guardar el detalle de la factura " + errores)
+
+            ids.each {ds->
+                def dtf = DetalleFactura.get(ds.toInteger())
+                dtf.delete(flush: true)
+            }
+
+            return false
+        }else{
             return true
         }
 
+    }
+
+    def exitosa(){
+        def cliente = null
+
+        if(session.cliente){
+            cliente = Cliente.get(session.cliente.id)
+            return[cliente: cliente]
+        }else{
+            redirect(controller: 'principal', action: 'index')
+        }
     }
 }

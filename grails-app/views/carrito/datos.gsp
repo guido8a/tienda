@@ -172,7 +172,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div style="margin-top: -20px">
             <div class="checkout-right-basket animated wow slideInRight" data-wow-delay=".5s">
                 <a href="${createLink(controller: 'carrito', action: 'carrito')}"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Regresar</a>
-                <a href="#">Siguiente paso <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> </a>
+%{--                <a href="#">Siguiente paso <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> </a>--}%
             </div>
             %{--            <div class="clearfix"> </div>--}%
         </div>
@@ -286,7 +286,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     if(msg == 'ok'){
                         bootbox.alert("<i class='fa fa-check text-success fa-2x'></i> Datos del cliente guardados correctamente");
                         setTimeout(function () {
-                            location.reload(true);
+                            location.href="${createLink(controller: 'carrito', action: 'exitosa')}";
                         }, 1500);
                     }else{
                         bootbox.alert("<i class='fa fa-exclamation-triangle text-danger fa-2x'></i> Error al guardar los datos del cliente")
