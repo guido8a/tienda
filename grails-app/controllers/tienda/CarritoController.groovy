@@ -431,7 +431,7 @@ class CarritoController {
             detFactura.producto = det.publicacion.producto
             detFactura.precioUnitario = det.precioUnitario
             detFactura.bodega = null
-            detFactura.observaciones = 'Generado mediante venta online, proceso # ' + proceso.id + " - " + new Date().format("dd-MM-yyyy")
+            detFactura.observaciones = 'Generado mediante venta online, proceso # ' + procesoActual.id + " - " + new Date().format("dd-MM-yyyy")
             detFactura.descuento = 0
 
            if(!detFactura.save(flush:true)){
