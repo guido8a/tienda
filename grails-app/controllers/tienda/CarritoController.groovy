@@ -6,6 +6,7 @@ import seguridad.Empresa
 import sri.Contabilidad
 import sri.DocumentoEmpresa
 import sri.Gestor
+import sri.Proceso
 import sri.TipoCmprSustento
 import sri.TipoIdentificacion
 import sri.TipoPersona
@@ -293,7 +294,7 @@ class CarritoController {
        def sql = "select coalesce(max(prcsfcsc), 0) mxmo from prcs, fcdt " +
                 "where tpps__id = ${tipoProceso?.id} and fcdt.fcdt__id = prcs.fcdt__id and " +
                 "prcs.fcdt__id = ${libretin?.id} and prcsfcsc between fcdtdsde and fcdthsta and " +
-                "and empr__id = ${empresaActual?.id}"
+                "prcs.empr__id = ${empresaActual?.id}"
         def cn = dbConnectionService.getConnection()
 
         def numEstablecimiento = libretin.numeroEstablecimiento
@@ -311,7 +312,9 @@ class CarritoController {
 
         //establecimiento no
 
-        def sqlIva = "select paux_iva from paux where ${new Date()} between pauxfcin and " +
+//        def fechaIva = "'" + new Date().parse("dd-MM-yyyy", params.fcha).format('yyyy-MM-dd') + "'"
+
+        def sqlIva = "select paux_iva from paux where now()::date between pauxfcin and " +
                 "coalesce(pauxfcfn, now())"
         def valorIva = cn.rows(sqlIva.toString())[0]?.paux_iva
 
@@ -347,11 +350,67 @@ class CarritoController {
 
         String retEstado = 'N'
 
-
         println("conta " + contabilidad)
         println("libretin " + libretin)
 
-        return true
+
+        def proceso = new Proceso()
+
+        proceso.gestor = gestor
+        proceso.contabilidad = contabilidad
+        proceso.empresa = empresaActual
+        proceso.proveedor = null
+        proceso.comprobante = null
+        proceso.usuario = null
+        proceso.tipoProceso = tipoProceso
+        proceso.documentoEmpresa = libretin
+        proceso.establecimiento = null
+        proceso.tipoEmision = null
+        proceso.rolPagos = null
+        proceso.tipoTransaccion = tipoTransaccion
+        proceso.sustentoTributario = null
+        proceso.tipoCmprSustento = tipoCmprSustento
+        proceso.modificaCmpr = null
+        proceso.fecha = fecha
+        proceso.fechaRegistro = fechaRegistro
+        proceso.fechaEmision = fechaEmision
+        proceso.fechaIngresoSistema = fechaIngreso
+        proceso.descripcion = descripcion
+        proceso.estado = estado
+        proceso.baseImponibleIva = baseImponibleIva
+        proceso.baseImponibleIva0 = baseImponibleIva0
+        proceso.baseImponibleNoIva = baseImponibleNoIva
+        proceso.excentoIva = excentoIva
+        proceso.ivaGenerado = ivaGenerado
+        proceso.iceGenerado = iceGenerado
+        proceso.impuesto = impuesto
+        proceso.valor = valor
+        proceso.flete = flete
+        proceso.retenidoIva = retenidoIva
+        proceso.retenidoRenta = retenidoRenta
+        proceso.procesoSerie01 = null
+        proceso.procesoSerie02 = null
+        proceso.autorizacion = null
+        proceso.documento = documento
+        proceso.facturaEstablecimiento = facturaEstablecimiento
+        proceso.facturaPuntoEmision = facturaPuntoEmision
+        proceso.facturaSecuencial = secuencial
+        proceso.facturaAutorizacion = null
+        proceso.pago = null
+        proceso.pais = pais
+        proceso.normaLegal = null
+        proceso.convenio = null
+        proceso.claveAcceso = null
+        proceso.modificaSerie01 = null
+        proceso.modificaSerie02 = null
+        proceso.modificaAutorizacion = null
+
+        if(!proceso.save(flush:true)){
+            println("error al guardar el proceso " + proceso.errors)
+            return false
+        }else{
+            return true
+        }
 
     }
 }
