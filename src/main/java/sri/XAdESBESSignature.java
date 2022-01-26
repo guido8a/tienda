@@ -38,9 +38,11 @@ public class XAdESBESSignature
         XAdESBESSignature signature = new XAdESBESSignature(xmlPath);
         signature.setPassSignature(passSignature);
         signature.setPathSignature(pathSignature);
+
         pathFile = pathOut;
         nameFile = nameFileOut;
 
+        System.out.println("signature -- ejecuta signature");
         signature.execute();
     }
 

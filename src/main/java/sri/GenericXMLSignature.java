@@ -64,6 +64,7 @@ public abstract class GenericXMLSignature
     protected void execute()
             throws CertificateException, IOException
     {
+        System.out.println("execute --1");
         KeyStore keyStore = getKeyStore();
         if (keyStore == null)
         {
@@ -161,9 +162,14 @@ public abstract class GenericXMLSignature
     {
         KeyStore ks = null;
 
+        System.out.println("keyStore --1");
         try
         {
+            System.out.println("pkcs12");
             ks = KeyStore.getInstance("PKCS12");
+            System.out.println("this.pathSignature:" + this.pathSignature + "this.passSignature.toCharArray()" +
+                    this.passSignature.toCharArray());
+
             ks.load(new FileInputStream(this.pathSignature), this.passSignature.toCharArray());
         }
         catch (KeyStoreException e)

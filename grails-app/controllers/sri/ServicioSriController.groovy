@@ -317,7 +317,7 @@ class ServicioSriController {
         def pathBase = "/var/tienda/empresas/empr_" + empresa_id
         def path = pathBase + "/xml/"
 //        def pathxml = servletContext.getRealPath("/") + "xml/" + empresa_id + "/f${archivo}"
-        def pathxml = pathBase + "/${archivo}"
+        def pathxml = path + "f${archivo}"
 
         def arch_xml = new File(pathxml).text.encodeAsBase64()
 
