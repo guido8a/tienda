@@ -427,8 +427,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <ul class="resp-tabs-list">
                     <li class="resp-tab-item" aria-controls="tab_item-0" role="tab"><span>Últimos diseños</span></li>
                     <li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span>Ofertas especiales</span></li>
-                    <li class="resp-tab-item" aria-controls="tab_item-2" role="tab"><span>Coleciones</span></li>
-                    <li class="resp-tab-item" aria-controls="tab_item-3" role="tab"><span>Coleciones2</span></li>
+                    <li class="resp-tab-item" aria-controls="tab_item-2" role="tab"><span>Colecciones</span></li>
+%{--                    <li class="resp-tab-item" aria-controls="tab_item-3" role="tab"><span>Coleciones2</span></li>--}%
                 </ul>
 
                 <div class="resp-tabs-container">
@@ -440,9 +440,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <div class="men-thumb-item">
                                     <img alt="" class="pro-image-front"
-                                         src="${request.contextPath}/principal/getImgnProd?ruta=${prod.rt}&tp=P&id=${prod.p}"/>
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=${prod.rt}&tp=P&id=${prod.p}" />
                                     <img alt="" class="pro-image-back"
-                                         src="${request.contextPath}/principal/getImgnProd?ruta=${prod.rt}&tp=P&id=${prod.p}"/>
+                                         src="${request.contextPath}/principal/getImgnProd?ruta=${prod.rt}&tp=P&id=${prod.p}" />
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
                                             <a href="${createLink(controller: 'ver', action: 'producto',  params: [publ:prod.id])}"

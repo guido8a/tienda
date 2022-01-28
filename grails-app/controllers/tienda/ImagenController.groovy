@@ -85,6 +85,8 @@ class ImagenController {
 //            }
 //        }
 
+//        println("imagenes " + imagenes)
+
         imagenes.each { im ->
             def file = new File(path + im.ruta)
             def img = ImageIO.read(file)

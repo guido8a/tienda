@@ -266,12 +266,32 @@ class CarritoController {
         def clienteActual = Cliente.get(cliente)
         def carrito = Carrito.findByClienteAndEstado(clienteActual, 'A')
         def empresaActual = Empresa.get(empresa)
+
+        def listaEstadosProceso = ['N','R']
+        def procesoExistente = Proceso.findByEmpresaAndCarritoAndEstadoInList(empresaActual, carrito, listaEstadosProceso)
+
+        if(procesoExistente){
+            println("ERRROR: ya existe un proceso generado para esta venta")
+            return false
+        }
+
         def gestor = Gestor.get(22)
         def contabilidad = Contabilidad.findByFechaInicioLessThanEqualsAndFechaCierreGreaterThanEqualsAndInstitucion(new Date(), new Date(), empresaActual)
+
+        if(!contabilidad){
+            println("ERRROR: no existe contabilidad para generar el proceso de ventas")
+            return false
+        }
+
         //proveedor no
         //comprobante no
         def tipoProceso = TipoProceso.get(2)
         def libretin = DocumentoEmpresa.findByFechaInicioLessThanEqualsAndFechaFinGreaterThanEqualsAndEmpresa(new Date(), new Date(), empresaActual)
+
+        if(!libretin){
+            println("ERRROR: no existe libretin de facturas para generar el proceso de ventas")
+            return false
+        }
 
          //tipoEmision no
         //rolPagos no
@@ -315,6 +335,12 @@ class CarritoController {
         def sqlIva = "select paux_iva from paux where now()::date between pauxfcin and " +
                 "coalesce(pauxfcfn, now())"
         def valorIva = cn.rows(sqlIva.toString())[0]?.paux_iva
+
+        if(!valorIva){
+            println("ERRROR: no existe iva para generar el proceso de ventas")
+            return false
+        }
+
 
         def baseImponibleIva = carrito?.subtotal
         def baseImponibleIva0 = 0
@@ -407,6 +433,7 @@ class CarritoController {
             println("error al guardar el proceso " + proceso.errors)
             return false
         }else{
+            println("id proceso " + proceso?.id)
             if(generacionDetalleFactura(carrito?.id, proceso?.id)){
                 return true
             }else{
@@ -418,6 +445,9 @@ class CarritoController {
 
     def generacionDetalleFactura(carrito, proceso){
         def procesoActual = Proceso.get(proceso)
+
+        def empresa = procesoActual.empresa
+        def bodega = Bodega.findByEmpresaAndTipo(empresa,'T')
         def carritoActual = Carrito.get(carrito)
         def detalles = DetalleCarrito.findAllByCarrito(carritoActual)
         def errores = ''
@@ -430,7 +460,11 @@ class CarritoController {
             detFactura.cantidad = det.cantidad
             detFactura.producto = det.publicacion.producto
             detFactura.precioUnitario = det.precioUnitario
-            detFactura.bodega = null
+            if(bodega){
+                detFactura.bodega = bodega
+            }else{
+                detFactura.bodega = null
+            }
             detFactura.observaciones = 'Generado mediante venta online, proceso # ' + procesoActual.id + " - " + new Date().format("dd-MM-yyyy")
             detFactura.descuento = 0
 
@@ -445,13 +479,19 @@ class CarritoController {
         if(errores != ''){
             println("error al guardar el detalle de la factura " + errores)
 
-            ids.each {ds->
-                def dtf = DetalleFactura.get(ds.toInteger())
-                dtf.delete(flush: true)
+            if(ids.size() > 0){
+                ids.each {ds->
+                    def dtf = DetalleFactura.get(ds.toInteger())
+                    dtf.delete(flush: true)
+                }
+
             }
 
             return false
+
         }else{
+            carritoActual.estado = 'B'
+            carritoActual.save(flush:true)
             return true
         }
 
