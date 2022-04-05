@@ -118,7 +118,7 @@ class MenuTagLib {
         if (grails.util.Environment.getCurrent().name == 'development') {
             app = '/'
         } else {
-            app = '/infolideres/'
+            app = '/tienda/'
         }
 
         def usuario, perfil, dpto
