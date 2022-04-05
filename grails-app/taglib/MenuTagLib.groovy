@@ -522,4 +522,121 @@ class MenuTagLib {
         out << html1 + strItems + "</ul></div></div></nav>"
     }
 
+    def menuTienda ={ attrs ->
+        def appUrl = attrs.appUrl?: '/tienda'
+        def cliente = attrs.cleinte?: ''
+        def html =
+        """
+<div class="ban-top">
+    <div class="container">
+        <div class="top_nav_left">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav menu__list">
+                            <li class="active menu__item menu__item--current"><a class="menu__link" href="${appUrl}">
+                                Inicio<span class="sr-only"></span></a></li>
+                            <li class="dropdown menu__item">
+                                <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" 
+                                    aria-haspopup="true" aria-expanded="false">Ropa caballeros <span class="caret"></span></a>
+                                <ul class="dropdown-menu multi-column columns-3">
+                                    <div class="row">
+                                        <div class="col-sm-6 multi-gd-img1 multi-gd-text ">
+                                            <a href="mens.html">
+                                                <img alt="" src="${request.contextPath}/principal/getImgnProd?ruta=woo1.jpg&tp=v&id=0"/></a>
+                                        </div>
+                                        <div class="col-sm-3 multi-gd-img">
+                                            <ul class="multi-column-dropdown">
+                                                <li><a href="mens.html">Ropa</a></li>
+                                                <li><a href="mens.html">Accesorios</a></li>
+                                                <li><a href="mens.html">Calzado</a></li>
+                                                <li><a href="mens.html">Relojes</a></li>
+                                                <li><a href="mens.html">Bufandas</a></li>
+                                                <li><a href="mens.html">Maletas</a></li>
+                                                <li><a href="mens.html">Gorras y sobreros</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-sm-3 multi-gd-img">
+                                            <ul class="multi-column-dropdown">
+                                                <li><a href="mens.html">Joyería</a></li>
+                                                <li><a href="mens.html">Gafas</a></li>
+                                                <li><a href="mens.html">Perfumes</a></li>
+                                                <li><a href="mens.html">Shampú</a></li>
+                                                <li><a href="mens.html">Camisas</a></li>
+                                                <li><a href="mens.html">Relojaes</a></li>
+                                                <li><a href="mens.html">Deporte</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </ul>
+                            </li>
+                            <li class="dropdown menu__item">
+                                <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" 
+                                aria-expanded="false">Ropa de damas <span class="caret"></span></a>
+                                <ul class="dropdown-menu multi-column columns-3">
+                                    <div class="row">
+                                        <div class="col-sm-3 multi-gd-img">
+                                            <ul class="multi-column-dropdown">
+                                                <li><a href="mens.html">Ropa</a></li>
+                                                <li><a href="mens.html">Accesorios</a></li>
+                                                <li><a href="mens.html">Calzado</a></li>
+                                                <li><a href="mens.html">Relojes</a></li>
+                                                <li><a href="mens.html">Bufandas</a></li>
+                                                <li><a href="mens.html">Maletas</a></li>
+                                                <li><a href="mens.html">Gorras y sobreros</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-sm-3 multi-gd-img">
+                                            <ul class="multi-column-dropdown">
+                                                <li><a href="mens.html">Joyería</a></li>
+                                                <li><a href="mens.html">Gafas</a></li>
+                                                <li><a href="mens.html">Perfumes</a></li>
+                                                <li><a href="mens.html">Shampú</a></li>
+                                                <li><a href="mens.html">Camisas</a></li>
+                                                <li><a href="mens.html">Relojaes</a></li>
+                                                <li><a href="mens.html">Deporte</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-sm-6 multi-gd-img multi-gd-text ">
+                                            <a href="womens.html">
+                                                <img alt="" src="${request.contextPath}/principal/getImgnProd?ruta=woo.jpg&tp=v&id=0"/></a>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </ul>
+                            </li>
+                            <li class=" menu__item"><a class="menu__link" href="electronics.html">Tecnología</a></li>
+                            <li class=" menu__item"><a class="menu__link" href="codes.html">Celulares</a></li>
+                            <li class=" menu__item"><a class="menu__link" href="contact.html">contacto</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <g:if test="${cliente}">
+            <div class="top_nav_right">
+                <div class="cart box_1" id="divCarrito">
+
+                </div>
+            </div>
+        </g:if>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+        """
+        out << html
+    }
+
 }

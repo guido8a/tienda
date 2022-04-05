@@ -109,8 +109,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 <!-- //header-bot -->
-<!-- banner -->
+<mn:menuTienda appUrl="/" cliente="${cliente}" />
+%{--
 <div class="ban-top">
+    <mn:menu appUrl="/" />
+</div>
+--}%
+<!-- banner -->
+%{--<div class="ban-top">
     <div class="container">
         <div class="top_nav_left">
             <nav class="navbar navbar-default">
@@ -129,7 +135,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <ul class="nav navbar-nav menu__list">
                             <li class="active menu__item menu__item--current"><a class="menu__link" href="${appUrl}">Home <span class="sr-only">(current)</span></a></li>
                             <li class="dropdown menu__item">
-                                <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">men's wear <span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true" aria-expanded="false">Ropa caballeros<span class="caret"></span></a>
                                 <ul class="dropdown-menu multi-column columns-3">
                                     <div class="row">
                                         <div class="col-sm-6 multi-gd-img1 multi-gd-text ">
@@ -138,24 +145,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         </div>
                                         <div class="col-sm-3 multi-gd-img">
                                             <ul class="multi-column-dropdown">
-                                                <li><a href="mens.html">Clothing</a></li>
-                                                <li><a href="mens.html">Wallets</a></li>
-                                                <li><a href="mens.html">Footwear</a></li>
-                                                <li><a href="mens.html">Watches</a></li>
-                                                <li><a href="mens.html">Accessories</a></li>
-                                                <li><a href="mens.html">Bags</a></li>
-                                                <li><a href="mens.html">Caps & Hats</a></li>
+                                                <li><a href="mens.html">Ropa</a></li>
+                                                <li><a href="mens.html">Accesorios</a></li>
+                                                <li><a href="mens.html">Calzado</a></li>
+                                                <li><a href="mens.html">Relojes</a></li>
+                                                <li><a href="mens.html">Bufandas</a></li>
+                                                <li><a href="mens.html">Maletas</a></li>
+                                                <li><a href="mens.html">Gorras y sobreros</a></li>
                                             </ul>
                                         </div>
                                         <div class="col-sm-3 multi-gd-img">
                                             <ul class="multi-column-dropdown">
-                                                <li><a href="mens.html">Jewellery</a></li>
-                                                <li><a href="mens.html">Sunglasses</a></li>
+                                                <li><a href="mens.html">Joyería</a></li>
+                                                <li><a href="mens.html">Gafas</a></li>
                                                 <li><a href="mens.html">Perfumes</a></li>
-                                                <li><a href="mens.html">Beauty</a></li>
-                                                <li><a href="mens.html">Shirts</a></li>
-                                                <li><a href="mens.html">Sunglasses</a></li>
-                                                <li><a href="mens.html">Swimwear</a></li>
+                                                <li><a href="mens.html">Shampú</a></li>
+                                                <li><a href="mens.html">Camisas</a></li>
+                                                <li><a href="mens.html">Relojaes</a></li>
+                                                <li><a href="mens.html">Deporte</a></li>
                                             </ul>
                                         </div>
                                         <div class="clearfix"></div>
@@ -163,29 +170,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 </ul>
                             </li>
                             <li class="dropdown menu__item">
-                                <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">women's wear <span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true" aria-expanded="false">Ropa de damas<span class="caret"></span></a>
                                 <ul class="dropdown-menu multi-column columns-3">
                                     <div class="row">
                                         <div class="col-sm-3 multi-gd-img">
                                             <ul class="multi-column-dropdown">
-                                                <li><a href="womens.html">Clothing</a></li>
-                                                <li><a href="womens.html">Wallets</a></li>
-                                                <li><a href="womens.html">Footwear</a></li>
-                                                <li><a href="womens.html">Watches</a></li>
-                                                <li><a href="womens.html">Accessories</a></li>
-                                                <li><a href="womens.html">Bags</a></li>
-                                                <li><a href="womens.html">Caps & Hats</a></li>
+                                                <li><a href="mens.html">Ropa</a></li>
+                                                <li><a href="mens.html">Accesorios</a></li>
+                                                <li><a href="mens.html">Calzado</a></li>
+                                                <li><a href="mens.html">Relojes</a></li>
+                                                <li><a href="mens.html">Bufandas</a></li>
+                                                <li><a href="mens.html">Maletas</a></li>
+                                                <li><a href="mens.html">Gorras y sobreros</a></li>
                                             </ul>
                                         </div>
                                         <div class="col-sm-3 multi-gd-img">
                                             <ul class="multi-column-dropdown">
-                                                <li><a href="womens.html">Jewellery</a></li>
-                                                <li><a href="womens.html">Sunglasses</a></li>
-                                                <li><a href="womens.html">Perfumes</a></li>
-                                                <li><a href="womens.html">Beauty</a></li>
-                                                <li><a href="womens.html">Shirts</a></li>
-                                                <li><a href="womens.html">Sunglasses</a></li>
-                                                <li><a href="womens.html">Swimwear</a></li>
+                                                <li><a href="mens.html">Joyería</a></li>
+                                                <li><a href="mens.html">Gafas</a></li>
+                                                <li><a href="mens.html">Perfumes</a></li>
+                                                <li><a href="mens.html">Shampú</a></li>
+                                                <li><a href="mens.html">Camisas</a></li>
+                                                <li><a href="mens.html">Relojaes</a></li>
+                                                <li><a href="mens.html">Deporte</a></li>
                                             </ul>
                                         </div>
                                         <div class="col-sm-6 multi-gd-img multi-gd-text ">
@@ -196,25 +204,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     </div>
                                 </ul>
                             </li>
-                            <li class=" menu__item"><a class="menu__link" href="electronics.html">Electronics</a></li>
-                            <li class=" menu__item"><a class="menu__link" href="codes.html">Short Codes</a></li>
-                            <li class=" menu__item"><a class="menu__link" href="contact.html">contact</a></li>
+                            <li class=" menu__item"><a class="menu__link" href="electronics.html">Tecnología</a></li>
+                            <li class=" menu__item"><a class="menu__link" href="codes.html">Celulares</a></li>
+                            <li class=" menu__item"><a class="menu__link" href="contact.html">contacto</a></li>
                         </ul>
                     </div>
                 </div>
             </nav>
         </div>
-%{--        <g:if test="${cliente}">--}%
+--}%%{--        <g:if test="${cliente}">--}%%{--
             <div class="top_nav_right">
                 <div class="cart box_1" id="divCarrito">
 
                 </div>
             </div>
-%{--        </g:if>--}%
+--}%%{--        </g:if>--}%%{--
         <div class="clearfix"></div>
     </div>
-</div>
+</div>--}%
 <!-- //banner-top -->
+
+
+
+
+
 <!-- banner -->
 <div class="banner-grid">
     <div id="visual">

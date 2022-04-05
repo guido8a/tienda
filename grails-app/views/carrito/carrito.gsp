@@ -212,7 +212,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="checkout-left">
 			<div class="checkout-right-basket animated wow slideInRight" data-wow-delay=".5s">
 %{--				<a href="${createLink(controller: 'principal', action: 'index')}"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Seguir comprando</a>--}%
-				<a href="${createLink(controller: 'carrito', action: 'datos', params: [empresa: productos?.empr__id?.unique()])}"> Siguiente paso <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> </a>
+				<a href="${createLink(controller: 'carrito', action: 'datos', params: [empresa: productos?.empr__id?.unique()])}">
+				Siguiente paso &nbsp;&nbsp; <span class="glyphicon glyphicon-menu-right"
+									 aria-hidden="true"></span> </a>
 			</div>
 %{--			<div class="clearfix"> </div>--}%
 		</div>
