@@ -102,14 +102,16 @@ class Empresa {
         prefijoEgreso(blank: true, nullable: true, size: 1..20)
         prefijoIngreso(blank: true, nullable: true, size: 1..20)
         ordenCompra(blank: true, nullable: true, maxSize: 1)
-        establecimientos(blank: false, nullable: false, maxSize: 63)
-        tipoEmision(blank: false, nullable: false, maxSize: 1, inList: ['F', 'E'])
+        establecimientos(blank: true, nullable: true, maxSize: 63)
+//        tipoEmision(blank: true, nullable: true, maxSize: 1, inList: ['F', 'E'])
+        tipoEmision(blank: true, nullable: true, maxSize: 1, inList: ['F', 'E'])
         obligadaContabilidad(blank: true, nullable: true, maxSize: 1)
         contribuyenteEspecial(blank: true, nullable: true)
         razonSocial(blank: true, nullable: true)
         ambiente(blank: true, nullable: true)
         firma(blank: true, nullable: true)
         clave(blank: true, nullable: true)
+        tipoIdentificacion(blank: true, nullable: true)
 
     }
 
