@@ -1,5 +1,6 @@
 package sri
 
+import grails.converters.JSON
 import sri.FormaDePago
 import sri.Periodo
 import sri.Proceso
@@ -13,6 +14,8 @@ import sri.XAdESBESSignature
 class ServicioSriController {
     def dbConnectionService
     def utilitarioService
+
+    static allowedMethods = [fctrServicio: "POST"]
 
     def index() { }
 
@@ -60,6 +63,17 @@ class ServicioSriController {
         println "$linea"
         println "$clave"
 
+        def verificador = verificador(clave)
+        println "clave: ${clave}, verificador: ${verificador} "
+        clave += verificador
+        return clave
+    }
+
+    def srvcClaveAccs(tpcp, ruc, ambt, srie, nmro, cdgo, tipo) {
+        def fcha = new Date().format("ddMMyyyy")
+        def clave = fcha + tpcp + ruc + ambt + srie + nmro + cdgo + tipo
+//        def linea = "12345678|91|1234567892123|4|567893|123456789|41234567|8|9<br/>"
+        def linea = "1234567890123456789012345678901234567890123456789"
         def verificador = verificador(clave)
         println "clave: ${clave}, verificador: ${verificador} "
         clave += verificador
@@ -159,7 +173,7 @@ class ServicioSriController {
         println "dcdc: ${cddc?.codigo}"
 
         if (!file.exists()) {
-            sql = "select tpidcdgo, emprnmbr, empr_ruc, emprtpem, emprdire, emprambt, emprrzsc, emprnmbr, " +
+            sql = "select tpidcdgo, emprnmbr, empr_ruc, emprtpem, emprdire, emprambt, emprrzsc, " +
                     "emprctes, emprcont from empr, tpid " +
                     "where tpid.tpid__id = empr.tpid__id and empr__id = ${empresa_id}"
             println "empresa: $sql"
@@ -266,7 +280,7 @@ class ServicioSriController {
 
                         println "trfa---> $sql"
 
-                        def trfa = cn.rows(sql.toString()) [0]
+                        def trfa = cn.rows(sql.toString())[0]
 
                         println "parcial: ${dt.dtfccntd}, ${dt.dtfcpcun}, ${dt.dtfcdsct}"
                         def pcun = dt.dtfcpcun * (1 - dt.dtfcdsct / 100)
@@ -302,7 +316,7 @@ class ServicioSriController {
                 }
 */
 
-            }   /* -- facura -- */
+            }   /* -- factura -- */
 
             file.write(writer.toString())
         }
@@ -437,6 +451,30 @@ class ServicioSriController {
         println "---> $tipo"
         tipo
     }
+
+
+    /** nuevo 2022 servicio factura */
+    def fctrServicio() {
+        println "fctrServicio params: $params --> ${request.JSON}  --hd: ${request.getHeader('token')}"
+        def token = request.getHeader('token')
+        def data = request.JSON
+        def prcs = Proceso.get(741)
+        println "claveA: ${claveAccs(prcs)}"
+
+        def tpcp = "01"
+        def ruc = "1705310330001"
+        def ambt = 1
+        def srie = "001001"
+        def nmro = prcs.documento.split("-")[2]
+        def cdgo = 99999999 - 741
+        def tipo = 1
+        println "claveB: ${srvcClaveAccs(data.tipoComprobante, data.ruc, data.ambiente, data.serie, data.numero, data.codigo, data.tipo)}"
+
+
+        def retorna =  [Token: token, ok: true, data: data]
+        render retorna as JSON
+    }
+
 
 
 }

@@ -545,7 +545,7 @@
             ".</p>", function (result) {
             $.ajax({
                 type: 'POST',
-                url: "${createLink(controller: 'reportes3', action: 'enviar Mail2')}",
+                url: "${createLink(controller: 'reportes3', action: 'enviarMail2')}",
                 data: {
                     id: "${proceso?.id}",
                     emp: '${session.empresa.id}',

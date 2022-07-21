@@ -1,5 +1,6 @@
 package seguridad
 
+import grails.converters.JSON
 import sri.Contabilidad
 
 class LoginController {
@@ -326,5 +327,12 @@ class LoginController {
         session.permisos = hp
         println "permisos menu " + session.permisos
     }
+
+
+    def saludo() {
+        def mensaje = [saludo: "Hola", ok: true]
+        render mensaje as JSON
+    }
+
 
 }

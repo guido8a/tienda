@@ -23,7 +23,7 @@ class CarritoController {
         def cliente = null
         def productos
         def carrito
-
+        println "carrito"
         if(session.cliente){
             cliente = Cliente.get(session.cliente.id)
             carrito = Carrito.findByClienteAndEstado(cliente, 'A')
