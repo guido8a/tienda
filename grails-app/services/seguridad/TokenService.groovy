@@ -16,6 +16,8 @@ import com.auth0.jwt.algorithms.Algorithm;
 @Transactional
 class TokenService {
 
+    def clave_secreta = "TEDEIN-1207"
+
         def createJWT(JsonSlurper slurper, Integer validSeconds, String appID, String tenantID, String appSecret, String iss) {
             // Get the Unix Epoch timestamp. In this case we need the original one and the expiration one.
             TimeZone.setDefault(TimeZone.getTimeZone('UTC'))
@@ -130,43 +132,41 @@ class TokenService {
 
         }
 
-        def creatoken() {
-            println "params: $params --> ${request.JSON}  --hd: ${request.getHeader('token')}"
-            def data = request.JSON
-            Algorithm algorithm = Algorithm.HMAC256("TEDEIN-1207");
+        def creatoken(data) {
+//            Algorithm algorithm = Algorithm.HMAC256("TEDEIN-1207")
+            Algorithm algorithm = Algorithm.HMAC256(clave_secreta)
+            def retorna =  []
 
-            String token = JWT.create()
-                    .withIssuer("Tedein")
-                    .withClaim("id", 120)
-                    .withClaim("Usuario", "Guido")
-                    .withClaim("Perfil", "ADMN")
-                    .withExpiresAt(new Date(System.currentTimeMillis() + (4 * 60 * 60 * 1000).toLong()))
-                    .sign(algorithm);
+            println "data: $data"
+            if(data.usuario == 'admin' && data.password == 'PruebasI7') {
+                println " crea el token..."
+                String token = JWT.create()
+                        .withIssuer("Tedein")
+                        .withClaim("id", 120)
+                        .withClaim("Usuario", "Admin")
+                        .withClaim("Perfil", "ADMN")
+                        .withClaim("Empresa", 9)
+                        .withExpiresAt(new Date(System.currentTimeMillis() + (4 * 60 * 60 * 1000).toLong()))
+                        .sign(algorithm);
 
-            def verifica = verificaToken(token)
+//                def verifica = verificaToken(token)
+                retorna =  [Token: token, ok: true]
+            } else {
+                retorna =  [Token: "", ok: false, mensaje: "Credenciales no válidas"]
+            }
 
-//        render "Token: ${token}\n --> ${verifica}"
-            /*  {
-                  "nombre": "Guido",
-                  "ok": true,
-                  "perfil": 1,
-                  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmEiOjE2NjAzMTk4OTgsImZlY2hhIjoxNjU3NzI3ODk4LCJpZCI6MSwibG9naW4iOiJhZG1pbiIsIm5vbWJyZSI6Ikd1aWRvIiwicGVyZmlsSWQiOjF9.p1RTmHTWJEL4ZAlWCJz_4JMvTcmZIGbZMZ2KWgU1WZs",
-                  "uid": 1
-              } */
-            def retorna =  [Token: token, ok: true]
-            render retorna as JSON
-//        render token
-
-
+//            render retorna as JSON
+            return retorna
         }
 
         def verificaToken(token) {
             println "Inicia servicio verificaToken"
-            Algorithm algoritmo = Algorithm.HMAC256("TEDEIN-1207");
+//            Algorithm algoritmo = Algorithm.HMAC256("TEDEIN-1207")
+            Algorithm algorithm = Algorithm.HMAC256(clave_secreta)
             def retorna = ["ok": true]
             try {
                 println "token a validar: $token"
-                JWTVerifier verifier = JWT.require(algoritmo)
+                JWTVerifier verifier = JWT.require(algorithm)
                         .withIssuer("Tedein")
                         .build();
 
@@ -178,8 +178,11 @@ class TokenService {
 
                 def js = new JsonSlurper()
                 def datos = js.parseText(data)
+                println "++++Claims: $datos"
                 def termina = new Date(datos.exp * 1000.toLong()).format("dd-MM-yyyy HH:mm")
+                def empresa = datos.Empresa
                 retorna["exp"] = termina
+                retorna["empresa"] = empresa
             } catch (e) {
                 retorna["ok"] = false
             }

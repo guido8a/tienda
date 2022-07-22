@@ -1,6 +1,7 @@
 package sri
 
 import grails.converters.JSON
+import seguridad.Empresa
 import sri.FormaDePago
 import sri.Periodo
 import sri.Proceso
@@ -14,6 +15,7 @@ import sri.XAdESBESSignature
 class ServicioSriController {
     def dbConnectionService
     def utilitarioService
+    def tokenService
 
     static allowedMethods = [fctrServicio: "POST"]
 
@@ -30,6 +32,17 @@ class ServicioSriController {
         println "pathxml: $pathxml, firma en: $firma"
         println "inicia firmar..."
         //sri.firmar(input_file_path, key_store_path, key_store_password, output_path, out_file_name)
+        sri.firmar(pathxml + archivo, firma, "GuidoE60cMo", pathxml, "f${archivo}")
+    }
+
+    def srvcFirmaSri(empresa, archivo){
+        def sri = new  XAdESBESSignature()
+        def pathBase = "/var/tienda/empresas/empr_" + empresa.id
+        def pathxml = pathBase + "/xml/"
+        def firma = pathBase + "/firma.p12"
+
+        println "pathxml: $pathxml, firma en: $firma"
+        println "inicia firmar..."
         sri.firmar(pathxml + archivo, firma, "GuidoE60cMo", pathxml, "f${archivo}")
     }
 
@@ -69,6 +82,7 @@ class ServicioSriController {
         return clave
     }
 
+    /* servicio de factura electrónica */
     def srvcClaveAccs(tpcp, ruc, ambt, srie, nmro, cdgo, tipo) {
         def fcha = new Date().format("ddMMyyyy")
         def clave = fcha + tpcp + ruc + ambt + srie + nmro + cdgo + tipo
@@ -97,20 +111,6 @@ class ServicioSriController {
             respuesta = 11 - respuesta
         }
 
-/*
-        48.times{i ->
-            suma += dg[i].toInteger() * coef[i]
-        }
-        def retorna = 11 - suma%11
-
-        if(retorna > 9) {
-            retorna = 11 - retorna
-        }
-
-        println "retorna: ${retorna}"
-        retorna
-*/
-//        println "verificador: ${respuesta}"
         respuesta
     }
 
@@ -152,6 +152,149 @@ class ServicioSriController {
         println "retorna autorización: $autorizacion"
 
         render "ok"
+    }
+
+    def srvcFactura(empresa, clave, data){
+        def pathBase = "/var/tienda/empresas/empr_" + empresa.id
+        def pathxml = pathBase + "/xml/"
+
+        def prcs = Proceso.get(741)   //eliminar luego
+        srvcFacturaXml(empresa, clave, data)
+        def archivo = "fc_${clave}.xml"
+
+        println "Fin crear xml\n e inicia la firma de xml: ${archivo}"
+
+        srvcFirmaSri(empresa, archivo)
+        println "finaliza firma..."
+        //se envía al SRI y si todo va bien se pone TipoEmision = 1, caso contrario 2
+
+        def autorizacion = srvcEnviar(empresa, archivo, clave)
+
+        if(autorizacion) {
+            prcs.claveAcceso = clave
+            prcs.autorizacion = autorizacion
+            prcs.tipoEmision = '1'  // si contesta el SRI
+        } else {
+            prcs.claveAcceso = clave
+            prcs.tipoEmision = '2'  // si no contesta el SRI hay que hacer otro envío de los "2"
+        }
+        prcs.save(flush: true)
+
+        println "retorna autorización: $autorizacion"
+
+        return "ok"
+    }
+
+    def srvcFacturaXml(empresa, clave, data) {
+        println "---> facturaXml"
+        def cn = dbConnectionService.getConnection()
+        def sql = " "
+        def hoy = new Date().format('yyyy-MM-dd')
+        def pathBase = "/var/tienda/empresas/empr_" + empresa.id
+        def pathxml = pathBase + "/xml/"
+        def path = pathxml + "fc_${clave}.xml"
+        new File(pathxml).mkdirs()
+        def file = new File(path)
+
+
+        if (!file.exists()) {
+            def writer = new StringWriter()
+            def xml = new MarkupBuilder(writer)
+            xml.mkp.xmlDeclaration(version: "1.0", encoding: "UTF-8", standalone: "yes")
+
+            xml.factura(id: "comprobante", version: "1.1.0") {
+                println "inicia factura..."
+                infoTributaria() {
+                    ambiente(data.ambiente)   //pruebas 1, Producción: 2
+                    tipoEmision(data.tipoEmision) //aplica solo a empresas de emisión "E" si no contesta SRI se pone 2.--> Reenvío???
+                    razonSocial(data.razonSocial)  //Razón Social en Empresa
+                    nombreComercial(data.nombreComercial)  //nombre comercial
+                    ruc(data.ruc)
+                    claveAcceso(clave)
+                    codDoc(data.codDoc)
+                    estab(data.estab)
+                    ptoEmi(data.ptoEmi)
+                    secuencial(data.secuencial)
+                    dirMatriz(data.dirMatriz)
+                }  /* -- infoTributaria -- */
+
+                infoFactura() {
+//                    fechaEmision(new Date().format('dd/MM/yyyy'))
+                    fechaEmision(data.fechaEmision)
+                    dirEstablecimiento(data.dirEstablecimiento)   //+++ crear tabla establecimeintos ++dirección
+                    contribuyenteEspecial(data.contribuyenteEspecial)   //++ agregar en empresa
+                    obligadoContabilidad(data.obligadoContabilidad)
+                    tipoIdentificacionComprador(data.tipoIdentificacionComprador)   // Usar dato desde TITT
+                    razonSocialComprador(data.razonSocialComprador)
+                    identificacionComprador(data.identificacionComprador)
+                    totalSinImpuestos(data.totalSinImpuestos)
+                    totalDescuento(data.totalDescuento)   //+++ agregar total descuentos en prcs
+
+                    /** total con impuestos IVA 0, 12 y el ICE **/
+                    totalConImpuestos() {
+                        data.totalConImpuestos.each { im ->
+                            totalImpuesto() {
+                                codigo(im.codigo_de_TipoDeImpuesto)   // TPIM
+                                codigoPorcentaje(im.codigoPorcentaje)   // TRIV
+                                baseImponible(im.baseImponible)   // +++ código % del IVA
+                                tarifa(im.tarifa)   // +++ código % del IVA
+                                valor(im.valor)   // +++ código % del IVA
+                            }
+                        }
+                    }
+
+                    propina(data.propina)
+                    importeTotal(data.importeTotal)
+                    moneda(data.moneda)
+                    
+                    /** para cada forma de pago **/
+                    pagos() {
+                        data.pagos.each { fp ->
+                            pago() {
+                                formaPago(fp.formaPago_codigo)
+                                total(fp.total)
+                                plazo(fp.plazo)
+                                unidadTiempo(fp.unidadTiempo)   //siempre es DIAS
+                            }
+                        }
+                    }
+                }  /* -- infoFactura -- */
+
+                /** detalle **/
+                detalles() {
+                    data.detalles.each { dt ->
+                        detalle() {
+                            codigoPrincipal(dt.codigoPrincipal)
+                            codigoAuxiliar(dt.codigoAuxiliar)
+                            descripcion(dt.descripcion)
+                            cantidad(dt.cantidad)
+                            precioUnitario(dt.precioUnitario)
+                            descuento(dt.descuento)
+                            precioTotalSinImpuesto(dt.precioTotalSinImpuesto)
+                            impuestos() {
+                                impuesto() {
+                                    codigo(dt.impuesto.codigo)  /*** siempre IVA **/
+                                    codigoPorcentaje(dt.impuesto.codigoPorcentaje)
+                                    tarifa(dt.impuesto.tarifa)
+                                    baseImponible(dt.impuesto.baseImponible)
+                                    valor(dt.impuesto.valor)
+                                }
+                            }
+                        }
+                    }
+                }
+                println "--- ifoAdicional ---"
+                infoAdicional(){
+                    direccioncliente(data.infoAdicional.direccioncliente)
+                    Telefonocliente(data.infoAdicional.telefonocliente)
+                }
+
+            }   /* -- factura -- */
+
+            file.write(writer.toString())
+        }
+
+        return clave
     }
 
     def facturaXml(prcs) {
@@ -428,6 +571,89 @@ class ServicioSriController {
 
     }
 
+    def srvcEnviar(empresa, archivo, clave) {
+        def pathBase = "/var/tienda/empresas/empr_" + empresa.id
+        def path = pathBase + "/xml/"
+        def pathxml = path + "f${archivo}"
+
+        def arch_xml = new File(pathxml).text.encodeAsBase64()
+
+        def sobre_xml = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" " +
+           "xmlns:ec=\"http://ec.gob.sri.ws.recepcion\"><soapenv:Header/><soapenv:Body>" +
+           "<ec:validarComprobante><xml>${arch_xml}</xml>" +
+           "</ec:validarComprobante></soapenv:Body></soapenv:Envelope>"
+
+        //https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl
+        def soapUrl = new URL("https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl")
+        def connection = soapUrl.openConnection()
+        println "abre conexion"
+        connection.setRequestMethod("POST" )
+        connection.setConnectTimeout(5000)
+        connection.setReadTimeout(5000)
+        println "...post"
+        connection.setRequestProperty("Content-Type" ,"application/xml" )
+        println "...xml"
+        connection.doOutput = true
+        println "...do Output"
+
+        Writer writer = new OutputStreamWriter(connection.outputStream)
+
+        writer.write(sobre_xml)
+        println "...write"
+        writer.flush()
+        writer.close()
+        connection.connect()
+        println "...connect"
+
+        def respuesta = connection.content.text
+        def respuestaSri = new XmlSlurper().parseText(respuesta)
+        println respuestaSri
+
+        if(respuestaSri == "RECIBIDA") {
+            def para_autorizacion = """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ec="http://ec.gob.sri.ws.autorizacion">
+                <soapenv:Header/>
+                <soapenv:Body>
+                <ec:autorizacionComprobante>
+                <claveAccesoComprobante>${clave}</claveAccesoComprobante>
+                </ec:autorizacionComprobante>
+                </soapenv:Body>
+                </soapenv:Envelope>"""
+
+            println "----\n ${para_autorizacion}\n----"
+            soapUrl = new URL("https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl")
+            connection = soapUrl.openConnection()
+            println "abre conexion --- atrz"
+            connection.setRequestMethod("POST" )
+            connection.setConnectTimeout(5000)
+            connection.setReadTimeout(5000)
+            println "...post"
+            connection.setRequestProperty("Content-Type" ,"application/xml" )
+            println "...xml"
+            connection.doOutput = true
+            println "...do Output"
+
+            writer = new OutputStreamWriter(connection.outputStream)
+
+            writer.write(para_autorizacion)
+            println "...write"
+            writer.flush()
+            writer.close()
+            connection.connect()
+            println "...connect atz... "
+
+            respuesta = connection.content.text
+            def guardar = new File(path + "/sri${archivo}")
+            guardar.write(respuesta)
+
+            def atrz = respuesta =~ /numeroAutorizacion.(\d+)/
+
+            return atrz[0][1]
+
+        } else {
+            return "ha ocurrido un error al solicitar la autorización al SRI"
+        }
+    }
+
     def tipoId(id) {
         def cn = dbConnectionService.getConnection()
         def sql = "select tittcdgo from titt, tpid, prve, prcs " +
@@ -455,24 +681,33 @@ class ServicioSriController {
 
     /** nuevo 2022 servicio factura */
     def fctrServicio() {
-        println "fctrServicio params: $params --> ${request.JSON}  --hd: ${request.getHeader('token')}"
+        println "fctrServicio params: $params --hd: ${request.getHeader('token')}"
+        println "data --> ${request.JSON}"
         def token = request.getHeader('token')
+        def empresa = Empresa.get(tokenService.verificaToken(token).empresa)
         def data = request.JSON
-        def prcs = Proceso.get(741)
-        println "claveA: ${claveAccs(prcs)}"
 
-        def tpcp = "01"
-        def ruc = "1705310330001"
-        def ambt = 1
-        def srie = "001001"
-        def nmro = prcs.documento.split("-")[2]
-        def cdgo = 99999999 - 741
-        def tipo = 1
-        println "claveB: ${srvcClaveAccs(data.tipoComprobante, data.ruc, data.ambiente, data.serie, data.numero, data.codigo, data.tipo)}"
+        def clave = srvcClaveAccs(data.tipoComprobante, data.ruc, data.ambiente, data.serie, data.numero, data.codigo, data.tipo)
 
+        println "Empresa: $empresa"
+        println "clave: ${clave}"
 
-        def retorna =  [Token: token, ok: true, data: data]
-        render retorna as JSON
+        println "....Inicia"
+        srvcFactura(empresa, clave, data)
+        println "....Fin"
+
+//        def retorna =  [Token: token, ok: true, data: data]
+//        render retorna as JSON
+
+        def nombre = 'factura.xml'
+//        def path = '/var/fida/manual avales.pdf'
+        def path = "/var/tienda/empresas/empr_${empresa.id}/xml/ffc_${clave}.xml"
+        def file = new File(path)
+        def b = file.getBytes()
+        response.setContentType('text/html; charset=utf-8')
+        response.setHeader("Content-disposition", "attachment; filename=" + nombre)
+        response.setContentLength(b.length)
+        response.getOutputStream().write(b)
     }
 
 
